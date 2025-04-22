@@ -73,15 +73,13 @@ namespace HTTL_May_Xay_Dung.Controllers
                 .Select(p => new ArticleReturnDTO
                 {
                     Id = p.Id,
-                    ArticleCategoryId = p.ArticleCategoryId,
-                    ArticleCategoryName = p.ArticleCategory.Name,
+                    Thumbnail = p.Thumbnail,
                     Title = p.Title,
                     Content = p.Content,
-                    Image = p.Image,
-                    UserId = p.UserId,
-                    UserName = p.User.Username,
                     Status = p.Status,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    ArticleCateId = p.ArticleCateId,
+                    ArticleCateName = p.ArticleCate.Name,
                 })
             .ToListAsync();
 
