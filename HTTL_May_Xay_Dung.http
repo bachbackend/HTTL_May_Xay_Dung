@@ -1,0 +1,6 @@
+@HTTL_May_Xay_Dung_HostAddress = http://localhost:5057
+
+GET {{HTTL_May_Xay_Dung_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
