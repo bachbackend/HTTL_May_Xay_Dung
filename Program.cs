@@ -1,4 +1,5 @@
 ﻿
+using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -50,13 +51,13 @@ namespace HTTL_May_Xay_Dung
             builder.Services.AddScoped<MailService>();
 
             // Đăng ký DbContext với MySQL sử dụng Pomelo.EntityFrameworkCore.MySql
-            //builder.Services.AddDbContext<B3ifu0huowhy6xqzhw41Context>(options =>
-            //    options.UseMySql(
-            //        builder.Configuration.GetConnectionString("MyDatabase"),
-            //        // Sử dụng Pomelo để tự động phát hiện phiên bản MySQL
-            //        new MySqlServerVersion(new Version(8, 0, 0))  // Thay bằng phiên bản MySQL của bạn
-            //    )
-            //);
+            builder.Services.AddDbContext<BfhahziulzpihzqwnwfhContext>(options =>
+                options.UseMySql(
+                    builder.Configuration.GetConnectionString("MyDatabase"),
+                    // Sử dụng Pomelo để tự động phát hiện phiên bản MySQL
+                    new MySqlServerVersion(new Version(8, 0, 0))  // Thay bằng phiên bản MySQL của bạn
+                )
+            );
 
             // Bind PaginationSettings to configuration
             builder.Services.Configure<PaginationSettings>(builder.Configuration.GetSection("PaginationSettings"));

@@ -156,6 +156,9 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.ToTable("Contact");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ContactDate)
+                .HasColumnType("datetime")
+                .HasColumnName("contact_date");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
@@ -323,12 +326,18 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
+            entity.Property(e => e.Email)
+                .HasMaxLength(255)
+                .HasColumnName("email");
             entity.Property(e => e.LastLogin)
                 .HasColumnType("datetime")
                 .HasColumnName("last_login");
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .HasColumnName("password");
+            entity.Property(e => e.Phonenumber)
+                .HasMaxLength(255)
+                .HasColumnName("phonenumber");
             entity.Property(e => e.Role).HasColumnName("role");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Username)
