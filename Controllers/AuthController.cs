@@ -101,5 +101,42 @@ namespace HTTL_May_Xay_Dung.Controllers
                 role = user.Role
             });
         }
+
+        [HttpPut("ChangePassword")]
+        public async Task<IActionResult> UpdatePassword([FromBody] ChangePassworđTO dto)
+        {
+            if (dto == null || string.IsNullOrEmpty(dto.NewPassword) || string.IsNullOrEmpty(dto.OldPassword))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            if (dto.NewPassword == dto.OldPassword)
+            {
+                return BadRequest(new { message = "New password cannot equal with old password." });
+            }
+
+            var user = await _context.Users
+                .Where(a => a.Email == dto.Email)
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            if (!dto.OldPassword.Verify(user.Password))
+            {
+                return BadRequest("Wrong password.");
+            }
+
+            user.Password = dto.NewPassword.Hash();
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Password updated successfully." });
+        }
+
+
+
+
     }
 }
