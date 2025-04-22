@@ -91,5 +91,150 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetArticleById/{id}")]
+        public async Task<IActionResult> GetArticleById(int id)
+        {
+            // Tìm bài viết theo Id, bao gồm thông tin danh mục và người dùng
+            var article = await _context.Articles
+                .Include(p => p.ArticleCate)
+                .Where(p => p.Id == id)
+                .Select(p => new ArticleReturnDTO
+                {
+                    Id = p.Id,
+                    Thumbnail = p.Thumbnail,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    ArticleCateId = p.ArticleCateId,
+                    ArticleCateName = p.ArticleCate.Name,
+                })
+                .FirstOrDefaultAsync();
+
+            // Nếu không tìm thấy bài viết, trả về NotFound
+            if (article == null)
+            {
+                return NotFound(new { Message = $"Không tìm thấy bài viết với Id = {id}" });
+            }
+
+            // Trả về bài viết
+            return Ok(article);
+        }
+
+        [HttpGet("GetArticleByArticleCategoryId/{categoryId}")]
+        public async Task<IActionResult> GetArticleByArticleCategoryId(int categoryId)
+        {
+            // Tìm tất cả bài viết thuộc danh mục, bao gồm thông tin danh mục và người dùng
+            var articles = await _context.Articles
+                .Include(p => p.ArticleCate)
+                .Where(p => p.ArticleCateId == categoryId)
+                .Select(p => new ArticleReturnDTO
+                {
+                    Id = p.Id,
+                    Thumbnail = p.Thumbnail,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    ArticleCateId = p.ArticleCateId,
+                    ArticleCateName = p.ArticleCate.Name,
+                })
+                .ToListAsync();
+
+            // Nếu không tìm thấy bài viết, trả về NotFound
+            if (articles == null || !articles.Any())
+            {
+                return NotFound(new { Message = $"Không tìm thấy bài viết với danh mục Id = {categoryId}" });
+            }
+
+            // Trả về danh sách bài viết
+            return Ok(articles);
+        }
+
+        [HttpPost("addArticle")]
+        public async Task<IActionResult> AddArticle(IFormFile file, [FromForm] ArticleRequest model)
+        {
+            // Kiểm tra nếu ảnh được upload
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No image uploaded.");
+            }
+
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var extension = Path.GetExtension(file.FileName).ToLower();
+            if (!allowedExtensions.Contains(extension))
+            {
+                return BadRequest("Invalid file type.");
+            }
+
+            // Lưu ảnh vào thư mục
+            var fileName = Guid.NewGuid() + extension;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/article", fileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Tạo một sản phẩm mới và lưu vào database
+            var article = new Article
+            {
+                ArticleCateId = model.ArticleCateId,
+                Title = model.Title,
+                Content = model.Content,
+                Thumbnail = fileName,
+                Status = model.Status,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // Lưu sản phẩm vào database
+            _context.Articles.Add(article);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { articleId = article.Id, fileName = article.Thumbnail });
+        }
+
+        //[HttpPut("updateArticle/{id}")]
+        //public async Task<IActionResult> UpdateProduct(int id, [FromForm] ArticleRequestUpdate model, IFormFile? file)
+        //{
+        //    var article = await _context.Articles.FirstOrDefaultAsync(p => p.Id == id);
+        //    if (article == null)
+        //    {
+        //        return NotFound("Article not found.");
+        //    }
+
+        //    article.ArticleCategoryId = model.ArticleCategoryId;
+        //    article.Title = model.Title;
+        //    article.Content = model.Content;
+        //    article.UserId = model.UserId;
+        //    article.Status = model.Status;
+
+        //    if (file != null && file.Length > 0)
+        //    {
+        //        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+        //        var extension = Path.GetExtension(file.FileName).ToLower();
+        //        if (!allowedExtensions.Contains(extension))
+        //        {
+        //            return BadRequest("Invalid file type.");
+        //        }
+
+        //        var fileName = Guid.NewGuid() + extension;
+        //        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/article", fileName);
+
+        //        using (var stream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await file.CopyToAsync(stream);
+        //        }
+
+        //        article.Image = fileName;
+        //    }
+
+
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok(new { message = "Article updated successfully." });
+        //}
+
     }
 }
