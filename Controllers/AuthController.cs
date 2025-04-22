@@ -2,6 +2,7 @@
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Extension;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +12,8 @@ using System.Text;
 
 namespace HTTL_May_Xay_Dung.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IConfiguration _configuration;
