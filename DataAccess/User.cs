@@ -23,6 +23,10 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
+    public string? ResetToken { get; set; }
+
+    public DateTime? ResetTokenExpired { get; set; }
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

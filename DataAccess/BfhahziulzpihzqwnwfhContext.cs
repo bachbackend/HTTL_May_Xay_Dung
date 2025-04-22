@@ -338,6 +338,12 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.Property(e => e.Phonenumber)
                 .HasMaxLength(255)
                 .HasColumnName("phonenumber");
+            entity.Property(e => e.ResetToken)
+                .HasMaxLength(255)
+                .HasColumnName("reset_token");
+            entity.Property(e => e.ResetTokenExpired)
+                .HasColumnType("datetime")
+                .HasColumnName("reset_token_expired");
             entity.Property(e => e.Role).HasColumnName("role");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Username)
