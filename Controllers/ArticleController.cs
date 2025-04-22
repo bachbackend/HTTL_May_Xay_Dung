@@ -23,75 +23,75 @@ namespace HTTL_May_Xay_Dung.Controllers
             _environment = environment;
         }
 
-        //[HttpGet("GetAllArticle")]
-        //public async Task<IActionResult> GetAllArticle(
-        //    int pageNumber = 1,
-        //    int? pageSize = null,
-        //    int? status = null,
-        //    string? title = null,
-        //    int? categoryId = null
-        //    )
-        //{
-        //    int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
-        //    var articles = _context.Articles
-        //        .Include(p => p.ArticleCate)
-        //        .AsQueryable();
+        [HttpGet("GetAllArticle")]
+        public async Task<IActionResult> GetAllArticle(
+            int pageNumber = 1,
+            int? pageSize = null,
+            int? status = null,
+            string? title = null,
+            int? categoryId = null
+            )
+        {
+            int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
+            var articles = _context.Articles
+                .Include(p => p.ArticleCate)
+                .AsQueryable();
 
-        //    if (!string.IsNullOrEmpty(title))
-        //    {
-        //        articles = articles.Where(p => p.Title.Contains(title));
-        //    }
+            if (!string.IsNullOrEmpty(title))
+            {
+                articles = articles.Where(p => p.Title.Contains(title));
+            }
 
-        //    if (categoryId.HasValue)
-        //    {
-        //        articles = articles.Where(p => p.ArticleCateId == categoryId.Value);
-        //    }
+            if (categoryId.HasValue)
+            {
+                articles = articles.Where(p => p.ArticleCateId == categoryId.Value);
+            }
 
-        //    if (status.HasValue)
-        //    {
-        //        articles = articles.Where(p => p.Status == status.Value);
-        //    }
+            if (status.HasValue)
+            {
+                articles = articles.Where(p => p.Status == status.Value);
+            }
 
-        //    int totalArticleCount = await articles.CountAsync();
+            int totalArticleCount = await articles.CountAsync();
 
 
-        //    int totalPageCount = (int)Math.Ceiling(totalArticleCount / (double)actualPageSize);
-        //    int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
-        //    int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
+            int totalPageCount = (int)Math.Ceiling(totalArticleCount / (double)actualPageSize);
+            int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
+            int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
 
-        //    var pagingResult = new PagingReturn
-        //    {
-        //        TotalPageCount = totalPageCount,
-        //        CurrentPage = pageNumber,
-        //        NextPage = nextPage,
-        //        PreviousPage = previousPage
-        //    };
+            var pagingResult = new PagingReturn
+            {
+                TotalPageCount = totalPageCount,
+                CurrentPage = pageNumber,
+                NextPage = nextPage,
+                PreviousPage = previousPage
+            };
 
-        //    List<ArticleReturnDTO> articletWithPaging = await articles
-        //        .Skip((pageNumber - 1) * actualPageSize)
-        //        .Take(actualPageSize)
-        //        .Select(p => new ArticleReturnDTO
-        //        {
-        //            Id = p.Id,
-        //            ArticleCategoryId = p.ArticleCategoryId,
-        //            ArticleCategoryName = p.ArticleCategory.Name,
-        //            Title = p.Title,
-        //            Content = p.Content,
-        //            Image = p.Image,
-        //            UserId = p.UserId,
-        //            UserName = p.User.Username,
-        //            Status = p.Status,
-        //            CreatedAt = p.CreatedAt
-        //        })
-        //    .ToListAsync();
+            List<ArticleReturnDTO> articletWithPaging = await articles
+                .Skip((pageNumber - 1) * actualPageSize)
+                .Take(actualPageSize)
+                .Select(p => new ArticleReturnDTO
+                {
+                    Id = p.Id,
+                    ArticleCategoryId = p.ArticleCategoryId,
+                    ArticleCategoryName = p.ArticleCategory.Name,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Image = p.Image,
+                    UserId = p.UserId,
+                    UserName = p.User.Username,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt
+                })
+            .ToListAsync();
 
-        //    var result = new
-        //    {
-        //        Articles = articletWithPaging,
-        //        Paging = pagingResult
-        //    };
+            var result = new
+            {
+                Articles = articletWithPaging,
+                Paging = pagingResult
+            };
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
     }
 }

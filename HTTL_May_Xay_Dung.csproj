@@ -41,9 +41,4 @@
 	  </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="HTTL_May_Xay_Dung_FE\" />
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
 </Project>
