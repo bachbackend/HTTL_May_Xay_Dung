@@ -254,5 +254,93 @@ namespace HTTL_May_Xay_Dung.Controllers
         }
 
 
+        [HttpPost("PaymentCOD")]
+        public async Task<IActionResult> PaymentCOD([FromBody] PaymentRequestDTO request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var customer = await _context.Users.FirstOrDefaultAsync(c => c.Id == request.UserId);
+            if (customer == null)
+                return NotFound("Không tìm thấy khách hàng.");
+
+            var cartItems = await _context.Carts
+                .Where(x => x.UserId == customer.Id)
+                .Include(x => x.Product)
+                .ToListAsync();
+
+            if (!cartItems.Any())
+                return BadRequest("Giỏ hàng trống hoặc không tìm thấy thông tin giỏ hàng.");
+
+            // Xử lý địa chỉ giao hàng
+            ShippingAddress shippingAddress;
+
+            if (request.ShippingAddressId.HasValue)
+            {
+                shippingAddress = await _context.ShippingAddresses
+                    .FirstOrDefaultAsync(sa => sa.Id == request.ShippingAddressId && sa.UserId == customer.Id);
+
+                if (shippingAddress == null)
+                    return BadRequest("Địa chỉ giao hàng không hợp lệ.");
+            }
+            else if (request.NewShippingAddress != null)
+            {
+                shippingAddress = new ShippingAddress
+                {
+                    UserId = customer.Id,
+                    CityId = request.NewShippingAddress.CityId,
+                    SpecificAddress = request.NewShippingAddress.SpecificAddress,
+                    PhoneNumber = request.NewShippingAddress.PhoneNumber
+                };
+
+                await _context.ShippingAddresses.AddAsync(shippingAddress);
+                await _context.SaveChangesAsync(); // Lưu để có shippingAddress.Id
+            }
+            else
+            {
+                return BadRequest("Vui lòng chọn hoặc nhập địa chỉ giao hàng.");
+            }
+
+            // Tạo đơn hàng sau khi địa chỉ hợp lệ
+            var order = new Order
+            {
+                UserId = customer.Id,
+                ShippingAddressId = shippingAddress.Id,  // Gán địa chỉ vào đơn hàng
+                OrderDate = DateTime.Now,
+                StatusId = 1, // Đang xử lý
+            };
+
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync(); // Lưu để có order.Id
+
+            // Thêm chi tiết đơn hàng
+            var orderDetails = cartItems.Select(item => new OrderDetail
+            {
+                OrderId = order.Id,
+                ProductId = item.ProductId,
+                Quantity = item.Quantity
+            }).ToList();
+
+            await _context.OrderDetails.AddRangeAsync(orderDetails);
+
+            // Cập nhật số lượng bán của sản phẩm
+            foreach (var item in cartItems)
+            {
+                var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
+                if (product != null)
+                {
+                    product.SaleQuantity = (product.SaleQuantity) + item.Quantity;
+                }
+            }
+
+            // Xóa giỏ hàng và lưu tất cả thay đổi
+            _context.Carts.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Thanh toán thành công!", orderId = order.Id });
+        }
+
     }
 }
