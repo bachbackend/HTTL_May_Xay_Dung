@@ -195,46 +195,44 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { articleId = article.Id, fileName = article.Thumbnail });
         }
 
-        //[HttpPut("updateArticle/{id}")]
-        //public async Task<IActionResult> UpdateProduct(int id, [FromForm] ArticleRequestUpdate model, IFormFile? file)
-        //{
-        //    var article = await _context.Articles.FirstOrDefaultAsync(p => p.Id == id);
-        //    if (article == null)
-        //    {
-        //        return NotFound("Article not found.");
-        //    }
+        [HttpPut("updateArticle/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromForm] ArticleRequestUpdate model, IFormFile? file)
+        {
+            var article = await _context.Articles.FirstOrDefaultAsync(p => p.Id == id);
+            if (article == null)
+            {
+                return NotFound("Article not found.");
+            }
 
-        //    article.ArticleCategoryId = model.ArticleCategoryId;
-        //    article.Title = model.Title;
-        //    article.Content = model.Content;
-        //    article.UserId = model.UserId;
-        //    article.Status = model.Status;
+            article.ArticleCateId = model.ArticleCateId;
+            article.Title = model.Title;
+            article.Content = model.Content;
+            article.Status = model.Status;
 
-        //    if (file != null && file.Length > 0)
-        //    {
-        //        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-        //        var extension = Path.GetExtension(file.FileName).ToLower();
-        //        if (!allowedExtensions.Contains(extension))
-        //        {
-        //            return BadRequest("Invalid file type.");
-        //        }
+            if (file != null && file.Length > 0)
+            {
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                if (!allowedExtensions.Contains(extension))
+                {
+                    return BadRequest(new { message = "Invalid file type." });
+                }
 
-        //        var fileName = Guid.NewGuid() + extension;
-        //        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/article", fileName);
+                var fileName = Guid.NewGuid() + extension;
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/article", fileName);
 
-        //        using (var stream = new FileStream(path, FileMode.Create))
-        //        {
-        //            await file.CopyToAsync(stream);
-        //        }
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
 
-        //        article.Image = fileName;
-        //    }
+                article.Thumbnail = fileName;
+            }
 
+            await _context.SaveChangesAsync();
 
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok(new { message = "Article updated successfully." });
-        //}
+            return Ok(new { message = "Article updated successfully." });
+        }
 
     }
 }
