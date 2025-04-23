@@ -20,5 +20,4 @@ public partial class Article
     public int ArticleCateId { get; set; }
 
     public virtual ArticleCate ArticleCate { get; set; } = null!;
-    public object ArticleCategory { get; internal set; }
 }

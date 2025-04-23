@@ -245,7 +245,7 @@ namespace HTTL_May_Xay_Dung.Controllers
         {
             int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
             var articles = _context.Articles
-                .Include(p => p.ArticleCategory)
+                .Include(p => p.ArticleCate)
                 .Where(p => p.Status == 0)
                 .AsQueryable();
 
