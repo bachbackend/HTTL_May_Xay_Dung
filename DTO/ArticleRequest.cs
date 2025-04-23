@@ -2,8 +2,6 @@
 {
     public class ArticleRequest
     {
-        public string Thumbnail { get; set; } = null!;
-
         public string Title { get; set; } = null!;
 
         public string Content { get; set; } = null!;

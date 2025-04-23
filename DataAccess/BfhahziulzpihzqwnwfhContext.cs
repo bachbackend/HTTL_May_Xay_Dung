@@ -303,7 +303,7 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.HasOne(d => d.City).WithMany(p => p.ShippingAddresses)
                 .HasForeignKey(d => d.CityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Shipping_Address_ibfk_3");
+                .HasConstraintName("Shipping_Address_ibfk_4");
 
             entity.HasOne(d => d.Order).WithMany(p => p.ShippingAddresses)
                 .HasForeignKey(d => d.OrderId)
