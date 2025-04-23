@@ -182,6 +182,8 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
 
             entity.HasIndex(e => e.OrderStatusId, "order_status_id");
 
+            entity.HasIndex(e => e.ShippingAddressId, "shipping_address_id");
+
             entity.HasIndex(e => e.UserId, "user_id");
 
             entity.Property(e => e.Id).HasColumnName("id");
@@ -189,6 +191,7 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("order_date");
             entity.Property(e => e.OrderStatusId).HasColumnName("order_status_id");
+            entity.Property(e => e.ShippingAddressId).HasColumnName("shipping_address_id");
             entity.Property(e => e.TotalPrice)
                 .HasPrecision(10)
                 .HasColumnName("total_price");
@@ -198,6 +201,11 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
                 .HasForeignKey(d => d.OrderStatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Order_ibfk_2");
+
+            entity.HasOne(d => d.ShippingAddress).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.ShippingAddressId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Order_ibfk_3");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
@@ -285,13 +293,10 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
 
             entity.HasIndex(e => e.CityId, "city_id");
 
-            entity.HasIndex(e => e.OrderId, "order_id");
-
             entity.HasIndex(e => e.UserId, "user_id");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CityId).HasColumnName("city_id");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(255)
                 .HasColumnName("phone_number");
@@ -304,11 +309,6 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
                 .HasForeignKey(d => d.CityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Shipping_Address_ibfk_4");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.ShippingAddresses)
-                .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Shipping_Address_ibfk_1");
 
             entity.HasOne(d => d.User).WithMany(p => p.ShippingAddresses)
                 .HasForeignKey(d => d.UserId)

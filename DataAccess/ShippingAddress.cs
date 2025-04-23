@@ -7,8 +7,6 @@ public partial class ShippingAddress
 {
     public int Id { get; set; }
 
-    public int OrderId { get; set; }
-
     public int UserId { get; set; }
 
     public int CityId { get; set; }
@@ -19,7 +17,7 @@ public partial class ShippingAddress
 
     public virtual City City { get; set; } = null!;
 
-    public virtual Order Order { get; set; } = null!;
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual User User { get; set; } = null!;
 }
