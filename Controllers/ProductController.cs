@@ -1,0 +1,329 @@
+﻿using HTTL_May_Xay_Dung.DataAccess;
+using HTTL_May_Xay_Dung.DTO;
+using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using static HTTL_May_Xay_Dung.DTO.ProductDTO;
+
+namespace HTTL_May_Xay_Dung.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductController : ControllerBase
+    {
+        private readonly BfhahziulzpihzqwnwfhContext _context;
+        private readonly PaginationSettings _paginationSettings;
+        private readonly IWebHostEnvironment _environment;
+
+        public ProductController(IConfiguration configuration, BfhahziulzpihzqwnwfhContext context, IOptions<PaginationSettings> paginationSettings, IWebHostEnvironment environment)
+        {
+            _context = context;
+            _paginationSettings = paginationSettings.Value;
+            _environment = environment;
+        }
+
+
+        [HttpGet("GetAllProduct")]
+        public async Task<IActionResult> GetAllProduct(
+            int pageNumber = 1,
+            int? pageSize = null,
+            int? status = null,
+            string? name = null,
+            int? categoryId = null,
+            string? sortBy = "id",
+            string? sortOrder = "asc"
+            )
+        {
+            int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
+            var products = _context.Products
+                .Include(p => p.Category)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                products = products.Where(p => p.Name.Contains(name));
+            }
+
+            if (categoryId.HasValue)
+            {
+                products = products.Where(p => p.CategoryId == categoryId.Value);
+            }
+
+            if (status.HasValue)
+            {
+                products = products.Where(p => p.Status == status.Value);
+            }
+
+            if (sortBy?.ToLower() == "name")
+            {
+                products = sortOrder.ToLower() == "desc"
+                    ? products.OrderByDescending(p => p.Name)
+                    : products.OrderBy(p => p.Name);
+            }
+            else if (sortBy?.ToLower() == "saleQuantity")
+            {
+                products = sortOrder.ToLower() == "desc"
+                    ? products.OrderByDescending(p => p.SaleQuantity)
+                    : products.OrderBy(p => p.SaleQuantity);
+            }
+            else if (sortBy?.ToLower() == "createDate")
+            {
+                products = sortOrder.ToLower() == "desc"
+                    ? products.OrderByDescending(p => p.CreatedAt)
+                    : products.OrderBy(p => p.CreatedAt);
+            }
+            else // Sắp xếp mặc định theo Id
+            {
+                products = sortOrder.ToLower() == "desc"
+                    ? products.OrderByDescending(p => p.Id)
+                    : products.OrderBy(p => p.Id);
+            }
+
+            int totalProductCount = await products.CountAsync();
+
+
+            int totalPageCount = (int)Math.Ceiling(totalProductCount / (double)actualPageSize);
+            int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
+            int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
+
+            var pagingResult = new PagingReturn
+            {
+                TotalPageCount = totalPageCount,
+                CurrentPage = pageNumber,
+                NextPage = nextPage,
+                PreviousPage = previousPage
+            };
+
+            List<ProductReturnDTO> productWithPaging = await products
+                .Skip((pageNumber - 1) * actualPageSize)
+                .Take(actualPageSize)
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name
+                })
+            .ToListAsync();
+
+            var result = new
+            {
+                Products = productWithPaging,
+                Paging = pagingResult
+            };
+
+            return Ok(result);
+        }
+
+
+        [HttpPost("addProduct")]
+        public async Task<IActionResult> AddProduct(IFormFile file, [FromForm] ProductRequestDTO model)
+        {
+            // Kiểm tra nếu ảnh được upload
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No image uploaded.");
+            }
+
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var extension = Path.GetExtension(file.FileName).ToLower();
+            if (!allowedExtensions.Contains(extension))
+            {
+                return BadRequest("Invalid file type.");
+            }
+
+            // Lưu ảnh vào thư mục
+            var fileName = Guid.NewGuid() + extension;
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/product", fileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Tạo một sản phẩm mới và lưu vào database
+            var product = new Product
+            {
+                CategoryId = model.CategoryId,
+                Name = model.Name,
+                Image = fileName,
+                Description = model.Description,
+                Status = model.Status,
+                CreatedAt = DateTime.UtcNow,
+            };
+
+            // Lưu sản phẩm vào database
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { productId = product.Id, fileName = product.Image });
+        }
+
+
+        [HttpPut("updateProduct/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductRequestDTO model, IFormFile? file)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null)
+            {
+                return NotFound(new { message = "Product not found." });
+            }
+
+            product.CategoryId = model.CategoryId;
+            product.Name = model.Name;
+            product.Status = model.Status;
+            product.Description = model.Description;
+
+            if (file != null && file.Length > 0)
+            {
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                if (!allowedExtensions.Contains(extension))
+                {
+                    return BadRequest(new { message = "Invalid file type. Allowed types are .jpg, .jpeg, .png" });
+                }
+
+                var fileName = Guid.NewGuid() + extension;
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/product", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                product.Image = fileName;
+            }
+            await _context.SaveChangesAsync();
+
+            // Trả về thông tin chi tiết sản phẩm đã cập nhật
+            return Ok(new
+            {
+                message = "Product updated successfully.",
+                productId = product.Id,
+                name = product.Name,
+                categoryId = product.CategoryId,
+                description = product.Description,
+                status = product.Status,
+                image = product.Image
+            });
+        }
+
+
+        [HttpDelete("deleteProduct/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            // Tìm sản phẩm theo ID
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            // Xác định đường dẫn của ảnh để xóa
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", product.Image);
+
+            // Kiểm tra và xóa ảnh nếu tồn tại
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
+
+            // Xóa sản phẩm khỏi database
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+
+            return Ok("Product deleted successfully.");
+        }
+
+
+
+        [HttpGet("GetProductById/{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            // Tìm sản phẩm theo ID, bao gồm thông tin liên quan
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.Id == id)
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name,
+                })
+                .FirstOrDefaultAsync();
+
+            // Nếu không tìm thấy sản phẩm, trả về lỗi 404
+            if (product == null)
+            {
+                return NotFound(new { Message = "Product not found." });
+            }
+
+            // Trả về sản phẩm
+            return Ok(product);
+        }
+
+        [HttpGet("GetTop5NewestProducts")]
+        public async Task<IActionResult> GetTop3NewestProducts()
+        {
+            // Lấy 3 sản phẩm mới nhất dựa trên CreatedAt
+            var newestProducts = await _context.Products
+                .Include(p => p.Category)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(5)
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name
+                })
+                .ToListAsync();
+
+            return Ok(newestProducts);
+        }
+
+
+        [HttpGet("GetBestSeller")]
+        public async Task<IActionResult> GetBestSeller()
+        {
+            //Lấy 5 sản phẩm bán chạy nhất
+            var bestseller = await _context.Products
+                .Include(p => p.Category)
+                .OrderByDescending (p => p.SaleQuantity)
+                .Take(5)
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name
+                })
+                .ToListAsync ();
+            return Ok(bestseller);
+        }
+    }
+}

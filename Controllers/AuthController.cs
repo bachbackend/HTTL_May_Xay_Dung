@@ -26,6 +26,127 @@ namespace HTTL_May_Xay_Dung.Controllers
             _context = context;
             _mailService = mailService;
         }
+        private static readonly char[] Characters =
+       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".ToCharArray();
+        private static readonly Random Random = new Random();
+
+        public static string GenerateRandomString(int length = 32)
+        {
+            if (length <= 0)
+            {
+                throw new ArgumentException("Length must be greater than 0", nameof(length));
+            }
+
+            char[] result = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = Characters[Random.Next(Characters.Length)];
+            }
+
+            return new string(result);
+        }
+
+        [HttpPost("ResetPassword/{email}")]
+        public async Task<IActionResult> ResetPassword(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Generate a reset token
+            string resetToken = GenerateRandomString();
+            DateTime expiry = DateTime.Now.AddHours(1); // Token hết hạn sau 1 giờ
+
+            // Save token and expiry to database
+            user.ResetToken = resetToken;
+            user.ResetTokenExpired = expiry;
+            await _context.SaveChangesAsync();
+
+            // Generate reset link with token and phone number
+            string resetLink = $"http://127.0.0.1:5500/confirmResetPassword.html";
+
+            var subject = "Reset Password";
+            var message = $"Click the link below to reset your password:\n{resetLink}\n\nLink will expire in 10 minutes.";
+
+            // Send email
+            _mailService.SendEmailAsync(user.Email, subject, message);
+
+            // Return result including phoneNumber and token
+            return Ok(new
+            {
+                message = "Password reset link has been sent to your email.",
+                phoneNumber = user.Email,
+                token = resetToken
+            });
+        }
+
+        [HttpPost("ConfirmResetPassword")]
+        public async Task<IActionResult> ConfirmResetPassword([FromQuery] string email, [FromQuery] string token, [FromBody] ResetPasswordRequestDTO request)
+        {
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email && u.ResetTokenExpired > DateTime.UtcNow);
+
+            if (user == null)
+            {
+                return BadRequest(new { message = "Invalid or expired request." });
+            }
+
+            // Check token validity
+            if (user.ResetToken != token)
+            {
+                return BadRequest(new { message = "Invalid or expired token." });
+            }
+
+            // Hash new password and save to DB
+            user.Password = request.NewPassword.Hash();
+            user.ResetToken = null; // Remove token
+            user.ResetTokenExpired = null; // Remove token expiry
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Password has been reset successfully." });
+        }
+
+        [HttpPost("ResendResetPasswordToken/{email}")]
+        public async Task<IActionResult> ResendResetPasswordToken(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            if (user.ResetToken == null || user.ResetTokenExpired == null)
+            {
+                return BadRequest(new { message = "No reset token found. Please request a password reset first." });
+            }
+
+            // Kiểm tra mã hiện tại đã hết hạn hay chưa
+            if (user.ResetTokenExpired > DateTime.Now)
+            {
+                return BadRequest(new { message = "Current reset token is still valid. Please use the existing link." });
+            }
+
+            // Tạo mã mới và cập nhật thời gian hết hạn
+            string newResetToken = GenerateRandomString();
+            DateTime newExpiry = DateTime.Now.AddMinutes(10);
+
+            user.ResetToken = newResetToken;
+            user.ResetTokenExpired = newExpiry;
+            await _context.SaveChangesAsync();
+
+            // Tạo link khôi phục mới
+            string resetLink = $"{Request.Scheme}://{Request.Host}/api/Profile/ConfirmResetPassword?phoneNumber={user.Email}&token={newResetToken}";
+
+            var subject = "Resend Password Reset Token";
+            var message = $"Your new password reset link:\n{resetLink}\n\nThis link will expire in 10 minutes.";
+
+            // Gửi email
+            _mailService.SendEmailAsync(user.Email, subject, message);
+
+            return Ok(new { message = "A new reset link has been sent to your email." });
+        }
 
         //tạo tài khoản cho các role 1 2 3 
         [HttpPost("Register")]
@@ -101,5 +222,42 @@ namespace HTTL_May_Xay_Dung.Controllers
                 role = user.Role
             });
         }
+
+        [HttpPut("ChangePassword")]
+        public async Task<IActionResult> UpdatePassword([FromBody] ChangePassworđTO dto)
+        {
+            if (dto == null || string.IsNullOrEmpty(dto.NewPassword) || string.IsNullOrEmpty(dto.OldPassword))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            if (dto.NewPassword == dto.OldPassword)
+            {
+                return BadRequest(new { message = "New password cannot equal with old password." });
+            }
+
+            var user = await _context.Users
+                .Where(a => a.Email == dto.Email)
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            if (!dto.OldPassword.Verify(user.Password))
+            {
+                return BadRequest("Wrong password.");
+            }
+
+            user.Password = dto.NewPassword.Hash();
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Password updated successfully." });
+        }
+
+
+
+
     }
 }
