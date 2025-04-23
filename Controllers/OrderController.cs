@@ -39,7 +39,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             var orders = _context.Orders
                 .Include(p => p.OrderStatus)
                 .Include(p => p.User)
-                .Include(p => p.ShippingAddresses)
+                .Include(p => p.ShippingAddress)
                     .ThenInclude(p => p.City)
                 .AsQueryable();
             if (!string.IsNullOrEmpty(name))
@@ -94,7 +94,9 @@ namespace HTTL_May_Xay_Dung.Controllers
                     StatusName = p.OrderStatus.Name,
                     OrderDate = p.OrderDate,
                     TotalPrice = p.TotalPrice,
-                    CityId = p.ShippingAddresse
+                    CityId = p.ShippingAddress.CityId,
+                    CityName = p.ShippingAddress.City.Name,
+                    SpecificAddress = p.ShippingAddress.SpecificAddress
 
                 })
                     .ToListAsync();
@@ -106,6 +108,188 @@ namespace HTTL_May_Xay_Dung.Controllers
             };
 
             return Ok(result);
+        }
+
+        [HttpGet("GetOrderByOrderId/{orderId}")]
+        public async Task<IActionResult> GetOrderByOrderId(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(p => p.OrderStatus)
+                .Include(p => p.User)
+                .Include(p => p.ShippingAddress)
+                    .ThenInclude(p => p.City)
+                .Where(p => p.Id == orderId)
+                .Select(p => new OrderDTO
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
+                    Username = p.User.Username,
+                    CityId = p.ShippingAddress.CityId,
+                    CityName = p.ShippingAddress.City.Name,
+                    SpecificAddress = p.ShippingAddress.SpecificAddress,
+                    PhoneNumber = p.ShippingAddress.PhoneNumber,
+                    StatusId = p.OrderStatus.Id,
+                    StatusName = p.OrderStatus.Name,
+                    OrderDate = p.OrderDate,
+                    TotalPrice = p.TotalPrice
+
+                })
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                return NotFound(new { Message = "Không tìm thấy đơn hàng." });
+            }
+
+            return Ok(order);
+        }
+
+        [HttpGet("GetOrderDetailsByOrderId/{orderId}")]
+        public async Task<IActionResult> GetOrderDetailsByOrderId(int orderId)
+        {
+            var orders = await _context.Orders
+                .Where(o => o.Id == orderId)
+                .Include(p => p.OrderStatus)
+                .Include(p => p.User)
+                .Include(p => p.ShippingAddress)
+                    .ThenInclude(p => p.City)
+                .Include(p => p.OrderDetails)
+                    .ThenInclude(p => p.Product)
+                        .ThenInclude(p => p.Category)
+                .Select(o => new OrderDTO
+                {
+                    Id = o.Id,
+                    UserId = o.UserId,
+                    Username = o.User.Username,
+                    SpecificAddress = o.ShippingAddress.SpecificAddress,
+                    PhoneNumber = o.ShippingAddress.PhoneNumber,
+                    CityId = o.ShippingAddress.CityId,
+                    CityName = o.ShippingAddress.City.Name,
+                    StatusId = o.OrderStatus.Id,
+                    StatusName = o.OrderStatus.Name,
+                    OrderDate = o.OrderDate,
+                    TotalPrice = o.TotalPrice,
+
+                    // Thông tin chi tiết của OrderDetail
+                    OrderDetails = o.OrderDetails.Select(od => new OrderDetailDTO
+                    {
+                        Id = od.Id,
+                        OrderId = od.OrderId,
+                        ProductId = od.ProductId,
+                        ProductName = od.Product.Name,
+                        ProductImage = od.Product.Image,
+                        Quantity = od.Quantity,
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            if (orders == null)
+            {
+                return NotFound("Không tìm thấy chi tiết của đơn hàng.");
+            }
+
+            return Ok(orders);
+        }
+
+        [HttpGet("GetOrderByUserId/{userId}")]
+        public async Task<IActionResult> GetOrderByUserId(
+            int userId,
+            int pageNumber = 1,
+            int? pageSize = null
+            )
+        {
+            int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
+            var orders = _context.Orders
+                .Include(p => p.OrderStatus)
+                .Include(p => p.User)
+                .Include(p => p.ShippingAddress)
+                    .ThenInclude(p => p.City)
+                .Where(p => p.UserId == userId)
+                .AsQueryable();
+
+            int totalOrderCount = await orders.CountAsync();
+
+            int totalPageCount = (int)Math.Ceiling(totalOrderCount / (double)actualPageSize);
+            int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
+            int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
+
+            var pagingResult = new PagingReturn
+            {
+                TotalPageCount = totalPageCount,
+                CurrentPage = pageNumber,
+                NextPage = nextPage,
+                PreviousPage = previousPage
+            };
+
+            List<OrderDTO> orderWithPaging = await orders
+                .Skip((pageNumber - 1) * actualPageSize)
+                .Take(actualPageSize)
+                .Select(p => new OrderDTO
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
+                    Username = p.User.Username,
+                    SpecificAddress = p.ShippingAddress.SpecificAddress,
+                    PhoneNumber = p.ShippingAddress.PhoneNumber,
+                    CityId = p.ShippingAddress.CityId,
+                    CityName = p.ShippingAddress.City.Name,
+                    StatusId = p.OrderStatusId,
+                    StatusName = p.OrderStatus.Name,
+                    OrderDate = p.OrderDate,
+                    TotalPrice = p.TotalPrice,
+                })
+                .ToListAsync();
+
+            var result = new
+            {
+                Orders = orderWithPaging,
+                Paging = pagingResult
+            };
+
+            return Ok(result);
+        }
+
+
+        [HttpPut("UpdateOrderStatus/{orderId}")]
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromForm] int statusId)
+        {
+            // Kiểm tra nếu trạng thái là 6 (Hủy đơn hàng), không cho phép cập nhật
+            if (statusId == 6)
+            {
+                return BadRequest(new { message = "Không được thực hiện hủy đơn hàng tại đây." });
+            }
+
+            // Kiểm tra sự hợp lệ của trạng thái
+            var statusExists = await _context.OrderStatuses.AnyAsync(s => s.Id == statusId);
+            if (!statusExists)
+            {
+                return BadRequest(new { message = "Trạng thái không hợp lệ." });
+            }
+
+            // Tìm đơn hàng theo orderId
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null)
+            {
+                return NotFound(new { message = "Không tìm thấy đơn hàng." });
+            }
+
+            // Cập nhật trạng thái đơn hàng
+            order.OrderStatusId = statusId;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = "Cập nhật trạng thái đơn hàng thành công!",
+                    orderId = order.Id,
+                    statusId = order.OrderStatusId
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"Đã xảy ra lỗi khi cập nhật: {ex.Message}" });
+            }
         }
     }
 }

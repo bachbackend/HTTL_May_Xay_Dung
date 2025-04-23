@@ -8,6 +8,7 @@ namespace HTTL_May_Xay_Dung.DTO
 
         public int UserId { get; set; }
         public string Username { get; set; } = null!;
+        public string SpecificAddress { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public int StatusId { get; set; }
         public string StatusName { get; set; } = null!;
@@ -30,5 +31,4 @@ namespace HTTL_May_Xay_Dung.DTO
 
         public int Quantity { get; set; }
     }
-}
 }
