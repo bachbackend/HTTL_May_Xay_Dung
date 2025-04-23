@@ -309,7 +309,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 UserId = customer.Id,
                 ShippingAddressId = shippingAddress.Id,  // Gán địa chỉ vào đơn hàng
                 OrderDate = DateTime.Now,
-                StatusId = 1, // Đang xử lý
+                OrderStatusId = 1, // Đang xử lý
             };
 
             await _context.Orders.AddAsync(order);
