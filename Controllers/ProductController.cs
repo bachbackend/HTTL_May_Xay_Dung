@@ -308,7 +308,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             //Lấy 5 sản phẩm bán chạy nhất
             var bestseller = await _context.Products
                 .Include(p => p.Category)
-                .OrderByDescending (p => p.SaleQuantity)
+                .OrderByDescending(p => p.SaleQuantity)
                 .Take(5)
                 .Select(p => new ProductReturnDTO
                 {
@@ -322,8 +322,76 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name
                 })
-                .ToListAsync ();
+                .ToListAsync();
             return Ok(bestseller);
+        }
+
+
+        [HttpGet("GetProductByStatus")]
+
+        public async Task<IActionResult> GetProductByStatus(
+            int pageNumber = 1,
+            int? pageSize = null,
+            string? name = null,
+            int? categoryId = null
+            )
+        {
+            int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
+            var products = _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.Status == 0)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                products = products.Where(p => p.Name.Contains(name));
+            }
+
+            if (categoryId.HasValue)
+            {
+                products = products.Where(p => p.CategoryId == categoryId.Value);
+            }
+
+
+            int totalProductCount = await products.CountAsync();
+
+
+            int totalPageCount = (int)Math.Ceiling(totalProductCount / (double)actualPageSize);
+            int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
+            int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
+
+            var pagingResult = new PagingReturn
+            {
+                TotalPageCount = totalPageCount,
+                CurrentPage = pageNumber,
+                NextPage = nextPage,
+                PreviousPage = previousPage
+            };
+
+            List<ProductReturnDTO> productWithPaging = await products
+                .Skip((pageNumber - 1) * actualPageSize)
+                .Take(actualPageSize)
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name
+                })
+            .ToListAsync();
+
+            var result = new
+            {
+                Products = productWithPaging,
+                Paging = pagingResult
+            };
+
+            return Ok(result);
         }
     }
 }

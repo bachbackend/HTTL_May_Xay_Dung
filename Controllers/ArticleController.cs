@@ -234,5 +234,73 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { message = "Article updated successfully." });
         }
 
+
+        [HttpGet("GetAllArticleStatusZero")]
+        public async Task<IActionResult> GetAllArticleStatusZero(
+    int pageNumber = 1,
+    int? pageSize = null,
+    string? title = null,
+    int? categoryId = null
+)
+        {
+            int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
+            var articles = _context.Articles
+                .Include(p => p.ArticleCategory)
+                .Where(p => p.Status == 0)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                articles = articles.Where(p => p.Title.Contains(title));
+            }
+
+            if (categoryId.HasValue)
+            {
+                articles = articles.Where(p => p.ArticleCateId == categoryId.Value);
+            }
+
+
+            // Sắp xếp theo CreatedAt giảm dần
+            articles = articles.OrderByDescending(p => p.CreatedAt);
+
+            int totalArticleCount = await articles.CountAsync();
+
+            int totalPageCount = (int)Math.Ceiling(totalArticleCount / (double)actualPageSize);
+            int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
+            int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
+
+            var pagingResult = new PagingReturn
+            {
+                TotalPageCount = totalPageCount,
+                CurrentPage = pageNumber,
+                NextPage = nextPage,
+                PreviousPage = previousPage
+            };
+
+            List<ArticleReturnDTO> articletWithPaging = await articles
+                .Skip((pageNumber - 1) * actualPageSize)
+                .Take(actualPageSize)
+                .Select(p => new ArticleReturnDTO
+                {
+                    Id = p.Id,
+                    ArticleCateId = p.ArticleCateId,
+                    ArticleCateName = p.ArticleCate.Name,
+                    Title = p.Title,
+                    Thumbnail=p.Thumbnail,
+                    Content = p.Content,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt
+                })
+            .ToListAsync();
+
+            var result = new
+            {
+                Articles = articletWithPaging,
+                Paging = pagingResult
+            };
+
+            return Ok(result);
+        }
+
     }
 }
