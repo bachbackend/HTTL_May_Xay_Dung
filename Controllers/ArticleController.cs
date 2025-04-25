@@ -302,5 +302,27 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetRandom5Article")]
+        public async Task<IActionResult> GetRandom5Article()
+        {
+            var randomArticles = await _context.Articles
+                .Include(p => p.ArticleCate)
+                .OrderBy(r => Guid.NewGuid()) // Lấy ngẫu nhiên
+                .Take(5)
+                .Select(p => new ArticleReturnDTO
+                {
+                    Id = p.Id,
+                    ArticleCateId = p.ArticleCateId,
+                    ArticleCateName = p.ArticleCate.Name,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Thumbnail = p.Thumbnail,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt
+                })
+                .ToListAsync();
+
+            return Ok(randomArticles);
+        }
     }
 }
