@@ -264,7 +264,7 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             var customer = await _context.Users.FirstOrDefaultAsync(c => c.Id == request.UserId);
             if (customer == null)
-                return NotFound("Không tìm thấy khách hàng.");
+                return NotFound(new { message = "Không tìm thấy khách hàng." });
 
             var cartItems = await _context.Carts
                 .Where(x => x.UserId == customer.Id)
@@ -272,7 +272,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 .ToListAsync();
 
             if (!cartItems.Any())
-                return BadRequest("Giỏ hàng trống hoặc không tìm thấy thông tin giỏ hàng.");
+                return BadRequest(new { message = "Giỏ hàng trống hoặc không tìm thấy thông tin giỏ hàng." });
 
             // Xử lý địa chỉ giao hàng
             ShippingAddress shippingAddress;
@@ -283,7 +283,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     .FirstOrDefaultAsync(sa => sa.Id == request.ShippingAddressId && sa.UserId == customer.Id);
 
                 if (shippingAddress == null)
-                    return BadRequest("Địa chỉ giao hàng không hợp lệ.");
+                    return BadRequest(new { message = "Địa chỉ giao hàng không hợp lệ." });
             }
             else if (request.NewShippingAddress != null)
             {
@@ -300,7 +300,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
             else
             {
-                return BadRequest("Vui lòng chọn hoặc nhập địa chỉ giao hàng.");
+                return BadRequest(new { message = "Vui lòng chọn hoặc nhập địa chỉ giao hàng." });
             }
 
             // Tạo đơn hàng sau khi địa chỉ hợp lệ

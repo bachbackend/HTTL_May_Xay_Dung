@@ -185,7 +185,7 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             if (orders == null)
             {
-                return NotFound("Không tìm thấy chi tiết của đơn hàng.");
+                return NotFound(new { Message = "Không tìm thấy chi tiết của đơn hàng." });
             }
 
             return Ok(orders);
@@ -254,7 +254,7 @@ namespace HTTL_May_Xay_Dung.Controllers
         public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromForm] int statusId)
         {
             // Kiểm tra nếu trạng thái là 6 (Hủy đơn hàng), không cho phép cập nhật
-            if (statusId == 6)
+            if (statusId == 7)
             {
                 return BadRequest(new { message = "Không được thực hiện hủy đơn hàng tại đây." });
             }
@@ -291,5 +291,61 @@ namespace HTTL_May_Xay_Dung.Controllers
                 return StatusCode(500, new { message = $"Đã xảy ra lỗi khi cập nhật: {ex.Message}" });
             }
         }
+
+        [HttpPut("CancelOrder/{orderId}")]
+        public async Task<IActionResult> CancelOrder(int orderId, [FromForm] int reasonId)
+        {
+            // Tìm đơn hàng theo ID
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null)
+            {
+                return Ok(new { message = "Không tìm thấy đơn hàng." });
+            }
+
+            // Kiểm tra trạng thái đơn hàng
+            if (order.OrderStatusId == 7)
+            {
+                return Ok(new { message = "Đơn hàng này đã bị hủy trước đó." });
+            }
+
+            if (order.OrderStatusId == 4 || order.OrderStatusId == 5 || order.OrderStatusId == 6)
+            {
+                return Ok(new { message = "Không thể hủy đơn hàng đang giao hoặc đã hoàn thành." });
+            }
+
+            var orderDetails = await _context.OrderDetails
+                .Where(od => od.OrderId == orderId)
+                .ToListAsync();
+
+            foreach (var detail in orderDetails)
+            {
+                var productItem = await _context.Products
+                    .FirstOrDefaultAsync(pi => pi.Id == detail.ProductId);
+
+                if (productItem != null)
+                {
+                    productItem.SaleQuantity -= detail.Quantity;
+                }
+            }
+
+            // Cập nhật trạng thái
+            order.OrderStatusId = 7;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = "Đơn hàng đã được hủy thành công!",
+                    orderId = order.Id,
+                    statusId = order.OrderStatusId,
+                });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { message = $"Đã xảy ra lỗi khi hủy đơn hàng: {ex.Message}" });
+            }
+        }
+
     }
 }

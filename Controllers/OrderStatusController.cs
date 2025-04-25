@@ -26,7 +26,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             var os = _context.OrderStatuses.ToList();
             if (os == null)
             {
-                return NotFound("Không tìm thấy trạng thái đơn hàng nào.");
+                return NotFound(new { Message = "Không tìm thấy trạng thái đơn hàng nào." });
             }
             return Ok(os);
         }
@@ -44,7 +44,7 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             if (os != null)
             {
-                return BadRequest("Trạng thái đơn hàng này đã tồn tại.");
+                return BadRequest(new { Message = "Trạng thái đơn hàng này đã tồn tại." });
             }
 
             var newOs = new OrderStatus
@@ -64,7 +64,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             var os = await _context.OrderStatuses.FindAsync(id);
             if (os == null)
             {
-                return NotFound("Trạng thái đơn hàng không tồn tại.");
+                return NotFound(new { Message = "Trạng thái đơn hàng không tồn tại." });
             }
             return Ok(os);
         }
@@ -80,14 +80,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             var existingOs = await _context.OrderStatuses.FindAsync(id);
             if (existingOs == null)
             {
-                return NotFound("Trạng thái đơn hàng không tồn tại.");
+                return NotFound(new { Message = "Trạng thái đơn hàng không tồn tại." });
             }
 
             var duplicateOs = await _context.OrderStatuses
                 .FirstOrDefaultAsync(c => c.Name == dto.Name && c.Id != id);
             if (duplicateOs != null)
             {
-                return BadRequest("Trạng thái đơn hàng đã tồn tại.");
+                return BadRequest(new { Message = "Trạng thái đơn hàng đã tồn tại." });
             }
 
             existingOs.Name = dto.Name;

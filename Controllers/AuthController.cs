@@ -30,7 +30,7 @@ namespace HTTL_May_Xay_Dung.Controllers
        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".ToCharArray();
         private static readonly Random Random = new Random();
 
-        public static string GenerateRandomString(int length = 32)
+        public static string GenerateRandomString(int length = 6)
         {
             if (length <= 0)
             {

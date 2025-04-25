@@ -228,7 +228,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
 
             // Xác định đường dẫn của ảnh để xóa
-            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", product.Image);
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/product", product.Image);
 
             // Kiểm tra và xóa ảnh nếu tồn tại
             if (System.IO.File.Exists(imagePath))
@@ -393,5 +393,6 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             return Ok(result);
         }
+
     }
 }
