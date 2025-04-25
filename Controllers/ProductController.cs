@@ -426,5 +426,36 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(randomProducts);
         }
 
+        [HttpGet("GetProductByCategoryId/{categoryId}")]
+        public async Task<IActionResult> GetProductByCategoryId(int categoryId)
+        {
+            // Lấy danh sách sản phẩm thuộc danh mục, bao gồm thông tin danh mục và chứng nhận
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId == categoryId)
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name,
+                })
+                .ToListAsync();
+
+            // Nếu không tìm thấy sản phẩm, trả về NotFound
+            if (products == null || !products.Any())
+            {
+                return NotFound(new { Message = $"Không tìm thấy sản phẩm với danh mục Id = {categoryId}" });
+            }
+
+            // Trả về danh sách sản phẩm
+            return Ok(products);
+        }
+
     }
 }

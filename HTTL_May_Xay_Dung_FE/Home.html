@@ -958,15 +958,47 @@
     <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://metrics.10web-site.ai/ns.html?id=GTM-M6GPZ95"
             height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
-    <script>
-        function twdemo_clean_url() {
-            let url, new_url;
-            url = window.location.href;
-            new_url = url.split('?')[0];
-            window.history.pushState({}, document.title, new_url);
+
+
+    <style>
+        .icon.scroll-top {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            /* vị trí dưới cùng */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            /* Đảm bảo bo tròn */
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: transform 0.3s ease, filter 0.3s ease;
         }
-        twdemo_clean_url();
-    </script>
+
+        .icon.scroll-top img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .icon.scroll-top:hover img {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+    </style>
+    <div class="social-icons">
+        <a href="#" class="icon scroll-top">
+            <img src="./images/5690103.png" alt="Scroll Up">
+        </a>
+    </div>
+
+
 
     <div data-elementor-type="twbb_header" data-elementor-id="82398" class="elementor elementor-82398">
         <div class="elementor-element elementor-element-2hox7bwj twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky--active elementor-section--handles-inside"
@@ -994,9 +1026,12 @@
                                 <style>
                                     .dropdown-menu {
                                         background-color: white;
-                                        border-radius: 10px; /* Bo góc */
-                                        padding: 10px 0; /* Khoảng cách trên dưới */
-                                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+                                        border-radius: 10px;
+                                        /* Bo góc */
+                                        padding: 10px 0;
+                                        /* Khoảng cách trên dưới */
+                                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                                        /* Đổ bóng nhẹ */
                                     }
 
                                     .dropdown-menu li a {
@@ -1008,47 +1043,63 @@
                                     }
 
                                     .dropdown-menu li a:hover {
-                                        background-color: #f0f0f0; /* Màu nền khi hover */
-                                        color: #0011ff; /* Màu chữ khi hover */
+                                        background-color: #f0f0f0;
+                                        /* Màu nền khi hover */
+                                        color: #0011ff;
+                                        /* Màu chữ khi hover */
                                     }
                                 </style>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
-                                    <a href="#"
-                                        class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>GIỚI THIỆU</strong></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="./AboutUs.html" style="font-family: Arial, sans-serif !important;"><strong>Giới thiệu về chúng tôi</strong></a></li>
-                                            <li><a href="./HistoryCompany.html" style="font-family: Arial, sans-serif !important;"><strong>Lịch sử phát triển</strong></a></li>
-                                            <li><a href="./DevelopmentOrientation.html" style="font-family: Arial, sans-serif !important;"><strong>Định hướng phát triển</strong></a></li>
-                                        </ul>
+                                    <a href="#" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>GIỚI
+                                            THIỆU</strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./AboutUs.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Giới thiệu về
+                                                    chúng tôi</strong></a></li>
+                                        <li><a href="./HistoryCompany.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Lịch sử phát
+                                                    triển</strong></a></li>
+                                        <li><a href="./DevelopmentOrientation.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Định hướng
+                                                    phát triển</strong></a></li>
+                                    </ul>
                                 </li>
 
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
-                                    <a href="./Product.html"
-                                        class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
+                                    <a href="./Product.html" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
-                                    <a href="./Article.html"
-                                        class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>BÀI VIẾT</strong></a>
+                                    <a href="./Article.html" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>BÀI VIẾT</strong></a>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a></li>
+                                        class="twbb-item">Winter Essentials</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a></li>
+                                        class="twbb-item">Contractor’s Choice</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
-                                    <a href="#"
-                                        class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>CHÍNH SÁCH</strong></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="./TermsAndConditions.html" style="font-family: Arial, sans-serif !important;"><strong>Điều khoản & điều kiện</strong></a></li>
-                                            <li><a href="./Privacy.html" style="font-family: Arial, sans-serif !important;"><strong>Chính sách bảo mật</strong></a></li>
-                                        </ul>
+                                    <a href="#" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>CHÍNH
+                                            SÁCH</strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./TermsAndConditions.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Điều khoản &
+                                                    điều kiện</strong></a></li>
+                                        <li><a href="./Privacy.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Chính sách
+                                                    bảo mật</strong></a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </nav>
@@ -1066,27 +1117,33 @@
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                        class="twbb-item">Construction Tools</a></li>
+                                        class="twbb-item">Construction Tools</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                        class="twbb-item">Heavy Equipment</a></li>
+                                        class="twbb-item">Heavy Equipment</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                        class="twbb-item">Safety Gear</a></li>
+                                        class="twbb-item">Safety Gear</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a></li>
+                                        class="twbb-item">Winter Essentials</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a></li>
+                                        class="twbb-item">Contractor’s Choice</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/power-tools/"
-                                        class="twbb-item">Power Tools</a></li>
+                                        class="twbb-item">Power Tools</a>
+                                </li>
                             </ul>
                         </nav>
                         <style>
@@ -1172,27 +1229,33 @@
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                        class="twbb-item">Construction Tools</a></li>
+                                        class="twbb-item">Construction Tools</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                        class="twbb-item">Heavy Equipment</a></li>
+                                        class="twbb-item">Heavy Equipment</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                        class="twbb-item">Safety Gear</a></li>
+                                        class="twbb-item">Safety Gear</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a></li>
+                                        class="twbb-item">Winter Essentials</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a></li>
+                                        class="twbb-item">Contractor’s Choice</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/power-tools/"
-                                        class="twbb-item">Power Tools</a></li>
+                                        class="twbb-item">Power Tools</a>
+                                </li>
                             </ul>
                         </nav>
                         <div class="twbb-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle"
@@ -1207,27 +1270,33 @@
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                        class="twbb-item">Construction Tools</a></li>
+                                        class="twbb-item">Construction Tools</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                        class="twbb-item">Heavy Equipment</a></li>
+                                        class="twbb-item">Heavy Equipment</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                        class="twbb-item">Safety Gear</a></li>
+                                        class="twbb-item">Safety Gear</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a></li>
+                                        class="twbb-item">Winter Essentials</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a></li>
+                                        class="twbb-item">Contractor’s Choice</a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/power-tools/"
-                                        class="twbb-item">Power Tools</a></li>
+                                        class="twbb-item">Power Tools</a>
+                                </li>
                             </ul>
                         </nav>
                         <style>
@@ -4364,12 +4433,19 @@
                                                                     class="swiper-slide-bg elementor-ken-burns elementor-ken-burns--in">
                                                                 </div>
                                                                 <div class="elementor-background-overlay"></div><a
-                                                                    class="swiper-slide-inner"
-                                                                    href="#">
+                                                                    class="swiper-slide-inner" href="#">
                                                                     <div class="swiper-slide-contents animated fadeInUp"
                                                                         style="">
-                                                                        <div class="elementor-slide-heading" style="font-family: Arial, sans-serif;">Trang bị vững vàng, kiến tạo tương lai</div>
-                                                                        <div class="elementor-slide-description" style="font-family: Arial, sans-serif;">Machine Max cung cấp thiết bị và vật liệu xây dựng chất lượng hàng đầu. Chúng tôi cam kết đồng hành cùng dự án của bạn với công cụ đáng tin cậy và dịch vụ vượt trội. Khám phá ngay danh mục sản phẩm của chúng tôi!</div>
+                                                                        <div class="elementor-slide-heading"
+                                                                            style="font-family: Arial, sans-serif;">
+                                                                            Trang bị vững vàng, kiến tạo tương lai</div>
+                                                                        <div class="elementor-slide-description"
+                                                                            style="font-family: Arial, sans-serif;">
+                                                                            Machine Max cung cấp thiết bị và vật liệu
+                                                                            xây dựng chất lượng hàng đầu. Chúng tôi cam
+                                                                            kết đồng hành cùng dự án của bạn với công cụ
+                                                                            đáng tin cậy và dịch vụ vượt trội. Khám phá
+                                                                            ngay danh mục sản phẩm của chúng tôi!</div>
                                                                         <div
                                                                             class="elementor-button elementor-slide-button elementor-size-sm">
                                                                             Explore Now</div>
@@ -4383,12 +4459,19 @@
                                                                     class="swiper-slide-bg elementor-ken-burns elementor-ken-burns--in">
                                                                 </div>
                                                                 <div class="elementor-background-overlay"></div><a
-                                                                    class="swiper-slide-inner"
-                                                                    href="#">
+                                                                    class="swiper-slide-inner" href="#">
                                                                     <div class="swiper-slide-contents animated fadeInUp"
                                                                         style="">
-                                                                        <div class="elementor-slide-heading" style="font-family: Arial, sans-serif;">Đối tác đáng tin cậy cho mọi công trình</div>
-                                                                        <div class="elementor-slide-description" style="font-family: Arial, sans-serif;">Từ dụng cụ cầm tay đến máy móc hạng nặng, Machine Max cung cấp đầy đủ thiết bị để giúp bạn hoàn thành công trình một cách hiệu quả và an toàn. Khám phá ngay danh mục sản phẩm đa dạng của chúng tôi.</div>
+                                                                        <div class="elementor-slide-heading"
+                                                                            style="font-family: Arial, sans-serif;">Đối
+                                                                            tác đáng tin cậy cho mọi công trình</div>
+                                                                        <div class="elementor-slide-description"
+                                                                            style="font-family: Arial, sans-serif;">Từ
+                                                                            dụng cụ cầm tay đến máy móc hạng nặng,
+                                                                            Machine Max cung cấp đầy đủ thiết bị để giúp
+                                                                            bạn hoàn thành công trình một cách hiệu quả
+                                                                            và an toàn. Khám phá ngay danh mục sản phẩm
+                                                                            đa dạng của chúng tôi.</div>
                                                                         <div
                                                                             class="elementor-button elementor-slide-button elementor-size-sm">
                                                                             View Catalog</div>
@@ -4402,12 +4485,20 @@
                                                                     class="swiper-slide-bg elementor-ken-burns elementor-ken-burns--in">
                                                                 </div>
                                                                 <div class="elementor-background-overlay"></div><a
-                                                                    class="swiper-slide-inner"
-                                                                    href="#">
+                                                                    class="swiper-slide-inner" href="#">
                                                                     <div class="swiper-slide-contents animated fadeInUp"
                                                                         style="">
-                                                                        <div class="elementor-slide-heading" style="font-family: Arial, sans-serif;">Trang thiết bị chất lượng cho mọi công trường</div>
-                                                                        <div class="elementor-slide-description" style="font-family: Arial, sans-serif;">Đảm bảo an toàn và hiệu quả tại công trường của bạn với các thiết bị và dụng cụ bảo hộ cao cấp từ Machine Max. Khám phá bộ sưu tập của chúng tôi để tìm ra những giải pháp bền bỉ và đáng tin cậy.</div>
+                                                                        <div class="elementor-slide-heading"
+                                                                            style="font-family: Arial, sans-serif;">
+                                                                            Trang thiết bị chất lượng cho mọi công
+                                                                            trường</div>
+                                                                        <div class="elementor-slide-description"
+                                                                            style="font-family: Arial, sans-serif;">Đảm
+                                                                            bảo an toàn và hiệu quả tại công trường của
+                                                                            bạn với các thiết bị và dụng cụ bảo hộ cao
+                                                                            cấp từ Machine Max. Khám phá bộ sưu tập của
+                                                                            chúng tôi để tìm ra những giải pháp bền bỉ
+                                                                            và đáng tin cậy.</div>
                                                                         <div
                                                                             class="elementor-button elementor-slide-button elementor-size-sm">
                                                                             Safety First</div>
@@ -4421,12 +4512,19 @@
                                                                     class="swiper-slide-bg elementor-ken-burns elementor-ken-burns--in">
                                                                 </div>
                                                                 <div class="elementor-background-overlay"></div><a
-                                                                    class="swiper-slide-inner"
-                                                                    href="#">
+                                                                    class="swiper-slide-inner" href="#">
                                                                     <div class="swiper-slide-contents animated fadeInUp"
                                                                         style="">
-                                                                        <div class="elementor-slide-heading" style="font-family: Arial, sans-serif; font-size: 30px;">Trang bị vững vàng, kiến tạo tương lai</div>
-                                                                        <div class="elementor-slide-description" style="font-family: Arial, sans-serif; font-size: 20px;">Machine Max cung cấp thiết bị và vật liệu xây dựng chất lượng hàng đầu. Chúng tôi cam kết đồng hành cùng dự án của bạn với công cụ đáng tin cậy và dịch vụ vượt trội. Khám phá ngay danh mục sản phẩm của chúng tôi!</div>
+                                                                        <div class="elementor-slide-heading"
+                                                                            style="font-family: Arial, sans-serif; font-size: 30px;">
+                                                                            Trang bị vững vàng, kiến tạo tương lai</div>
+                                                                        <div class="elementor-slide-description"
+                                                                            style="font-family: Arial, sans-serif; font-size: 20px;">
+                                                                            Machine Max cung cấp thiết bị và vật liệu
+                                                                            xây dựng chất lượng hàng đầu. Chúng tôi cam
+                                                                            kết đồng hành cùng dự án của bạn với công cụ
+                                                                            đáng tin cậy và dịch vụ vượt trội. Khám phá
+                                                                            ngay danh mục sản phẩm của chúng tôi!</div>
                                                                         <div
                                                                             class="elementor-button elementor-slide-button elementor-size-sm">
                                                                             Explore Now</div>
@@ -4440,12 +4538,20 @@
                                                                     class="swiper-slide-bg elementor-ken-burns elementor-ken-burns--in">
                                                                 </div>
                                                                 <div class="elementor-background-overlay"></div><a
-                                                                    class="swiper-slide-inner"
-                                                                    href="#">
+                                                                    class="swiper-slide-inner" href="#">
                                                                     <div class="swiper-slide-contents animated fadeInUp"
                                                                         style="">
-                                                                        <div class="elementor-slide-heading" style="font-family: Arial, sans-serif; font-size: 30px;">Đối tác đáng tin cậy cho mọi công trình</div>
-                                                                        <div class="elementor-slide-description" style="font-family: Arial, sans-serif; font-size: 20px;">Từ dụng cụ cầm tay đến máy móc hạng nặng, Machine Max cung cấp đầy đủ thiết bị để giúp bạn hoàn thành công trình một cách hiệu quả và an toàn. Khám phá ngay danh mục sản phẩm đa dạng của chúng tôi.</div>
+                                                                        <div class="elementor-slide-heading"
+                                                                            style="font-family: Arial, sans-serif; font-size: 30px;">
+                                                                            Đối tác đáng tin cậy cho mọi công trình
+                                                                        </div>
+                                                                        <div class="elementor-slide-description"
+                                                                            style="font-family: Arial, sans-serif; font-size: 20px;">
+                                                                            Từ dụng cụ cầm tay đến máy móc hạng nặng,
+                                                                            Machine Max cung cấp đầy đủ thiết bị để giúp
+                                                                            bạn hoàn thành công trình một cách hiệu quả
+                                                                            và an toàn. Khám phá ngay danh mục sản phẩm
+                                                                            đa dạng của chúng tôi.</div>
                                                                         <div
                                                                             class="elementor-button elementor-slide-button elementor-size-sm">
                                                                             View Catalog</div>
@@ -4465,8 +4571,17 @@
                                                                     href="#">
                                                                     <div class="swiper-slide-contents animated fadeInUp"
                                                                         style="">
-                                                                        <div class="elementor-slide-heading" style="font-family: Arial, sans-serif; font-size: 30px;">Trang thiết bị chất lượng cho mọi công trường</div>
-                                                                        <div class="elementor-slide-description" style="font-family: Arial, sans-serif; font-size: 20px;">Đảm bảo an toàn và hiệu quả tại công trường của bạn với các thiết bị và dụng cụ bảo hộ cao cấp từ Machine Max. Khám phá bộ sưu tập của chúng tôi để tìm ra những giải pháp bền bỉ và đáng tin cậy.</div>
+                                                                        <div class="elementor-slide-heading"
+                                                                            style="font-family: Arial, sans-serif; font-size: 30px;">
+                                                                            Trang thiết bị chất lượng cho mọi công
+                                                                            trường</div>
+                                                                        <div class="elementor-slide-description"
+                                                                            style="font-family: Arial, sans-serif; font-size: 20px;">
+                                                                            Đảm bảo an toàn và hiệu quả tại công trường
+                                                                            của bạn với các thiết bị và dụng cụ bảo hộ
+                                                                            cao cấp từ Machine Max. Khám phá bộ sưu tập
+                                                                            của chúng tôi để tìm ra những giải pháp bền
+                                                                            bỉ và đáng tin cậy.</div>
                                                                         <div
                                                                             class="elementor-button elementor-slide-button elementor-size-sm">
                                                                             Safety First</div>
@@ -4557,7 +4672,8 @@
                                                                 role="button" aria-label="Go to slide 2"></span><span
                                                                 class="swiper-pagination-bullet swiper-pagination-bullet-active"
                                                                 tabindex="0" role="button" aria-label="Go to slide 3"
-                                                                aria-current="true"></span></div>
+                                                                aria-current="true"></span>
+                                                        </div>
                                                         <span class="swiper-notification" aria-live="assertive"
                                                             aria-atomic="true"></span>
                                                     </div>
@@ -4765,9 +4881,9 @@
                                     <div class="container mt-5">
                                         <h4 class="mb-3">Sản phẩm mới nhất</h4>
                                         <div class="scrolling-wrapper" id="newestProductList">
-                                          <!-- Sản phẩm mới nhất sẽ được thêm bằng JavaScript -->
+                                            <!-- Sản phẩm mới nhất sẽ được thêm bằng JavaScript -->
                                         </div>
-                                      </div>
+                                    </div>
                                     </br>
 
 
@@ -4781,7 +4897,8 @@
                                                 data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
                                                 data-widget_type="heading.default">
                                                 <div class="elementor-widget-container">
-                                                    <h2 class="elementor-heading-title elementor-size-default">Ưu đãi đặc biệt cho dụng cụ xây dựng!</h2>
+                                                    <h2 class="elementor-heading-title elementor-size-default">Ưu đãi
+                                                        đặc biệt cho dụng cụ xây dựng!</h2>
                                                 </div>
                                             </div>
                                             <div class="elementor-element elementor-element-xonylkk0 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-text-editor animated fadeInUp"
@@ -4789,7 +4906,9 @@
                                                 data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
                                                 data-widget_type="text-editor.default">
                                                 <div class="elementor-widget-container">
-                                                    Khám phá ngay mức giá không thể hấp dẫn hơn cho những thiết bị và dụng cụ xây dựng chất lượng hàng đầu. Đừng bỏ lỡ các chương trình khuyến mãi và ưu đãi có thời hạn của chúng tôi!
+                                                    Khám phá ngay mức giá không thể hấp dẫn hơn cho những thiết bị và
+                                                    dụng cụ xây dựng chất lượng hàng đầu. Đừng bỏ lỡ các chương trình
+                                                    khuyến mãi và ưu đãi có thời hạn của chúng tôi!
                                                 </div>
                                             </div>
                                             <div class="elementor-element elementor-element-mdr5z0sd elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-align-left elementor-mobile-align-center elementor-widget elementor-widget-button"
@@ -4841,7 +4960,8 @@
                                                             data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
                                                             data-widget_type="text-editor.default">
                                                             <div class="elementor-widget-container">
-                                                                Khám phá những sản phẩm bán chạy nhất – lựa chọn hàng đầu của hàng ngàn khách hàng!
+                                                                Khám phá những sản phẩm bán chạy nhất – lựa chọn hàng
+                                                                đầu của hàng ngàn khách hàng!
                                                             </div>
                                                         </div>
                                                     </div>
@@ -4853,7 +4973,8 @@
                                                                 <a class="elementor-button elementor-button-link elementor-size-sm"
                                                                     href="./Product.html">
                                                                     <span class="elementor-button-content-wrapper">
-                                                                        <span class="elementor-button-text">Mua sắm ngay!</span>
+                                                                        <span class="elementor-button-text">Mua sắm
+                                                                            ngay!</span>
                                                                     </span>
                                                                 </a>
                                                             </div>
@@ -5067,58 +5188,58 @@
 
                                             <style>
                                                 .scrolling-wrapper {
-                                                  display: flex;
-                                                  overflow-x: auto;
-                                                  gap: 20px;
-                                                  padding-bottom: 10px;
-                                                  scroll-behavior: smooth;
+                                                    display: flex;
+                                                    overflow-x: auto;
+                                                    gap: 20px;
+                                                    padding-bottom: 10px;
+                                                    scroll-behavior: smooth;
                                                 }
-                                              
+
                                                 .product-card {
-                                                  flex: 0 0 auto;
-                                                  width: 250px;
-                                                  border: 1px solid #ddd;
-                                                  border-radius: 10px;
-                                                  padding: 10px;
-                                                  background-color: #fff;
-                                                  text-align: center;
+                                                    flex: 0 0 auto;
+                                                    width: 250px;
+                                                    border: 1px solid #ddd;
+                                                    border-radius: 10px;
+                                                    padding: 10px;
+                                                    background-color: #fff;
+                                                    text-align: center;
                                                 }
-                                              
+
                                                 .product-card img {
-                                                  width: 100%;
-                                                  height: 180px;
-                                                  object-fit: cover;
-                                                  border-radius: 8px;
+                                                    width: 100%;
+                                                    height: 180px;
+                                                    object-fit: cover;
+                                                    border-radius: 8px;
                                                 }
-                                              
+
                                                 .product-name {
-                                                  font-weight: bold;
-                                                  margin-top: 10px;
-                                                  font-size: 16px;
+                                                    font-weight: bold;
+                                                    margin-top: 10px;
+                                                    font-size: 16px;
                                                 }
-                                              
+
                                                 .product-category {
-                                                  color: #666;
-                                                  font-size: 14px;
+                                                    color: #666;
+                                                    font-size: 14px;
                                                 }
-                                              
+
                                                 /* Optional: Hide scrollbar for a cleaner look */
                                                 .scrolling-wrapper::-webkit-scrollbar {
-                                                  height: 8px;
+                                                    height: 8px;
                                                 }
-                                              
+
                                                 .scrolling-wrapper::-webkit-scrollbar-thumb {
-                                                  background-color: #aaa;
-                                                  border-radius: 10px;
+                                                    background-color: #aaa;
+                                                    border-radius: 10px;
                                                 }
                                             </style>
 
                                             <div class="container mt-5">
                                                 <h4 class="mb-3">Sản phẩm bán chạy</h4>
                                                 <div class="scrolling-wrapper" id="bestSellerList">
-                                                  <!-- Sản phẩm sẽ được thêm bằng JavaScript -->
+                                                    <!-- Sản phẩm sẽ được thêm bằng JavaScript -->
                                                 </div>
-                                              </div>
+                                            </div>
 
 
                                         </div>
@@ -5326,9 +5447,9 @@
                                     <div class="container mt-5">
                                         <h4 class="mb-3">Sản phẩm nổi bật trong ngày</h4>
                                         <div class="scrolling-wrapper" id="randomProductList">
-                                          <!-- Sản phẩm ngẫu nhiên sẽ được thêm bằng JavaScript -->
+                                            <!-- Sản phẩm ngẫu nhiên sẽ được thêm bằng JavaScript -->
                                         </div>
-                                      </div>
+                                    </div>
 
 
                                 </div>
@@ -5366,15 +5487,18 @@
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82386">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                                class="twbb-item">Construction Tools</a></li>
+                                                class="twbb-item">Construction Tools</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82387">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                                class="twbb-item">Heavy Equipment</a></li>
+                                                class="twbb-item">Heavy Equipment</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                                class="twbb-item">Safety Gear</a></li>
+                                                class="twbb-item">Safety Gear</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
@@ -5384,15 +5508,18 @@
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82386">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                                class="twbb-item">Construction Tools</a></li>
+                                                class="twbb-item">Construction Tools</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82387">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                                class="twbb-item">Heavy Equipment</a></li>
+                                                class="twbb-item">Heavy Equipment</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                                class="twbb-item">Safety Gear</a></li>
+                                                class="twbb-item">Safety Gear</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <style>
@@ -5421,11 +5548,13 @@
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82389">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#about-us"
-                                                class="twbb-item">About Us</a></li>
+                                                class="twbb-item">About Us</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#contact-us"
-                                                class="twbb-item">Contact Us</a></li>
+                                                class="twbb-item">Contact Us</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
@@ -5435,11 +5564,13 @@
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82389">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#about-us"
-                                                class="twbb-item">About Us</a></li>
+                                                class="twbb-item">About Us</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#contact-us"
-                                                class="twbb-item">Contact Us</a></li>
+                                                class="twbb-item">Contact Us</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <style>
@@ -5468,11 +5599,13 @@
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82391">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#shipping-&amp;-returns"
-                                                class="twbb-item">Shipping &amp; Returns</a></li>
+                                                class="twbb-item">Shipping &amp; Returns</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#faq"
-                                                class="twbb-item">Faq</a></li>
+                                                class="twbb-item">Faq</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
@@ -5482,11 +5615,13 @@
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82391">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#shipping-&amp;-returns"
-                                                class="twbb-item">Shipping &amp; Returns</a></li>
+                                                class="twbb-item">Shipping &amp; Returns</a>
+                                        </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#faq"
-                                                class="twbb-item">Faq</a></li>
+                                                class="twbb-item">Faq</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <style>
@@ -5577,13 +5712,13 @@
                                     data-smartmenus-id="17454618201534412">
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82393">
-                                        <a href="./TermsAndConditions.html"
-                                            class="twbb-item">Terms-and-conditions</a></li>
+                                        <a href="./TermsAndConditions.html" class="twbb-item">Terms-and-conditions</a>
+                                    </li>
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-82394">
-                                        <a rel="privacy-policy"
-                                            href="./Privacy.html"
-                                            class="twbb-item">Privacy-policy</a></li>
+                                        <a rel="privacy-policy" href="./Privacy.html"
+                                            class="twbb-item">Privacy-policy</a>
+                                    </li>
                                 </ul>
                             </nav>
                             <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
@@ -5591,13 +5726,13 @@
                                     data-smartmenus-id="17454618201543901">
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82393">
-                                        <a href="./TermsAndConditions.html"
-                                            class="twbb-item">Terms-and-conditions</a></li>
+                                        <a href="./TermsAndConditions.html" class="twbb-item">Terms-and-conditions</a>
+                                    </li>
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-82394">
-                                        <a rel="privacy-policy"
-                                            href="./Privacy.html"
-                                            class="twbb-item">Privacy-policy</a></li>
+                                        <a rel="privacy-policy" href="./Privacy.html"
+                                            class="twbb-item">Privacy-policy</a>
+                                    </li>
                                 </ul>
                             </nav>
                             <style>
@@ -5708,13 +5843,12 @@
     <script type="text/javascript" id=""
         charset="">(function () { var a = document.createElement("script"); a.type = "text/javascript"; a.async = !0; a.src = "https://cdn.firstpromoter.com/fprom.js"; a.onload = a.onreadystatechange = function () { var b = this.readyState; if (!b || "complete" == b || "loaded" == b) try { $FPROM.init("xs0difqj", ".10web.io") } catch (d) { } }; var c = document.getElementsByTagName("script")[0]; c.parentNode.insertBefore(a, c) })();</script>
 
-    <script type="text/javascript" id=""
-        charset="">!function (d, g, e) {
-                d.TiktokAnalyticsObject = e; var a = d[e] = d[e] || []; a.methods = "page track identify instances debug on off once ready alias group enableCookie disableCookie".split(" "); a.setAndDefer = function (b, c) { b[c] = function () { b.push([c].concat(Array.prototype.slice.call(arguments, 0))) } }; for (d = 0; d < a.methods.length; d++)a.setAndDefer(a, a.methods[d]); a.instance = function (b) { b = a._i[b] || []; for (var c = 0; c < a.methods.length; c++)a.setAndDefer(b, a.methods[c]); return b }; a.load = function (b, c) {
-                    var f = "https://analytics.tiktok.com/i18n/pixel/events.js";
-                    a._i = a._i || {}; a._i[b] = []; a._i[b]._u = f; a._t = a._t || {}; a._t[b] = +new Date; a._o = a._o || {}; a._o[b] = c || {}; c = document.createElement("script"); c.type = "text/javascript"; c.async = !0; c.src = f + "?sdkid\x3d" + b + "\x26lib\x3d" + e; b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(c, b)
-                }; a.load("CML2UCRC77UBB48CJFDG"); a.page()
-            }(window, document, "ttq");</script>
+    <script type="text/javascript" id="" charset="">!function (d, g, e) {
+            d.TiktokAnalyticsObject = e; var a = d[e] = d[e] || []; a.methods = "page track identify instances debug on off once ready alias group enableCookie disableCookie".split(" "); a.setAndDefer = function (b, c) { b[c] = function () { b.push([c].concat(Array.prototype.slice.call(arguments, 0))) } }; for (d = 0; d < a.methods.length; d++)a.setAndDefer(a, a.methods[d]); a.instance = function (b) { b = a._i[b] || []; for (var c = 0; c < a.methods.length; c++)a.setAndDefer(b, a.methods[c]); return b }; a.load = function (b, c) {
+                var f = "https://analytics.tiktok.com/i18n/pixel/events.js";
+                a._i = a._i || {}; a._i[b] = []; a._i[b]._u = f; a._t = a._t || {}; a._t[b] = +new Date; a._o = a._o || {}; a._o[b] = c || {}; c = document.createElement("script"); c.type = "text/javascript"; c.async = !0; c.src = f + "?sdkid\x3d" + b + "\x26lib\x3d" + e; b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(c, b)
+            }; a.load("CML2UCRC77UBB48CJFDG"); a.page()
+        }(window, document, "ttq");</script>
 
     <script type="text/javascript" src="./Home_files/webfont.js.download" id="tbdemo-webfont-js"></script>
     <script type="text/javascript" id="twbb-theme-customize-script-js-extra">
@@ -5778,13 +5912,13 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("https://localhost:7205/api/Product/GetBestSeller")
-        .then(response => response.json())
-        .then(data => {
-          const listContainer = document.getElementById("bestSellerList");
-  
-          data.forEach(product => {
-            const productHTML = `
+        fetch("https://localhost:7205/api/Product/GetBestSeller")
+            .then(response => response.json())
+            .then(data => {
+                const listContainer = document.getElementById("bestSellerList");
+
+                data.forEach(product => {
+                    const productHTML = `
             <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
               <div class="product-card">
                 <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -5793,22 +5927,22 @@
               </div>
             </a>
             `;
-            listContainer.insertAdjacentHTML("beforeend", productHTML);
-          });
-        })
-        .catch(error => {
-          console.error("Lỗi khi tải sản phẩm bán chạy:", error);
-        });
+                    listContainer.insertAdjacentHTML("beforeend", productHTML);
+                });
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải sản phẩm bán chạy:", error);
+            });
 
 
         // Gọi API Sản phẩm mới nhất
-    fetch("https://localhost:7205/api/Product/GetTop5NewestProducts")
-      .then(response => response.json())
-      .then(data => {
-        const newestListContainer = document.getElementById("newestProductList");
+        fetch("https://localhost:7205/api/Product/GetTop5NewestProducts")
+            .then(response => response.json())
+            .then(data => {
+                const newestListContainer = document.getElementById("newestProductList");
 
-        data.forEach(product => {
-          const productHTML = `
+                data.forEach(product => {
+                    const productHTML = `
             <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                 <div class="product-card">
                 <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -5817,21 +5951,21 @@
                 </div>
             </a>
           `;
-          newestListContainer.insertAdjacentHTML("beforeend", productHTML);
-        });
-      })
-      .catch(error => {
-        console.error("Lỗi khi tải sản phẩm mới nhất:", error);
-      });
+                    newestListContainer.insertAdjacentHTML("beforeend", productHTML);
+                });
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải sản phẩm mới nhất:", error);
+            });
 
-      // Gọi API Sản phẩm ngẫu nhiên
-    fetch("https://localhost:7205/api/Product/GetRandomProducts")
-      .then(response => response.json())
-      .then(data => {
-        const randomListContainer = document.getElementById("randomProductList");
+        // Gọi API Sản phẩm ngẫu nhiên
+        fetch("https://localhost:7205/api/Product/GetRandomProducts")
+            .then(response => response.json())
+            .then(data => {
+                const randomListContainer = document.getElementById("randomProductList");
 
-        data.forEach(product => {
-          const productHTML = `
+                data.forEach(product => {
+                    const productHTML = `
             <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                 <div class="product-card">
                 <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -5840,19 +5974,19 @@
                 </div>
             </a>
           `;
-          randomListContainer.insertAdjacentHTML("beforeend", productHTML);
-        });
-      })
-      .catch(error => {
-        console.error("Lỗi khi tải sản phẩm ngẫu nhiên:", error);
-      });
+                    randomListContainer.insertAdjacentHTML("beforeend", productHTML);
+                });
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải sản phẩm ngẫu nhiên:", error);
+            });
 
 
 
     });
-  </script>
-  
-  
-    
+</script>
+
+
+
 
 </html>
