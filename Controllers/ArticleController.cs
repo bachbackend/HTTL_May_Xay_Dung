@@ -324,5 +324,37 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             return Ok(randomArticles);
         }
+
+
+        [HttpGet("GetLatestArticles")]
+        public async Task<IActionResult> GetLatestArticles()
+        {
+            // Lấy 3 bài viết mới nhất, sắp xếp theo CreatedAt giảm dần
+            var latestArticles = await _context.Articles
+                .Include(p => p.ArticleCate)
+                .OrderByDescending(p => p.CreatedAt)  // Sắp xếp theo thời gian tạo bài viết giảm dần
+                .Take(5)  // Lấy 3 bài viết đầu tiên
+                .Select(p => new ArticleReturnDTO
+                {
+                    Id = p.Id,
+                    ArticleCateId = p.ArticleCateId,
+                    ArticleCateName = p.ArticleCate.Name,
+                    Title = p.Title,
+                    Content = p.Content,
+                    Thumbnail = p.Thumbnail,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt
+                })
+                .ToListAsync();
+
+            // Nếu không có bài viết nào, trả về NotFound
+            if (latestArticles == null || !latestArticles.Any())
+            {
+                return NotFound(new { Message = "Không có bài viết nào." });
+            }
+
+            // Trả về 3 bài viết mới nhất
+            return Ok(latestArticles);
+        }
     }
 }
