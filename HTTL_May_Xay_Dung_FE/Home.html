@@ -1082,11 +1082,11 @@
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
                                         class="twbb-item">Winter Essentials</a>
                                 </li>
-                                <li
+                                <!-- <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
                                         class="twbb-item">Contractor’s Choice</a>
-                                </li>
+                                </li> -->
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
                                     <a href="#" class="twbb-item"
@@ -1100,6 +1100,34 @@
                                                 style="font-family: Arial, sans-serif !important;"><strong>Chính sách
                                                     bảo mật</strong></a></li>
                                     </ul>
+                                </li>
+                                <li
+                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
+                                    <a href="Cart.html" class="twbb-item"
+                                        style="position: relative; display: inline-block;">
+                                        <strong>GIỎ HÀNG</strong>
+                                        <i class="fa fa-shopping-cart"
+                                            style="font-size: 20px; margin-left: 5px; position: relative;"></i>
+                                        <span id="cart-count" style="
+                                                position: absolute;
+                                                top: -5px;
+                                                right: -8px;
+                                                background-color: red;
+                                                color: white;
+                                                font-size: 10px;
+                                                font-weight: bold;
+                                                padding: 2px 5px;
+                                                border-radius: 50%;
+                                                min-width: 18px;
+                                                text-align: center;
+                                                line-height: 1;
+                                                border: 2px solid white;">
+                                            0
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="menu-item d-inline-block" id="auth-links">
+                                    <!-- Nội dung sẽ được JavaScript thay đổi -->
                                 </li>
                             </ul>
                         </nav>
@@ -1153,7 +1181,7 @@
                         </style>
                     </div>
                 </div>
-                <div class="elementor-element elementor-element-pncer879 e-con-full e-flex e-con e-parent e-lazyloaded"
+                <!-- <div class="elementor-element elementor-element-pncer879 e-con-full e-flex e-con e-parent e-lazyloaded"
                     data-id="pncer879" data-element_type="container">
                     <div class="elementor-element elementor-element-ltok8oyl elementor-view-default elementor-widget elementor-widget-icon"
                         data-id="ltok8oyl" data-element_type="widget" data-widget_type="icon.default">
@@ -1199,10 +1227,10 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div> <!-- close twbb_menu-cart__wrapper -->
+                            </div> 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="elementor-element elementor-element-2hox7bwj twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky__spacer"
@@ -5912,6 +5940,59 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem('accessToken');  // Lấy token từ localStorage
+        const authLinks = document.getElementById('auth-links');
+
+        if (token) {
+            const payload = parseJwt(token);  // Giải mã token
+
+            if (payload && payload.unique_name) {
+                // Nếu giải mã thành công và có unique_name, hiển thị lời chào
+                authLinks.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
+                                <strong>Hello, ${payload.unique_name}!</strong>
+                            </a>
+                            <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+                                style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+
+                    `;
+            } else {
+                // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
+                showLoginButtons();
+            }
+        } else {
+            // Nếu không có token, hiển thị nút đăng nhập/đăng ký
+            showLoginButtons();
+        }
+
+        function parseJwt(token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+                return JSON.parse(jsonPayload);
+            } catch (error) {
+                console.error("Invalid JWT Token:", error);
+                return null;
+            }
+        }
+
+        // Hiển thị nút Đăng nhập/Đăng ký
+        function showLoginButtons() {
+            const authLinks = document.getElementById('auth-links');
+            authLinks.innerHTML = `
+                    <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
+                
+            `;
+        }
+
         fetch("https://localhost:7205/api/Product/GetBestSeller")
             .then(response => response.json())
             .then(data => {

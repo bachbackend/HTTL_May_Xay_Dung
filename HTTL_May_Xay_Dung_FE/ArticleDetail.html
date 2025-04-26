@@ -1291,14 +1291,17 @@
                     data-id="kvutht02" data-element_type="widget"
                     data-widget_type="twbb_woocommerce-breadcrumb.default">
                     <div class="elementor-widget-container">
-                        <nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a
-                                href="./Home.html">Trang chủ</a>&nbsp;/&nbsp;Bài viết</nav>
+                        <nav class="woocommerce-breadcrumb" aria-label="Breadcrumb">
+                            <a href="./Home.html">Trang chủ</a>&nbsp;/&nbsp;
+                            <a href="./Article.html">Bài viết</a>&nbsp;/&nbsp;
+                            <a href="#" id="Breadcrumb-title">Machine Max</a>
+                          </nav>
                     </div>
                 </div>
                 <div class="elementor-element elementor-element-h6gl09io elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-tenweb-archive-title elementor-page-title tenweb-page-title elementor-widget-heading"
                     data-id="h6gl09io" data-element_type="widget" data-widget_type="tenweb-archive-title.default">
                     <div class="elementor-widget-container">
-                        <h1 class="elementor-heading-title elementor-size-default">Bài viết</h1>
+                        <h1 class="elementor-heading-title elementor-size-default" style="font-family: Arial, Helvetica, sans-serif;">Bài viết</h1>
                     </div>
                 </div>
             </div>
@@ -2043,6 +2046,12 @@
         }
 
         function renderArticle(article) {
+            const breadcrumbTitle = document.getElementById("Breadcrumb-title");
+            if (breadcrumbTitle) {
+                breadcrumbTitle.textContent = article.title;
+                breadcrumbTitle.href = `./ArticleDetail.html?id=${article.id}`; // nếu có trang chi tiết
+            }
+
             productGrid.innerHTML = `
                 <div class="product-card">
                     <div class="card mb-3 shadow-sm">
