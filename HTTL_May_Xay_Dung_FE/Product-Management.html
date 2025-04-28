@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản Phẩm</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Public CDN for TinyMCE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.0/tinymce.min.js"></script>
+
+    <script>
+        // Initialize TinyMCE
+        tinymce.init({
+            selector: 'textarea', // Apply TinyMCE to all <textarea> elements
+            plugins: [
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
+                'image', 'link', 'lists', 'media', 'searchreplace',
+                'table', 'visualblocks', 'wordcount'
+            ],
+            toolbar: 'undo redo | bold italic underline | link image media | numlist bullist | emoticons charmap | removeformat',
+            branding: false, // Remove "Powered by TinyMCE" branding
+            height: 300 // Set editor height
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .container-fluid {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4e73df;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .form-control,
+        .btn {
+            border-radius: 10px;
+        }
+
+        .form-control:focus,
+        .btn:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .mb-4 {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4e73df;
+            color: white;
+            font-weight: 500;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .action-btns button {
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .action-btns button:hover {
+            transform: scale(1.05);
+            background-color: #5a6268;
+        }
+
+        .table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            border-radius: 50%;
+            padding: 10px 15px;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .input-group .form-control {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #4e73df;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #365f8f;
+        }
+
+        /* Thêm hiệu ứng cho các input khi focus */
+        .form-control:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
+        }
+
+        /* Cải tiến bố cục phần filter */
+        .filter-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-row .form-control {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .filter-row .btn-primary {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        /* Chỉnh sửa cột ID */
+        th:first-child,
+        td:first-child {
+            width: 30px;
+            /* Điều chỉnh kích thước của cột ID */
+            text-align: center;
+            /* Căn giữa cột ID */
+        }
+
+        th:nth-child(5),
+        td:nth-child(5) {
+            width: 300px;
+            /* Làm cho cột Dịch vụ rộng hơn */
+        }
+
+        th:nth-child(6),
+        td:nth-child(6) {
+            width: 200px;
+            /* Làm cho cột Dịch vụ rộng hơn */
+        }
+
+        th:nth-child(7),
+        td:nth-child(7) {
+            width: 220px;
+            /* Làm cho cột Hành động rộng hơn */
+            text-align: center;
+            /* Căn giữa các nút hành động */
+        }
+
+        .filter-container {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-row .form-control,
+        .filter-row .btn {
+            flex: 1;
+        }
+
+        .filter-row select {
+            min-width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid mt-5">
+        <h1 class="text-center mb-4">Quản Lý Sản Phẩm</h1>
+        <div class="mb-4 text-right">
+            <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Thêm
+                sản phẩm
+            </button> -->
+
+            <a href="Add-Product.html" class="btn btn-success" target="_blank">
+                Thêm sản phẩm
+            </a>
+
+            <!-- <button type="button" class="btn btn-primary" id="downloadCSVButton">
+                Tải File CSV
+            </button> -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportCSVModal">Tải
+                File CSV
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal CSV-->
+    <div class="modal fade" id="exportCSVModal" tabindex="-1" aria-labelledby="exportCSVModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportCSVModalLabel">Tải file CSV - Lọc sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="filterForm">
+                        <div class="mb-3">
+                            <label for="productStatusCSV" class="form-label">Chọn trạng thái sản phẩm</label>
+                            <select class="form-select" id="productStatusCSV" name="productStatusCSV">
+                                <option value="">Tất cả</option>
+                                <option value="0">Đang kinh doanh</option>
+                                <option value="1">Ngừng kinh doanh</option>
+                            </select>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary" id="downloadCSVBtn">Tải File CSV</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal add-->
+    <div class="modal fade" id="addCompanyModal" tabindex="-1" aria-labelledby="addCompanyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCompanyModalLabel">Thêm Sản Phẩm Mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCompanyForm">
+                        <div class="mb-3">
+                            <label for="companyName" class="form-label">Tên Sản Phẩm <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="Name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="filterService1" class="form-label">Loại Sản Phẩm <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-control" id="filterServices1">
+                                <option value="">Loại sản phẩm</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="companyContact" class="form-label">Mô tả sản phẩm <span
+                                    class="text-danger">*</span></label>
+                            <textarea id="description" name="Description"></textarea><br><br>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                            <select id="status" name="Status" class="form-control">
+                                <option value="0">Đang kinh doanh</option>
+                                <option value="1">Ngừng kinh doanh</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Upload Image <span
+                                    class="text-danger">*</span></label>
+                            <input type="file" id="file" name="file" accept="image/*" class="form-control" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <!-- <button type="button" class="btn btn-primary" id="addCompanyBtn">Thêm Công Ty</button> -->
+                            <button type="button" class="btn btn-primary" onclick="submitForm()">Thêm sản phẩm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal view by id-->
+    <div class="modal fade" id="companyModal" tabindex="-1" aria-labelledby="companyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl"> <!-- Thêm modal-lg để làm rộng modal -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="companyModalLabel">Thông Tin Sản Phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 id="modalCompanyName"></h5>
+                    <p><strong>Tên sản phẩm:</strong> <span id="productName"></span></p>
+                    <p><strong>Loại sản phẩm:</strong> <span id="productCategory"></span></p>
+                    <p><strong>Trạng thái:</strong> <span id="productStatus"></span></p>
+                    <p><strong>Ảnh sản phẩm:</strong>
+                        <img id="productImage" src="" alt="Ảnh sản phẩm" class="img-fluid"
+                            style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;">
+                    </p>
+                    <p><strong>Mô tả sản phẩm:</strong></p>
+                    <textarea id="productDescription" class="form-control" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal chỉnh sửa công ty -->
+    <div class="modal fade" id="editCompanyModal" tabindex="-1" aria-labelledby="editCompanyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCompanyModalLabel">Chỉnh Sửa Sản Phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editCompanyForm">
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="editProductId" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editProductName" class="form-label">Tên Sản Phẩm <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="editProductName" required maxlength="250">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editProductCategory" class="form-label">Loại Sản Phẩm <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-control" id="editProductCategory">
+                                <option value="">Chọn loại sản phẩm</option>
+                                <!-- Các loại sản phẩm sẽ được tải từ API -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editProductDescription" class="form-label">Mô tả sản phẩm <span
+                                    class="text-danger">*</span></label>
+                            <textarea id="editProductDescription" name="Description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStatus" class="form-label">Trạng thái <span
+                                    class="text-danger">*</span></label>
+                            <select id="editStatus" name="Status" class="form-control">
+                                <option value="0">Đang kinh doanh</option>
+                                <option value="1">Ngừng kinh doanh</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editImage" class="form-label">Upload Image <span
+                                    class="text-danger">*</span></label>
+                            <input type="file" id="editImage" name="file" accept="image/*" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Form tìm kiếm và bộ lọc -->
+    <div class="mb-4">
+        <div class="filter-container p-3">
+            <div class="filter-row d-flex gap-2 align-items-center">
+                <input type="text" class="form-control" id="searchName" placeholder="Tìm kiếm theo tên">
+
+                <select class="form-control" id="filterServices3">
+                    <option value="">Loại sản phẩm</option>
+                </select>
+
+                <select class="form-control" id="searchStatus">
+                    <option value="">Chọn trạng thái</option>
+                    <option value="0">Đang kinh doanh</option>
+                    <option value="1">Ngừng kinh doanh</option>
+                </select>
+                <select class="form-control" id="sortBy">
+                    <option value="id">Sắp xếp theo</option>
+                    <option value="name">Tên</option>
+                    <option value="saleQuantity">Số lượng bán</option>
+                    <option value="createDate">Ngày tạo</option>
+                </select>
+
+                <select class="form-control" id="sortOrder">
+                    <option value="asc">Tăng dần</option>
+                    <option value="desc">Giảm dần</option>
+                </select>
+
+
+                <button class="btn btn-primary" id="searchBtn">Tìm Kiếm</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th style="width: 200px;">Tên</th>
+                    <th style="width: 300px;">Ảnh</th>
+                    <th style="width: 200px;">Loại sản phẩm</th>
+                    <th style="width: 200px;">Trạng thái</th>
+                    <th>Số lượng bán</th>
+                    <!-- <th style="width: 200px;">Ngày tạo</th> -->
+                    <th style="width: 150px;">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="transportTableBody">
+                <!-- Danh sách công ty vận chuyển sẽ được tải vào đây -->
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4" id="pagination">
+            <!-- Phân trang sẽ được tải vào đây -->
+        </div>
+
+    </div>
+    <div class="mb-4 text-right">
+        <a href="managerDashboard.html" class="btn btn-secondary">Quay Lại Trang Chủ</a>
+    </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const itemsPerPage = 10;
+        let currentPage = 1;
+
+        function renderPaginationButtons(totalPages) {
+            const paginationElement = document.getElementById('pagination');
+            paginationElement.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.classList.add('btn', 'btn-primary', 'me-2');
+                button.addEventListener('click', () => loadProducts(i));
+                if (i === currentPage) {
+                    button.classList.add('active');
+                }
+                paginationElement.appendChild(button);
+            }
+        }
+
+        function loadProducts(pageNumber) {
+            const searchName = document.getElementById('searchName').value;
+            const serviceId = document.getElementById('filterServices3').value;
+            const searchStatus = document.getElementById('searchStatus').value;
+            const sortBy = document.getElementById('sortBy').value;
+            const sortOrder = document.getElementById('sortOrder').value;
+            let url = `https://localhost:7205/api/Product/GetAllProduct?pageNumber=${pageNumber}&pageSize=10`;
+            currentPage = pageNumber;
+
+            const params = new URLSearchParams();
+
+            if (searchName) {
+                params.append('name', searchName);
+            }
+            if (serviceId) {
+                params.append('categoryId', serviceId);
+            }
+            if (searchStatus) {
+                params.append('status', searchStatus);
+            }
+            if (sortBy) {
+                params.append('sortBy', sortBy);
+            }
+            if (sortOrder) {
+                params.append('sortOrder', sortOrder);
+            }
+
+            if (params.toString()) {
+                url += `&${params.toString()}`;
+            }
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            };
+
+            fetch(url, {
+                method: 'GET',
+                headers: headers
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const products = data.products;
+                    const paging = data.paging;
+                    const tableBody = document.getElementById('transportTableBody');
+
+                    tableBody.innerHTML = ''; // Clear existing rows
+
+                    if (products.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="6" class="text-center">Không tìm thấy sản phẩm nào.</td></tr>`;
+                        renderPaginationButtons(0); // No pagination if no products
+                        return;
+                    }
+
+                    products.forEach((product, index) => {
+                        const pageSize = 12;
+                        const serialNumber = (currentPage - 1) * pageSize + (index + 1);
+                        console.log(`Sản phẩm #${serialNumber}:`, product);
+
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                <td>${product.id}</td> 
+                <td style="width: 200px;">${product.name}</td>
+                <td>
+                    <img src="https://localhost:7205/images/product/${product.image}" 
+                        alt="${product.name}" 
+                        class="img-fluid" 
+                        style="width: 300px; height: 200px; border: 1px solid black;">
+                </td>
+                <td style="width: 100px;">${product.categoryName}</td>
+                <td>
+                    ${product.status === 0
+                                ? '<span style="color: green; font-weight: bold;">Đang kinh doanh</span>'
+                                : '<span style="color: red; font-weight: bold;">Ngừng kinh doanh</span>'
+                            }
+                </td>
+                <td>${product.saleQuantity != null ? product.saleQuantity : 0}</td>
+                
+                <td>
+                    <div class="action-btns">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Hành động
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="showProductModal(${product.id})">Xem</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="editProduct(${product.id})">Sửa</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="deleteProduct(${product.id})">Xóa</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            `;
+                        tableBody.appendChild(row);
+                    });
+
+                    // Render pagination buttons
+                    renderPaginationButtons(paging.totalPageCount);
+                })
+                .catch(() => alert("Không tìm thấy sản phẩm nào."));
+        }
+
+
+        loadProducts(1);
+
+        //     const itemsPerPage = 10;
+        // let currentPage = 1;
+
+        // function renderPaginationButtons(totalPages) {
+        //     const paginationElement = document.getElementById('pagination');
+        //     paginationElement.innerHTML = '';
+
+        //     for (let i = 1; i <= totalPages; i++) {
+        //         const button = document.createElement('button');
+        //         button.textContent = i;
+        //         button.classList.add('btn', 'btn-primary', 'me-2');
+        //         button.addEventListener('click', () => loadProducts(i));
+        //         if (i === currentPage) {
+        //             button.classList.add('active');
+        //         }
+        //         paginationElement.appendChild(button);
+        //     }
+        // }
+
+        // function loadProducts(pageNumber) {
+        //     const searchName = document.getElementById('searchName')?.value || '';
+        //     const serviceId = document.getElementById('filterServices3')?.value || '';
+        //     const searchStatus = document.getElementById('searchStatus')?.value || '';
+        //     let url = `https://localhost:7171/api/Product/GetAllProduct?pageNumber=${pageNumber}&pageSize=${itemsPerPage}`;
+        //     currentPage = pageNumber;
+
+        //     const params = new URLSearchParams({
+        //         name: searchName,
+        //         categoryId: serviceId,
+        //         status: searchStatus
+        //     });
+
+        //     url += `&${params.toString()}`;
+
+        //     fetch(url, {
+        //         method: 'GET',
+        //         headers: { 'Content-Type': 'application/json' }
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const { products, paging } = data;
+        //             const tableBody = document.getElementById('transportTableBody');
+        //             tableBody.innerHTML = '';
+
+        //             if (!products?.length) {
+        //                 tableBody.innerHTML = `<tr><td colspan="7" class="text-center">Không tìm thấy sản phẩm nào.</td></tr>`;
+        //                 renderPaginationButtons(0);
+        //                 return;
+        //             }
+
+        //             products.forEach((product, index) => {
+        //                 const serialNumber = (currentPage - 1) * itemsPerPage + index + 1;
+        //                 const row = `<tr>
+        //                     <td>${serialNumber}</td>
+        //                     <td style="display:none;">${product.id}</td>
+        //                     <td>${product.name}</td>
+        //                     <td><img src="https://localhost:7171/images/${product.image}" alt="${product.name}" class="img-fluid" style="width: 150px; height: 100px; border: 1px solid black;"></td>
+        //                     <td>${product.categoryName}</td>
+        //                     <td>${product.status === 0 ? '<span class="text-success fw-bold">Đang kinh doanh</span>' : '<span class="text-danger fw-bold">Ngừng kinh doanh</span>'}</td>
+        //                     <td>${new Date(product.createdAt).toLocaleDateString()}</td>
+        //                     <td>
+        //                         <div class="dropdown">
+        //                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Hành động</button>
+        //                             <ul class="dropdown-menu">
+        //                                 <li><a class="dropdown-item" href="#" onclick="showProductModal(${product.id})">Xem</a></li>
+        //                                 <li><a class="dropdown-item" href="#" onclick="editProduct(${product.id})">Sửa</a></li>
+        //                                 <li><a class="dropdown-item text-danger" href="#" onclick="deleteProduct(${product.id})">Xóa</a></li>
+        //                             </ul>
+        //                         </div>
+        //                     </td>
+        //                 </tr>`;
+        //                 tableBody.innerHTML += row;
+        //             });
+
+        //             renderPaginationButtons(paging.totalPageCount);
+        //         })
+        //         .catch(error => {
+        //             console.error('Lỗi khi tải sản phẩm:', error);
+        //             alert('Đã xảy ra lỗi khi tải danh sách sản phẩm.');
+        //         });
+        // }
+
+        // loadProducts(1);
+
+        // Gán sự kiện click cho nút tìm kiếm
+        document.getElementById('searchBtn').addEventListener('click', function () {
+            loadProducts(1); // Gọi hàm với trang hiện tại
+        });
+
+        // Hàm để load danh sách dịch vụ từ API vào dropdown (filter)
+        // function loadServices3() {
+        //     fetch('https://localhost:7205/api/Category/GetAll', {
+        //         method: 'GET',
+        //         headers: {
+        //             'Accept': '*/*'
+        //         }
+        //     })
+        //         .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
+        //         .then(data => {
+        //             const serviceDropdown = document.getElementById('filterServices3');
+
+        //             // Xóa tất cả các option cũ trong dropdown
+        //             serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+
+        //             // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+        //             data.forEach(category => {
+        //                 const option = document.createElement('option');
+        //                 option.value = category.id; // Gán giá trị là ID của dịch vụ
+        //                 option.textContent = category.name; // Hiển thị tên dịch vụ
+        //                 serviceDropdown.appendChild(option); // Thêm option vào dropdown
+        //             });
+        //         })
+        //         .catch(error => {
+        //             console.error('Có lỗi xảy ra khi gọi API:', error);
+        //         });
+        // }
+
+        function loadServices3() {
+            fetch('https://localhost:7205/api/Category/GetAll', {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const serviceDropdown = document.getElementById('filterServices3');
+
+                    // Xóa tất cả các option cũ trong dropdown
+                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+
+                    // Lọc ra những category có parentId
+                    const childCategories = data.filter(category => category.parentId !== null);
+
+                    // Gom nhóm theo parent.name
+                    const groupedCategories = {};
+
+                    childCategories.forEach(category => {
+                        const parentName = category.parent.name;
+                        if (!groupedCategories[parentName]) {
+                            groupedCategories[parentName] = [];
+                        }
+                        groupedCategories[parentName].push(category);
+                    });
+
+                    // Tạo các optgroup
+                    for (const parentName in groupedCategories) {
+                        const optgroup = document.createElement('optgroup');
+                        optgroup.label = parentName;
+
+                        groupedCategories[parentName].forEach(category => {
+                            const option = document.createElement('option');
+                            option.value = category.id;
+                            option.textContent = category.name;
+                            optgroup.appendChild(option);
+                        });
+
+                        serviceDropdown.appendChild(optgroup);
+                    }
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra khi gọi API:', error);
+                });
+        }
+
+        // Gọi hàm loadServices khi trang được tải
+        loadServices3();
+
+        function loadServices1() {
+            fetch('https://localhost:7171/api/Category/GetAll', {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*'
+                }
+            })
+                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
+                .then(data => {
+                    const serviceDropdown = document.getElementById('filterServices1');
+
+                    // Xóa tất cả các option cũ trong dropdown
+                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+
+                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id; // Gán giá trị là ID của dịch vụ
+                        option.textContent = category.name; // Hiển thị tên dịch vụ
+                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
+                    });
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra khi gọi API:', error);
+                });
+        }
+        loadServices1();
+
+        function loadServices2() {
+            fetch('https://localhost:7171/api/Category/GetAll', {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*'
+                }
+            })
+                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
+                .then(data => {
+                    const serviceDropdown = document.getElementById('editProductCategory');
+
+                    // Xóa tất cả các option cũ trong dropdown
+                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+
+                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id; // Gán giá trị là ID của dịch vụ
+                        option.textContent = category.name; // Hiển thị tên dịch vụ
+                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
+                    });
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra khi gọi API:', error);
+                });
+        }
+        loadServices2();
+
+
+
+
+        // Hàm để load các tỉnh/thành phố vào popupcsv
+        function loadProvincesCSV() {
+            fetch('https://localhost:7214/api/Location/GetProvinces', {
+                method: 'GET',
+                headers: {
+                    'Accept': '*/*'
+                }
+            })
+                .then(response => response.json()) // Chuyển đổi phản hồi thành JSON
+                .then(data => {
+                    const provinceDropdown = document.getElementById('provinceCSV');
+
+                    // Xóa tất cả các option cũ trong dropdown
+                    provinceDropdown.innerHTML = '<option value="">Chọn Tỉnh/Thành Phố</option>';
+
+                    // Duyệt qua dữ liệu và thêm các tỉnh vào dropdown
+                    data.forEach(province => {
+                        const option = document.createElement('option');
+                        option.value = province.id; // Gán giá trị là ID của tỉnh/thành phố
+                        option.textContent = province.name; // Hiển thị tên tỉnh/thành phố
+                        provinceDropdown.appendChild(option); // Thêm option vào dropdown
+                    });
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra khi gọi API tỉnh/thành phố:', error);
+                });
+        }
+
+
+
+        //end của domcontent loaded
+    });
+
+
+    // async function submitForm() {
+    //         const form = document.getElementById('addCompanyForm');
+    //         const formData = new FormData(form);
+
+    //         // Update the Description field with the content from TinyMCE
+    //         const descriptionContent = tinymce.get('description').getContent();
+    //         formData.set('Description', descriptionContent);
+
+    //         try {
+    //             const response = await fetch('https://localhost:7171/api/Product/addProduct', {
+    //                 method: 'POST',
+    //                 body: formData
+    //             });
+
+    //             if (response.ok) {
+    //                 alert('Product added successfully!');
+    //                 form.reset(); // Reset the form after successful submission
+    //                 tinymce.get('description').setContent(''); // Clear TinyMCE content
+    //             } else {
+    //                 const error = await response.json();
+    //                 alert('Error: ' + JSON.stringify(error.errors));
+    //             }
+    //         } catch (error) {
+    //             console.error('Error:', error);
+    //             alert('Failed to add product.');
+    //         }
+    //     }
+
+    async function submitForm() {
+        const form = document.getElementById('addCompanyForm');
+        const formData = new FormData();
+
+        // Lấy dữ liệu từ các input fields
+        const name = document.getElementById('name').value;
+        const descriptionContent = tinymce.get('description').getContent();
+        const status = document.getElementById('status').value;
+        const fileInput = document.getElementById('file').files[0];
+        const categoryId = document.getElementById('filterServices1').value;
+
+        // Thêm dữ liệu vào formData
+        formData.append('Name', name);
+        formData.append('Description', descriptionContent);
+        formData.append('Status', status);
+        formData.append('file', fileInput);
+        formData.append('CategoryId', categoryId);
+
+        // try {
+        const response = await fetch('https://localhost:7171/api/Product/addProduct', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Sản phẩm đã được thêm thành công!');
+            form.reset(); // Reset form sau khi thành công
+            tinymce.get('description').setContent(''); // Xóa nội dung TinyMCE
+            // var modal = bootstrap.Modal.getInstance(document.getElementById('addCompanyForm'));
+            // modal.hide();
+            location.reload();
+        } else {
+            const error = await response.json();
+            alert('Lỗi: ' + JSON.stringify(error.errors));
+        }
+        // } catch (error) {
+        //     console.error('Error:', error);
+        //     alert('Thêm sản phẩm thất bại.');
+        // }
+    }
+
+
+    function showProductModal(companyId) {
+        // Lấy token từ localStorage
+        const token = localStorage.getItem('accessToken'); // Đảm bảo key đúng
+
+        fetch(`https://localhost:7171/api/Product/GetProductById/${companyId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Thêm token vào header
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Cập nhật nội dung modal với dữ liệu từ API
+                document.getElementById('productName').textContent = data.name;
+                document.getElementById('productCategory').textContent = data.categoryName;
+                // document.getElementById('productStatus').textContent = data.status;
+
+                const productStatus = document.getElementById('productStatus');
+                if (data.status === 0) {
+                    productStatus.innerHTML = '<span style="color: green; font-weight: bold;">Đang kinh doanh</span>';
+                } else {
+                    productStatus.innerHTML = '<span style="color: red; font-weight: bold;">Ngừng kinh doanh</span>';
+                }
+
+                // Cập nhật ảnh sản phẩm
+                const productImage = document.getElementById('productImage');
+                productImage.src = `https://localhost:7171/images/${data.image}`; // Thêm đường dẫn ảnh từ API
+                productImage.alt = data.name; // Đặt alt cho ảnh
+
+                // Cập nhật mô tả sản phẩm trong TinyMCE
+                const productDescription = document.getElementById('productDescription');
+                productDescription.value = data.description; // Gán nội dung mô tả vào textarea
+
+                // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
+                tinymce.init({
+                    selector: '#productDescription',
+                    menubar: false,
+                    toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+                    plugins: 'lists link image',
+                    readonly: true // Đảm bảo rằng người dùng không thể chỉnh sửa
+                });
+                tinymce.get('productDescription').setContent(data.description);
+
+                // Hiển thị modal
+                var modal = new bootstrap.Modal(document.getElementById('companyModal'));
+                modal.show();
+            })
+            .catch(error => {
+                console.error('Có lỗi khi tải thông tin sản phẩm:', error);
+                alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
+            });
+    }
+
+    function editProduct(productId) {
+        const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
+
+        // Fetch thông tin sản phẩm
+        fetch(`https://localhost:7171/api/Product/GetProductById/${productId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Load thông tin vào form
+
+                document.getElementById('editProductId').value = data.id;
+                document.getElementById('editProductName').value = data.name;
+                document.getElementById('editProductCategory').value = data.categoryId; // Cập nhật ID của loại sản phẩm
+                // tinymce.get('description').setContent(data.description); 
+                document.getElementById('editStatus').value = data.status;
+
+                const productDescription = document.getElementById('editProductDescription');
+                productDescription.value = data.description; // Gán nội dung mô tả vào textarea
+
+                // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
+                tinymce.init({
+                    selector: '#editProductDescription',
+                    menubar: false,
+                    toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+                    plugins: 'lists link image',
+                    readonly: false // Đảm bảo rằng người dùng không thể chỉnh sửa
+                });
+                tinymce.get('editProductDescription').setContent(data.description);
+
+
+                // Hiển thị modal
+                var modal = new bootstrap.Modal(document.getElementById('editCompanyModal'));
+                modal.show();
+            })
+            .catch(error => {
+                console.error('Có lỗi khi tải thông tin sản phẩm:', error);
+                alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
+            });
+    }
+
+    // document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
+    //     event.preventDefault(); // Ngăn chặn form gửi mặc định
+
+    //     const productId = document.getElementById('editProductId').value;
+    //     const productName = document.getElementById('editProductName').value;
+    //     const productCategory = document.getElementById('editProductCategory').value;
+    //     const productDescription = tinymce.get('editProductDescription').getContent();
+    //     const productStatus = document.getElementById('status').value;
+
+    //     // Lấy file ảnh
+    //     const fileInput = document.getElementById('file');
+    //     const formData = new FormData();
+    //     formData.append('CategoryId', productCategory);
+    //     formData.append('Name', productName);
+    //     formData.append('Description', productDescription);
+    //     formData.append('Status', productStatus);
+
+    //     // Kiểm tra nếu có file ảnh mới, nếu có thì thêm vào FormData
+    //     if (fileInput.files.length > 0) {
+    //         formData.append('file', fileInput.files[0]);
+    //     }
+
+    //     const token = localStorage.getItem('accessToken');
+    //     fetch(`https://localhost:7171/api/Product/updateProduct/${productId}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`,
+    //         },
+    //         body: formData
+    //     })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Lỗi từ server: ' + response.statusText); // Xử lý lỗi nếu HTTP response không thành công
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             if (data.success) {
+    //                 alert('Cập nhật sản phẩm thành công!');
+    //                 location.reload(); // Tải lại trang hoặc cập nhật lại danh sách sản phẩm
+    //             } else {
+    //                 alert('Có lỗi khi cập nhật sản phẩm.');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Có lỗi khi cập nhật sản phẩm:', error);
+    //             alert('Không thể cập nhật sản phẩm. Vui lòng thử lại.');
+    //         });
+    // });
+
+    function updateProduct() {
+        const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
+        const productId = document.getElementById('editProductId').value; // Lấy ID sản phẩm
+        const formData = new FormData();
+
+        // Thêm thông tin sản phẩm vào formData
+        formData.append('CategoryId', document.getElementById('editProductCategory').value);
+        formData.append('Name', document.getElementById('editProductName').value);
+        formData.append('Description', tinymce.get('editProductDescription').getContent()); // Lấy nội dung mô tả từ TinyMCE
+        formData.append('Status', document.getElementById('editStatus').value);
+
+        const fileInput = document.getElementById('editImage');
+
+        // Nếu có file, thêm vào formData
+        if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]);
+        }
+
+        // Gửi yêu cầu PUT đến API
+        fetch(`https://localhost:7171/api/Product/updateProduct/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dữ liệu trả về từ API:', data); // In ra dữ liệu trả về để kiểm tra
+
+                if (data.message) {
+                    alert(data.message); // Hiển thị thông báo thành công hoặc lỗi từ API
+                } else {
+                    alert('Cập nhật sản phẩm thành công!');
+
+                }
+
+                // Đóng modal sau khi cập nhật thành công
+                var modal = bootstrap.Modal.getInstance(document.getElementById('editCompanyModal'));
+                modal.hide();
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Có lỗi xảy ra:', error);
+                alert('Đã xảy ra lỗi khi cập nhật sản phẩm!');
+            });
+    }
+
+
+
+
+
+
+    // Gắn sự kiện submit cho form
+    document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Ngừng gửi form mặc định
+        updateProduct(); // Gọi hàm updateProduct để gửi yêu cầu PUT
+    });
+
+    function deleteProduct(companyId) {
+        // Lấy token từ localStorage
+        const token = localStorage.getItem('accessToken');
+        if (confirm("Bạn có chắc chắn muốn xóa công ty này?")) {
+            fetch(`https://localhost:7171/api/Product/deleteProduct/${companyId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Sản phẩm đã được xóa thành công!');
+                        // Cập nhật lại danh sách công ty hoặc reload trang
+                        // window.location.href = 'http://127.0.0.1:5500/transportCompany.html';
+                        location.reload();
+                    } else {
+                        alert('Xóa sản phẩm thất bại!');
+                    }
+                })
+        }
+    }
+
+
+
+
+
+
+
+
+
+    // document.getElementById('downloadCSVButton').addEventListener('click', function () {
+    //     const apiUrl = 'https://localhost:7214/api/TransportCompany/GetCSVFile';
+    //     const token = localStorage.getItem('accessToken');  // Lấy token từ localStorage
+
+    //     if (!token) {
+    //         alert('Vui lòng đăng nhập!');
+    //         return;
+    //     }
+
+    //     fetch(apiUrl, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`,
+    //             'Accept': '*/*',
+    //         }
+    //     })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Không thể tải file CSV');
+    //             }
+    //             return response.blob(); // Nhận phản hồi dưới dạng blob
+    //         })
+    //         .then(blob => {
+    //             const url = window.URL.createObjectURL(blob);
+    //             const a = document.createElement('a');
+    //             a.href = url;
+    //             a.download = 'Danh_sach_cong_ty_van_chuyen.csv';
+    //             document.body.appendChild(a);
+    //             a.click();
+    //             a.remove();
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //             alert('Có lỗi xảy ra khi tải file CSV!');
+    //         });
+    // });
+    // Khi người dùng nhấn nút "Tải File CSV"
+    document.getElementById("downloadCSVBtn").addEventListener("click", function () {
+        const provinceId = document.getElementById("provinceCSV").value;
+        const districtId = document.getElementById("districtCSV").value;
+        const token = localStorage.getItem('accessToken');
+        // Xây dựng URL API với các tham số provinceId và districtId
+        const apiUrl = `https://localhost:7214/api/TransportCompany/GetCSVFileModify?provinceId=${provinceId}&districtId=${districtId}`;
+
+        // Gọi API và tải file CSV
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/csv',
+                'Authorization': `Bearer ${token}`
+                // Nếu cần token, hãy thêm vào headers:
+                // 'Authorization': 'Bearer ' + 'YOUR_ACCESS_TOKEN_HERE'
+            }
+        })
+            .then(response => response.blob())  // Lấy file dạng blob
+            .then(blob => {
+                // Tạo một liên kết để tải file
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = "Danh_sach_cong_ty_van_chuyen.csv";  // Tên file tải về
+                link.click();  // Mô phỏng click để tải file
+            })
+            .catch(error => {
+                alert('Có lỗi xảy ra khi tải file!');
+                console.error(error);
+            });
+    });
+
+    document.getElementById("downloadCSVBtn").addEventListener("click", function () {
+        let productStatus = document.getElementById("productStatusCSV").value;
+        let apiUrl = `https://localhost:7171/api/Product/GetCSVFile`;
+
+        // Nếu có trạng thái sản phẩm, thêm vào URL
+        if (productStatus !== "") {
+            apiUrl += `?productStatus=${productStatus}`;
+        }
+
+        fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Accept": "*/*"
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Lỗi tải file CSV");
+                }
+                return response.blob(); // Nhận dữ liệu dưới dạng blob
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "Product.csv";
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error("Lỗi:", error));
+    });
+
+
+
+</script>
+
+</body>
+
+</html>
