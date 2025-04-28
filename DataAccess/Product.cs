@@ -23,6 +23,8 @@ public partial class Product
 
     public int CategoryId { get; set; }
 
+    public string Specifications { get; set; } = null!;
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual Category Category { get; set; } = null!;

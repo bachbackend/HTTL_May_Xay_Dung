@@ -60,9 +60,7 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.ArticleCateId).HasColumnName("article_cate_id");
-            entity.Property(e => e.Content)
-                .HasMaxLength(255)
-                .HasColumnName("content");
+            entity.Property(e => e.Content).HasColumnName("content");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
@@ -110,7 +108,7 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.HasOne(d => d.Product).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("0");
+                .HasConstraintName("Cart_ibfk_1");
 
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)
@@ -195,6 +193,9 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.Property(e => e.TotalPrice)
                 .HasPrecision(10)
                 .HasColumnName("total_price");
+            entity.Property(e => e.TotalRevenue)
+                .HasPrecision(10)
+                .HasColumnName("total_revenue");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.OrderStatus).WithMany(p => p.Orders)
@@ -264,9 +265,7 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
-            entity.Property(e => e.Description)
-                .HasMaxLength(255)
-                .HasColumnName("description");
+            entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Image)
                 .HasMaxLength(255)
                 .HasColumnName("image");
@@ -277,6 +276,7 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
                 .HasPrecision(10)
                 .HasColumnName("price");
             entity.Property(e => e.SaleQuantity).HasColumnName("sale_quantity");
+            entity.Property(e => e.Specifications).HasColumnName("specifications");
             entity.Property(e => e.Status).HasColumnName("status");
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)

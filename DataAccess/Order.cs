@@ -17,6 +17,8 @@ public partial class Order
 
     public int ShippingAddressId { get; set; }
 
+    public decimal? TotalRevenue { get; set; }
+
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual OrderStatus OrderStatus { get; set; } = null!;
