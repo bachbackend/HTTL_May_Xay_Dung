@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý thông tin liên lạc</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Public CDN for TinyMCE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.0/tinymce.min.js"></script>
+
+    <script>
+        // Initialize TinyMCE
+        tinymce.init({
+            selector: 'textarea', // Apply TinyMCE to all <textarea> elements
+            plugins: [
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons',
+                'image', 'link', 'lists', 'media', 'searchreplace',
+                'table', 'visualblocks', 'wordcount'
+            ],
+            toolbar: 'undo redo | bold italic underline | link image media | numlist bullist | emoticons charmap | removeformat',
+            branding: false, // Remove "Powered by TinyMCE" branding
+            height: 300 // Set editor height
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .container-fluid {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4e73df;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .form-control,
+        .btn {
+            border-radius: 10px;
+        }
+
+        .form-control:focus,
+        .btn:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .mb-4 {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4e73df;
+            color: white;
+            font-weight: 500;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .action-btns button {
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .action-btns button:hover {
+            transform: scale(1.05);
+            background-color: #5a6268;
+        }
+
+        .table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .pagination {
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            border-radius: 50%;
+            padding: 10px 15px;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .pagination button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .input-group .form-control {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #4e73df;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #365f8f;
+        }
+
+        /* Thêm hiệu ứng cho các input khi focus */
+        .form-control:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
+        }
+
+        /* Cải tiến bố cục phần filter */
+        .filter-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-row .form-control {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .filter-row .btn-primary {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        /* Chỉnh sửa cột ID */
+        th:first-child,
+        td:first-child {
+            width: 30px;
+            /* Điều chỉnh kích thước của cột ID */
+            text-align: center;
+            /* Căn giữa cột ID */
+        }
+
+        th:nth-child(5),
+        td:nth-child(5) {
+            width: 300px;
+            /* Làm cho cột Dịch vụ rộng hơn */
+        }
+
+        th:nth-child(6),
+        td:nth-child(6) {
+            width: 200px;
+            /* Làm cho cột Dịch vụ rộng hơn */
+        }
+
+        th:nth-child(7),
+        td:nth-child(7) {
+            width: 220px;
+            /* Làm cho cột Hành động rộng hơn */
+            text-align: center;
+            /* Căn giữa các nút hành động */
+        }
+
+        .filter-container {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);        }
+
+        .filter-row .form-control,
+        .filter-row .btn {
+            flex: 1;
+        }
+
+        .filter-row select {
+            min-width: 200px;
+        }
+
+        .col-stt { width: 5%; }
+        .col-title { width: 25%; }
+        .col-thumbnail { width: 20%; }
+        .col-category { width: 20%; }
+        .col-status { width: 10%; }
+        .col-date { width: 10%; }
+        .col-action { width: 10%; }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid mt-5">
+        <h1 class="text-center mb-4">Quản lý thông tin liên lạc</h1>
+        <div class="mb-4 text-right">
+            <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Thêm
+                bài viết
+            </button> -->
+
+            <!-- <button type="button" class="btn btn-primary" id="downloadCSVButton">
+                Tải File CSV
+            </button> -->
+
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportCSVModal">Tải
+                File CSV
+            </button> -->
+        </div>
+    </div>
+
+
+    <!-- Form tìm kiếm và bộ lọc -->
+    <div class="mb-4">
+        <div class="filter-container p-3">
+            <div class="filter-row d-flex gap-2 align-items-center">
+                <!-- <input type="text" class="form-control" id="searchName" placeholder="Tìm kiếm theo tiêu đề"> -->
+
+                <!-- <select class="form-control" id="articleCategoryFilter">
+                    <option value="">Chọn thể loại bài viết</option>
+                </select> -->
+
+                <select class="form-control" id="searchStatus">
+                    <option value="">Chọn trạng thái</option>
+                    <option value="0">Chờ xử lý</option>
+                    <option value="1">Đã liên hệ</option>
+                </select>
+
+
+                <button class="btn btn-primary" id="searchBtn">Tìm Kiếm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- popup chỉnh sửa contactStatus -->
+    <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editStatusLabel">Cập nhật trạng thái</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="contactId">
+                    <label for="statusSelect">Trạng thái:</label>
+                    <select id="statusSelect" class="form-control">
+                        <option value="0">Chờ xử lý</option>
+                        <option value="1">Đã liên hệ</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="updateContactStatus()">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th class="col-stt">STT</th>
+                    <th class="col-title">Tên khách hàng</th>
+                    <th class="col-thumbnail">Số điện thoại</th>
+                    <th class="col-category">Email</th>
+                    <th class="col-status">Ngày gửi liên hệ</th>
+                    <th class="col-date">Trạng thái</th>
+                    <th class="col-action">Hành Động</th>
+                </tr>
+            </thead>
+            <tbody id="transportTableBody">
+                <!-- Danh sách công ty vận chuyển sẽ được tải vào đây -->
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4" id="pagination">
+            <!-- Phân trang sẽ được tải vào đây -->
+        </div>
+
+    </div>
+    <div class="mb-4 text-right">
+        <a href="Dashboard.html" class="btn btn-secondary">Quay Lại Trang Chủ</a>
+    </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const itemsPerPage = 10;
+        let currentPage = 1;
+    
+        function renderPaginationButtons(totalPages) {
+            const paginationElement = document.getElementById('pagination');
+            paginationElement.innerHTML = '';
+    
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.classList.add('btn', 'btn-primary', 'me-2');
+                button.addEventListener('click', () => loadContacts(i));
+                if (i === currentPage) {
+                    button.classList.add('active');
+                }
+                paginationElement.appendChild(button);
+            }
+        }
+    
+        function loadContacts(pageNumber) {
+            const searchStatus = document.getElementById('searchStatus').value;
+            let url = `https://localhost:7205/api/Contact/GetAllContact?pageNumber=${pageNumber}&pageSize=10`;
+            currentPage = pageNumber;
+    
+            const params = new URLSearchParams();
+            if (searchStatus) {
+                params.append('status', searchStatus);
+            }
+            if (params.toString()) {
+                url += `&${params.toString()}`;
+            }
+    
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const contacts = data.contacts;
+                const paging = data.paging;
+                const tableBody = document.getElementById('transportTableBody');
+                tableBody.innerHTML = '';
+    
+                if (contacts.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="8" class="text-center">Không tìm thấy thông tin liên hệ nào.</td></tr>`;
+                    renderPaginationButtons(0);
+                    return;
+                }
+    
+                contacts.forEach((contact, index) => {
+                    const pageSize = 12;
+                    const serialNumber = (currentPage - 1) * pageSize + (index + 1);
+    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td style="display: none;">${contact.id}</td> 
+                        <td>${serialNumber}</td> 
+                        <td style="text-align: center;">${contact.username}</td>
+                        <td>${contact.phonenumber}</td>
+                        <td>${contact.email}</td>
+                        <td>${new Date(contact.contactDate).toLocaleDateString()}</td>
+                        <td>
+                            ${contact.status === 0
+                                ? '<span style="color: red; font-weight: bold;">Chờ xử lý</span>'
+                                : '<span style="color: green; font-weight: bold;">Đã liên hệ</span>'
+                            }
+                        </td>
+                        <td>
+                            <div class="action-btns">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Hành động
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:void(0);" onclick="editProduct(${contact.id})">Sửa trạng thái</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+    
+                renderPaginationButtons(paging.totalPageCount);
+            })
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Không tìm thấy thông tin liên hệ nào.',
+                    confirmButtonColor: '#d33'
+                });
+            });
+        }
+    
+        loadContacts(1);
+    
+        document.getElementById('searchBtn').addEventListener('click', function () {
+            loadContacts(1);
+        });
+    });
+    
+    // Mở modal sửa trạng thái
+    function editProduct(contactId) {
+        $("#contactId").val(contactId);
+        $("#editStatusModal").modal("show");
+    }
+    
+    // Gọi API cập nhật trạng thái
+    function updateContactStatus() {
+        let contactId = $("#contactId").val();
+        let newStatus = $("#statusSelect").val();
+    
+        Swal.fire({
+            title: 'Bạn chắc chắn muốn cập nhật?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`https://localhost:7205/api/Contact/updateContactStatus/${contactId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "*/*"
+                    },
+                    body: JSON.stringify({ status: parseInt(newStatus) })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Cập nhật thành công!',
+                            text: 'Trạng thái liên hệ đã được thay đổi.',
+                            confirmButtonColor: '#3085d6'
+                        }).then(() => {
+                            location.reload(); // Reload sau khi OK
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Cập nhật thất bại!',
+                            text: 'Vui lòng thử lại.',
+                            confirmButtonColor: '#d33'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi:", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: 'Không thể kết nối server.',
+                        confirmButtonColor: '#d33'
+                    });
+                });
+            }
+        });
+    }
+    </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
