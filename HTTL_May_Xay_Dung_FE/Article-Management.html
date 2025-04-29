@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Sản Phẩm</title>
+    <title>Quản lý Bài Viết</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -205,27 +205,28 @@
 
 <body>
     <div class="container-fluid mt-5">
-        <h1 class="text-center mb-4">Quản Lý Sản Phẩm</h1>
+        <h1 class="text-center mb-4">Quản lý bài viết</h1>
         <div class="mb-4 text-right">
             <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCompanyModal">Thêm
                 sản phẩm
             </button> -->
 
-            <a href="Add-Product.html" class="btn btn-success" target="_blank">
-                Thêm sản phẩm
+            <a href="Add-Article.html" class="btn btn-success" target="_blank">
+                Thêm bài viết
             </a>
 
             <!-- <button type="button" class="btn btn-primary" id="downloadCSVButton">
                 Tải File CSV
             </button> -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportCSVModal">Tải
+
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportCSVModal">Tải
                 File CSV
-            </button>
+            </button> -->
         </div>
     </div>
 
     <!-- Modal CSV-->
-    <div class="modal fade" id="exportCSVModal" tabindex="-1" aria-labelledby="exportCSVModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exportCSVModal" tabindex="-1" aria-labelledby="exportCSVModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -247,7 +248,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- Modal add-->
@@ -392,25 +393,15 @@
                 <input type="text" class="form-control" id="searchName" placeholder="Tìm kiếm theo tên">
 
                 <select class="form-control" id="filterServices3">
-                    <option value="">Loại sản phẩm</option>
+                    <option value="">Thể loại</option>
                 </select>
 
                 <select class="form-control" id="searchStatus">
                     <option value="">Chọn trạng thái</option>
-                    <option value="0">Đang kinh doanh</option>
-                    <option value="1">Ngừng kinh doanh</option>
+                    <option value="0">Đang hiển thị</option>
+                    <option value="1">Ngừng hiển thị</option>
                 </select>
-                <select class="form-control" id="sortBy">
-                    <option value="id">Sắp xếp theo</option>
-                    <option value="name">Tên</option>
-                    <option value="saleQuantity">Số lượng bán</option>
-                    <option value="createDate">Ngày tạo</option>
-                </select>
-
-                <select class="form-control" id="sortOrder">
-                    <option value="asc">Tăng dần</option>
-                    <option value="desc">Giảm dần</option>
-                </select>
+                
 
 
                 <button class="btn btn-primary" id="searchBtn">Tìm Kiếm</button>
@@ -424,11 +415,11 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
-                    <th style="width: 200px;">Tên</th>
+                    <th style="width: 200px;">Tiêu đề</th>
                     <th style="width: 300px;">Ảnh</th>
-                    <th style="width: 200px;">Loại sản phẩm</th>
+                    <th style="width: 200px;">Thể loại</th>
                     <th style="width: 200px;">Trạng thái</th>
-                    <th>Số lượng bán</th>
+                    <th>Ngày đăng</th>
                     <!-- <th style="width: 200px;">Ngày tạo</th> -->
                     <th style="width: 150px;">Hành Động</th>
                 </tr>
@@ -473,27 +464,19 @@
             const searchName = document.getElementById('searchName').value;
             const serviceId = document.getElementById('filterServices3').value;
             const searchStatus = document.getElementById('searchStatus').value;
-            const sortBy = document.getElementById('sortBy').value;
-            const sortOrder = document.getElementById('sortOrder').value;
-            let url = `https://localhost:7205/api/Product/GetAllProduct?pageNumber=${pageNumber}&pageSize=10`;
+            let url = `https://localhost:7205/api/Article/GetAllArticle?pageNumber=${pageNumber}&pageSize=10`;
             currentPage = pageNumber;
 
             const params = new URLSearchParams();
 
             if (searchName) {
-                params.append('name', searchName);
+                params.append('title', searchName);
             }
             if (serviceId) {
                 params.append('categoryId', serviceId);
             }
             if (searchStatus) {
                 params.append('status', searchStatus);
-            }
-            if (sortBy) {
-                params.append('sortBy', sortBy);
-            }
-            if (sortOrder) {
-                params.append('sortOrder', sortOrder);
             }
 
             if (params.toString()) {
@@ -511,41 +494,43 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    const products = data.products;
+                    const articles = data.articles;
                     const paging = data.paging;
                     const tableBody = document.getElementById('transportTableBody');
 
                     tableBody.innerHTML = ''; // Clear existing rows
 
-                    if (products.length === 0) {
-                        tableBody.innerHTML = `<tr><td colspan="6" class="text-center">Không tìm thấy sản phẩm nào.</td></tr>`;
+                    if (articles.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="6" class="text-center">Không tìm thấy bài viết nào.</td></tr>`;
                         renderPaginationButtons(0); // No pagination if no products
                         return;
                     }
 
-                    products.forEach((product, index) => {
+                    articles.forEach((article, index) => {
                         const pageSize = 12;
                         const serialNumber = (currentPage - 1) * pageSize + (index + 1);
-                        console.log(`Sản phẩm #${serialNumber}:`, product);
+                        console.log(`Sản phẩm #${serialNumber}:`, article);
 
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                <td>${product.id}</td> 
-                <td style="width: 200px;">${product.name}</td>
+                <td>${article.id}</td> 
+                <td style="width: 200px;">${article.title}</td>
                 <td>
-                    <img src="https://localhost:7205/images/product/${product.image}" 
-                        alt="${product.name}" 
+                    <img src="https://localhost:7205/images/article/${article.thumbnail}" 
+                        alt="${article.title}" 
                         class="img-fluid" 
                         style="width: 300px; height: 200px; border: 1px solid black;">
                 </td>
-                <td style="width: 100px;">${product.categoryName}</td>
+                <td style="width: 100px;">${article.articleCateName}</td>
                 <td>
-                    ${product.status === 0
-                                ? '<span style="color: green; font-weight: bold;">Đang kinh doanh</span>'
-                                : '<span style="color: red; font-weight: bold;">Ngừng kinh doanh</span>'
+                    ${article.status === 0
+                                ? '<span style="color: green; font-weight: bold;">Đang hiển thị</span>'
+                                : '<span style="color: red; font-weight: bold;">Ngừng hiển thị</span>'
                             }
                 </td>
-                <td>${product.saleQuantity != null ? product.saleQuantity : 0}</td>
+                <td>
+                ${article.createdAt != null ? formatDate(article.createdAt) : 'Không có ngày đăng'}
+                </td>
                 
                 <td>
                     <div class="action-btns">
@@ -554,9 +539,9 @@
                                 Hành động
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="showProductModal(${product.id})">Xem</a></li>
-                                <li><a class="dropdown-item" href="Update-Product.html?id=${product.id}" target="_blank">Sửa</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="deleteProduct(${product.id})">Xóa</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="showProductModal(${article.id})">Xem</a></li>
+                                <li><a class="dropdown-item" href="Update-Product.html?id=${article.id}" target="_blank">Sửa</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="deleteProduct(${article.id})">Xóa</a></li>
                             </ul>
                         </div>
                     </div>
@@ -568,7 +553,7 @@
                     // Render pagination buttons
                     renderPaginationButtons(paging.totalPageCount);
                 })
-                .catch(() => alert("Không tìm thấy sản phẩm nào."));
+                .catch(() => alert("Không tìm thấy bài viết nào."));
         }
 
 
@@ -664,204 +649,39 @@
         });
 
         // Hàm để load danh sách dịch vụ từ API vào dropdown (filter)
-        // function loadServices3() {
-        //     fetch('https://localhost:7205/api/Category/GetAll', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Accept': '*/*'
-        //         }
-        //     })
-        //         .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
-        //         .then(data => {
-        //             const serviceDropdown = document.getElementById('filterServices3');
-
-        //             // Xóa tất cả các option cũ trong dropdown
-        //             serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
-
-        //             // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
-        //             data.forEach(category => {
-        //                 const option = document.createElement('option');
-        //                 option.value = category.id; // Gán giá trị là ID của dịch vụ
-        //                 option.textContent = category.name; // Hiển thị tên dịch vụ
-        //                 serviceDropdown.appendChild(option); // Thêm option vào dropdown
-        //             });
-        //         })
-        //         .catch(error => {
-        //             console.error('Có lỗi xảy ra khi gọi API:', error);
-        //         });
-        // }
-
         function loadServices3() {
-            fetch('https://localhost:7205/api/Category/GetAll', {
+            fetch('https://localhost:7205/api/ArticleCate/GetAll', {
                 method: 'GET',
                 headers: {
                     'Accept': '*/*'
                 }
             })
-                .then(response => response.json())
+                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
                 .then(data => {
                     const serviceDropdown = document.getElementById('filterServices3');
 
                     // Xóa tất cả các option cũ trong dropdown
-                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+                    serviceDropdown.innerHTML = '<option value="">Thể loại</option>';
 
-                    // Lọc ra những category có parentId
-                    const childCategories = data.filter(category => category.parentId !== null);
-
-                    // Gom nhóm theo parent.name
-                    const groupedCategories = {};
-
-                    childCategories.forEach(category => {
-                        const parentName = category.parent.name;
-                        if (!groupedCategories[parentName]) {
-                            groupedCategories[parentName] = [];
-                        }
-                        groupedCategories[parentName].push(category);
+                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id; // Gán giá trị là ID của dịch vụ
+                        option.textContent = category.name; // Hiển thị tên dịch vụ
+                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
                     });
-
-                    // Tạo các optgroup
-                    for (const parentName in groupedCategories) {
-                        const optgroup = document.createElement('optgroup');
-                        optgroup.label = parentName;
-
-                        groupedCategories[parentName].forEach(category => {
-                            const option = document.createElement('option');
-                            option.value = category.id;
-                            option.textContent = category.name;
-                            optgroup.appendChild(option);
-                        });
-
-                        serviceDropdown.appendChild(optgroup);
-                    }
                 })
                 .catch(error => {
                     console.error('Có lỗi xảy ra khi gọi API:', error);
                 });
         }
-
-        // Gọi hàm loadServices khi trang được tải
         loadServices3();
+        
 
-        function loadServices1() {
-            fetch('https://localhost:7171/api/Category/GetAll', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
-                .then(data => {
-                    const serviceDropdown = document.getElementById('filterServices1');
-
-                    // Xóa tất cả các option cũ trong dropdown
-                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
-
-                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
-                    data.forEach(category => {
-                        const option = document.createElement('option');
-                        option.value = category.id; // Gán giá trị là ID của dịch vụ
-                        option.textContent = category.name; // Hiển thị tên dịch vụ
-                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
-                    });
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API:', error);
-                });
-        }
-        loadServices1();
-
-        function loadServices2() {
-            fetch('https://localhost:7171/api/Category/GetAll', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
-                .then(data => {
-                    const serviceDropdown = document.getElementById('editProductCategory');
-
-                    // Xóa tất cả các option cũ trong dropdown
-                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
-
-                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
-                    data.forEach(category => {
-                        const option = document.createElement('option');
-                        option.value = category.id; // Gán giá trị là ID của dịch vụ
-                        option.textContent = category.name; // Hiển thị tên dịch vụ
-                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
-                    });
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API:', error);
-                });
-        }
-        loadServices2();
-
-
-
-
-        // Hàm để load các tỉnh/thành phố vào popupcsv
-        function loadProvincesCSV() {
-            fetch('https://localhost:7214/api/Location/GetProvinces', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json()) // Chuyển đổi phản hồi thành JSON
-                .then(data => {
-                    const provinceDropdown = document.getElementById('provinceCSV');
-
-                    // Xóa tất cả các option cũ trong dropdown
-                    provinceDropdown.innerHTML = '<option value="">Chọn Tỉnh/Thành Phố</option>';
-
-                    // Duyệt qua dữ liệu và thêm các tỉnh vào dropdown
-                    data.forEach(province => {
-                        const option = document.createElement('option');
-                        option.value = province.id; // Gán giá trị là ID của tỉnh/thành phố
-                        option.textContent = province.name; // Hiển thị tên tỉnh/thành phố
-                        provinceDropdown.appendChild(option); // Thêm option vào dropdown
-                    });
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API tỉnh/thành phố:', error);
-                });
-        }
-
-
-
+        
         //end của domcontent loaded
     });
-
-
-    // async function submitForm() {
-    //         const form = document.getElementById('addCompanyForm');
-    //         const formData = new FormData(form);
-
-    //         // Update the Description field with the content from TinyMCE
-    //         const descriptionContent = tinymce.get('description').getContent();
-    //         formData.set('Description', descriptionContent);
-
-    //         try {
-    //             const response = await fetch('https://localhost:7171/api/Product/addProduct', {
-    //                 method: 'POST',
-    //                 body: formData
-    //             });
-
-    //             if (response.ok) {
-    //                 alert('Product added successfully!');
-    //                 form.reset(); // Reset the form after successful submission
-    //                 tinymce.get('description').setContent(''); // Clear TinyMCE content
-    //             } else {
-    //                 const error = await response.json();
-    //                 alert('Error: ' + JSON.stringify(error.errors));
-    //             }
-    //         } catch (error) {
-    //             console.error('Error:', error);
-    //             alert('Failed to add product.');
-    //         }
-    //     }
+    
 
     async function submitForm() {
         const form = document.getElementById('addCompanyForm');
@@ -939,7 +759,7 @@
                 // Cập nhật mô tả sản phẩm trong TinyMCE
                 const productDescription = document.getElementById('productDescription');
                 productDescription.value = data.description; // Gán nội dung mô tả vào textarea
-                
+
                 const productSpecification = document.getElementById('productSpecification');
                 productSpecification.value = data.specifications;
                 // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
@@ -1187,69 +1007,19 @@
     //         });
     // });
     // Khi người dùng nhấn nút "Tải File CSV"
-    document.getElementById("downloadCSVBtn").addEventListener("click", function () {
-        const provinceId = document.getElementById("provinceCSV").value;
-        const districtId = document.getElementById("districtCSV").value;
-        const token = localStorage.getItem('accessToken');
-        // Xây dựng URL API với các tham số provinceId và districtId
-        const apiUrl = `https://localhost:7214/api/TransportCompany/GetCSVFileModify?provinceId=${provinceId}&districtId=${districtId}`;
+    
 
-        // Gọi API và tải file CSV
-        fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/csv',
-                'Authorization': `Bearer ${token}`
-                // Nếu cần token, hãy thêm vào headers:
-                // 'Authorization': 'Bearer ' + 'YOUR_ACCESS_TOKEN_HERE'
-            }
-        })
-            .then(response => response.blob())  // Lấy file dạng blob
-            .then(blob => {
-                // Tạo một liên kết để tải file
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = "Danh_sach_cong_ty_van_chuyen.csv";  // Tên file tải về
-                link.click();  // Mô phỏng click để tải file
-            })
-            .catch(error => {
-                alert('Có lỗi xảy ra khi tải file!');
-                console.error(error);
-            });
-    });
+    function formatDate(dateString) {
+        const date = new Date(dateString);
 
-    document.getElementById("downloadCSVBtn").addEventListener("click", function () {
-        let productStatus = document.getElementById("productStatusCSV").value;
-        let apiUrl = `https://localhost:7171/api/Product/GetCSVFile`;
+        // Lấy ngày, tháng, năm
+        const day = ("0" + date.getDate()).slice(-2);
+        const month = ("0" + (date.getMonth() + 1)).slice(-2);  // Tháng bắt đầu từ 0
+        const year = date.getFullYear();
 
-        // Nếu có trạng thái sản phẩm, thêm vào URL
-        if (productStatus !== "") {
-            apiUrl += `?productStatus=${productStatus}`;
-        }
-
-        fetch(apiUrl, {
-            method: "GET",
-            headers: {
-                "Accept": "*/*"
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Lỗi tải file CSV");
-                }
-                return response.blob(); // Nhận dữ liệu dưới dạng blob
-            })
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "Product.csv";
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.error("Lỗi:", error));
-    });
+        // Trả về định dạng dd/MM/yyyy
+        return `${day}/${month}/${year}`;
+    }
 
 
 

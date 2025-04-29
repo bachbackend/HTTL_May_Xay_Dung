@@ -13,6 +13,7 @@
             public string Image { get; set; } = null!;
             public int? SaleQuantity { get; set; }
             public string Description { get; set; } = null!;
+            public string Specifications { get; set; } = null!;
             public decimal? Price { get; set; }
 
             public short Status { get; set; }
@@ -28,6 +29,7 @@
             public string Name { get; set; }
             public string Description { get; set; }
             public sbyte Status { get; set; }
+            public string Specifications { get; set; }
         }
     }
 }
