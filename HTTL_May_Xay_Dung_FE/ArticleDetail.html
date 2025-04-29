@@ -2060,7 +2060,9 @@
             document.getElementById("author-name").textContent = "Admin"; // Gán cố định nếu API không trả về
             document.getElementById("article-date").textContent = new Date(data.createdAt).toLocaleDateString('vi-VN');
             document.getElementById("article-image").src = `https://localhost:7205/images/article/${data.thumbnail}`; // đảm bảo đường dẫn đúng
-            document.getElementById("article-content").textContent = data.content;
+            
+            // document.getElementById("article-content").textContent = data.content;
+            document.getElementById("article-content").innerHTML = data.content;
 
             const categoryId = data.articleCateId;
             await loadSameCategoryArticles(categoryId);
