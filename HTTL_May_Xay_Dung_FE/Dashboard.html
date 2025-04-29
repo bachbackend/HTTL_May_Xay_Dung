@@ -91,21 +91,20 @@
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+						<a class="sidebar-link" href="Product-Management.html" target="_blank">
+							<i class="align-middle" data-feather="box"></i> <span class="align-middle">Quản lý sản phẩm</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
+						<a class="sidebar-link" href="Article-Management.html" target="_blank">
+							<i class="align-middle" data-feather="edit"></i> <span class="align-middle">Quản lý bài viết</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="list"></i> <span class="align-middle">Tasks</span>
-							<span class="sidebar-badge badge bg-primary">Pro</span>
+						<a class="sidebar-link" href="Contact-Management.html"target="_blank">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lý liên hệ</span>
 						</a>
 					</li>
 
@@ -328,7 +327,7 @@
 	</div>
     <script>
 		document.addEventListener("DOMContentLoaded", function() {
-			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+			var date = new Date(Date.now());
 			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
 			document.getElementById("datetimepicker-dashboard").flatpickr({
 				inline: true,
