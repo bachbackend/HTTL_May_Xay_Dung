@@ -418,6 +418,17 @@
         </div>
     </div>
 
+    <div id="loading-spinner" style="
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+            ">
+                <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="60">
+            </div>
+
 
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -470,6 +481,8 @@
         }
 
         function loadProducts(pageNumber) {
+            const spinner = document.getElementById("loading-spinner");
+
             const searchName = document.getElementById('searchName').value;
             const serviceId = document.getElementById('filterServices3').value;
             const searchStatus = document.getElementById('searchStatus').value;
@@ -477,6 +490,8 @@
             const sortOrder = document.getElementById('sortOrder').value;
             let url = `https://localhost:7205/api/Product/GetAllProduct?pageNumber=${pageNumber}&pageSize=10`;
             currentPage = pageNumber;
+
+            spinner.style.display = "block"; // Hiện loading
 
             const params = new URLSearchParams();
 
@@ -511,6 +526,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    spinner.style.display = "none"; // Ẩn loading
                     const products = data.products;
                     const paging = data.paging;
                     const tableBody = document.getElementById('transportTableBody');
