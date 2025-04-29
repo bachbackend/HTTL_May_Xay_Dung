@@ -1376,54 +1376,57 @@
 }
         </style>
 
-<div class="container my-4">
-    <!-- Loading Spinner -->
-    <div id="loading-spinner" style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
-    ">
-        <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="60">
-    </div>
+        <div class="product-container">
+            <!-- Cột Filter và Tìm kiếm -->
+            <!-- <div class="filter-column">
+                <h5 style="font-family: Arial, Helvetica, sans-serif;">Bộ lọc</h5>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label" for="article-title-search">Tìm kiếm</label>
+                        <input type="text" class="form-control" id="article-title-search" name="article-title-search" placeholder="Nhập tiêu đề bài viết...">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Thể loại</label>
+                        <select class="form-select" id="article-category">
+                            <option value="">Tất cả</option>
+                        </select>
+                    </div>
+        </br>
+                    <button type="button" id="searchButton" class="btn btn-primary w-100">Tìm kiếm</button>
+                </form>
+            </div> -->
 
-    <!-- Hàng 1: Chi tiết bài viết & Bài viết mới nhất -->
-    <div class="row">
-        <!-- Chi tiết bài viết (bên trái) -->
-        <div class="col-lg-8 col-12">
-            <div class="product-grid" id="product-grid">
-                <!-- Nội dung bài viết sẽ hiển thị ở đây -->
+            <!-- Loading Spinner -->
+            <div id="loading-spinner" style="
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+            ">
+                <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="60">
             </div>
-        </div>
 
-        <!-- Bài viết mới nhất (bên phải) -->
-        <div class="col-lg-4 col-12">
-            <div class="latest-articles-sidebar ps-lg-4 mt-4 mt-lg-0">
-                <h5 class="fw-bold">Bài viết mới nhất</h5>
+            <!-- Product list -->
+            <div class="product-list-column">
+                <div class="product-grid" id="product-grid">
+                    <!-- Sản phẩm sẽ hiển thị ở đây -->
+                </div>
+                
                 <hr>
-                <div id="latest-articles-list">
-                    <!-- Danh sách bài viết mới nhất sẽ hiển thị ở đây -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hàng 2: Bài viết liên quan -->
-    <div class="row mt-5">
-        <div class="col-12">
-            <h4 class="text-center fw-bold">Bài viết liên quan</h4>
-            <div class="horizontal-article-wrapper mt-3">
-                <div id="related-articles-horizontal" class="horizontal-scroll">
-                    <!-- Bài viết liên quan sẽ hiển thị ở đây -->
-                </div>
-            </div>
-        </div>
+<h4 style="margin-top: 40px; text-align: center;">Các bài viết liên quan</h4>
+<div class="horizontal-article-wrapper">
+    <div id="related-articles-horizontal" class="horizontal-scroll">
+        <!-- Bài viết sẽ render ở đây -->
     </div>
 </div>
-
-
+            </div>
+            <div class="latest-articles-sidebar">
+                <h5>Bài viết mới nhất</h5>
+            </br>
+                <div id="latest-articles-list"></div>
+            </div>
 
 <style>
     .horizontal-article-wrapper {
@@ -1433,17 +1436,22 @@
 
 .horizontal-scroll {
     display: flex;
+    gap: 20px;
     overflow-x: auto;
-    gap: 1rem;
-}
-.related-article-card {
-    min-width: 250px;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 10px 0;
+    scroll-snap-type: x mandatory;
 }
 
+.related-article-card {
+    min-width: 250px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+    margin-left: 50px;
+}
 
 .related-article-card:hover {
     transform: scale(1.03);
@@ -1474,11 +1482,9 @@
 }
 
 .latest-articles-sidebar {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
+    border-left: 1px solid #eee;
+    padding-left: 50px;
 }
-
 
 #latest-articles-list .article-item {
     display: flex;
