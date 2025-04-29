@@ -312,22 +312,20 @@
         <div class="modal-dialog modal-xl"> <!-- Thêm modal-lg để làm rộng modal -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="companyModalLabel">Thông Tin Sản Phẩm</h5>
+                    <h5 class="modal-title" id="companyModalLabel">Thông tin bài viết</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h5 id="modalCompanyName"></h5>
-                    <p><strong>Tên sản phẩm:</strong> <span id="productName"></span></p>
-                    <p><strong>Loại sản phẩm:</strong> <span id="productCategory"></span></p>
-                    <p><strong>Trạng thái:</strong> <span id="productStatus"></span></p>
-                    <p><strong>Ảnh sản phẩm:</strong>
-                        <img id="productImage" src="" alt="Ảnh sản phẩm" class="img-fluid"
+                    <p><strong>Tiêu đề bài viết:</strong> <span id="modalArticalTitle"></span></p>
+                    <p><strong>Thể loại:</strong> <span id="modalArticalCategory"></span></p>
+                    <p><strong>Trạng thái:</strong> <span id="modalArticalStatus"></span></p>
+                    <p><strong>Ảnh thumbnail:</strong>
+                        <img id="modalArticalThumbnail" src="" alt="Ảnh sản phẩm" class="img-fluid"
                             style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 15px;">
                     </p>
-                    <p><strong>Mô tả sản phẩm:</strong></p>
-                    <textarea id="productDescription" class="form-control" readonly></textarea>
-                    <p><strong>Thông số kỹ thuật:</strong></p>
-                    <textarea id="productSpecification" class="form-control" readonly></textarea>
+                    <p><strong>Nội dung bài viết:</strong></p>
+                    <textarea id="modalArticalContent" class="form-control" readonly></textarea>
                 </div>
             </div>
         </div>
@@ -409,6 +407,17 @@
         </div>
     </div>
 
+    <div id="loading-spinner" style="
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+            ">
+                <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="60">
+            </div>
+
 
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -461,11 +470,15 @@
         }
 
         function loadProducts(pageNumber) {
+            const spinner = document.getElementById("loading-spinner");
+
             const searchName = document.getElementById('searchName').value;
             const serviceId = document.getElementById('filterServices3').value;
             const searchStatus = document.getElementById('searchStatus').value;
             let url = `https://localhost:7205/api/Article/GetAllArticle?pageNumber=${pageNumber}&pageSize=10`;
             currentPage = pageNumber;
+
+            spinner.style.display = "block"; // Hiện loading
 
             const params = new URLSearchParams();
 
@@ -494,6 +507,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    spinner.style.display = "none"; // Ẩn loading
                     const articles = data.articles;
                     const paging = data.paging;
                     const tableBody = document.getElementById('transportTableBody');
@@ -539,7 +553,7 @@
                                 Hành động
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="showProductModal(${article.id})">Xem</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="showArticleModal(${article.id})">Xem</a></li>
                                 <li><a class="dropdown-item" href="Update-Article.html?id=${article.id}" target="_blank">Sửa</a></li>
                                 <li><a class="dropdown-item" href="javascript:void(0);" onclick="deleteProduct(${article.id})">Xóa</a></li>
                             </ul>
@@ -559,89 +573,6 @@
 
         loadProducts(1);
 
-        //     const itemsPerPage = 10;
-        // let currentPage = 1;
-
-        // function renderPaginationButtons(totalPages) {
-        //     const paginationElement = document.getElementById('pagination');
-        //     paginationElement.innerHTML = '';
-
-        //     for (let i = 1; i <= totalPages; i++) {
-        //         const button = document.createElement('button');
-        //         button.textContent = i;
-        //         button.classList.add('btn', 'btn-primary', 'me-2');
-        //         button.addEventListener('click', () => loadProducts(i));
-        //         if (i === currentPage) {
-        //             button.classList.add('active');
-        //         }
-        //         paginationElement.appendChild(button);
-        //     }
-        // }
-
-        // function loadProducts(pageNumber) {
-        //     const searchName = document.getElementById('searchName')?.value || '';
-        //     const serviceId = document.getElementById('filterServices3')?.value || '';
-        //     const searchStatus = document.getElementById('searchStatus')?.value || '';
-        //     let url = `https://localhost:7171/api/Product/GetAllProduct?pageNumber=${pageNumber}&pageSize=${itemsPerPage}`;
-        //     currentPage = pageNumber;
-
-        //     const params = new URLSearchParams({
-        //         name: searchName,
-        //         categoryId: serviceId,
-        //         status: searchStatus
-        //     });
-
-        //     url += `&${params.toString()}`;
-
-        //     fetch(url, {
-        //         method: 'GET',
-        //         headers: { 'Content-Type': 'application/json' }
-        //     })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             const { products, paging } = data;
-        //             const tableBody = document.getElementById('transportTableBody');
-        //             tableBody.innerHTML = '';
-
-        //             if (!products?.length) {
-        //                 tableBody.innerHTML = `<tr><td colspan="7" class="text-center">Không tìm thấy sản phẩm nào.</td></tr>`;
-        //                 renderPaginationButtons(0);
-        //                 return;
-        //             }
-
-        //             products.forEach((product, index) => {
-        //                 const serialNumber = (currentPage - 1) * itemsPerPage + index + 1;
-        //                 const row = `<tr>
-        //                     <td>${serialNumber}</td>
-        //                     <td style="display:none;">${product.id}</td>
-        //                     <td>${product.name}</td>
-        //                     <td><img src="https://localhost:7171/images/${product.image}" alt="${product.name}" class="img-fluid" style="width: 150px; height: 100px; border: 1px solid black;"></td>
-        //                     <td>${product.categoryName}</td>
-        //                     <td>${product.status === 0 ? '<span class="text-success fw-bold">Đang kinh doanh</span>' : '<span class="text-danger fw-bold">Ngừng kinh doanh</span>'}</td>
-        //                     <td>${new Date(product.createdAt).toLocaleDateString()}</td>
-        //                     <td>
-        //                         <div class="dropdown">
-        //                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Hành động</button>
-        //                             <ul class="dropdown-menu">
-        //                                 <li><a class="dropdown-item" href="#" onclick="showProductModal(${product.id})">Xem</a></li>
-        //                                 <li><a class="dropdown-item" href="#" onclick="editProduct(${product.id})">Sửa</a></li>
-        //                                 <li><a class="dropdown-item text-danger" href="#" onclick="deleteProduct(${product.id})">Xóa</a></li>
-        //                             </ul>
-        //                         </div>
-        //                     </td>
-        //                 </tr>`;
-        //                 tableBody.innerHTML += row;
-        //             });
-
-        //             renderPaginationButtons(paging.totalPageCount);
-        //         })
-        //         .catch(error => {
-        //             console.error('Lỗi khi tải sản phẩm:', error);
-        //             alert('Đã xảy ra lỗi khi tải danh sách sản phẩm.');
-        //         });
-        // }
-
-        // loadProducts(1);
 
         // Gán sự kiện click cho nút tìm kiếm
         document.getElementById('searchBtn').addEventListener('click', function () {
@@ -725,11 +656,11 @@
     }
 
 
-    function showProductModal(companyId) {
+    function showArticleModal(articleId) {
         // Lấy token từ localStorage
         const token = localStorage.getItem('accessToken'); // Đảm bảo key đúng
 
-        fetch(`https://localhost:7205/api/Product/GetProductById/${companyId}`, {
+        fetch(`https://localhost:7205/api/Article/GetArticleById/${articleId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,  // Thêm token vào header
@@ -740,202 +671,150 @@
             .then(response => response.json())
             .then(data => {
                 // Cập nhật nội dung modal với dữ liệu từ API
-                document.getElementById('productName').textContent = data.name;
-                document.getElementById('productCategory').textContent = data.categoryName;
+                document.getElementById('modalArticalTitle').textContent = data.title;
+                document.getElementById('modalArticalCategory').textContent = data.articleCateName;
                 // document.getElementById('productStatus').textContent = data.status;
 
-                const productStatus = document.getElementById('productStatus');
+                const articalStatus = document.getElementById('modalArticalStatus');
                 if (data.status === 0) {
-                    productStatus.innerHTML = '<span style="color: green; font-weight: bold;">Đang kinh doanh</span>';
+                    articalStatus.innerHTML = '<span style="color: green; font-weight: bold;">Đang hiển thị</span>';
                 } else {
-                    productStatus.innerHTML = '<span style="color: red; font-weight: bold;">Ngừng kinh doanh</span>';
+                    articalStatus.innerHTML = '<span style="color: red; font-weight: bold;">Ngừng hiển thị</span>';
                 }
 
                 // Cập nhật ảnh sản phẩm
-                const productImage = document.getElementById('productImage');
-                productImage.src = `https://localhost:7205/images/product/${data.image}`; // Thêm đường dẫn ảnh từ API
-                productImage.alt = data.name; // Đặt alt cho ảnh
+                const productImage = document.getElementById('modalArticalThumbnail');
+                productImage.src = `https://localhost:7205/images/article/${data.thumbnail}`; // Thêm đường dẫn ảnh từ API
+                productImage.alt = data.title; // Đặt alt cho ảnh
 
                 // Cập nhật mô tả sản phẩm trong TinyMCE
-                const productDescription = document.getElementById('productDescription');
-                productDescription.value = data.description; // Gán nội dung mô tả vào textarea
+                const articalContent = document.getElementById('modalArticalContent');
+                articalContent.value = data.content; // Gán nội dung mô tả vào textarea
 
-                const productSpecification = document.getElementById('productSpecification');
-                productSpecification.value = data.specifications;
                 // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
                 tinymce.init({
-                    selector: '#productDescription, #productSpecification',
+                    selector: '#modalArticalContent',
                     menubar: false,
                     toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
                     plugins: 'lists link image',
                     readonly: true // Đảm bảo rằng người dùng không thể chỉnh sửa
                 });
-                tinymce.get('productDescription').setContent(data.description);
-                tinymce.get('productSpecification').setContent(data.specifications);
+                tinymce.get('modalArticalContent').setContent(data.content);
 
                 // Hiển thị modal
                 var modal = new bootstrap.Modal(document.getElementById('companyModal'));
                 modal.show();
             })
             .catch(error => {
-                console.error('Có lỗi khi tải thông tin sản phẩm:', error);
-                alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
+                console.error('Có lỗi khi tải thông tin bài viết:', error);
+                alert('Không thể tải thông tin bài viết. Vui lòng thử lại.');
             });
     }
 
-    function editProduct(productId) {
-        const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
+    // function editProduct(productId) {
+    //     const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
 
-        // Fetch thông tin sản phẩm
-        fetch(`https://localhost:7171/api/Product/GetProductById/${productId}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Load thông tin vào form
+    //     // Fetch thông tin sản phẩm
+    //     fetch(`https://localhost:7171/api/Product/GetProductById/${productId}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // Load thông tin vào form
 
-                document.getElementById('editProductId').value = data.id;
-                document.getElementById('editProductName').value = data.name;
-                document.getElementById('editProductCategory').value = data.categoryId; // Cập nhật ID của loại sản phẩm
-                // tinymce.get('description').setContent(data.description); 
-                document.getElementById('editStatus').value = data.status;
+    //             document.getElementById('editProductId').value = data.id;
+    //             document.getElementById('editProductName').value = data.name;
+    //             document.getElementById('editProductCategory').value = data.categoryId; // Cập nhật ID của loại sản phẩm
+    //             // tinymce.get('description').setContent(data.description); 
+    //             document.getElementById('editStatus').value = data.status;
 
-                const productDescription = document.getElementById('editProductDescription');
-                productDescription.value = data.description; // Gán nội dung mô tả vào textarea
+    //             const productDescription = document.getElementById('editProductDescription');
+    //             productDescription.value = data.description; // Gán nội dung mô tả vào textarea
 
-                // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
-                tinymce.init({
-                    selector: '#editProductDescription',
-                    menubar: false,
-                    toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
-                    plugins: 'lists link image',
-                    readonly: false // Đảm bảo rằng người dùng không thể chỉnh sửa
-                });
-                tinymce.get('editProductDescription').setContent(data.description);
+    //             // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
+    //             tinymce.init({
+    //                 selector: '#editProductDescription',
+    //                 menubar: false,
+    //                 toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+    //                 plugins: 'lists link image',
+    //                 readonly: false // Đảm bảo rằng người dùng không thể chỉnh sửa
+    //             });
+    //             tinymce.get('editProductDescription').setContent(data.description);
 
 
-                // Hiển thị modal
-                var modal = new bootstrap.Modal(document.getElementById('editCompanyModal'));
-                modal.show();
-            })
-            .catch(error => {
-                console.error('Có lỗi khi tải thông tin sản phẩm:', error);
-                alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
-            });
-    }
+    //             // Hiển thị modal
+    //             var modal = new bootstrap.Modal(document.getElementById('editCompanyModal'));
+    //             modal.show();
+    //         })
+    //         .catch(error => {
+    //             console.error('Có lỗi khi tải thông tin sản phẩm:', error);
+    //             alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
+    //         });
+    // }
 
-    // document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
-    //     event.preventDefault(); // Ngăn chặn form gửi mặc định
 
-    //     const productId = document.getElementById('editProductId').value;
-    //     const productName = document.getElementById('editProductName').value;
-    //     const productCategory = document.getElementById('editProductCategory').value;
-    //     const productDescription = tinymce.get('editProductDescription').getContent();
-    //     const productStatus = document.getElementById('status').value;
-
-    //     // Lấy file ảnh
-    //     const fileInput = document.getElementById('file');
+    // function updateProduct() {
+    //     const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
+    //     const productId = document.getElementById('editProductId').value; // Lấy ID sản phẩm
     //     const formData = new FormData();
-    //     formData.append('CategoryId', productCategory);
-    //     formData.append('Name', productName);
-    //     formData.append('Description', productDescription);
-    //     formData.append('Status', productStatus);
 
-    //     // Kiểm tra nếu có file ảnh mới, nếu có thì thêm vào FormData
+    //     // Thêm thông tin sản phẩm vào formData
+    //     formData.append('CategoryId', document.getElementById('editProductCategory').value);
+    //     formData.append('Name', document.getElementById('editProductName').value);
+    //     formData.append('Description', tinymce.get('editProductDescription').getContent()); // Lấy nội dung mô tả từ TinyMCE
+    //     formData.append('Status', document.getElementById('editStatus').value);
+
+    //     const fileInput = document.getElementById('editImage');
+
+    //     // Nếu có file, thêm vào formData
     //     if (fileInput.files.length > 0) {
     //         formData.append('file', fileInput.files[0]);
     //     }
 
-    //     const token = localStorage.getItem('accessToken');
+    //     // Gửi yêu cầu PUT đến API
     //     fetch(`https://localhost:7171/api/Product/updateProduct/${productId}`, {
     //         method: 'PUT',
     //         headers: {
     //             'Authorization': `Bearer ${token}`,
     //         },
-    //         body: formData
+    //         body: formData,
     //     })
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('Lỗi từ server: ' + response.statusText); // Xử lý lỗi nếu HTTP response không thành công
-    //             }
-    //             return response.json();
-    //         })
+    //         .then(response => response.json())
     //         .then(data => {
-    //             if (data.success) {
-    //                 alert('Cập nhật sản phẩm thành công!');
-    //                 location.reload(); // Tải lại trang hoặc cập nhật lại danh sách sản phẩm
+    //             console.log('Dữ liệu trả về từ API:', data); // In ra dữ liệu trả về để kiểm tra
+
+    //             if (data.message) {
+    //                 alert(data.message); // Hiển thị thông báo thành công hoặc lỗi từ API
     //             } else {
-    //                 alert('Có lỗi khi cập nhật sản phẩm.');
+    //                 alert('Cập nhật sản phẩm thành công!');
+
     //             }
+
+    //             // Đóng modal sau khi cập nhật thành công
+    //             var modal = bootstrap.Modal.getInstance(document.getElementById('editCompanyModal'));
+    //             modal.hide();
+    //             location.reload();
     //         })
     //         .catch(error => {
-    //             console.error('Có lỗi khi cập nhật sản phẩm:', error);
-    //             alert('Không thể cập nhật sản phẩm. Vui lòng thử lại.');
+    //             console.error('Có lỗi xảy ra:', error);
+    //             alert('Đã xảy ra lỗi khi cập nhật sản phẩm!');
     //         });
+    // }
+
+
+
+
+
+
+    // // Gắn sự kiện submit cho form
+    // document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
+    //     event.preventDefault(); // Ngừng gửi form mặc định
+    //     updateProduct(); // Gọi hàm updateProduct để gửi yêu cầu PUT
     // });
-
-    function updateProduct() {
-        const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
-        const productId = document.getElementById('editProductId').value; // Lấy ID sản phẩm
-        const formData = new FormData();
-
-        // Thêm thông tin sản phẩm vào formData
-        formData.append('CategoryId', document.getElementById('editProductCategory').value);
-        formData.append('Name', document.getElementById('editProductName').value);
-        formData.append('Description', tinymce.get('editProductDescription').getContent()); // Lấy nội dung mô tả từ TinyMCE
-        formData.append('Status', document.getElementById('editStatus').value);
-
-        const fileInput = document.getElementById('editImage');
-
-        // Nếu có file, thêm vào formData
-        if (fileInput.files.length > 0) {
-            formData.append('file', fileInput.files[0]);
-        }
-
-        // Gửi yêu cầu PUT đến API
-        fetch(`https://localhost:7171/api/Product/updateProduct/${productId}`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dữ liệu trả về từ API:', data); // In ra dữ liệu trả về để kiểm tra
-
-                if (data.message) {
-                    alert(data.message); // Hiển thị thông báo thành công hoặc lỗi từ API
-                } else {
-                    alert('Cập nhật sản phẩm thành công!');
-
-                }
-
-                // Đóng modal sau khi cập nhật thành công
-                var modal = bootstrap.Modal.getInstance(document.getElementById('editCompanyModal'));
-                modal.hide();
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Có lỗi xảy ra:', error);
-                alert('Đã xảy ra lỗi khi cập nhật sản phẩm!');
-            });
-    }
-
-
-
-
-
-
-    // Gắn sự kiện submit cho form
-    document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Ngừng gửi form mặc định
-        updateProduct(); // Gọi hàm updateProduct để gửi yêu cầu PUT
-    });
 
     function deleteProduct(companyId) {
         // Lấy token từ localStorage
@@ -961,52 +840,6 @@
                 })
         }
     }
-
-
-
-
-
-
-
-
-
-    // document.getElementById('downloadCSVButton').addEventListener('click', function () {
-    //     const apiUrl = 'https://localhost:7214/api/TransportCompany/GetCSVFile';
-    //     const token = localStorage.getItem('accessToken');  // Lấy token từ localStorage
-
-    //     if (!token) {
-    //         alert('Vui lòng đăng nhập!');
-    //         return;
-    //     }
-
-    //     fetch(apiUrl, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Authorization': `Bearer ${token}`,
-    //             'Accept': '*/*',
-    //         }
-    //     })
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('Không thể tải file CSV');
-    //             }
-    //             return response.blob(); // Nhận phản hồi dưới dạng blob
-    //         })
-    //         .then(blob => {
-    //             const url = window.URL.createObjectURL(blob);
-    //             const a = document.createElement('a');
-    //             a.href = url;
-    //             a.download = 'Danh_sach_cong_ty_van_chuyen.csv';
-    //             document.body.appendChild(a);
-    //             a.click();
-    //             a.remove();
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error);
-    //             alert('Có lỗi xảy ra khi tải file CSV!');
-    //         });
-    // });
-    // Khi người dùng nhấn nút "Tải File CSV"
     
 
     function formatDate(dateString) {
