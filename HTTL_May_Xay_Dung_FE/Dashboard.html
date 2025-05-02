@@ -69,17 +69,18 @@
 						<div class="flex-shrink-0">
 							<img src="./dashboard/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" />
 						</div>
-						<div class="flex-grow-1 ps-2">
-							<a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
+						<div class="flex-grow-1 ps-2" id="user-profile-section">
+							<a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown" id="user-name">
 								Bách Béo
 							</a>
 							<div class="dropdown-menu dropdown-menu-start">
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="#" id="open-profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<a class="dropdown-item" href="#">Log out</a>
 							</div>
-
-							<div class="sidebar-user-subtitle">Manager</div>
+						
+							<div class="sidebar-user-subtitle" id="user-role">Manager</div>
 						</div>
+						
 					</div>
 				</div>
 
@@ -331,7 +332,81 @@
 			});
 		});
 	</script>
+
+<script>
+	let currentUser = null;
+
+	document.addEventListener("DOMContentLoaded", async function () {
+		const params = new URLSearchParams(window.location.search);
+		const userId = params.get("userId");
+
+		if (!userId) {
+			console.error("userId không tồn tại trong URL.");
+			return;
+		}
+
+		try {
+			const res = await fetch(`https://localhost:7205/api/Users/Profile/${userId}`);
+			if (!res.ok) throw new Error("Không thể tải thông tin người dùng");
+
+			const user = await res.json();
+			currentUser = user;
+
+			document.getElementById("user-name").textContent = user.username;
+			document.getElementById("user-role").textContent = mapRoleToText(user.role);
+		} catch (err) {
+			console.error("Lỗi khi lấy thông tin người dùng:", err);
+		}
+	});
+
+	document.getElementById("open-profile").addEventListener("click", function () {
+		if (!currentUser) return;
+
+		document.getElementById("modal-username").textContent = currentUser.username;
+		document.getElementById("modal-email").textContent = currentUser.email;
+		document.getElementById("modal-phone").textContent = currentUser.phonenumber;
+		document.getElementById("modal-role").textContent = mapRoleToText(currentUser.role);
+		document.getElementById("modal-lastlogin").textContent = currentUser.lastLogin
+			? new Date(currentUser.lastLogin).toLocaleString()
+			: "Chưa đăng nhập";
+
+		const modal = new bootstrap.Modal(document.getElementById("userProfileModal"));
+		modal.show();
+	});
+
+	function mapRoleToText(role) {
+		switch (role) {
+			case 0: return "Khách hàng";
+			case 1: return "Nhân viên";
+			case 2: return "Quản lý";
+			default: return "Không rõ";
+		}
+	}
+</script>
+
+
 	<script src="./dashboard/js/app.js"></script>
+
+
+	<!-- Modal thông tin người dùng -->
+<div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="userProfileModalLabel">Thông tin người dùng</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+		</div>
+		<div class="modal-body">
+		  <p><strong>Tên:</strong> <span id="modal-username"></span></p>
+		  <p><strong>Email:</strong> <span id="modal-email"></span></p>
+		  <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
+		  <p><strong>Vai trò:</strong> <span id="modal-role"></span></p>
+		  <p><strong>Lần đăng nhập cuối:</strong> <span id="modal-lastlogin"></span></p>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
 </body>
 
 </html>
