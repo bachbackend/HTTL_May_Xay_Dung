@@ -111,6 +111,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice
                 })
             .ToListAsync();
 
@@ -159,6 +160,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 Specifications = model.Specifications,
                 Status = model.Status,
                 CreatedAt = DateTime.UtcNow,
+                ProductPrice = model.ProductPrice,
             };
 
             // Lưu sản phẩm vào database
@@ -183,6 +185,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             product.Status = model.Status;
             product.Description = model.Description;
             product.Specifications = model.Specifications;
+            product.ProductPrice = model.ProductPrice;
 
             if (file != null && file.Length > 0)
             {
@@ -214,7 +217,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                 categoryId = product.CategoryId,
                 description = product.Description,
                 status = product.Status,
-                image = product.Image
+                image = product.Image,
+                price = product.Price
             });
         }
 
@@ -267,6 +271,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
                 })
                 .FirstOrDefaultAsync();
 
@@ -300,6 +305,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 
@@ -327,6 +333,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
             return Ok(bestseller);
@@ -389,6 +396,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
                 })
             .ToListAsync();
 
@@ -421,6 +429,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 
@@ -453,6 +462,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 

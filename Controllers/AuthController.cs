@@ -165,7 +165,8 @@ namespace HTTL_May_Xay_Dung.Controllers
             {
                 Username = registerDTO.Username,
                 Password = registerDTO.Password.Hash(),
-                Role = registerDTO.Role,
+                Role = 2,
+                Status = 0,
                 Phonenumber = registerDTO.PhoneNumber,
                 Email = registerDTO.Email,
                 CreatedAt = DateTime.Now
