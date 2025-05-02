@@ -24,7 +24,7 @@ namespace HTTL_May_Xay_Dung.Controllers
         }
 
 
-        [HttpGet("GetAllOrder")]
+        [HttpGet("GetAllOrderSortByDate")]
         public async Task<IActionResult> GetAllOrder(
             int pageNumber = 1,
             int? pageSize = null,
@@ -293,7 +293,7 @@ namespace HTTL_May_Xay_Dung.Controllers
         }
 
         [HttpPut("CancelOrder/{orderId}")]
-        public async Task<IActionResult> CancelOrder(int orderId, [FromForm] int reasonId)
+        public async Task<IActionResult> CancelOrder(int orderId)
         {
             // Tìm đơn hàng theo ID
             var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);

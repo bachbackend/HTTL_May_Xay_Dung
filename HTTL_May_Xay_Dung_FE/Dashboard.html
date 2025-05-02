@@ -71,14 +71,14 @@
 						</div>
 						<div class="flex-grow-1 ps-2" id="user-profile-section">
 							<a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown" id="user-name">
-								Bách Béo
 							</a>
 							<div class="dropdown-menu dropdown-menu-start">
-								<a class="dropdown-item" href="#" id="open-profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#">Log out</a>
+								<a class="dropdown-item" id="open-profile"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="#" id="logout-button">Log out</a>
+
 							</div>
 						
-							<div class="sidebar-user-subtitle" id="user-role">Manager</div>
+							<div class="sidebar-user-subtitle" id="user-role"></div>
 						</div>
 						
 					</div>
@@ -104,9 +104,8 @@
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="#">
-							<i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Calendar</span>
-							<span class="sidebar-badge badge bg-primary">Pro</span>
+						<a class="sidebar-link" href="Order-Management.html" target="_blank">
+							<i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Quản lý đơn hàng</span>
 						</a>
 					</li>
 
@@ -130,6 +129,20 @@
 
 				
 			</div>
+
+			<script>
+				document.getElementById("logout-button").addEventListener("click", function () {
+					// Xóa thông tin người dùng khỏi localStorage
+					localStorage.removeItem("accesstoken");
+			
+					// Có thể xóa thêm token hoặc dữ liệu liên quan nếu có
+					// localStorage.removeItem("authToken");
+			
+					// Chuyển hướng đến trang đăng nhập
+					window.location.href = "Login.html"; // Thay bằng đường dẫn đúng tới trang đăng nhập của bạn
+				});
+			</script>
+			
 		</nav>
 
 		<div class="main">
@@ -337,28 +350,38 @@
 	let currentUser = null;
 
 	document.addEventListener("DOMContentLoaded", async function () {
-		const params = new URLSearchParams(window.location.search);
-		const userId = params.get("userId");
+		const userId = localStorage.getItem("userId"); // Lấy từ localStorage
 
 		if (!userId) {
-			console.error("userId không tồn tại trong URL.");
+			console.error("Không tìm thấy userId trong localStorage.");
+			window.location.href = "/Login.html";
 			return;
 		}
 
 		try {
-			const res = await fetch(`https://localhost:7205/api/Users/Profile/${userId}`);
+			const res = await fetch(`https://localhost:7205/api/Profile/Profile/${userId}`);
 			if (!res.ok) throw new Error("Không thể tải thông tin người dùng");
 
 			const user = await res.json();
 			currentUser = user;
 
+			// Kiểm tra quyền truy cập dashboard
+			if (window.location.pathname.includes("Dashboard.html") && user.role !== 0 && user.role !== 2) {
+				alert("Bạn không có quyền truy cập vào trang này.");
+				window.location.href = "/Home.html"; // Chuyển hướng về trang chủ hoặc trang phù hợp
+				return;
+			}
+
+			// Gán tên và vai trò vào UI
 			document.getElementById("user-name").textContent = user.username;
 			document.getElementById("user-role").textContent = mapRoleToText(user.role);
 		} catch (err) {
 			console.error("Lỗi khi lấy thông tin người dùng:", err);
+			window.location.href = "/Login.html";
 		}
 	});
 
+	// Khi click "Profile"
 	document.getElementById("open-profile").addEventListener("click", function () {
 		if (!currentUser) return;
 
@@ -376,13 +399,16 @@
 
 	function mapRoleToText(role) {
 		switch (role) {
-			case 0: return "Khách hàng";
-			case 1: return "Nhân viên";
-			case 2: return "Quản lý";
+			case 0: return "Admin";
+			case 1: return "Khách hàng";
+			case 2: return "Manager";
 			default: return "Không rõ";
 		}
 	}
+	
 </script>
+
+
 
 
 	<script src="./dashboard/js/app.js"></script>

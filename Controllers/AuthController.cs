@@ -2,6 +2,7 @@
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Extension;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -256,8 +257,62 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { message = "Password updated successfully." });
         }
 
+        [Authorize(Policy = "AdminOnly")]
+        [HttpPost("CreateAdmin")]
+        public async Task<IActionResult> CreateAdmin([FromBody] RegisterAdminDTO registerDTO)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == registerDTO.Username);
+
+            if (existingUser != null)
+                return BadRequest(new { message = "Username is already exists" });
 
 
+            // Tạo người dùng nhưng chưa kích hoạt
+            User user = new User
+            {
+                Username = registerDTO.Username,
+                Password = registerDTO.Password.Hash(),
+                Email = registerDTO.Email,
+                Phonenumber = registerDTO.Phonenumber,
+                Role = 0,
+                Status = 1,
+                CreatedAt = DateTime.Now
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Create admin account successfully." });
+        }
+
+
+        [Authorize(Policy = "AdminOnly")]
+        [HttpPost("CreateManager")]
+        public async Task<IActionResult> CreateManager([FromBody] RegisterDTO registerDTO)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(x => x.Username == registerDTO.Username);
+
+            if (existingUser != null)
+                return BadRequest(new { message = "Username is already exists" });
+
+
+            // Tạo người dùng nhưng chưa kích hoạt
+            User user = new User
+            {
+                Username = registerDTO.Username,
+                Password = registerDTO.Password.Hash(),
+                Email = registerDTO.Email,
+                Phonenumber = registerDTO.PhoneNumber,
+                Role = 2,
+                Status = 1,
+                CreatedAt = DateTime.Now
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Create manager account successfully." });
+        }
 
     }
 }

@@ -88,9 +88,9 @@ namespace HTTL_May_Xay_Dung
 
             builder.Services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole("1"));  // 1 = Admin
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("0"));  // 0 = Admin
                 options.AddPolicy("ManagerOnly", policy => policy.RequireRole("2")); // 2 = Manager
-                options.AddPolicy("NormalUserOnly", policy => policy.RequireRole("0")); // 0 = Normal User
+                options.AddPolicy("NormalUserOnly", policy => policy.RequireRole("1")); // 1 = Customer
             });
 
             builder.Services.AddSwaggerGen(c =>
