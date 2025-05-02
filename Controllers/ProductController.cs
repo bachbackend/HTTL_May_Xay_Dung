@@ -111,7 +111,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice
+                    ProductPrice = p.ProductPrice,
+                    BasePrice = p.BasePrice,
                 })
             .ToListAsync();
 
@@ -161,6 +162,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 Status = model.Status,
                 CreatedAt = DateTime.UtcNow,
                 ProductPrice = model.ProductPrice,
+                BasePrice = model.BasePrice,
             };
 
             // Lưu sản phẩm vào database
@@ -186,6 +188,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             product.Description = model.Description;
             product.Specifications = model.Specifications;
             product.ProductPrice = model.ProductPrice;
+            product.BasePrice = model.BasePrice;
 
             if (file != null && file.Length > 0)
             {
@@ -218,7 +221,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                 description = product.Description,
                 status = product.Status,
                 image = product.Image,
-                price = product.Price
+                price = product.Price,
+                baseprice = product.BasePrice,
             });
         }
 
@@ -397,6 +401,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
                     ProductPrice = p.ProductPrice,
+                    BasePrice = p.BasePrice,
                 })
             .ToListAsync();
 
