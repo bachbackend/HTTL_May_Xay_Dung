@@ -261,6 +261,9 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.HasIndex(e => e.CategoryId, "category_id");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.BasePrice)
+                .HasPrecision(10)
+                .HasColumnName("base_price");
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
