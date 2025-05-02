@@ -25,6 +25,8 @@ public partial class Product
 
     public string Specifications { get; set; } = null!;
 
+    public decimal ProductPrice { get; set; }
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual Category Category { get; set; } = null!;

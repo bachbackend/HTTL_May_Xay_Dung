@@ -275,6 +275,9 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.Property(e => e.Price)
                 .HasPrecision(10)
                 .HasColumnName("price");
+            entity.Property(e => e.ProductPrice)
+                .HasPrecision(10)
+                .HasColumnName("product_price");
             entity.Property(e => e.SaleQuantity).HasColumnName("sale_quantity");
             entity.Property(e => e.Specifications).HasColumnName("specifications");
             entity.Property(e => e.Status).HasColumnName("status");

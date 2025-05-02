@@ -2051,7 +2051,7 @@
         try {
             const response = await fetch(`https://localhost:7205/api/Article/GetArticleById/${articleId}`);
             if (!response.ok) throw new Error("Lỗi khi lấy bài viết");
-
+                    
             const data = await response.json();
 
             // Gán dữ liệu vào các phần tử HTML
