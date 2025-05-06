@@ -41,6 +41,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 {
                     sa.Id,
                     sa.UserId,
+                    sa.User.Username,
                     sa.CityId,
                     sa.City.Name,
                     sa.SpecificAddress,

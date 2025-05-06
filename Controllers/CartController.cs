@@ -45,7 +45,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     ProductName = c.Product.Name,
                     Image = c.Product.Image,
                     Quantity = c.Quantity,
-                    ProductPrice = c.Product.Price,
+                    ProductPrice = c.Product.ProductPrice,
                 })
                 .ToListAsync();
 

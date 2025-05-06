@@ -2549,7 +2549,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const keyword = document.getElementById('product-name-search').value.trim();
-        const categoryId = document.getElementById('product-category').value;
+        const categoryId = urlParams.get('cid') || document.getElementById('product-category').value;
         const params = new URLSearchParams();
 
         if (keyword) params.append('name', keyword);

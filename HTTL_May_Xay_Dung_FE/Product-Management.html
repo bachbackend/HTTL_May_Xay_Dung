@@ -758,61 +758,61 @@
         // Gọi hàm loadServices khi trang được tải
         loadServices3();
 
-        function loadServices1() {
-            fetch('https://localhost:7171/api/Category/GetAll', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
-                .then(data => {
-                    const serviceDropdown = document.getElementById('filterServices1');
+        // function loadServices1() {
+        //     fetch('https://localhost:7171/api/Category/GetAll', {
+        //         method: 'GET',
+        //         headers: {
+        //             'Accept': '*/*'
+        //         }
+        //     })
+        //         .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
+        //         .then(data => {
+        //             const serviceDropdown = document.getElementById('filterServices1');
 
-                    // Xóa tất cả các option cũ trong dropdown
-                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+        //             // Xóa tất cả các option cũ trong dropdown
+        //             serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
 
-                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
-                    data.forEach(category => {
-                        const option = document.createElement('option');
-                        option.value = category.id; // Gán giá trị là ID của dịch vụ
-                        option.textContent = category.name; // Hiển thị tên dịch vụ
-                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
-                    });
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API:', error);
-                });
-        }
-        loadServices1();
+        //             // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+        //             data.forEach(category => {
+        //                 const option = document.createElement('option');
+        //                 option.value = category.id; // Gán giá trị là ID của dịch vụ
+        //                 option.textContent = category.name; // Hiển thị tên dịch vụ
+        //                 serviceDropdown.appendChild(option); // Thêm option vào dropdown
+        //             });
+        //         })
+        //         .catch(error => {
+        //             console.error('Có lỗi xảy ra khi gọi API:', error);
+        //         });
+        // }
+        // loadServices1();
 
-        function loadServices2() {
-            fetch('https://localhost:7171/api/Category/GetAll', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
-                .then(data => {
-                    const serviceDropdown = document.getElementById('editProductCategory');
+        // function loadServices2() {
+        //     fetch('https://localhost:7171/api/Category/GetAll', {
+        //         method: 'GET',
+        //         headers: {
+        //             'Accept': '*/*'
+        //         }
+        //     })
+        //         .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
+        //         .then(data => {
+        //             const serviceDropdown = document.getElementById('editProductCategory');
 
-                    // Xóa tất cả các option cũ trong dropdown
-                    serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
+        //             // Xóa tất cả các option cũ trong dropdown
+        //             serviceDropdown.innerHTML = '<option value="">Loại sản phẩm</option>';
 
-                    // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
-                    data.forEach(category => {
-                        const option = document.createElement('option');
-                        option.value = category.id; // Gán giá trị là ID của dịch vụ
-                        option.textContent = category.name; // Hiển thị tên dịch vụ
-                        serviceDropdown.appendChild(option); // Thêm option vào dropdown
-                    });
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API:', error);
-                });
-        }
-        loadServices2();
+        //             // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+        //             data.forEach(category => {
+        //                 const option = document.createElement('option');
+        //                 option.value = category.id; // Gán giá trị là ID của dịch vụ
+        //                 option.textContent = category.name; // Hiển thị tên dịch vụ
+        //                 serviceDropdown.appendChild(option); // Thêm option vào dropdown
+        //             });
+        //         })
+        //         .catch(error => {
+        //             console.error('Có lỗi xảy ra khi gọi API:', error);
+        //         });
+        // }
+        // loadServices2();
 
 
 
@@ -1203,69 +1203,69 @@
     //         });
     // });
     // Khi người dùng nhấn nút "Tải File CSV"
-    document.getElementById("downloadCSVBtn").addEventListener("click", function () {
-        const provinceId = document.getElementById("provinceCSV").value;
-        const districtId = document.getElementById("districtCSV").value;
-        const token = localStorage.getItem('accessToken');
-        // Xây dựng URL API với các tham số provinceId và districtId
-        const apiUrl = `https://localhost:7214/api/TransportCompany/GetCSVFileModify?provinceId=${provinceId}&districtId=${districtId}`;
+    // document.getElementById("downloadCSVBtn").addEventListener("click", function () {
+    //     const provinceId = document.getElementById("provinceCSV").value;
+    //     const districtId = document.getElementById("districtCSV").value;
+    //     const token = localStorage.getItem('accessToken');
+    //     // Xây dựng URL API với các tham số provinceId và districtId
+    //     const apiUrl = `https://localhost:7214/api/TransportCompany/GetCSVFileModify?provinceId=${provinceId}&districtId=${districtId}`;
 
-        // Gọi API và tải file CSV
-        fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/csv',
-                'Authorization': `Bearer ${token}`
-                // Nếu cần token, hãy thêm vào headers:
-                // 'Authorization': 'Bearer ' + 'YOUR_ACCESS_TOKEN_HERE'
-            }
-        })
-            .then(response => response.blob())  // Lấy file dạng blob
-            .then(blob => {
-                // Tạo một liên kết để tải file
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = "Danh_sach_cong_ty_van_chuyen.csv";  // Tên file tải về
-                link.click();  // Mô phỏng click để tải file
-            })
-            .catch(error => {
-                alert('Có lỗi xảy ra khi tải file!');
-                console.error(error);
-            });
-    });
+    //     // Gọi API và tải file CSV
+    //     fetch(apiUrl, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Accept': 'application/csv',
+    //             'Authorization': `Bearer ${token}`
+    //             // Nếu cần token, hãy thêm vào headers:
+    //             // 'Authorization': 'Bearer ' + 'YOUR_ACCESS_TOKEN_HERE'
+    //         }
+    //     })
+    //         .then(response => response.blob())  // Lấy file dạng blob
+    //         .then(blob => {
+    //             // Tạo một liên kết để tải file
+    //             const link = document.createElement('a');
+    //             link.href = URL.createObjectURL(blob);
+    //             link.download = "Danh_sach_cong_ty_van_chuyen.csv";  // Tên file tải về
+    //             link.click();  // Mô phỏng click để tải file
+    //         })
+    //         .catch(error => {
+    //             alert('Có lỗi xảy ra khi tải file!');
+    //             console.error(error);
+    //         });
+    // });
 
-    document.getElementById("downloadCSVBtn").addEventListener("click", function () {
-        let productStatus = document.getElementById("productStatusCSV").value;
-        let apiUrl = `https://localhost:7171/api/Product/GetCSVFile`;
+    // document.getElementById("downloadCSVBtn").addEventListener("click", function () {
+    //     let productStatus = document.getElementById("productStatusCSV").value;
+    //     let apiUrl = `https://localhost:7171/api/Product/GetCSVFile`;
 
-        // Nếu có trạng thái sản phẩm, thêm vào URL
-        if (productStatus !== "") {
-            apiUrl += `?productStatus=${productStatus}`;
-        }
+    //     // Nếu có trạng thái sản phẩm, thêm vào URL
+    //     if (productStatus !== "") {
+    //         apiUrl += `?productStatus=${productStatus}`;
+    //     }
 
-        fetch(apiUrl, {
-            method: "GET",
-            headers: {
-                "Accept": "*/*"
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Lỗi tải file CSV");
-                }
-                return response.blob(); // Nhận dữ liệu dưới dạng blob
-            })
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "Product.csv";
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.error("Lỗi:", error));
-    });
+    //     fetch(apiUrl, {
+    //         method: "GET",
+    //         headers: {
+    //             "Accept": "*/*"
+    //         }
+    //     })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error("Lỗi tải file CSV");
+    //             }
+    //             return response.blob(); // Nhận dữ liệu dưới dạng blob
+    //         })
+    //         .then(blob => {
+    //             const url = window.URL.createObjectURL(blob);
+    //             const a = document.createElement("a");
+    //             a.href = url;
+    //             a.download = "Product.csv";
+    //             document.body.appendChild(a);
+    //             a.click();
+    //             window.URL.revokeObjectURL(url);
+    //         })
+    //         .catch(error => console.error("Lỗi:", error));
+    // });
 
 
 

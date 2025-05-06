@@ -971,7 +971,7 @@
                         <nav
                             class="twbb-nav-menu--main twbb-nav-menu__container twbb-nav-menu--layout-horizontal e--pointer-none">
                             <ul id="menu-1-b639t6vy" class="twbb-nav-menu twbb-menu_term_id-8743"
-                                data-smartmenus-id="17454868026131401">
+                                data-smartmenus-id="17454651601260786">
                                 <style>
                                     .dropdown-menu {
                                         background-color: white;
@@ -997,6 +997,12 @@
                                         color: #0011ff;
                                         /* Màu chữ khi hover */
                                     }
+
+                                    .nav-menu {
+                                        list-style: none;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
                                 </style>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
@@ -1015,26 +1021,112 @@
                                                     phát triển</strong></a></li>
                                     </ul>
                                 </li>
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
-                                    <a href="./Product.html" class="twbb-item"
+                                <style>
+                                    .dropdown-menu1 {
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        padding: 10px 0;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                        position: absolute;
+                                        display: none;
+                                        min-width: 200px;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateY(10px);
+                                    }
+
+                                    .dropdown-menu1 li {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-menu1 li a {
+                                        color: #333;
+                                        padding: 12px 20px;
+                                        display: block;
+                                        text-decoration: none;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+                                        white-space: nowrap;
+                                    }
+
+                                    .dropdown-menu1 li a:hover {
+                                        background-color: #f0f0f0;
+                                        color: #0011ff;
+                                        transform: translateX(5px);
+                                        border-radius: 8px;
+                                        /* Bo góc khi hover */
+                                    }
+
+                                    .dropdown:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    .dropdown-submenu {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-submenu>.dropdown-menu1 {
+                                        top: 0;
+                                        left: 100%;
+                                        margin-left: 0;
+                                        display: none;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateX(10px);
+                                    }
+
+                                    .dropdown-submenu:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateX(0);
+                                    }
+
+                                    .dropdown-toggle::after {
+                                        display: none !important;
+                                    }
+
+                                    /* Thêm icon mũi tên tùy chỉnh */
+                                    .dropdown>a {
+                                        position: relative;
+                                    }
+
+                                    .dropdown>a::after {
+                                        content: '▼';
+                                        font-size: 12px;
+                                        position: absolute;
+                                        right: 10px;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        transition: transform 0.3s ease;
+                                    }
+
+                                    .dropdown:hover>a::after {
+                                        transform: translateY(-50%) rotate(180deg);
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="product-menu">
+                                    <a href="./Product.html" class="twbb-item dropdown-toggle"
                                         style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
+                                    <ul class="dropdown-menu1" id="product-dropdown"></ul>
                                 </li>
                                 <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat current-menu-item menu-item-82382">
+                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
                                     <a href="./Article.html" class="twbb-item"
                                         style="font-family: Arial, sans-serif !important;"><strong>BÀI VIẾT</strong></a>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a>
+                                    <a href="./Contact.html" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>LIÊN HỆ</strong></a>
                                 </li>
-                                <li
+                                <!-- <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a>
-                                </li>
+                                        class="twbb-item">Contractor’s Choice</a></li> -->
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
                                     <a href="#" class="twbb-item"
@@ -1048,6 +1140,78 @@
                                                 style="font-family: Arial, sans-serif !important;"><strong>Chính sách
                                                     bảo mật</strong></a></li>
                                     </ul>
+                                </li>
+                                <style>
+                                    #cart-menu {
+                                        position: relative;
+                                    }
+
+                                    #cart-menu:hover>#cart-dropdown {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    #cart-dropdown {
+                                        position: absolute;
+                                        top: 100%;
+                                        right: 0;
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                                        padding: 10px;
+                                        min-width: 250px;
+                                        display: none;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transform: translateY(10px);
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                    }
+
+                                    #cart-dropdown li {
+                                        padding: 5px 10px;
+                                        border-bottom: 1px solid #eee;
+                                        font-size: 14px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                    }
+
+                                    #cart-dropdown li:last-child {
+                                        border-bottom: none;
+                                    }
+
+                                    #cart-menu>a::after {
+                                        display: none !important;
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="cart-menu">
+                                    <a href="Cart.html" class="twbb-item"
+                                        style="position: relative; display: inline-block;">
+                                        <strong>GIỎ HÀNG</strong>
+                                        <i class="fa fa-shopping-cart"
+                                            style="font-size: 20px; margin-left: 5px; position: relative;"></i>
+                                        <span id="cart-count" style="
+                                                    position: absolute;
+                                                    top: -5px;
+                                                    right: -8px;
+                                                    background-color: red;
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    padding: 2px 5px;
+                                                    border-radius: 50%;
+                                                    min-width: 18px;
+                                                    text-align: center;
+                                                    line-height: 1;
+                                                    border: 2px solid white;">
+                                            0
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu1" id="cart-dropdown" style="right: 0; left: auto;"></ul>
+                                </li>
+                                <li class="menu-item d-inline-block" id="auth-links">
+                                    <!-- Nội dung sẽ được JavaScript thay đổi -->
                                 </li>
                             </ul>
                         </nav>
@@ -1101,7 +1265,7 @@
                         </style>
                     </div>
                 </div>
-                <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
+                <!-- <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
                     data-id="j0oehjjo" data-element_type="container">
                     <div class="elementor-element elementor-element-ksw7v8wj elementor-view-default elementor-widget elementor-widget-icon"
                         data-id="ksw7v8wj" data-element_type="widget" data-widget_type="icon.default">
@@ -1147,10 +1311,10 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div> <!-- close twbb_menu-cart__wrapper -->
+                            </div> 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="elementor-element elementor-element-gtvn2he9 twbb_section e-con-boxed e-flex e-con e-parent elementor-sticky elementor-sticky__spacer"

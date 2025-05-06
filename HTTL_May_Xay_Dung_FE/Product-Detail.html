@@ -1641,31 +1641,14 @@
                         </div>
                     </div>
 
-                    <!-- Short Description -->
-                    <!-- <div class="elementor-element elementor-widget elementor-widget-twbb_woocommerce-product-short-description">
-                    <div class="elementor-widget-container">
-                        <div class="woocommerce-product-details__short-description">
-                            <p id="product-short-description">Short description here.</p>
-                        </div>
-                    </div>
-                </div> -->
-
                     <!-- Add to Cart -->
                     <div class="elementor-element elementor-widget elementor-widget-twbb_woocommerce-product-add-to-cart"
                         style="margin-top: -20px;">
                         <div class="elementor-widget-container">
                             <div class="elementor-add-to-cart elementor-product-simple">
-                                <!-- <form class="cart" method="post">
-                                    <div class="e-atc-qty-button-holder">
-                                        <div class="quantity">
-                                            <input type="number" class="input-text qty text" name="quantity" value="1"
-                                                min="1" step="1" inputmode="numeric">
-                                        </div> -->
                                 <button id="btn-add-to-cart" class="single_add_to_cart_button button alt">Thêm
                                     vào giỏ
                                     hàng</button>
-                                <!-- </div>
-                                </form> -->
                             </div>
                         </div>
                     </div>
@@ -1710,11 +1693,33 @@
                             </ul>
                         </div>
                     </div>
-
-
                 </div>
+
             </div>
 
+        </div>
+
+        <style>
+            #product-specification table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+        
+            #product-specification th,
+            #product-specification td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: left;
+            }
+        </style>
+
+        <!-- Thông số kỹ thuật -->
+        <div class="elementor-element elementor-widget"
+            style="border: 1px solid #ddd; border-radius: 10px; padding: 15px; margin-bottom: 20px; background-color: #f9f9f9;">
+            <div class="elementor-widget-container">
+                <h4 style="font-weight: 600; font-size: 20px; color: #333;">Thông số kỹ thuật:</h4>
+                <div id="product-specification">Full description here.</div>
+            </div>
         </div>
 
 
@@ -2520,9 +2525,15 @@
             document.getElementById('product-name-link').textContent = product.name;
             document.getElementById('product-breadcrumb-name').textContent = product.name;
             document.getElementById('product-category-link').textContent = product.categoryName;
+            document.getElementById('product-category-link').href = `Product.html?cid=${product.categoryId}`;
             document.getElementById('product-image').src = `https://localhost:7205/images/product/${product.image}`;
             document.getElementById('product-image-link').href = `https://localhost:7205/images/product/${product.image}`;
             document.getElementById('product-description').innerHTML = product.description;
+            document.getElementById('product-specification').innerHTML = product.specifications;
+            const price = Number(product.productPrice);
+            const priceElement = document.getElementById('product-price');
+            priceElement.textContent = `Giá: ${price.toLocaleString('vi-VN')}₫`;
+            priceElement.style.color = '#283566';
 
             loadSameCategoryProducts(product.categoryId, productId);
         } catch (error) {
@@ -2623,6 +2634,10 @@
                     showConfirmButton: false,
                     timer: 1500
                 });
+
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
             })
             .catch(error => {
                 console.error("Lỗi khi thêm vào giỏ hàng:", error);

@@ -472,7 +472,7 @@
         var woocommerce_params = { "ajax_url": "\/70\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/70\/?wc-ajax=%%endpoint%%", "i18n_password_show": "Show password", "i18n_password_hide": "Hide password" };
         /* ]]> */
     </script> -->
-    <script type="text/javascript" src="./Home_files/woocommerce.min.js.download" id="woocommerce-js" defer="defer"
+    <!-- <script type="text/javascript" src="./Home_files/woocommerce.min.js.download" id="woocommerce-js" defer="defer"
         data-wp-strategy="defer"></script>
     <script type="text/javascript" src="./Home_files/payment.js.download" id="tbdemo_twwpdemo_script-js"></script>
     <script type="text/javascript" src="./Home_files/scripts.min.js.download"
@@ -508,14 +508,15 @@
         content="https://aisite.10web.io/70/wp-content/plugins/ai-builder-demo-plugin-master/assets/images/share_banner.png">
     <meta name="twitter:title"
         content="It took me less than a minute to build this website with @10Web’s %23AI Website Builder.%0AHow awesome is that%3F🤯">
-    <meta name="twitter:description" content="AI created this website in minutes! Try it yourself now.">
-    <noscript>
+    <meta name="twitter:description" content="AI created this website in minutes! Try it yourself now."> -->
+
+    <!-- <noscript>
         <style>
             .woocommerce-product-gallery {
                 opacity: 1 !important;
             }
         </style>
-    </noscript>
+    </noscript> -->
     <meta name="generator"
         content="Elementor 3.27.6; settings: css_print_method-external, google_font-enabled, font_display-block">
     <style>
@@ -540,7 +541,7 @@
             }
         }
     </style>
-    <style class="wp-fonts-local" type="text/css">
+    <!-- <style class="wp-fonts-local" type="text/css">
         @font-face {
             font-family: Inter;
             font-style: normal;
@@ -557,7 +558,7 @@
             font-display: fallback;
             src: url('https://aisite.10web.io/70/wp-content/plugins/woocommerce/assets/fonts/cardo_normal_400.woff2') format('woff2');
         }
-    </style>
+    </style> -->
     <link rel="stylesheet" href="./Home_files/css(2)" media="all">
     <script src="./Home_files/wp-emoji-release.min.js.download" defer=""></script>
 </head>
@@ -955,9 +956,13 @@
         </div>
                     </div>
         </script>
-    <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://metrics.10web-site.ai/ns.html?id=GTM-M6GPZ95"
+    <!-- Google Tag Manager (noscript) -->
+     <noscript>
+        <iframe src="https://metrics.10web-site.ai/ns.html?id=GTM-M6GPZ95"
             height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+            style="display:none;visibility:hidden">
+        </iframe>
+    </noscript><!-- End Google Tag Manager (noscript) -->
 
 
     <style>
@@ -1048,7 +1053,14 @@
                                         color: #0011ff;
                                         /* Màu chữ khi hover */
                                     }
+
+                                    .nav-menu {
+                                        list-style: none;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
                                 </style>
+
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
                                     <a href="#" class="twbb-item"
@@ -1067,11 +1079,104 @@
                                     </ul>
                                 </li>
 
-                                <li
+                                <!-- <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
                                     <a href="./Product.html" class="twbb-item"
                                         style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
+                                </li> -->
+                                <style>
+                                    .dropdown-menu1 {
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        padding: 10px 0;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                        position: absolute;
+                                        display: none;
+                                        min-width: 200px;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateY(10px);
+                                    }
+
+                                    .dropdown-menu1 li {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-menu1 li a {
+                                        color: #333;
+                                        padding: 12px 20px;
+                                        display: block;
+                                        text-decoration: none;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+                                        white-space: nowrap;
+                                    }
+
+                                    .dropdown-menu1 li a:hover {
+                                        background-color: #f0f0f0;
+                                        color: #0011ff;
+                                        transform: translateX(5px);
+                                        border-radius: 8px;
+                                        /* Bo góc khi hover */
+                                    }
+
+                                    .dropdown:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    .dropdown-submenu {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-submenu>.dropdown-menu1 {
+                                        top: 0;
+                                        left: 100%;
+                                        margin-left: 0;
+                                        display: none;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateX(10px);
+                                    }
+
+                                    .dropdown-submenu:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateX(0);
+                                    }
+
+                                    .dropdown-toggle::after {
+                                        display: none !important;
+                                    }
+
+                                    /* Thêm icon mũi tên tùy chỉnh */
+                                    .dropdown>a {
+                                        position: relative;
+                                    }
+
+                                    .dropdown>a::after {
+                                        content: '▼';
+                                        font-size: 12px;
+                                        position: absolute;
+                                        right: 10px;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        transition: transform 0.3s ease;
+                                    }
+
+                                    .dropdown:hover>a::after {
+                                        transform: translateY(-50%) rotate(180deg);
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="product-menu">
+                                    <a href="./Product.html" class="twbb-item dropdown-toggle"
+                                        style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
+                                    <ul class="dropdown-menu1" id="product-dropdown"></ul>
                                 </li>
+
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
                                     <a href="./Article.html" class="twbb-item"
@@ -1079,13 +1184,9 @@
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
-                                    <a href="./Contact.html" class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>LIÊN HỆ</strong></a>
+                                    <a href="./Contact.html" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>LIÊN HỆ</strong></a>
                                 </li>
-                                <!-- <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a>
-                                </li> -->
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
                                     <a href="#" class="twbb-item"
@@ -1100,7 +1201,50 @@
                                                     bảo mật</strong></a></li>
                                     </ul>
                                 </li>
-                                <li
+                                <style>
+                                    #cart-menu {
+                                        position: relative;
+                                    }
+
+                                    #cart-menu:hover>#cart-dropdown {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    #cart-dropdown {
+                                        position: absolute;
+                                        top: 100%;
+                                        right: 0;
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                                        padding: 10px;
+                                        min-width: 250px;
+                                        display: none;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transform: translateY(10px);
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                    }
+
+                                    #cart-dropdown li {
+                                        padding: 5px 10px;
+                                        border-bottom: 1px solid #eee;
+                                        font-size: 14px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                    }
+
+                                    #cart-dropdown li:last-child {
+                                        border-bottom: none;
+                                    }
+                                    #cart-menu > a::after {
+                                        display: none !important;
+                                    }
+                                </style>
+                                <!-- <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
@@ -1108,22 +1252,48 @@
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
-                                                position: absolute;
-                                                top: -5px;
-                                                right: -8px;
-                                                background-color: red;
-                                                color: white;
-                                                font-size: 10px;
-                                                font-weight: bold;
-                                                padding: 2px 5px;
-                                                border-radius: 50%;
-                                                min-width: 18px;
-                                                text-align: center;
-                                                line-height: 1;
-                                                border: 2px solid white;">
+                                                    position: absolute;
+                                                    top: -5px;
+                                                    right: -8px;
+                                                    background-color: red;
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    padding: 2px 5px;
+                                                    border-radius: 50%;
+                                                    min-width: 18px;
+                                                    text-align: center;
+                                                    line-height: 1;
+                                                    border: 2px solid white;">
                                             0
                                         </span>
                                     </a>
+                                    <ul class="dropdown-menu1" id="cart-dropdown" style="right: 0; left: auto;"></ul>
+                                </li> -->
+                                <li class="menu-item dropdown" id="cart-menu">
+                                    <a href="Cart.html" class="twbb-item"
+                                        style="position: relative; display: inline-block;">
+                                        <strong>GIỎ HÀNG</strong>
+                                        <i class="fa fa-shopping-cart"
+                                            style="font-size: 20px; margin-left: 5px; position: relative;"></i>
+                                        <span id="cart-count" style="
+                                                    position: absolute;
+                                                    top: -5px;
+                                                    right: -8px;
+                                                    background-color: red;
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    padding: 2px 5px;
+                                                    border-radius: 50%;
+                                                    min-width: 18px;
+                                                    text-align: center;
+                                                    line-height: 1;
+                                                    border: 2px solid white;">
+                                            0
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu1" id="cart-dropdown" style="right: 0; left: auto;"></ul>
                                 </li>
                                 <li class="menu-item d-inline-block" id="auth-links">
                                     <!-- Nội dung sẽ được JavaScript thay đổi -->
@@ -5498,7 +5668,7 @@
                         <div class="elementor-element elementor-element-r25tvpdn elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-heading"
                             data-id="r25tvpdn" data-element_type="widget" data-widget_type="heading.default">
                             <div class="elementor-widget-container">
-                                <h5 class="elementor-heading-title elementor-size-default">Products</h5>
+                                <h5 class="elementor-heading-title elementor-size-default">Công ty</h5>
                             </div>
                         </div>
                         <div class="elementor-element elementor-element-32xo3z4i elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--vertical twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5513,19 +5683,19 @@
                                         data-smartmenus-id="17454618201469236">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82386">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                                class="twbb-item">Construction Tools</a>
+                                            <a href="./AboutUs.html"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Giới thiệu về chúng tôi</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82387">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                                class="twbb-item">Heavy Equipment</a>
+                                            <a href="./Contact.html"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Liên hệ</a>
                                         </li>
-                                        <li
+                                        <!-- <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
                                                 class="twbb-item">Safety Gear</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
@@ -5534,19 +5704,19 @@
                                         data-smartmenus-id="1745461820147133">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82386">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                                class="twbb-item">Construction Tools</a>
+                                            <a href="./AboutUs.html"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Giới thiệu về chúng tôi</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82387">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                                class="twbb-item">Heavy Equipment</a>
+                                            <a href="./Contact.html"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Liên hệ</a>
                                         </li>
-                                        <li
+                                        <!-- <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
                                             <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
                                                 class="twbb-item">Safety Gear</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </nav>
                                 <style>
@@ -5559,7 +5729,7 @@
                         <div class="elementor-element elementor-element-tq8byuxf elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-heading"
                             data-id="tq8byuxf" data-element_type="widget" data-widget_type="heading.default">
                             <div class="elementor-widget-container">
-                                <h5 class="elementor-heading-title elementor-size-default">Company</h5>
+                                <h5 class="elementor-heading-title elementor-size-default" style="white-space: nowrap;">Công ty TNHH Machine Max Việt Nam</h5>
                             </div>
                         </div>
                         <div class="elementor-element elementor-element-my5igz1v elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--vertical twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5574,13 +5744,23 @@
                                         data-smartmenus-id="174546182014844">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82389">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#about-us"
-                                                class="twbb-item">About Us</a>
+                                            <a href="#"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Trụ sở chính: Lô đất BT1.9, khu chức năng đô thị Tây Mỗ, quận Nam Từ Liêm, thành phố Hà Nội.</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#contact-us"
-                                                class="twbb-item">Contact Us</a>
+                                            <a href="#"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Văn phòng đại diện: Số 22, ngõ 85, phố Vũ Đức Thận, quận Long Biên, thành phố Hà Nội.</a>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
+                                            <a href="#"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Số điện thoại:</a>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
+                                            <a href="#"
+                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Email: machinemaxvn@gmail.com</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -5605,7 +5785,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="elementor-element elementor-element-r9qvde3i e-con-full e-flex e-con e-parent e-lazyloaded"
+                    <!-- <div class="elementor-element elementor-element-r9qvde3i e-con-full e-flex e-con e-parent e-lazyloaded"
                         data-id="r9qvde3i" data-element_type="container">
                         <div class="elementor-element elementor-element-ngfyq1uo elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-heading"
                             data-id="ngfyq1uo" data-element_type="widget" data-widget_type="heading.default">
@@ -5625,12 +5805,12 @@
                                         data-smartmenus-id="1745461820149905">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82391">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#shipping-&amp;-returns"
+                                            <a href="#"
                                                 class="twbb-item">Shipping &amp; Returns</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#faq"
+                                            <a href="#"
                                                 class="twbb-item">Faq</a>
                                         </li>
                                     </ul>
@@ -5641,12 +5821,12 @@
                                         data-smartmenus-id="17454618201491057">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82391">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#shipping-&amp;-returns"
+                                            <a href="#"
                                                 class="twbb-item">Shipping &amp; Returns</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#faq"
+                                            <a href="#"
                                                 class="twbb-item">Faq</a>
                                         </li>
                                     </ul>
@@ -5655,11 +5835,28 @@
                                 </style>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="elementor-element elementor-element-pd47l92f e-con-full e-flex e-con e-parent e-lazyloaded"
                         data-id="pd47l92f" data-element_type="container">
                     </div>
-                    <div class="elementor-element elementor-element-5tckqlfg e-con-full e-flex e-con e-parent e-lazyloaded"
+
+                    <div style="margin-left: 250px;" class="elementor-element elementor-element-5tckqlfg e-con-full e-flex e-con e-parent e-lazyloaded"
+                            data-id="5tckqlfg" data-element_type="container">
+                            <div class="elementor-element elementor-element-njpot5g1 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-mobile-button-align-stretch elementor-button-align-center elementor-widget elementor-widget-twbb_form"
+                                data-id="njpot5g1" data-element_type="widget"
+                                data-settings="{&quot;button_width&quot;:&quot;30&quot;,&quot;step_next_label&quot;:&quot;Next&quot;,&quot;step_previous_label&quot;:&quot;Previous&quot;,&quot;step_type&quot;:&quot;number_text&quot;,&quot;step_icon_shape&quot;:&quot;circle&quot;}"
+                                data-widget_type="twbb_form.default">
+                                <div class="elementor-widget-container">
+                                    <!-- Google Maps Iframe -->
+                                    <iframe class="google-map"
+                                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1794.557354674523!2d105.744726!3d20.9958818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345372918af629%3A0xcdb27884b9d28371!2zMzI0L8SQLiBI4buvdSBIxrBuZy80MCAyLCBU4buVIFTDsywgTmFtIFThu6sgTGnDqm0sIEjDoCBO4buZaQ!5e1!3m2!1svi!2s!4v1745554169355!5m2!1svi!2s"
+                                        allowfullscreen="" loading="lazy" height="250" referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- <div style="margin-left: 250px;" class="elementor-element elementor-element-5tckqlfg e-con-full e-flex e-con e-parent e-lazyloaded"
                         data-id="5tckqlfg" data-element_type="container">
                         <div class="elementor-element elementor-element-njpot5g1 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-mobile-button-align-stretch elementor-button-align-center elementor-widget elementor-widget-twbb_form"
                             data-id="njpot5g1" data-element_type="widget"
@@ -5710,7 +5907,8 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                 </div>
                 <div class="elementor-element elementor-element-blftld97 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
                     data-id="blftld97" data-element_type="widget" data-widget_type="divider.default">
@@ -5725,7 +5923,7 @@
                     data-id="fk3ugkx7" data-element_type="container">
                     <div class="elementor-element elementor-element-aws3z49z elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-text-editor"
                         data-id="aws3z49z" data-element_type="widget" data-widget_type="text-editor.default">
-                        <div class="elementor-widget-container">
+                        <div class="elementor-widget-container" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">
                             © 2025 Machine Max. All rights reserved. </div>
                     </div>
                     <div class="elementor-element elementor-element-2swmcd1e elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--horizontal twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5739,12 +5937,12 @@
                                     data-smartmenus-id="17454618201534412">
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82393">
-                                        <a href="./TermsAndConditions.html" class="twbb-item">Terms-and-conditions</a>
+                                        <a href="./TermsAndConditions.html" class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Điều khoản & điều kiện</a>
                                     </li>
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-82394">
                                         <a rel="privacy-policy" href="./Privacy.html"
-                                            class="twbb-item">Privacy-policy</a>
+                                            class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Chính sách bảo mật</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -5753,12 +5951,12 @@
                                     data-smartmenus-id="17454618201543901">
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82393">
-                                        <a href="./TermsAndConditions.html" class="twbb-item">Terms-and-conditions</a>
+                                        <a href="./TermsAndConditions.html" class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Điều khoản và điều kiện</a>
                                     </li>
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-82394">
                                         <a rel="privacy-policy" href="./Privacy.html"
-                                            class="twbb-item">Privacy-policy</a>
+                                            class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Chính sách bảo mật</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -6061,17 +6259,125 @@
                 console.error("Lỗi khi tải sản phẩm ngẫu nhiên:", error);
             });
 
-        
+        fetch('https://localhost:7205/api/Category/GetAll')
+            .then(response => response.json())
+            .then(data => {
+                const parentCategories = data.filter(c => c.parentId === null);
+                const subCategories = data.filter(c => c.parentId !== null);
+
+                const menu = document.getElementById('product-dropdown');
+
+                parentCategories.forEach(parent => {
+                    const li = document.createElement('li');
+                    li.classList.add('dropdown-submenu');
+
+                    const a = document.createElement('a');
+                    a.href = "#";
+                    a.innerText = parent.name;
+                    a.style.fontFamily = "Arial, sans-serif"; 
+                    a.style.fontWeight = "bold";
+                    li.appendChild(a);
+
+                    // Submenu container
+                    const subMenu = document.createElement('ul');
+                    subMenu.classList.add('dropdown-menu1');
+
+                    // Add subcategories
+                    subCategories
+                        .filter(sub => sub.parentId === parent.id)
+                        .forEach(sub => {
+                            const subLi = document.createElement('li');
+                            const subA = document.createElement('a');
+                            subA.href = `./Product.html?cid=${sub.id}`;
+                            subA.innerText = sub.name;
+                            subA.style.fontFamily = "Arial, sans-serif";
+                            subA.style.fontWeight = "bold";
+                            subLi.appendChild(subA);
+                            subMenu.appendChild(subLi);
+                        });
+
+                    if (subMenu.children.length > 0) {
+                        li.appendChild(subMenu);
+                    }
+
+                    menu.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Lỗi khi gọi API danh mục:", error));
 
 
 
     });
 
     function logout() {
-            localStorage.removeItem('accesstoken');
-            location.reload();
+        localStorage.removeItem('accesstoken');
+        location.reload();
+    }
+
+    function getUserIdFromToken() {
+        const token = localStorage.getItem("accesstoken");
+        if (!token) {
+            console.warn("Không có token");
+            return null;
         }
-        
+
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            return payload.nameid;
+        } catch (error) {
+            console.error("Lỗi khi giải mã token:", error);
+            return null;
+        }
+    }
+
+    document.getElementById('cart-menu').addEventListener('mouseenter', function () {
+    const dropdown = document.getElementById('cart-dropdown');
+    dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
+
+    const userId = getUserIdFromToken();
+    if (!userId) {
+        dropdown.innerHTML = '<li>Không xác định người dùng</li>';
+        return;
+    }
+
+    fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            dropdown.innerHTML = '';
+
+            const items = data.cartItems;
+            if (!Array.isArray(items) || items.length === 0) {
+                dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
+                return;
+            }
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 5px 0;">
+                        <img src="https://localhost:7205/images/product/${item.image}" alt="${item.productName}" width="40" height="40" style="border-radius: 5px;">
+                        <div style="font-family: Arial, sans-serif;">
+                            <strong>${item.productName}</strong><br>
+                            SL: ${item.quantity} - 
+                            <span style="color: #007bff;">${item.productPrice.toLocaleString()} đ</span>
+                        </div>
+                    </div>
+                `;
+                dropdown.appendChild(li);
+            });
+
+            document.getElementById('cart-count').innerText = items.length;
+        })
+        .catch(error => {
+            console.error('Lỗi khi gọi API giỏ hàng:', error);
+            dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
+        });
+});
+
+
+
+
+
 </script>
 
 
