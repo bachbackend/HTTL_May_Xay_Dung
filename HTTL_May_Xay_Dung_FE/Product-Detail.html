@@ -1043,10 +1043,97 @@
                                                     phát triển</strong></a></li>
                                     </ul>
                                 </li>
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent menu-item-82381">
-                                    <a href="./Product.html" class="twbb-item"
+                                <style>
+                                    .dropdown-menu1 {
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        padding: 10px 0;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                        position: absolute;
+                                        display: none;
+                                        min-width: 200px;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateY(10px);
+                                    }
+
+                                    .dropdown-menu1 li {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-menu1 li a {
+                                        color: #333;
+                                        padding: 12px 20px;
+                                        display: block;
+                                        text-decoration: none;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+                                        white-space: nowrap;
+                                    }
+
+                                    .dropdown-menu1 li a:hover {
+                                        background-color: #f0f0f0;
+                                        color: #0011ff;
+                                        transform: translateX(5px);
+                                        border-radius: 8px;
+                                        /* Bo góc khi hover */
+                                    }
+
+                                    .dropdown:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    .dropdown-submenu {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-submenu>.dropdown-menu1 {
+                                        top: 0;
+                                        left: 100%;
+                                        margin-left: 0;
+                                        display: none;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateX(10px);
+                                    }
+
+                                    .dropdown-submenu:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateX(0);
+                                    }
+
+                                    .dropdown-toggle::after {
+                                        display: none !important;
+                                    }
+
+                                    /* Thêm icon mũi tên tùy chỉnh */
+                                    .dropdown>a {
+                                        position: relative;
+                                    }
+
+                                    .dropdown>a::after {
+                                        content: '▼';
+                                        font-size: 12px;
+                                        position: absolute;
+                                        right: 10px;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        transition: transform 0.3s ease;
+                                    }
+
+                                    .dropdown:hover>a::after {
+                                        transform: translateY(-50%) rotate(180deg);
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="product-menu">
+                                    <a href="./Product.html" class="twbb-item dropdown-toggle"
                                         style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
+                                    <ul class="dropdown-menu1" id="product-dropdown"></ul>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
@@ -1077,30 +1164,74 @@
                                                     bảo mật</strong></a></li>
                                     </ul>
                                 </li>
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
+                                <style>
+                                    #cart-menu {
+                                        position: relative;
+                                    }
+
+                                    #cart-menu:hover>#cart-dropdown {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    #cart-dropdown {
+                                        position: absolute;
+                                        top: 100%;
+                                        right: 0;
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                                        padding: 10px;
+                                        min-width: 250px;
+                                        display: none;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transform: translateY(10px);
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                    }
+
+                                    #cart-dropdown li {
+                                        padding: 5px 10px;
+                                        border-bottom: 1px solid #eee;
+                                        font-size: 14px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                    }
+
+                                    #cart-dropdown li:last-child {
+                                        border-bottom: none;
+                                    }
+
+                                    #cart-menu>a::after {
+                                        display: none !important;
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
                                         <strong>GIỎ HÀNG</strong>
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
-                                                position: absolute;
-                                                top: -5px;
-                                                right: -8px;
-                                                background-color: red;
-                                                color: white;
-                                                font-size: 10px;
-                                                font-weight: bold;
-                                                padding: 2px 5px;
-                                                border-radius: 50%;
-                                                min-width: 18px;
-                                                text-align: center;
-                                                line-height: 1;
-                                                border: 2px solid white;">
+                                                    position: absolute;
+                                                    top: -5px;
+                                                    right: -8px;
+                                                    background-color: red;
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    padding: 2px 5px;
+                                                    border-radius: 50%;
+                                                    min-width: 18px;
+                                                    text-align: center;
+                                                    line-height: 1;
+                                                    border: 2px solid white;">
                                             0
                                         </span>
                                     </a>
+                                    <ul class="dropdown-menu1" id="cart-dropdown" style="right: 0; left: auto;"></ul>
                                 </li>
                                 <li class="menu-item d-inline-block" id="auth-links">
                                     <!-- Nội dung sẽ được JavaScript thay đổi -->
@@ -1157,7 +1288,7 @@
                         </style>
                     </div>
                 </div>
-                <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
+                <!-- <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
                     data-id="j0oehjjo" data-element_type="container">
                     <div class="elementor-element elementor-element-ksw7v8wj elementor-view-default elementor-widget elementor-widget-icon"
                         data-id="ksw7v8wj" data-element_type="widget" data-widget_type="icon.default">
@@ -1203,10 +1334,10 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div> <!-- close twbb_menu-cart__wrapper -->
+                            </div> 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="elementor-element elementor-element-gtvn2he9 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky__spacer"
@@ -2687,6 +2818,116 @@
             });
         }
         getCartCount();
+
+        fetch('https://localhost:7205/api/Category/GetAll')
+            .then(response => response.json())
+            .then(data => {
+                const parentCategories = data.filter(c => c.parentId === null);
+                const subCategories = data.filter(c => c.parentId !== null);
+
+                const menu = document.getElementById('product-dropdown');
+
+                parentCategories.forEach(parent => {
+                    const li = document.createElement('li');
+                    li.classList.add('dropdown-submenu');
+
+                    const a = document.createElement('a');
+                    a.href = "#";
+                    a.innerText = parent.name;
+                    a.style.fontFamily = "Arial, sans-serif";
+                    a.style.fontWeight = "bold";
+                    li.appendChild(a);
+
+                    // Submenu container
+                    const subMenu = document.createElement('ul');
+                    subMenu.classList.add('dropdown-menu1');
+
+                    // Add subcategories
+                    subCategories
+                        .filter(sub => sub.parentId === parent.id)
+                        .forEach(sub => {
+                            const subLi = document.createElement('li');
+                            const subA = document.createElement('a');
+                            subA.href = `./Product.html?cid=${sub.id}`;
+                            subA.innerText = sub.name;
+                            subA.style.fontFamily = "Arial, sans-serif";
+                            subA.style.fontWeight = "bold";
+                            subLi.appendChild(subA);
+                            subMenu.appendChild(subLi);
+                        });
+
+                    if (subMenu.children.length > 0) {
+                        li.appendChild(subMenu);
+                    }
+
+                    menu.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Lỗi khi gọi API danh mục:", error));
+
+            //end dom content loaded
+            
+    });
+
+
+    function getUserIdFromToken() {
+        const token = localStorage.getItem("accesstoken");
+        if (!token) {
+            console.warn("Không có token");
+            return null;
+        }
+
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            return payload.nameid;
+        } catch (error) {
+            console.error("Lỗi khi giải mã token:", error);
+            return null;
+        }
+    }
+
+    document.getElementById('cart-menu').addEventListener('mouseenter', function () {
+        const dropdown = document.getElementById('cart-dropdown');
+        dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
+
+        const userId = getUserIdFromToken();
+        if (!userId) {
+            dropdown.innerHTML = '<li>Không xác định người dùng</li>';
+            return;
+        }
+
+        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                dropdown.innerHTML = '';
+
+                const items = data.cartItems;
+                if (!Array.isArray(items) || items.length === 0) {
+                    dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
+                    return;
+                }
+
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 5px 0;">
+                        <img src="https://localhost:7205/images/product/${item.image}" alt="${item.productName}" width="40" height="40" style="border-radius: 5px;">
+                        <div style="font-family: Arial, sans-serif;">
+                            <strong>${item.productName}</strong><br>
+                            SL: ${item.quantity} - 
+                            <span style="color: #007bff;">${item.productPrice.toLocaleString()} đ</span>
+                        </div>
+                    </div>
+                `;
+                    dropdown.appendChild(li);
+                });
+
+                document.getElementById('cart-count').innerText = items.length;
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API giỏ hàng:', error);
+                dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
+            });
     });
 
 

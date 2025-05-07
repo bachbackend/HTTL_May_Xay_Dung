@@ -963,15 +963,7 @@
     <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://metrics.10web-site.ai/ns.html?id=GTM-M6GPZ95"
             height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
-    <script>
-        function twdemo_clean_url() {
-            let url, new_url;
-            url = window.location.href;
-            new_url = url.split('?')[0];
-            window.history.pushState({}, document.title, new_url);
-        }
-        twdemo_clean_url();
-    </script>
+    
     <div data-elementor-type="twbb_header" data-elementor-id="82395" class="elementor elementor-82395">
         <div class="elementor-element elementor-element-gtvn2he9 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky--active elementor-section--handles-inside elementor-sticky--effects"
             data-id="gtvn2he9" data-element_type="container" id="header"
@@ -994,31 +986,248 @@
                         <nav
                             class="twbb-nav-menu--main twbb-nav-menu__container twbb-nav-menu--layout-horizontal e--pointer-none">
                             <ul id="menu-1-b639t6vy" class="twbb-nav-menu twbb-menu_term_id-8743"
-                                data-smartmenus-id="1745465355250901">
+                                data-smartmenus-id="17454651601260786">
+                                <style>
+                                    .dropdown-menu {
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        /* Bo góc */
+                                        padding: 10px 0;
+                                        /* Khoảng cách trên dưới */
+                                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                                        /* Đổ bóng nhẹ */
+                                    }
+
+                                    .dropdown-menu li a {
+                                        color: black;
+                                        padding: 10px 20px;
+                                        display: block;
+                                        text-decoration: none;
+                                        transition: background-color 0.3s ease, color 0.3s ease;
+                                    }
+
+                                    .dropdown-menu li a:hover {
+                                        background-color: #f0f0f0;
+                                        /* Màu nền khi hover */
+                                        color: #0011ff;
+                                        /* Màu chữ khi hover */
+                                    }
+
+                                    .nav-menu {
+                                        list-style: none;
+                                        padding: 0;
+                                        margin: 0;
+                                    }
+                                </style>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                        class="twbb-item">Construction Tools</a></li>
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                        class="twbb-item">Heavy Equipment</a></li>
+                                    <a href="#" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>GIỚI
+                                            THIỆU</strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./AboutUs.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Giới thiệu về
+                                                    chúng tôi</strong></a></li>
+                                        <li><a href="./HistoryCompany.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Lịch sử phát
+                                                    triển</strong></a></li>
+                                        <li><a href="./DevelopmentOrientation.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Định hướng
+                                                    phát triển</strong></a></li>
+                                    </ul>
+                                </li>
+                                <style>
+                                    .dropdown-menu1 {
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        padding: 10px 0;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                        position: absolute;
+                                        display: none;
+                                        min-width: 200px;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateY(10px);
+                                    }
+
+                                    .dropdown-menu1 li {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-menu1 li a {
+                                        color: #333;
+                                        padding: 12px 20px;
+                                        display: block;
+                                        text-decoration: none;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        transition: background-color 0.3s ease, color 0.3s ease, border-radius 0.3s ease;
+                                        white-space: nowrap;
+                                    }
+
+                                    .dropdown-menu1 li a:hover {
+                                        background-color: #f0f0f0;
+                                        color: #0011ff;
+                                        transform: translateX(5px);
+                                        border-radius: 8px;
+                                        /* Bo góc khi hover */
+                                    }
+
+                                    .dropdown:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    .dropdown-submenu {
+                                        position: relative;
+                                    }
+
+                                    .dropdown-submenu>.dropdown-menu1 {
+                                        top: 0;
+                                        left: 100%;
+                                        margin-left: 0;
+                                        display: none;
+                                        opacity: 0;
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                        transform: translateX(10px);
+                                    }
+
+                                    .dropdown-submenu:hover>.dropdown-menu1 {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateX(0);
+                                    }
+
+                                    .dropdown-toggle::after {
+                                        display: none !important;
+                                    }
+
+                                    /* Thêm icon mũi tên tùy chỉnh */
+                                    .dropdown>a {
+                                        position: relative;
+                                    }
+
+                                    .dropdown>a::after {
+                                        content: '▼';
+                                        font-size: 12px;
+                                        position: absolute;
+                                        right: 10px;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        transition: transform 0.3s ease;
+                                    }
+
+                                    .dropdown:hover>a::after {
+                                        transform: translateY(-50%) rotate(180deg);
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="product-menu">
+                                    <a href="./Product.html" class="twbb-item dropdown-toggle"
+                                        style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
+                                    <ul class="dropdown-menu1" id="product-dropdown"></ul>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                        class="twbb-item">Safety Gear</a></li>
+                                    <a href="./Article.html" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>BÀI VIẾT</strong></a>
+                                </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a></li>
-                                <li
+                                    <a href="./Contact.html" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>LIÊN HỆ</strong></a>
+                                </li>
+                                <!-- <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a></li>
+                                        class="twbb-item">Contractor’s Choice</a></li> -->
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/power-tools/"
-                                        class="twbb-item">Power Tools</a></li>
+                                    <a href="#" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>CHÍNH
+                                            SÁCH</strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./TermsAndConditions.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Điều khoản &
+                                                    điều kiện</strong></a></li>
+                                        <li><a href="./Privacy.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Chính sách
+                                                    bảo mật</strong></a></li>
+                                    </ul>
+                                </li>
+                                <style>
+                                    #cart-menu {
+                                        position: relative;
+                                    }
+
+                                    #cart-menu:hover>#cart-dropdown {
+                                        display: block;
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+
+                                    #cart-dropdown {
+                                        position: absolute;
+                                        top: 100%;
+                                        right: 0;
+                                        background-color: white;
+                                        border-radius: 10px;
+                                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                                        padding: 10px;
+                                        min-width: 250px;
+                                        display: none;
+                                        z-index: 1000;
+                                        opacity: 0;
+                                        transform: translateY(10px);
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                    }
+
+                                    #cart-dropdown li {
+                                        padding: 5px 10px;
+                                        border-bottom: 1px solid #eee;
+                                        font-size: 14px;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                    }
+
+                                    #cart-dropdown li:last-child {
+                                        border-bottom: none;
+                                    }
+
+                                    #cart-menu>a::after {
+                                        display: none !important;
+                                    }
+                                </style>
+                                <li class="menu-item dropdown" id="cart-menu">
+                                    <a href="Cart.html" class="twbb-item"
+                                        style="position: relative; display: inline-block;">
+                                        <strong>GIỎ HÀNG</strong>
+                                        <i class="fa fa-shopping-cart"
+                                            style="font-size: 20px; margin-left: 5px; position: relative;"></i>
+                                        <span id="cart-count" style="
+                                                    position: absolute;
+                                                    top: -5px;
+                                                    right: -8px;
+                                                    background-color: red;
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    padding: 2px 5px;
+                                                    border-radius: 50%;
+                                                    min-width: 18px;
+                                                    text-align: center;
+                                                    line-height: 1;
+                                                    border: 2px solid white;">
+                                            0
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu1" id="cart-dropdown" style="right: 0; left: auto;"></ul>
+                                </li>
+                                <li class="menu-item d-inline-block" id="auth-links">
+                                    <!-- Nội dung sẽ được JavaScript thay đổi -->
+                                </li>
                             </ul>
                         </nav>
                         <div class="twbb-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle"
@@ -1065,7 +1274,7 @@
                         </style>
                     </div>
                 </div>
-                <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
+                <!-- <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
                     data-id="j0oehjjo" data-element_type="container">
                     <div class="elementor-element elementor-element-ksw7v8wj elementor-view-default elementor-widget elementor-widget-icon"
                         data-id="ksw7v8wj" data-element_type="widget" data-widget_type="icon.default">
@@ -1111,10 +1320,10 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div> <!-- close twbb_menu-cart__wrapper -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="elementor-element elementor-element-gtvn2he9 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky__spacer"
@@ -1206,7 +1415,7 @@
                         </style>
                     </div>
                 </div>
-                <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
+                <!-- <div class="elementor-element elementor-element-j0oehjjo e-con-full e-flex e-con e-parent e-lazyloaded"
                     data-id="j0oehjjo" data-element_type="container">
                     <div class="elementor-element elementor-element-ksw7v8wj elementor-view-default elementor-widget elementor-widget-icon"
                         data-id="ksw7v8wj" data-element_type="widget" data-widget_type="icon.default">
@@ -1252,10 +1461,10 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div> <!-- close twbb_menu-cart__wrapper -->
+                            </div> 
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -1553,22 +1762,23 @@
                                                 data-id="rwa8mk4a" data-element_type="widget"
                                                 data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
                                                 data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
+                                                <!-- <div class="elementor-widget-container">
                                                     <h1 class="elementor-heading-title elementor-size-default">Privacy
                                                         Policy</h1>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="elementor-element elementor-element-ryu61g9j twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
+                                    <div style="margin-top: -200px;" class="elementor-element elementor-element-ryu61g9j twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
                                         data-id="ryu61g9j" data-element_type="container">
                                         <div class="e-con-inner">
                                             <div class="elementor-element elementor-element-1qxntmyq elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-text-editor animated fadeInUp"
                                                 data-id="1qxntmyq" data-element_type="widget"
                                                 data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
                                                 data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p><b>Machine Max Privacy Policy</b></p>
+
+                                                <!-- <div class="elementor-widget-container">
+                                                    <p><b>Chính sách bảo mật của công ty TNHH Machine Max Việt Nam</b></p>
 
                                                     <p><b>1. Information We Collect</b></p>
                                                     <p>We collect information such as your name, email address, shipping
@@ -1607,7 +1817,103 @@
                                                     <p><b>8. Contact Us</b></p>
                                                     <p>For any questions or concerns regarding this Privacy Policy,
                                                         please contact us at [email protected]</p>
-                                                </div>
+                                                </div> -->
+
+                                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    .privacy-container {
+        background-color: #fefefe;
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        font-family: 'Segoe UI', sans-serif;
+        color: #333;
+        max-width: 850px;
+        margin: auto;
+        line-height: 1.8;
+    }
+
+    .privacy-container h2 {
+        text-align: center;
+        color: #6c63ff;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .privacy-section {
+        margin-bottom: 25px;
+    }
+
+    .privacy-section h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        color: #444;
+    }
+
+    .privacy-section h4 i {
+        margin-right: 10px;
+        color: #6c63ff;
+    }
+
+    .privacy-section p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .privacy-section a {
+        color: #6c63ff;
+        text-decoration: underline;
+    }
+</style>
+
+<div class="privacy-container">
+    <h2><i class="fas fa-user-shield"></i> Chính sách bảo mật</h2>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-database"></i> 1. Thông tin chúng tôi thu thập</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Chúng tôi thu thập tên, email, địa chỉ giao hàng và thông tin thanh toán của bạn khi bạn đặt hàng. Ngoài ra, chúng tôi cũng thu thập dữ liệu về hoạt động duyệt web trên trang web của chúng tôi.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-cogs"></i> 2. Mục đích sử dụng thông tin</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Thông tin của bạn được sử dụng để xử lý đơn hàng, hỗ trợ khách hàng và nâng cấp trải nghiệm người dùng. Chúng tôi cũng có thể sử dụng để gửi email giới thiệu sản phẩm hoặc dịch vụ mới.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-lock"></i> 3. Bảo mật</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Chúng tôi áp dụng các biện pháp kỹ thuật và tổ chức để bảo vệ thông tin cá nhân khỏi truy cập, sử dụng hoặc tiết lộ trái phép.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-share-alt"></i> 4. Chia sẻ thông tin</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Thông tin cá nhân của bạn không được chia sẻ với bên thứ ba, trừ khi cần thiết để xử lý đơn hàng hoặc theo yêu cầu pháp luật.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-user-cog"></i> 5. Quyền của bạn</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Bạn có quyền truy cập, chỉnh sửa hoặc xóa dữ liệu cá nhân. Bạn cũng có thể từ chối nhận các email quảng cáo từ chúng tôi bất kỳ lúc nào.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-child"></i> 6. Quyền riêng tư của trẻ em</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Trang web của chúng tôi không hướng đến trẻ em dưới 18 tuổi và chúng tôi không cố ý thu thập thông tin từ nhóm đối tượng này.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-sync-alt"></i> 7. Cập nhật chính sách</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Chúng tôi có thể cập nhật chính sách bảo mật theo thời gian. Các thay đổi sẽ được đăng tại trang này.</p>
+    </div>
+
+    <div class="privacy-section">
+        <h4><i class="fas fa-envelope"></i> 8. Liên hệ</h4>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 18px;">Mọi thắc mắc về chính sách bảo mật, vui lòng liên hệ qua email: <a href="mailto:machinemaxvn@gmail.com">machinemaxvn@gmail.com</a></p>
+    </div>
+</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -2058,5 +2364,229 @@
         src="./Privacy_files/adsct" height="1" width="1" style="display: none;"><img src="./Privacy_files/adsct(1)"
         height="1" width="1" style="display: none;">
 </body>
+
+<script>
+    const token = localStorage.getItem('accesstoken');
+    const authLinks = document.getElementById('auth-links');
+
+    if (token) {
+        const payload = parseJwt(token);  // Giải mã token
+
+        if (payload && payload.unique_name) {
+            // Nếu giải mã thành công và có unique_name, hiển thị lời chào
+            authLinks.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
+                                <strong>Hello, ${payload.unique_name}!</strong>
+                            </a>
+                            <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+                                style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+
+                    `;
+        } else {
+            // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
+            showLoginButtons();
+        }
+    } else {
+        // Nếu không có token, hiển thị nút đăng nhập/đăng ký
+        showLoginButtons();
+    }
+
+    function parseJwt(token) {
+        try {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        } catch (error) {
+            console.error("Invalid JWT Token:", error);
+            return null;
+        }
+    }
+
+    // Hiển thị nút Đăng nhập/Đăng ký
+    function showLoginButtons() {
+        const authLinks = document.getElementById('auth-links');
+        authLinks.innerHTML = `
+                    <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
+                
+            `;
+    }
+
+    function logout() {
+        localStorage.removeItem('accesstoken');
+        location.reload();
+    }
+
+    function getUserIdFromToken() {
+        const token = localStorage.getItem("accesstoken");
+        if (!token) {
+            console.warn("Không có token");
+            return null;
+        }
+
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            console.log("Payload JWT:", payload);
+            return payload.nameid;
+        } catch (error) {
+            console.error("Lỗi khi giải mã token:", error);
+            return null;
+        }
+    }
+
+    async function getCartCount() {
+        const userId = getUserIdFromToken();
+        if (!userId) {
+            console.warn("Không tìm thấy userId, vui lòng đăng nhập.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://localhost:7205/api/Cart/CountUniqueProducts/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'accept': '*/*'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log("Phản hồi từ API giỏ hàng:", data); // ✅ Log response body
+                const count = data.uniqueProductCount;
+                document.getElementById('cart-count').innerText = count;
+            } else {
+                console.error('Không thể lấy số lượng sản phẩm trong giỏ hàng. Mã lỗi:', response.status);
+            }
+        } catch (error) {
+            console.error('Lỗi khi gọi API giỏ hàng:', error);
+        }
+    }
+
+    window.addEventListener("DOMContentLoaded", function () {
+        const btnAddToCart = document.getElementById("btn-add-to-cart");
+        if (btnAddToCart) {
+            btnAddToCart.addEventListener("click", function () {
+                addToCart();
+            });
+        }
+        getCartCount();
+
+        fetch('https://localhost:7205/api/Category/GetAll')
+            .then(response => response.json())
+            .then(data => {
+                const parentCategories = data.filter(c => c.parentId === null);
+                const subCategories = data.filter(c => c.parentId !== null);
+
+                const menu = document.getElementById('product-dropdown');
+
+                parentCategories.forEach(parent => {
+                    const li = document.createElement('li');
+                    li.classList.add('dropdown-submenu');
+
+                    const a = document.createElement('a');
+                    a.href = "#";
+                    a.innerText = parent.name;
+                    a.style.fontFamily = "Arial, sans-serif";
+                    a.style.fontWeight = "bold";
+                    li.appendChild(a);
+
+                    // Submenu container
+                    const subMenu = document.createElement('ul');
+                    subMenu.classList.add('dropdown-menu1');
+
+                    // Add subcategories
+                    subCategories
+                        .filter(sub => sub.parentId === parent.id)
+                        .forEach(sub => {
+                            const subLi = document.createElement('li');
+                            const subA = document.createElement('a');
+                            subA.href = `./Product.html?cid=${sub.id}`;
+                            subA.innerText = sub.name;
+                            subA.style.fontFamily = "Arial, sans-serif";
+                            subA.style.fontWeight = "bold";
+                            subLi.appendChild(subA);
+                            subMenu.appendChild(subLi);
+                        });
+
+                    if (subMenu.children.length > 0) {
+                        li.appendChild(subMenu);
+                    }
+
+                    menu.appendChild(li);
+                });
+            })
+            .catch(error => console.error("Lỗi khi gọi API danh mục:", error));
+
+    });
+
+    function getUserIdFromToken() {
+        const token = localStorage.getItem("accesstoken");
+        if (!token) {
+            console.warn("Không có token");
+            return null;
+        }
+
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            return payload.nameid;
+        } catch (error) {
+            console.error("Lỗi khi giải mã token:", error);
+            return null;
+        }
+    }
+
+    document.getElementById('cart-menu').addEventListener('mouseenter', function () {
+        const dropdown = document.getElementById('cart-dropdown');
+        dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
+
+        const userId = getUserIdFromToken();
+        if (!userId) {
+            dropdown.innerHTML = '<li>Không xác định người dùng</li>';
+            return;
+        }
+
+        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                dropdown.innerHTML = '';
+
+                const items = data.cartItems;
+                if (!Array.isArray(items) || items.length === 0) {
+                    dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
+                    return;
+                }
+
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 5px 0;">
+                        <img src="https://localhost:7205/images/product/${item.image}" alt="${item.productName}" width="40" height="40" style="border-radius: 5px;">
+                        <div style="font-family: Arial, sans-serif;">
+                            <strong>${item.productName}</strong><br>
+                            SL: ${item.quantity} - 
+                            <span style="color: #007bff;">${item.productPrice.toLocaleString()} đ</span>
+                        </div>
+                    </div>
+                `;
+                    dropdown.appendChild(li);
+                });
+
+                document.getElementById('cart-count').innerText = items.length;
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API giỏ hàng:', error);
+                dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
+            });
+    });
+
+
+</script>
 
 </html>

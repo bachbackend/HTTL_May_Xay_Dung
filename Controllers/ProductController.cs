@@ -448,6 +448,40 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(randomProducts);
         }
 
+        [HttpGet("GetRandom10Products")]
+        public async Task<IActionResult> GetRandom10Products()
+        {
+            // Lấy danh sách sản phẩm từ cơ sở dữ liệu và sắp xếp ngẫu nhiên
+            var randomProducts = await _context.Products
+                .Include(p => p.Category)
+                .OrderBy(p => Guid.NewGuid())  // Sắp xếp ngẫu nhiên
+                .Take(10)  
+                .Select(p => new ProductReturnDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Status = p.Status,
+                    CreatedAt = p.CreatedAt,
+                    Image = p.Image,
+                    SaleQuantity = p.SaleQuantity,
+                    Description = p.Description,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name,
+                    Specifications = p.Specifications,
+                    ProductPrice = p.ProductPrice,
+                })
+                .ToListAsync();
+
+            // Nếu không tìm thấy sản phẩm, trả về NotFound
+            if (randomProducts == null || !randomProducts.Any())
+            {
+                return NotFound(new { Message = "Không tìm thấy sản phẩm ngẫu nhiên" });
+            }
+
+            // Trả về danh sách sản phẩm ngẫu nhiên
+            return Ok(randomProducts);
+        }
+
         [HttpGet("GetProductByCategoryId/{categoryId}")]
         public async Task<IActionResult> GetProductByCategoryId(int categoryId)
         {
