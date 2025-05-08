@@ -16,13 +16,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Import Swiper Stylesheet -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-<!-- Import Swiper JavaScript -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Import Swiper JavaScript -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <style>
         img:is([sizes="auto" i], [sizes^="auto," i]) {
             contain-intrinsic-size: 3000px 1500px
+        }
+    </style>
+
+    <style>
+        @media (max-width: 576px) {
+
+            header,
+            footer {
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .logo,
+            .footer-content {
+                display: block;
+                margin: auto;
+            }
         }
     </style>
     <!-- Google Tag Manager -->
@@ -963,9 +980,8 @@
                     </div>
         </script>
     <!-- Google Tag Manager (noscript) -->
-     <noscript>
-        <iframe src="https://metrics.10web-site.ai/ns.html?id=GTM-M6GPZ95"
-            height="0" width="0"
+    <noscript>
+        <iframe src="https://metrics.10web-site.ai/ns.html?id=GTM-M6GPZ95" height="0" width="0"
             style="display:none;visibility:hidden">
         </iframe>
     </noscript><!-- End Google Tag Manager (noscript) -->
@@ -1246,7 +1262,8 @@
                                     #cart-dropdown li:last-child {
                                         border-bottom: none;
                                     }
-                                    #cart-menu > a::after {
+
+                                    #cart-menu>a::after {
                                         display: none !important;
                                     }
                                 </style>
@@ -5185,7 +5202,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
 
                                             <style>
                                                 .scrolling-wrapper {
@@ -5213,19 +5230,21 @@
                                                     object-fit: cover;
                                                     border-radius: 8px;
                                                 }
+
                                                 .product-name {
                                                     font-size: 16px;
                                                     font-weight: bold;
                                                     text-align: center;
-                                                    height: 48px; 
+                                                    height: 48px;
                                                     overflow: hidden;
                                                     display: -webkit-box;
-                                                    -webkit-line-clamp: 2; 
+                                                    -webkit-line-clamp: 2;
                                                     -webkit-box-orient: vertical;
                                                     margin: 10px 0;
                                                 }
+
                                                 .product-price {
-                                                    margin-top: auto; 
+                                                    margin-top: auto;
                                                     text-align: center;
                                                     color: orange;
                                                 }
@@ -5243,17 +5262,16 @@
                                                     background-color: #aaa;
                                                     border-radius: 10px;
                                                 }
-  
                                             </style>
 
                                             <div class="container mt-5">
                                                 <h4 class="mb-3">Sản phẩm bán chạy</h4>
                                                 <div class="scrolling-wrapper" id="bestSellerList">
-                                                    
+
                                                 </div>
                                             </div>
 
-                                            
+
 
 
                                         </div>
@@ -5474,6 +5492,127 @@
             </div>
         </section>
     </div>
+
+    <br>
+
+
+
+
+    <!-- <style>
+        #footer {
+            background-color: white;
+            padding: 40px 20px;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #footer .e-con-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #footer .e-parent {
+            flex: 1 1 250px;
+            box-sizing: border-box;
+        }
+
+        /* Section titles */
+        #footer h5 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Navigation links */
+        .twbb-item {
+            display: block;
+            margin-bottom: 10px;
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .twbb-item:hover {
+            color: #ffa500;
+        }
+
+        /* Remove default list style */
+        .twbb-nav-menu--main {
+            padding-left: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        /* Remove hardcoded margin-left */
+        .elementor-element-5tckqlfg {
+            margin-left: 0 !important;
+        }
+
+        /* Responsive styles for mobile */
+        @media screen and (max-width: 768px) {
+            #footer .e-con-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #footer .e-parent {
+                width: 100% !important;
+                margin-bottom: 25px;
+            }
+
+            #footer h5 {
+                font-size: 18px;
+            }
+
+            .twbb-item {
+                font-size: 15px;
+            }
+        }
+    </style> -->
+
+    <style>
+       #footer {
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 40px 20px;
+    position: relative;
+}
+
+
+
+/* Overlay mờ để chữ dễ nhìn hơn */
+/* #footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 0;
+} */
+
+/* #footer * {
+    position: relative;
+    z-index: 1;
+}
+.footer p, .footer a {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+} */
+/* .footer {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+              url('https://www.transparenttextures.com/patterns/stardust.png') center/cover no-repeat;
+  color: white;
+  padding: 40px;
+} */
+    </style>
+
     <div data-elementor-type="twbb_footer" data-elementor-id="82396" class="elementor elementor-82396">
         <div class="elementor-element elementor-element-wyvesdu6 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
             data-id="wyvesdu6" data-element_type="container" id="footer">
@@ -5485,7 +5624,7 @@
                         <div class="elementor-element elementor-element-r25tvpdn elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-heading"
                             data-id="r25tvpdn" data-element_type="widget" data-widget_type="heading.default">
                             <div class="elementor-widget-container">
-                                <h5 class="elementor-heading-title elementor-size-default">Công ty</h5>
+                                <h5 class="elementor-heading-title elementor-size-default">Sản phẩm</h5>
                             </div>
                         </div>
                         <div class="elementor-element elementor-element-32xo3z4i elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--vertical twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5497,43 +5636,63 @@
                                     class="twbb-nav-menu--main twbb-nav-menu__container twbb-nav-menu--layout-vertical e--pointer-none">
                                     <ul id="menu-1-32xo3z4i"
                                         class="twbb-nav-menu twbb-menu_term_id-8744 sm-vertical twbb-menu-columns"
-                                        data-smartmenus-id="17454618201469236">
+                                        data-smartmenus-id="17454651601372212">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82386">
-                                            <a href="./AboutUs.html"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Giới thiệu về chúng tôi</a>
+                                            <a href="./Product.html?cid=2"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Máy cơ điện</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82387">
-                                            <a href="./Contact.html"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Liên hệ</a>
+                                            <a href="./Product.html?cid=3"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Máy xây dựng</a>
                                         </li>
-                                        <!-- <li
+                                        <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                                class="twbb-item">Safety Gear</a>
-                                        </li> -->
+                                            <a href="./Product.html?cid=4"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Thiết bị nâng hạ</a>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
+                                            <a href="./Product.html?cid=5"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Thiết bị khai thác đá</a>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
+                                            <a href="./Product.html?cid=6"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Máy phát điện</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
                                     <ul id="menu-2-32xo3z4i"
                                         class="twbb-nav-menu twbb-menu_term_id-8744 sm-vertical twbb-menu-columns"
-                                        data-smartmenus-id="1745461820147133">
+                                        data-smartmenus-id="17454651601374116">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82386">
-                                            <a href="./AboutUs.html"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Giới thiệu về chúng tôi</a>
+                                            <a href="./Product.html?cid=2"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Máy cơ điện</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82387">
-                                            <a href="./Contact.html"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Liên hệ</a>
+                                            <a href="./Product.html?cid=3"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Máy xây dựng</a>
                                         </li>
-                                        <!-- <li
+                                        <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                                class="twbb-item">Safety Gear</a>
-                                        </li> -->
+                                            <a href="./Product.html?cid=4"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Thiết bị nâng hạ</a>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
+                                            <a href="./Product.html?cid=5"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Thiết bị khai thác đá</a>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82388">
+                                            <a href="./Product.html?cid=6"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Máy phát điện</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 <style>
@@ -5546,7 +5705,7 @@
                         <div class="elementor-element elementor-element-tq8byuxf elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-heading"
                             data-id="tq8byuxf" data-element_type="widget" data-widget_type="heading.default">
                             <div class="elementor-widget-container">
-                                <h5 class="elementor-heading-title elementor-size-default" style="white-space: nowrap;">Công ty TNHH Machine Max Việt Nam</h5>
+                                <h5 class="elementor-heading-title elementor-size-default">Liên hệ</h5>
                             </div>
                         </div>
                         <div class="elementor-element elementor-element-my5igz1v elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--vertical twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5558,42 +5717,32 @@
                                     class="twbb-nav-menu--main twbb-nav-menu__container twbb-nav-menu--layout-vertical e--pointer-none">
                                     <ul id="menu-1-my5igz1v"
                                         class="twbb-nav-menu twbb-menu_term_id-8745 sm-vertical twbb-menu-columns"
-                                        data-smartmenus-id="174546182014844">
+                                        data-smartmenus-id="17454651601388547">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82389">
-                                            <a href="#"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Trụ sở chính: Lô đất BT1.9, khu chức năng đô thị Tây Mỗ, quận Nam Từ Liêm, thành phố Hà Nội.</a>
+                                            <a href="./AboutUs.html"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Về chúng tôi</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
-                                            <a href="#"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Văn phòng đại diện: Số 22, ngõ 85, phố Vũ Đức Thận, quận Long Biên, thành phố Hà Nội.</a>
-                                        </li>
-                                        <li
-                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
-                                            <a href="#"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Số điện thoại:</a>
-                                        </li>
-                                        <li
-                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
-                                            <a href="#"
-                                                class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Email: machinemaxvn@gmail.com</a>
+                                            <a href="./Contact.html"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Thông tin liên hệ</a>
                                         </li>
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
                                     <ul id="menu-2-my5igz1v"
                                         class="twbb-nav-menu twbb-menu_term_id-8745 sm-vertical twbb-menu-columns"
-                                        data-smartmenus-id="17454618201487869">
+                                        data-smartmenus-id="1745465160138069">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82389">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#about-us"
-                                                class="twbb-item">About Us</a>
+                                            <a href="./AboutUs.html"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Về chúng tôi</a>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82390">
-                                            <a href="https://aisite.10web.io/70/entirely-humane-lacewing/#contact-us"
-                                                class="twbb-item">Contact Us</a>
+                                            <a href="./Contact.html"
+                                                class="twbb-item" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 16px;">Thông tin liên hệ</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -5602,12 +5751,13 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="elementor-element elementor-element-r9qvde3i e-con-full e-flex e-con e-parent e-lazyloaded"
+
+                    <div class="elementor-element elementor-element-r9qvde3i e-con-full e-flex e-con e-parent e-lazyloaded"
                         data-id="r9qvde3i" data-element_type="container">
                         <div class="elementor-element elementor-element-ngfyq1uo elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-heading"
                             data-id="ngfyq1uo" data-element_type="widget" data-widget_type="heading.default">
                             <div class="elementor-widget-container">
-                                <h5 class="elementor-heading-title elementor-size-default">Resources</h5>
+                                <h5 class="elementor-heading-title elementor-size-default" style="white-space: nowrap;">Công ty TNHH Machine Max Việt Nam</h5>
                             </div>
                         </div>
                         <div class="elementor-element elementor-element-51vajpd8 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--vertical twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5619,32 +5769,64 @@
                                     class="twbb-nav-menu--main twbb-nav-menu__container twbb-nav-menu--layout-vertical e--pointer-none">
                                     <ul id="menu-1-51vajpd8"
                                         class="twbb-nav-menu twbb-menu_term_id-8746 sm-vertical twbb-menu-columns"
-                                        data-smartmenus-id="1745461820149905">
+                                        data-smartmenus-id="17454651601394514">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82391">
-                                            <a href="#"
-                                                class="twbb-item">Shipping &amp; Returns</a>
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Trụ sở chính: Lô đất BT1.9, khu chức năng đô thị Tây Mỗ,<br> quận Nam Từ Liêm,
+                                                thành phố Hà Nội.
+                                            </p>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
-                                            <a href="#"
-                                                class="twbb-item">Faq</a>
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Văn phòng đại diện: Số 22, ngõ 58, phố Vũ Đức Thận<br> quận Long Biên,
+                                                thành phố Hà Nội.
+                                            </p>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Số điện thoại:
+                                            </p>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Email: machinemaxvn@gmail.com
+                                            </p>
                                         </li>
                                     </ul>
                                 </nav>
                                 <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
                                     <ul id="menu-2-51vajpd8"
                                         class="twbb-nav-menu twbb-menu_term_id-8746 sm-vertical twbb-menu-columns"
-                                        data-smartmenus-id="17454618201491057">
+                                        data-smartmenus-id="17454651601398682">
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82391">
-                                            <a href="#"
-                                                class="twbb-item">Shipping &amp; Returns</a>
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Trụ sở chính: Lô đất BT1.9, khu chức năng đô thị Tây Mỗ,<br> quận Nam Từ Liêm,
+                                                thành phố Hà Nội.
+                                            </p>
                                         </li>
                                         <li
                                             class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
-                                            <a href="#"
-                                                class="twbb-item">Faq</a>
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Văn phòng đại diện: Số 22, ngõ 58, phố Vũ Đức Thận<br> quận Long Biên,
+                                                thành phố Hà Nội.
+                                            </p>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Số điện thoại:
+                                            </p>
+                                        </li>
+                                        <li
+                                            class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-custom menu-item-object-custom menu-item-82392">
+                                            <p class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
+                                                Email: machinemaxvn@gmail.com
+                                            </p>
                                         </li>
                                     </ul>
                                 </nav>
@@ -5652,79 +5834,31 @@
                                 </style>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+
                     <div class="elementor-element elementor-element-pd47l92f e-con-full e-flex e-con e-parent e-lazyloaded"
                         data-id="pd47l92f" data-element_type="container">
                     </div>
 
-                    <div style="margin-left: 250px;" class="elementor-element elementor-element-5tckqlfg e-con-full e-flex e-con e-parent e-lazyloaded"
-                            data-id="5tckqlfg" data-element_type="container">
-                            <div class="elementor-element elementor-element-njpot5g1 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-mobile-button-align-stretch elementor-button-align-center elementor-widget elementor-widget-twbb_form"
-                                data-id="njpot5g1" data-element_type="widget"
-                                data-settings="{&quot;button_width&quot;:&quot;30&quot;,&quot;step_next_label&quot;:&quot;Next&quot;,&quot;step_previous_label&quot;:&quot;Previous&quot;,&quot;step_type&quot;:&quot;number_text&quot;,&quot;step_icon_shape&quot;:&quot;circle&quot;}"
-                                data-widget_type="twbb_form.default">
-                                <div class="elementor-widget-container">
-                                    <!-- Google Maps Iframe -->
-                                    <iframe class="google-map"
-                                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1794.557354674523!2d105.744726!3d20.9958818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345372918af629%3A0xcdb27884b9d28371!2zMzI0L8SQLiBI4buvdSBIxrBuZy80MCAyLCBU4buVIFTDsywgTmFtIFThu6sgTGnDqm0sIEjDoCBO4buZaQ!5e1!3m2!1svi!2s!4v1745554169355!5m2!1svi!2s"
-                                        allowfullscreen="" loading="lazy" height="250" referrerpolicy="no-referrer-when-downgrade">
-                                    </iframe>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- <div style="margin-left: 250px;" class="elementor-element elementor-element-5tckqlfg e-con-full e-flex e-con e-parent e-lazyloaded"
+                    <div 
+                        class="elementor-element elementor-element-5tckqlfg e-con-full e-flex e-con e-parent e-lazyloaded"
                         data-id="5tckqlfg" data-element_type="container">
+
                         <div class="elementor-element elementor-element-njpot5g1 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-mobile-button-align-stretch elementor-button-align-center elementor-widget elementor-widget-twbb_form"
                             data-id="njpot5g1" data-element_type="widget"
                             data-settings="{&quot;button_width&quot;:&quot;30&quot;,&quot;step_next_label&quot;:&quot;Next&quot;,&quot;step_previous_label&quot;:&quot;Previous&quot;,&quot;step_type&quot;:&quot;number_text&quot;,&quot;step_icon_shape&quot;:&quot;circle&quot;}"
                             data-widget_type="twbb_form.default">
                             <div class="elementor-widget-container">
-                                <form class="elementor-form" method="post" name="Subscribe to our Newsletter">
-                                    <input type="hidden" name="post_id" value="82396">
-                                    <input type="hidden" name="form_id" value="njpot5g1">
-                                    <input type="hidden" name="referer_title" value="Home">
-
-                                    <input type="hidden" name="queried_id" value="82369">
-
-                                    <div class="elementor-form-fields-wrapper elementor-labels-">
-                                        <div
-                                            class="elementor-form-title-description-wrapper elementor-field-group elementor-column elementor-col-100 elementor-widget-wrap elementor-widget-heading">
-                                            <h5
-                                                class="elementor-form-title elementor-element elementor-heading-title elementor-size-large">
-                                                Subscribe to our Newsletter</h5>
-                                            <div class="elementor-text-editor elementor-clearfix elementor-element">Stay
-                                                up to date with the latest news and special offers from Machine Max.
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="elementor-field-type-email elementor-field-group elementor-column elementor-field-group-email elementor-col-66 elementor-field-required">
-                                            <label for="form-field-email"
-                                                class="elementor-field-label elementor-screen-only">
-                                                Email </label>
-                                            <input size="1" type="email" name="form_fields[email]" id="form-field-email"
-                                                class="elementor-field elementor-size-sm  elementor-field-textual"
-                                                placeholder="Enter your email" required="required" aria-required="true">
-                                        </div>
-                                        <div
-                                            class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-30 e-form__buttons">
-                                            <button type="submit" class="elementor-button">
-                                                <span>
-                                                    <span class=" elementor-button-icon">
-                                                    </span>
-                                                    <span class="elementor-button-text">Subscribe</span>
-                                                </span>
-                                            </button>
-                                            <button type="reset" class="elementor-button elementor-hidden">
-                                                <span>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <iframe class="google-map"
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1794.557354674523!2d105.744726!3d20.9958818!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345372918af629%3A0xcdb27884b9d28371!2zMzI0L8SQLiBI4buvdSBIxrBuZy80MCAyLCBU4buVIFTDsywgTmFtIFThu6sgTGnDqm0sIEjDoCBO4buZaQ!5e1!3m2!1svi!2s!4v1745554169355!5m2!1svi!2s"
+                                    allowfullscreen="" loading="lazy" height="250"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+
+
 
                 </div>
                 <div class="elementor-element elementor-element-blftld97 elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
@@ -5740,7 +5874,7 @@
                     data-id="fk3ugkx7" data-element_type="container">
                     <div class="elementor-element elementor-element-aws3z49z elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-text-editor"
                         data-id="aws3z49z" data-element_type="widget" data-widget_type="text-editor.default">
-                        <div class="elementor-widget-container" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">
+                        <div class="elementor-widget-container" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">
                             © 2025 Machine Max. All rights reserved. </div>
                     </div>
                     <div class="elementor-element elementor-element-2swmcd1e elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial twbb-responsive-nav-menu--horizontal twbb-nav-menu__align-left twbb-responsive-nav-menu--tablet-dropdown twbb-responsive-nav-menu--mobile-dropdown twbb-nav-menu--indicator-classic elementor-widget elementor-widget-twbb-nav-menu"
@@ -5751,29 +5885,35 @@
                             <nav
                                 class="twbb-nav-menu--main twbb-nav-menu__container twbb-nav-menu--layout-horizontal e--pointer-none">
                                 <ul id="menu-1-2swmcd1e" class="twbb-nav-menu twbb-menu_term_id-8747"
-                                    data-smartmenus-id="17454618201534412">
+                                    data-smartmenus-id="1745465160142943">
                                     <li
-                                        class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82393">
-                                        <a href="./TermsAndConditions.html" class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Điều khoản & điều kiện</a>
+                                        class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-82373 current_page_item menu-item-82393">
+                                        <a href="./TermsAndConditions.html"
+                                            aria-current="page"
+                                            class="twbb-item  twbb-item-active" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Điều khoản & điều kiện</a>
                                     </li>
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-82394">
-                                        <a rel="privacy-policy" href="./Privacy.html"
-                                            class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Chính sách bảo mật</a>
+                                        <a rel="privacy-policy"
+                                            href="./Privacy.html"
+                                            class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Chính sách bảo mật</a>
                                     </li>
                                 </ul>
                             </nav>
                             <nav class="twbb-nav-menu--dropdown twbb-nav-menu__container">
                                 <ul id="menu-2-2swmcd1e" class="twbb-nav-menu twbb-menu_term_id-8747"
-                                    data-smartmenus-id="17454618201543901">
+                                    data-smartmenus-id="17454651601432952">
                                     <li
-                                        class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82393">
-                                        <a href="./TermsAndConditions.html" class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Điều khoản và điều kiện</a>
+                                        class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-82373 current_page_item menu-item-82393">
+                                        <a href="./TermsAndConditions.html"
+                                            aria-current="page"
+                                            class="twbb-item  twbb-item-active" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Điều khoản & điều kiện</a>
                                     </li>
                                     <li
                                         class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-82394">
-                                        <a rel="privacy-policy" href="./Privacy.html"
-                                            class="twbb-item" style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">Chính sách bảo mật</a>
+                                        <a rel="privacy-policy"
+                                            href="./Privacy.html"
+                                            class="twbb-item" style="white-space: nowrap; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;">Chính sách bảo mật</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -6008,14 +6148,14 @@
         }
 
         fetch("https://localhost:7205/api/Product/GetBestSeller")
-    .then(response => response.json())
-    .then(data => {
-        const listContainer = document.getElementById("bestSellerList");
+            .then(response => response.json())
+            .then(data => {
+                const listContainer = document.getElementById("bestSellerList");
 
-        // Thêm các sản phẩm vào danh sách ban đầu
-        data.forEach(product => {
-            const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-            const productHTML = `
+                // Thêm các sản phẩm vào danh sách ban đầu
+                data.forEach(product => {
+                    const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                    const productHTML = `
                 <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                   <div class="product-card">
                     <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -6025,25 +6165,25 @@
                   </div>
                 </a>
             `;
-            listContainer.insertAdjacentHTML("beforeend", productHTML);
-        });
+                    listContainer.insertAdjacentHTML("beforeend", productHTML);
+                });
 
-        const scrollSpeed = 6; // Tăng tốc độ cuộn
-        let isScrolling = false; // Tránh cuộn lại khi đang cuộn
-        let scrollInterval;
+                const scrollSpeed = 6; // Tăng tốc độ cuộn
+                let isScrolling = false; // Tránh cuộn lại khi đang cuộn
+                let scrollInterval;
 
-        function autoScroll() {
-            if (isScrolling) return; // Nếu đang cuộn, không thực hiện cuộn mới
+                function autoScroll() {
+                    if (isScrolling) return; // Nếu đang cuộn, không thực hiện cuộn mới
 
-            isScrolling = true; // Đánh dấu là đang cuộn
+                    isScrolling = true; // Đánh dấu là đang cuộn
 
-            function scroll() {
-                // Kiểm tra nếu đã cuộn đến cuối, sao chép sản phẩm và nối vào cuối
-                if (listContainer.scrollLeft >= listContainer.scrollWidth - listContainer.clientWidth) {
-                    // Sao chép và nối sản phẩm vào cuối
-                    data.forEach(product => {
-                        const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-                        const productHTML = `
+                    function scroll() {
+                        // Kiểm tra nếu đã cuộn đến cuối, sao chép sản phẩm và nối vào cuối
+                        if (listContainer.scrollLeft >= listContainer.scrollWidth - listContainer.clientWidth) {
+                            // Sao chép và nối sản phẩm vào cuối
+                            data.forEach(product => {
+                                const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                                const productHTML = `
                             <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                               <div class="product-card">
                                 <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -6053,79 +6193,79 @@
                               </div>
                             </a>
                         `;
-                        listContainer.insertAdjacentHTML("beforeend", productHTML);
-                    });
+                                listContainer.insertAdjacentHTML("beforeend", productHTML);
+                            });
+                        }
+
+                        // Cuộn nhanh hơn với scrollSpeed
+                        listContainer.scrollLeft += scrollSpeed;
+
+                        // Tiếp tục cuộn mượt mà với requestAnimationFrame
+                        requestAnimationFrame(scroll);
+                    }
+
+                    // Bắt đầu cuộn
+                    requestAnimationFrame(scroll);
                 }
 
-                // Cuộn nhanh hơn với scrollSpeed
-                listContainer.scrollLeft += scrollSpeed;
+                // Gọi autoScroll mỗi 10ms
+                scrollInterval = setInterval(autoScroll, 10);
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải sản phẩm bán chạy:", error);
+            });
 
-                // Tiếp tục cuộn mượt mà với requestAnimationFrame
-                requestAnimationFrame(scroll);
-            }
+        //     fetch("https://localhost:7205/api/Product/GetBestSeller")
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     const listContainer = document.getElementById("bestSellerList");
 
-            // Bắt đầu cuộn
-            requestAnimationFrame(scroll);
-        }
+        //     // Tạo HTML sản phẩm
+        //     const renderProducts = (products) => {
+        //       return products.map(product => {
+        //         const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+        //         return `
+        //           <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
+        //             <div class="product-card">
+        //               <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
+        //               <div class="product-name">${product.name}</div>
+        //               <div class="product-category">${product.categoryName}</div>
+        //               <div class="product-price">Giá: ${formattedPrice}</div>
+        //             </div>
+        //           </a>
+        //         `;
+        //       }).join('');
+        //     };
 
-        // Gọi autoScroll mỗi 10ms
-        scrollInterval = setInterval(autoScroll, 10);
-    })
-    .catch(error => {
-        console.error("Lỗi khi tải sản phẩm bán chạy:", error);
-    });
+        //     // Gắn danh sách sản phẩm gốc
+        //     listContainer.innerHTML = renderProducts(data);
 
-//     fetch("https://localhost:7205/api/Product/GetBestSeller")
-//   .then(response => response.json())
-//   .then(data => {
-//     const listContainer = document.getElementById("bestSellerList");
+        //     // Clone và nối vào cuối
+        //     const cloneHTML = renderProducts(data);
+        //     listContainer.insertAdjacentHTML("beforeend", cloneHTML);
 
-//     // Tạo HTML sản phẩm
-//     const renderProducts = (products) => {
-//       return products.map(product => {
-//         const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-//         return `
-//           <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-//             <div class="product-card">
-//               <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
-//               <div class="product-name">${product.name}</div>
-//               <div class="product-category">${product.categoryName}</div>
-//               <div class="product-price">Giá: ${formattedPrice}</div>
-//             </div>
-//           </a>
-//         `;
-//       }).join('');
-//     };
+        //     // Auto scroll
+        //     const scrollSpeed = 5; // càng cao càng nhanh
+        //     function autoScroll() {
+        //       listContainer.scrollLeft += scrollSpeed;
 
-//     // Gắn danh sách sản phẩm gốc
-//     listContainer.innerHTML = renderProducts(data);
+        //       // Khi chạm đến điểm giữa (cuối phần gốc), quay lại đầu
+        //       if (listContainer.scrollLeft >= listContainer.scrollWidth / 2) {
+        //         listContainer.scrollLeft = 0;
+        //       }
 
-//     // Clone và nối vào cuối
-//     const cloneHTML = renderProducts(data);
-//     listContainer.insertAdjacentHTML("beforeend", cloneHTML);
+        //       requestAnimationFrame(autoScroll);
+        //     }
 
-//     // Auto scroll
-//     const scrollSpeed = 5; // càng cao càng nhanh
-//     function autoScroll() {
-//       listContainer.scrollLeft += scrollSpeed;
+        //     autoScroll();
+        //   })
+        //   .catch(error => {
+        //     console.error("Lỗi khi tải sản phẩm bán chạy:", error);
+        //   });
 
-//       // Khi chạm đến điểm giữa (cuối phần gốc), quay lại đầu
-//       if (listContainer.scrollLeft >= listContainer.scrollWidth / 2) {
-//         listContainer.scrollLeft = 0;
-//       }
 
-//       requestAnimationFrame(autoScroll);
-//     }
 
-//     autoScroll();
-//   })
-//   .catch(error => {
-//     console.error("Lỗi khi tải sản phẩm bán chạy:", error);
-//   });
 
-        
-
-    
 
 
         // Gọi API Sản phẩm mới nhất
@@ -6152,15 +6292,15 @@
         //     });
 
 
-            fetch("https://localhost:7205/api/Product/GetTop10NewestProducts")
-    .then(response => response.json())
-    .then(data => {
-        const listContainer = document.getElementById("newestProductList");
+        fetch("https://localhost:7205/api/Product/GetTop10NewestProducts")
+            .then(response => response.json())
+            .then(data => {
+                const listContainer = document.getElementById("newestProductList");
 
-        // Thêm các sản phẩm vào danh sách ban đầu
-        data.forEach(product => {
-            const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-            const productHTML = `
+                // Thêm các sản phẩm vào danh sách ban đầu
+                data.forEach(product => {
+                    const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                    const productHTML = `
                 <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                   <div class="product-card">
                     <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -6170,25 +6310,25 @@
                   </div>
                 </a>
             `;
-            listContainer.insertAdjacentHTML("beforeend", productHTML);
-        });
+                    listContainer.insertAdjacentHTML("beforeend", productHTML);
+                });
 
-        const scrollSpeed = 6; // Tăng tốc độ cuộn
-        let isScrolling = false; // Tránh cuộn lại khi đang cuộn
-        let scrollInterval;
+                const scrollSpeed = 6; // Tăng tốc độ cuộn
+                let isScrolling = false; // Tránh cuộn lại khi đang cuộn
+                let scrollInterval;
 
-        function autoScroll() {
-            if (isScrolling) return; // Nếu đang cuộn, không thực hiện cuộn mới
+                function autoScroll() {
+                    if (isScrolling) return; // Nếu đang cuộn, không thực hiện cuộn mới
 
-            isScrolling = true; // Đánh dấu là đang cuộn
+                    isScrolling = true; // Đánh dấu là đang cuộn
 
-            function scroll() {
-                // Kiểm tra nếu đã cuộn đến cuối, sao chép sản phẩm và nối vào cuối
-                if (listContainer.scrollLeft >= listContainer.scrollWidth - listContainer.clientWidth) {
-                    // Sao chép và nối sản phẩm vào cuối
-                    data.forEach(product => {
-                        const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-                        const productHTML = `
+                    function scroll() {
+                        // Kiểm tra nếu đã cuộn đến cuối, sao chép sản phẩm và nối vào cuối
+                        if (listContainer.scrollLeft >= listContainer.scrollWidth - listContainer.clientWidth) {
+                            // Sao chép và nối sản phẩm vào cuối
+                            data.forEach(product => {
+                                const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                                const productHTML = `
                             <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                               <div class="product-card">
                                 <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -6198,27 +6338,27 @@
                               </div>
                             </a>
                         `;
-                        listContainer.insertAdjacentHTML("beforeend", productHTML);
-                    });
+                                listContainer.insertAdjacentHTML("beforeend", productHTML);
+                            });
+                        }
+
+                        // Cuộn nhanh hơn với scrollSpeed
+                        listContainer.scrollLeft += scrollSpeed;
+
+                        // Tiếp tục cuộn mượt mà với requestAnimationFrame
+                        requestAnimationFrame(scroll);
+                    }
+
+                    // Bắt đầu cuộn
+                    requestAnimationFrame(scroll);
                 }
 
-                // Cuộn nhanh hơn với scrollSpeed
-                listContainer.scrollLeft += scrollSpeed;
-
-                // Tiếp tục cuộn mượt mà với requestAnimationFrame
-                requestAnimationFrame(scroll);
-            }
-
-            // Bắt đầu cuộn
-            requestAnimationFrame(scroll);
-        }
-
-        // Gọi autoScroll mỗi 10ms
-        scrollInterval = setInterval(autoScroll, 10);
-    })
-    .catch(error => {
-        console.error("Lỗi khi tải sản phẩm mới nhất:", error);
-    });
+                // Gọi autoScroll mỗi 10ms
+                scrollInterval = setInterval(autoScroll, 10);
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải sản phẩm mới nhất:", error);
+            });
 
 
         // Gọi API Sản phẩm ngẫu nhiên
@@ -6246,15 +6386,15 @@
 
 
 
-            fetch("https://localhost:7205/api/Product/GetRandom10Products")
-    .then(response => response.json())
-    .then(data => {
-        const listContainer = document.getElementById("randomProductList");
+        fetch("https://localhost:7205/api/Product/GetRandom10Products")
+            .then(response => response.json())
+            .then(data => {
+                const listContainer = document.getElementById("randomProductList");
 
-        // Thêm các sản phẩm vào danh sách ban đầu
-        data.forEach(product => {
-            const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-            const productHTML = `
+                // Thêm các sản phẩm vào danh sách ban đầu
+                data.forEach(product => {
+                    const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                    const productHTML = `
                 <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                   <div class="product-card">
                     <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -6264,25 +6404,25 @@
                   </div>
                 </a>
             `;
-            listContainer.insertAdjacentHTML("beforeend", productHTML);
-        });
+                    listContainer.insertAdjacentHTML("beforeend", productHTML);
+                });
 
-        const scrollSpeed = 6; // Tăng tốc độ cuộn
-        let isScrolling = false; // Tránh cuộn lại khi đang cuộn
-        let scrollInterval;
+                const scrollSpeed = 6; // Tăng tốc độ cuộn
+                let isScrolling = false; // Tránh cuộn lại khi đang cuộn
+                let scrollInterval;
 
-        function autoScroll() {
-            if (isScrolling) return; // Nếu đang cuộn, không thực hiện cuộn mới
+                function autoScroll() {
+                    if (isScrolling) return; // Nếu đang cuộn, không thực hiện cuộn mới
 
-            isScrolling = true; // Đánh dấu là đang cuộn
+                    isScrolling = true; // Đánh dấu là đang cuộn
 
-            function scroll() {
-                // Kiểm tra nếu đã cuộn đến cuối, sao chép sản phẩm và nối vào cuối
-                if (listContainer.scrollLeft >= listContainer.scrollWidth - listContainer.clientWidth) {
-                    // Sao chép và nối sản phẩm vào cuối
-                    data.forEach(product => {
-                        const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
-                        const productHTML = `
+                    function scroll() {
+                        // Kiểm tra nếu đã cuộn đến cuối, sao chép sản phẩm và nối vào cuối
+                        if (listContainer.scrollLeft >= listContainer.scrollWidth - listContainer.clientWidth) {
+                            // Sao chép và nối sản phẩm vào cuối
+                            data.forEach(product => {
+                                const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                                const productHTML = `
                             <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                               <div class="product-card">
                                 <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
@@ -6292,27 +6432,27 @@
                               </div>
                             </a>
                         `;
-                        listContainer.insertAdjacentHTML("beforeend", productHTML);
-                    });
+                                listContainer.insertAdjacentHTML("beforeend", productHTML);
+                            });
+                        }
+
+                        // Cuộn nhanh hơn với scrollSpeed
+                        listContainer.scrollLeft += scrollSpeed;
+
+                        // Tiếp tục cuộn mượt mà với requestAnimationFrame
+                        requestAnimationFrame(scroll);
+                    }
+
+                    // Bắt đầu cuộn
+                    requestAnimationFrame(scroll);
                 }
 
-                // Cuộn nhanh hơn với scrollSpeed
-                listContainer.scrollLeft += scrollSpeed;
-
-                // Tiếp tục cuộn mượt mà với requestAnimationFrame
-                requestAnimationFrame(scroll);
-            }
-
-            // Bắt đầu cuộn
-            requestAnimationFrame(scroll);
-        }
-
-        // Gọi autoScroll mỗi 10ms
-        scrollInterval = setInterval(autoScroll, 10);
-    })
-    .catch(error => {
-        console.error("Lỗi khi tải sản phẩm ngẫu nhiên:", error);
-    });
+                // Gọi autoScroll mỗi 10ms
+                scrollInterval = setInterval(autoScroll, 10);
+            })
+            .catch(error => {
+                console.error("Lỗi khi tải sản phẩm ngẫu nhiên:", error);
+            });
 
 
         fetch('https://localhost:7205/api/Category/GetAll')
@@ -6330,7 +6470,7 @@
                     const a = document.createElement('a');
                     a.href = "#";
                     a.innerText = parent.name;
-                    a.style.fontFamily = "Arial, sans-serif"; 
+                    a.style.fontFamily = "Arial, sans-serif";
                     a.style.fontWeight = "bold";
                     li.appendChild(a);
 
@@ -6387,29 +6527,29 @@
     }
 
     document.getElementById('cart-menu').addEventListener('mouseenter', function () {
-    const dropdown = document.getElementById('cart-dropdown');
-    dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
+        const dropdown = document.getElementById('cart-dropdown');
+        dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
 
-    const userId = getUserIdFromToken();
-    if (!userId) {
-        dropdown.innerHTML = '<li>Không xác định người dùng</li>';
-        return;
-    }
+        const userId = getUserIdFromToken();
+        if (!userId) {
+            dropdown.innerHTML = '<li>Không xác định người dùng</li>';
+            return;
+        }
 
-    fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
-        .then(response => response.json())
-        .then(data => {
-            dropdown.innerHTML = '';
+        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                dropdown.innerHTML = '';
 
-            const items = data.cartItems;
-            if (!Array.isArray(items) || items.length === 0) {
-                dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
-                return;
-            }
+                const items = data.cartItems;
+                if (!Array.isArray(items) || items.length === 0) {
+                    dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
+                    return;
+                }
 
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 10px; padding: 5px 0;">
                         <img src="https://localhost:7205/images/product/${item.image}" alt="${item.productName}" width="40" height="40" style="border-radius: 5px;">
                         <div style="font-family: Arial, sans-serif;">
@@ -6419,16 +6559,16 @@
                         </div>
                     </div>
                 `;
-                dropdown.appendChild(li);
-            });
+                    dropdown.appendChild(li);
+                });
 
-            document.getElementById('cart-count').innerText = items.length;
-        })
-        .catch(error => {
-            console.error('Lỗi khi gọi API giỏ hàng:', error);
-            dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
-        });
-});
+                document.getElementById('cart-count').innerText = items.length;
+            })
+            .catch(error => {
+                console.error('Lỗi khi gọi API giỏ hàng:', error);
+                dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
+            });
+    });
 
 
 

@@ -345,15 +345,15 @@ namespace HTTL_May_Xay_Dung.Controllers
 
 
         [HttpGet("GetProductByStatus")]
-
         public async Task<IActionResult> GetProductByStatus(
-            int pageNumber = 1,
-            int? pageSize = null,
-            string? name = null,
-            int? categoryId = null
-            )
+    int pageNumber = 1,
+    int? pageSize = null,
+    string? name = null,
+    int? categoryId = null
+)
         {
             int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
+
             var products = _context.Products
                 .Include(p => p.Category)
                 .Where(p => p.Status == 0)
@@ -364,15 +364,18 @@ namespace HTTL_May_Xay_Dung.Controllers
                 products = products.Where(p => p.Name.Contains(name));
             }
 
+            // ✅ Lọc theo category cha và các category con
             if (categoryId.HasValue)
             {
-                products = products.Where(p => p.CategoryId == categoryId.Value);
+                var allCategoryIds = await _context.Categories
+                    .Where(c => c.Id == categoryId.Value || c.ParentId == categoryId.Value)
+                    .Select(c => c.Id)
+                    .ToListAsync();
+
+                products = products.Where(p => allCategoryIds.Contains(p.CategoryId));
             }
 
-
             int totalProductCount = await products.CountAsync();
-
-
             int totalPageCount = (int)Math.Ceiling(totalProductCount / (double)actualPageSize);
             int nextPage = pageNumber + 1 > totalPageCount ? pageNumber : pageNumber + 1;
             int previousPage = pageNumber - 1 < 1 ? pageNumber : pageNumber - 1;
@@ -403,7 +406,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     ProductPrice = p.ProductPrice,
                     BasePrice = p.BasePrice,
                 })
-            .ToListAsync();
+                .ToListAsync();
 
             var result = new
             {
@@ -413,6 +416,7 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             return Ok(result);
         }
+
 
         [HttpGet("GetRandomProducts")]
         public async Task<IActionResult> GetRandomProducts()
