@@ -12,6 +12,8 @@
     <!-- Public CDN for TinyMCE -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.0/tinymce.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         // Initialize TinyMCE
         tinymce.init({
@@ -37,6 +39,11 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Tên Sản Phẩm <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="name" name="Name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Giá Sản Phẩm <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="price" name="Price" required min="0" step="0.01">
             </div>
 
             <div class="mb-3">
@@ -139,22 +146,28 @@
 
         document.querySelector('.btn-primary').addEventListener('click', submitForm);
 
-function submitForm() {
+        function submitForm() {
     const name = document.getElementById('name').value.trim();
-    const description = tinymce.get('description').getContent(); // lấy nội dung tinyMCE
-    const specification = tinymce.get('specification').getContent(); // lấy nội dung tinyMCE
+    const description = tinymce.get('description').getContent();
+    const specification = tinymce.get('specification').getContent();
     const status = document.getElementById('status').value;
     const categoryId = document.getElementById('filterCategory1').value;
     const fileInput = document.getElementById('file');
+    const price = document.getElementById('price').value.trim();
     const file = fileInput.files[0];
 
-    if (!name || !description || !specification || !categoryId || !file) {
-        alert('Vui lòng nhập đầy đủ thông tin!');
+    if (!name || !price || !description || !specification || !categoryId || !file) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Thiếu thông tin',
+            text: 'Vui lòng nhập đầy đủ thông tin!'
+        });
         return;
     }
 
     const formData = new FormData();
     formData.append('Name', name);
+    formData.append('ProductPrice', price);
     formData.append('Description', description);
     formData.append('Specifications', specification);
     formData.append('Status', status);
@@ -172,12 +185,22 @@ function submitForm() {
         return response.json();
     })
     .then(data => {
-        alert('Thêm sản phẩm thành công!');
-        window.location.href = './Product-Management.html'; // Redirect về trang quản lý sản phẩm
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: 'Thêm sản phẩm thành công!',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = './Product-Management.html';
+        });
     })
     .catch(error => {
         console.error(error);
-        alert('Thêm sản phẩm thất bại.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Thất bại',
+            text: 'Thêm sản phẩm thất bại.'
+        });
     });
 }
 
