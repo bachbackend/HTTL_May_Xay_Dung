@@ -1481,7 +1481,9 @@
                     data-id="02sq5iqy" data-element_type="widget"
                     data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}" data-widget_type="heading.default">
                     <div class="elementor-widget-container">
-                        <h5 class="elementor-heading-title elementor-size-default" style="font-family: Arial, Helvetica, sans-serif;">Ưu đãi sốc chỉ có tại đây! Mua ngay sản phẩm hot, chất lượng tuyệt vời, giá cực kỳ hấp dẫn!</h5>
+                        <h5 class="elementor-heading-title elementor-size-default"
+                            style="font-family: Arial, Helvetica, sans-serif;">Ưu đãi sốc chỉ có tại đây! Mua ngay sản
+                            phẩm hot, chất lượng tuyệt vời, giá cực kỳ hấp dẫn!</h5>
                     </div>
                 </div>
             </div>
@@ -1493,14 +1495,16 @@
                     data-id="kvutht02" data-element_type="widget"
                     data-widget_type="twbb_woocommerce-breadcrumb.default">
                     <div class="elementor-widget-container">
-                        <nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="./Home.html" style="font-family: Arial, Helvetica, sans-serif;">Trang
+                        <nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="./Home.html"
+                                style="font-family: Arial, Helvetica, sans-serif;">Trang
                                 chủ</a>&nbsp;/&nbsp;Sản phẩm</nav>
                     </div>
                 </div>
                 <div class="elementor-element elementor-element-h6gl09io elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-tenweb-archive-title elementor-page-title tenweb-page-title elementor-widget-heading"
                     data-id="h6gl09io" data-element_type="widget" data-widget_type="tenweb-archive-title.default">
                     <div class="elementor-widget-container">
-                        <h1 class="elementor-heading-title elementor-size-default" style="font-family: Arial, Helvetica, sans-serif;">Sản phẩm</h1>
+                        <h1 class="elementor-heading-title elementor-size-default"
+                            style="font-family: Arial, Helvetica, sans-serif;">Sản phẩm</h1>
                     </div>
                 </div>
             </div>
@@ -2168,12 +2172,15 @@
 
             .product-card {
                 background-color: #fff;
-                border: 2px solid #ccc; /* Viền đậm hơn */
+                border: 2px solid #ccc;
+                /* Viền đậm hơn */
                 border-radius: 12px;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
                 padding: 15px;
                 text-align: center;
                 transition: transform 0.2s ease;
+                width: 220px;
+                height: 310px;
             }
 
             .product-card:hover {
@@ -2185,6 +2192,29 @@
                 object-fit: contain;
                 margin-bottom: 10px;
             }
+
+            .product-name {
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+                height: 48px;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                margin: 10px 0;
+            }
+
+            .product-price {
+                margin-top: auto;
+                text-align: center;
+                color: orange;
+            }
+
+            .product-category {
+                color: #666;
+                font-size: 14px;
+            }
         </style>
 
         <div class="product-container">
@@ -2192,11 +2222,14 @@
             <div class="filter-column">
                 <form>
                     <div class="mb-3">
-                        <h6 class="form-label" for="product-name-search" style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;">Tìm kiếm</h6>
-                        <input type="text" class="form-control" id="product-name-search" name="product-name-search" placeholder="Nhập tên sản phẩm...">
+                        <h6 class="form-label" for="product-name-search"
+                            style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;">Tìm kiếm</h6>
+                        <input type="text" class="form-control" id="product-name-search" name="product-name-search"
+                            placeholder="Nhập tên sản phẩm...">
                     </div>
                     <div class="mb-3">
-                        <h6 class="form-label" style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;">Loại máy</h6>
+                        <h6 class="form-label" style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;">Loại
+                            máy</h6>
                         <select class="form-select" id="product-category">
                             <option value="">Tất cả</option>
                         </select>
@@ -2238,7 +2271,7 @@
     </div>
 
     <div style="width: 100%; height: 2px; background-color: black; margin: 10px 0;"></div>
-    
+
     <div data-elementor-type="twbb_footer" data-elementor-id="82396" class="elementor elementor-82396">
         <div class="elementor-element elementor-element-wyvesdu6 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
             data-id="wyvesdu6" data-element_type="container" id="footer">
@@ -2824,146 +2857,155 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-    const itemsPerPage = 12;
-    let currentPage = 1;
+        const itemsPerPage = 12;
+        let currentPage = 1;
 
-    function fetchAndDisplayProducts(page) {
-        const spinner = document.getElementById("loading-spinner");
-        const productGrid = document.querySelector(".product-grid");
+        function fetchAndDisplayProducts(page) {
+            const spinner = document.getElementById("loading-spinner");
+            const productGrid = document.querySelector(".product-grid");
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const keyword = document.getElementById('product-name-search').value.trim();
-        const categoryId = urlParams.get('cid') || document.getElementById('product-category').value;
-        const params = new URLSearchParams();
+            const urlParams = new URLSearchParams(window.location.search);
+            const keyword = document.getElementById('product-name-search').value.trim();
+            const categoryId = urlParams.get('cid') || document.getElementById('product-category').value;
+            const params = new URLSearchParams();
 
-        if (keyword) params.append('name', keyword);
-        if (categoryId) params.append('categoryId', categoryId);
+            if (keyword) params.append('name', keyword);
+            if (categoryId) params.append('categoryId', categoryId);
 
-        let url = `https://localhost:7205/api/Product/GetProductByStatus?pageNumber=${page}&pageSize=15`;
-        if (params.toString()) url += `&${params.toString()}`;
+            let url = `https://localhost:7205/api/Product/GetProductByStatus?pageNumber=${page}&pageSize=15`;
+            if (params.toString()) url += `&${params.toString()}`;
 
-        spinner.style.display = "block"; // Hiện loading
+            spinner.style.display = "block"; // Hiện loading
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                spinner.style.display = "none"; // Ẩn loading
-                productGrid.innerHTML = "";
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    spinner.style.display = "none"; // Ẩn loading
+                    productGrid.innerHTML = "";
 
-                data.products.forEach(product => {
-                    const card = document.createElement("div");
-                    card.className = "product-card";
+                    data.products.forEach(product => {
+                        const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
+                        const card = document.createElement("div");
+                        card.className = "product-card";
 
-                    card.innerHTML = `
-                        <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-                            <img src="https://localhost:7205/images/product/${product.image}" class="product-img" alt="${product.name}">
-                            <h6 style="font-family: Arial, sans-serif; font-size: 15px;">${product.name}</h6>
-                            <p>Giá: ${product.price ? product.price + "đ" : "Đang cập nhật"}</p>
-                        </a>
+                        card.innerHTML = `
+                        
+
+
+                        
+                <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
+                  
+                    <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-category">${product.categoryName}</div>
+                    <div class="product-price">Giá: ${formattedPrice}</div>
+                  
+                </a>
+
                     `;
 
-                    productGrid.appendChild(card);
+                        productGrid.appendChild(card);
+                    });
+
+                    renderPaginationButtons(data.paging.totalPageCount);
+                })
+                .catch(error => {
+                    spinner.style.display = "none";
+                    productGrid.innerHTML = "<p style='color:red;'>Không thể tải sản phẩm.</p>";
+                    console.error("Lỗi khi gọi API:", error);
+                });
+        }
+
+        fetchAndDisplayProducts(currentPage);
+
+        function renderPaginationButtons(totalPages) {
+            const paginationElement = document.getElementById('pagination');
+            paginationElement.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.classList.add('btn', 'btn-outline-primary', 'me-2');
+
+                if (i === currentPage) {
+                    button.classList.remove('btn-outline-primary');
+                    button.classList.add('btn-primary', 'active');
+                }
+
+                button.addEventListener('click', () => {
+                    currentPage = i;
+                    fetchAndDisplayProducts(currentPage);
                 });
 
-                renderPaginationButtons(data.paging.totalPageCount);
+                paginationElement.appendChild(button);
+            }
+        }
+
+        // fetch("https://localhost:7205/api/Category/GetAll")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         const select = document.getElementById("product-category");
+        //         data.forEach(category => {
+        //             if (category.parentId != null) {
+        //                 const option = document.createElement("option");
+        //                 option.value = category.id;
+        //                 option.textContent = category.name;
+        //                 select.appendChild(option);
+        //             }
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error("Lỗi khi tải loại máy:", error);
+        //     });
+
+        fetch("https://localhost:7205/api/Category/GetAll")
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById("product-category");
+
+                // Xóa các option cũ, chỉ giữ lại "Tất cả"
+                select.innerHTML = '<option value="">Tất cả</option>';
+
+                // Lọc ra các category con (parentId != null)
+                const childCategories = data.filter(category => category.parentId !== null);
+
+                // Gom nhóm các category con theo parent.name
+                const groupedCategories = {};
+
+                childCategories.forEach(category => {
+                    const parentName = category.parent.name;
+                    if (!groupedCategories[parentName]) {
+                        groupedCategories[parentName] = [];
+                    }
+                    groupedCategories[parentName].push(category);
+                });
+
+                // Tạo optgroup và các option
+                for (const parentName in groupedCategories) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = parentName;
+
+                    groupedCategories[parentName].forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id;
+                        option.textContent = category.name;
+                        optgroup.appendChild(option);
+                    });
+
+                    select.appendChild(optgroup);
+                }
             })
             .catch(error => {
-                spinner.style.display = "none";
-                productGrid.innerHTML = "<p style='color:red;'>Không thể tải sản phẩm.</p>";
-                console.error("Lỗi khi gọi API:", error);
-            });
-    }
-
-    fetchAndDisplayProducts(currentPage);
-
-    function renderPaginationButtons(totalPages) {
-        const paginationElement = document.getElementById('pagination');
-        paginationElement.innerHTML = '';
-
-        for (let i = 1; i <= totalPages; i++) {
-            const button = document.createElement('button');
-            button.textContent = i;
-            button.classList.add('btn', 'btn-outline-primary', 'me-2');
-
-            if (i === currentPage) {
-                button.classList.remove('btn-outline-primary');
-                button.classList.add('btn-primary', 'active');
-            }
-
-            button.addEventListener('click', () => {
-                currentPage = i;
-                fetchAndDisplayProducts(currentPage);
+                console.error("Lỗi khi tải loại máy:", error);
             });
 
-            paginationElement.appendChild(button);
-        }
-    }
-
-    // fetch("https://localhost:7205/api/Category/GetAll")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const select = document.getElementById("product-category");
-    //         data.forEach(category => {
-    //             if (category.parentId != null) {
-    //                 const option = document.createElement("option");
-    //                 option.value = category.id;
-    //                 option.textContent = category.name;
-    //                 select.appendChild(option);
-    //             }
-    //         });
-    //     })
-    //     .catch(error => {
-    //         console.error("Lỗi khi tải loại máy:", error);
-    //     });
-
-    fetch("https://localhost:7205/api/Category/GetAll")
-    .then(response => response.json())
-    .then(data => {
-        const select = document.getElementById("product-category");
-
-        // Xóa các option cũ, chỉ giữ lại "Tất cả"
-        select.innerHTML = '<option value="">Tất cả</option>';
-
-        // Lọc ra các category con (parentId != null)
-        const childCategories = data.filter(category => category.parentId !== null);
-
-        // Gom nhóm các category con theo parent.name
-        const groupedCategories = {};
-
-        childCategories.forEach(category => {
-            const parentName = category.parent.name;
-            if (!groupedCategories[parentName]) {
-                groupedCategories[parentName] = [];
-            }
-            groupedCategories[parentName].push(category);
+        document.getElementById('searchButton').addEventListener('click', () => {
+            currentPage = 1;
+            fetchAndDisplayProducts(currentPage);
         });
 
-        // Tạo optgroup và các option
-        for (const parentName in groupedCategories) {
-            const optgroup = document.createElement('optgroup');
-            optgroup.label = parentName;
 
-            groupedCategories[parentName].forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.id;
-                option.textContent = category.name;
-                optgroup.appendChild(option);
-            });
-
-            select.appendChild(optgroup);
-        }
-    })
-    .catch(error => {
-        console.error("Lỗi khi tải loại máy:", error);
-    });
-
-    document.getElementById('searchButton').addEventListener('click', () => {
-                currentPage = 1;
-                fetchAndDisplayProducts(currentPage);
-            });
-
-
-            getCartCount();
+        getCartCount();
 
         fetch('https://localhost:7205/api/Category/GetAll')
             .then(response => response.json())
@@ -3011,10 +3053,10 @@
             })
             .catch(error => console.error("Lỗi khi gọi API danh mục:", error));
 
-    
-});
 
-function getUserIdFromToken() {
+    });
+
+    function getUserIdFromToken() {
         const token = localStorage.getItem("accesstoken");
         if (!token) {
             console.warn("Không có token");

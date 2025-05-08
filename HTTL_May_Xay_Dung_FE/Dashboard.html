@@ -12,7 +12,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="./dashboard/img/icons/icon-48x48.png" />
 
-	<link rel="canonical" href="Dashboard.html" />
+	<!-- <link rel="canonical" href="Dashboard.html" /> -->
 
 	<title>Dashboard</title>
 
@@ -31,14 +31,15 @@
 		}
 	</style> -->
 	<!-- END SETTINGS -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-120946860-10', { 'anonymize_ip': true });
-</script></head>
+</script> -->
+</head>
 <!--
   HOW TO USE: 
   data-theme: default (default), dark, light, colored
@@ -350,7 +351,24 @@
 	let currentUser = null;
 
 	document.addEventListener("DOMContentLoaded", async function () {
-		const userId = localStorage.getItem("userId"); // Lấy từ localStorage
+
+		function getUserIdFromToken() {
+        const token = localStorage.getItem("accesstoken");
+        if (!token) {
+            console.warn("Không có token");
+            return null;
+        }
+
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            return payload.nameid;
+        } catch (error) {
+            console.error("Lỗi khi giải mã token:", error);
+            return null;
+        }
+    }
+
+		const userId = getUserIdFromToken(); // Lấy từ localStorage
 
 		if (!userId) {
 			console.error("Không tìm thấy userId trong localStorage.");
