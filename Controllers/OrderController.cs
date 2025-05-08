@@ -205,6 +205,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 .Include(p => p.ShippingAddress)
                     .ThenInclude(p => p.City)
                 .Where(p => p.UserId == userId)
+                .OrderByDescending(p => p.OrderDate)
                 .AsQueryable();
 
             int totalOrderCount = await orders.CountAsync();

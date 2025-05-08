@@ -289,14 +289,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(product);
         }
 
-        [HttpGet("GetTop5NewestProducts")]
+        [HttpGet("GetTop10NewestProducts")]
         public async Task<IActionResult> GetTop3NewestProducts()
         {
             // Lấy 3 sản phẩm mới nhất dựa trên CreatedAt
             var newestProducts = await _context.Products
                 .Include(p => p.Category)
                 .OrderByDescending(p => p.CreatedAt)
-                .Take(5)
+                .Take(10)
                 .Select(p => new ProductReturnDTO
                 {
                     Id = p.Id,
@@ -324,7 +324,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             var bestseller = await _context.Products
                 .Include(p => p.Category)
                 .OrderByDescending(p => p.SaleQuantity)
-                .Take(5)
+                .Take(10)
                 .Select(p => new ProductReturnDTO
                 {
                     Id = p.Id,

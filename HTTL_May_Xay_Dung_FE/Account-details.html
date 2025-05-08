@@ -6,9 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đơn hàng của bạn</title>
+    <title>Tài khoản</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         img:is([sizes="auto" i], [sizes^="auto," i]) {
             contain-intrinsic-size: 3000px 1500px
@@ -1792,13 +1793,13 @@
                                                 class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a
                                                     href="./Home.html"
                                                     style="font-family: Arial, Helvetica, sans-serif;">Trang
-                                                    chủ</a>&nbsp;/&nbsp;Đơn hàng của bạn</nav>
+                                                    chủ</a>&nbsp;/&nbsp;Tài khoản</nav>
                                         </div>
                                     </div>
 
                                 </div>
 
-                                <div style="margin-right:30px;" data-elementor-type="wp-page" data-elementor-id="113216"
+                                <div data-elementor-type="wp-page" data-elementor-id="113216"
                                     class="elementor elementor-113216">
                                     <div class="elementor-element elementor-element-ljbrle05 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
                                         data-id="ljbrle05" data-element_type="container"
@@ -1808,70 +1809,156 @@
                                                 data-id="m8i04kv9" data-element_type="widget"
                                                 data-widget_type="twbb_woocommerce-my-account.default">
                                                 <div class="elementor-widget-container">
-                                                    <div class="e-my-account-tab e-my-account-tab__orders "> <span
+                                                    <div class="e-my-account-tab e-my-account-tab__edit-account "> <span
                                                             class="elementor-hidden">[[woocommerce_my_account]]</span>
                                                         <div class="woocommerce">
                                                             <nav class="woocommerce-MyAccount-navigation"
                                                                 aria-label="Account pages">
                                                                 <ul>
+
                                                                     <li
-                                                                        class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders is-active">
-                                                                        <a href="./Orders.html" aria-current="page">
+                                                                        class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
+                                                                        <a
+                                                                            href="./Orders.html">
                                                                             Đơn hàng </a>
                                                                     </li>
+                                                                    <!-- <li
+                                                                        class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-address">
+                                                                        <a
+                                                                            href="https://10web-site.ai/187/humane-bunny/my-account/edit-address/">
+                                                                            Addresses </a>
+                                                                    </li> -->
                                                                     <li
-                                                                        class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account">
-                                                                        <a href="./Account-details.html">
+                                                                        class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account is-active">
+                                                                        <a href="./Account-details.html"
+                                                                            aria-current="page">
                                                                             Đổi mật khẩu </a>
                                                                     </li>
+
                                                                 </ul>
                                                             </nav>
 
+                                                            <style>
+                                                                .form-container {
+                                                                    max-width: 400px;
+                                                                    margin: 50px auto;
+                                                                    padding: 30px;
+                                                                    border-radius: 15px;
+                                                                    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+                                                                    background: linear-gradient(135deg, #4e59f159, #234bec);
+                                                                }
+                                                            
+                                                                .mb-3 {
+                                                                    margin-bottom: 1.5rem;
+                                                                }
+                                                            
+                                                                .form-label {
+                                                                    font-weight: 600;
+                                                                    color: #4b4b4b;
+                                                                }
+                                                            
+                                                                .form-control {
+                                                                    border-radius: 8px;
+                                                                    padding: 10px;
+                                                                    font-size: 1rem;
+                                                                    width: 50%; /* Giảm chiều dài input */
+                                                                    box-sizing: border-box;
+                                                                    transition: box-shadow 0.3s ease-in-out, transform 0.2s ease;
+                                                                    display: inline-block;
+                                                                }
+                                                            
+                                                                .form-control:focus {
+                                                                    box-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+                                                                    border-color: #ff9a9e;
+                                                                }
+                                                            
+                                                                .btn-primary {
+                                                                    background-color: #ff758c;
+                                                                    border-color: #ff758c;
+                                                                    font-weight: bold;
+                                                                    padding: 12px;
+                                                                    font-size: 1rem;
+                                                                    transition: background-color 0.3s, transform 0.2s;
+                                                                }
+                                                            
+                                                                .btn-primary:hover {
+                                                                    background-color: #ff5c7a;
+                                                                    transform: translateY(-2px);
+                                                                }
+                                                            
+                                                                .error {
+                                                                    color: #ff4d4d;
+                                                                    font-size: 0.9rem;
+                                                                }
+                                                            
+                                                                h3 {
+                                                                    font-family: 'Arial', sans-serif;
+                                                                    font-weight: bold;
+                                                                    background: linear-gradient(to right, #7f62ff, #413eff);
+                                                                    -webkit-background-clip: text;
+                                                                    -webkit-text-fill-color: transparent;
+                                                                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+                                                                }
+                                                            
+                                                                .position-relative {
+                                                                    position: relative;
+                                                                }
+                                                            
+                                                                /* Điều chỉnh icon con mắt theo chiều dài mới */
+                                                                .eye-icon {
+                                                                    position: absolute;
+                                                                    right: 52%;
+                                                                    top: 50%;
+                                                                    transform: translateY(-50%);
+                                                                    cursor: pointer;
+                                                                    color: #666;
+                                                                }
+                                                            
+                                                                .eye-icon i:hover {
+                                                                    color: #000;
+                                                                }
+                                                            </style>
+
 
                                                             <div class="woocommerce-MyAccount-content">
-                                                                <div class="woocommerce-MyAccount-content-wrapper">
-                                                                    <div class="woocommerce-notices-wrapper"></div>
+                                                                <h3 class="text-center text-primary" style="color: #0011ff;">Thay đổi mật khẩu của bạn
+                                                                </h3>
+                                                                <form id="changePasswordForm">
+                                                                    <div class="mb-3">
+                                                                        <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="password" class="form-control" id="currentPassword" placeholder="Nhập mật khẩu hiện tại">
+                                                                            <span class="eye-icon" onclick="togglePassword('currentPassword')">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="password" class="form-control" id="newPassword" placeholder="Nhập mật khẩu mới">
+                                                                            <span class="eye-icon" onclick="togglePassword('newPassword')">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-3">
+                                                                        <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                                                                        <div class="position-relative">
+                                                                            <input type="password" class="form-control" id="confirmPassword" placeholder="Xác nhận mật khẩu">
+                                                                            <span class="eye-icon" onclick="togglePassword('confirmPassword')">
+                                                                                <i class="fa fa-eye"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
 
-                                                                    <table
-                                                                        class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th scope="col"
-                                                                                    class="woocommerce-orders-table__header woocommerce-orders-table__header-order-number">
-                                                                                    <span class="nobr">Mã đơn
-                                                                                        hàng</span>
-                                                                                </th>
-                                                                                <th scope="col"
-                                                                                    class="woocommerce-orders-table__header woocommerce-orders-table__header-order-date">
-                                                                                    <span class="nobr">Ngày đặt
-                                                                                        hàng</span>
-                                                                                </th>
-                                                                                <th scope="col"
-                                                                                    class="woocommerce-orders-table__header woocommerce-orders-table__header-order-status">
-                                                                                    <span class="nobr">Trạng thái đơn
-                                                                                        hàng</span>
-                                                                                </th>
-                                                                                <th scope="col"
-                                                                                    class="woocommerce-orders-table__header woocommerce-orders-table__header-order-total">
-                                                                                    <span class="nobr">Tổng tiền</span>
-                                                                                </th>
-                                                                                <th scope="col"
-                                                                                    class="woocommerce-orders-table__header woocommerce-orders-table__header-order-actions">
-                                                                                    <span class="nobr"></span>
-                                                                                </th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <!-- Rows will be populated here by JavaScript -->
-                                                                        </tbody>
-                                                                    </table>
-
-
-
-
-                                                                </div>
+                                                                    <button type="button" class="btn btn-primary w-100"
+                                                                        onclick="changePassword()">Đổi mật khẩu</button>
+                                                                </form>
+                                                               
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2581,122 +2668,103 @@
             });
     });
 
-    async function loadUserOrders() {
-    const userId = getUserIdFromToken();
-    if (!userId) return;
-
-    const url = `https://localhost:7205/api/Order/GetOrderByUserId/${userId}?pageNumber=1`;
-
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'accept': '*/*',
-                'Authorization': `Bearer ${localStorage.getItem("accesstoken")}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error("Lỗi khi gọi API");
-        }
-
-        const data = await response.json();
-        const orders = data.orders;
-
-        const tbody = document.querySelector(".woocommerce-orders-table tbody");
-        tbody.innerHTML = "";
-
-        if (!orders || orders.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5">Không có đơn hàng nào.</td></tr>`;
-            return;
-        }
-
-        orders.forEach(order => {
-            const row = document.createElement("tr");
-            const detailsRow = document.createElement("tr");
-            detailsRow.classList.add("order-details-row");
-            detailsRow.style.display = "none"; // Initially hidden
-            detailsRow.innerHTML = `
-                <td colspan="5">
-                    <div class="order-details-content" style="padding: 15px;">
-                        <p>Đang tải chi tiết...</p>
-                    </div>
-                </td>
-            `;
-
-            row.innerHTML = `
-                <td data-title="Mã đơn hàng">#${order.id}</td>
-                <td data-title="Ngày đặt hàng">${new Date(order.orderDate).toLocaleString('vi-VN')}</td>
-                <td data-title="Trạng thái đơn hàng">${order.statusName}</td>
-                <td data-title="Tổng tiền">${order.totalPrice ? order.totalPrice.toLocaleString() + " ₫" : "Đang cập nhật"}</td>
-                <td data-title="Thao tác">
-                    <button class="woocommerce-button button view" onclick="toggleOrderDetails(${order.id}, this)">Xem</button>
-                </td>
-            `;
-
-            tbody.appendChild(row);
-            tbody.appendChild(detailsRow);
-        });
-    } catch (error) {
-        console.error("Lỗi khi tải đơn hàng:", error);
-    }
-}
-
-async function toggleOrderDetails(orderId, button) {
-    const detailsRow = button.closest("tr").nextElementSibling;
-    const detailsContent = detailsRow.querySelector(".order-details-content");
-
-    if (detailsRow.style.display === "none") {
-        // Fetch order details if not already loaded
-        if (detailsContent.innerHTML.includes("Đang tải chi tiết")) {
-            try {
-                const response = await fetch(`https://localhost:7205/api/Order/GetOrderDetailsByOrderId/${orderId}`, {
-                    method: 'GET',
-                    headers: {
-                        'accept': '*/*',
-                        'Authorization': `Bearer ${localStorage.getItem("accesstoken")}`
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error("Lỗi khi lấy chi tiết đơn hàng");
-                }
-
-                const data = await response.json();
-                detailsContent.innerHTML = `
-                    <h6>Chi tiết đơn hàng #${data.id}</h6>
-                    <p style="font-size: 16px;"><strong>Người đặt:</strong> ${data.username}</p>
-                    <p style="font-size: 16px;"><strong>Địa chỉ:</strong> ${data.specificAddress}, ${data.cityName}</p>
-                    <p style="font-size: 16px;"><strong>Số điện thoại:</strong> ${data.phoneNumber}</p>
-                    <p style="font-size: 16px;"><strong>Ngày đặt:</strong> ${new Date(data.orderDate).toLocaleString('vi-VN')}</p>
-                    <p style="font-size: 16px;"><strong>Trạng thái:</strong> ${data.statusName}</p>
-                    <p style="font-size: 16px;"><strong>Tổng tiền:</strong> ${data.totalPrice ? data.totalPrice.toLocaleString() + " ₫" : "Đang cập nhật"}</p>
-                    <h5>Sản phẩm:</h5>
-                    <ul>
-                        ${data.orderDetails.map(detail => `
-                            <li style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <img src="https://localhost:7205/images/product/${detail.productImage}" alt="${detail.productName}" style="width: 200px; height: 200px; object-fit: cover; margin-right: 15px;">
-                                <span style="font-family: Arial; font-size: 18px;">${detail.productName} (x${detail.quantity})</span>
-                            </li>
-                        `).join("")}
-                    </ul>
-                `;
-            } catch (error) {
-                console.error("Lỗi khi tải chi tiết đơn hàng:", error);
-                detailsContent.innerHTML = `<p style="color: red;">Không thể tải chi tiết đơn hàng.</p>`;
-            }
-        }
-        detailsRow.style.display = "table-row";
-        button.textContent = "Ẩn";
-    } else {
-        detailsRow.style.display = "none";
-        button.textContent = "Xem";
-    }
-}
+    
 
     // Gọi hàm khi trang tải xong
     // document.addEventListener("DOMContentLoaded", loadUserOrders);
 
+    async function changePassword() {
+    const userId = getUserIdFromToken();
+    if (!userId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Không tìm thấy người dùng',
+            text: 'Vui lòng đăng nhập lại.'
+        });
+        return;
+    }
+
+    // Lấy giá trị input
+    const oldPassword = document.getElementById("currentPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (newPassword !== confirmPassword) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi xác nhận mật khẩu',
+            text: 'Mật khẩu xác nhận không khớp.'
+        });
+        return;
+    }
+
+    // Hiển thị loading
+    Swal.fire({
+        title: 'Đang xử lý...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    try {
+        const response = await fetch("https://localhost:7205/api/Auth/ChangePassword", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "accept": "*/*",
+            },
+            body: JSON.stringify({
+                    userId: parseInt(userId),
+                    oldPassword: oldPassword,
+                    newPassword: newPassword
+                
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: 'Đổi mật khẩu thành công!'
+            });
+            document.getElementById("changePasswordForm").reset();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại',
+                text: result.message || 'Đã xảy ra lỗi khi đổi mật khẩu.'
+            });
+        }
+    } catch (error) {
+        console.error("Lỗi khi gọi API:", error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi kết nối',
+            text: 'Không thể kết nối đến máy chủ.'
+        });
+    }
+}
+
+function togglePassword(inputId) {
+            const inputField = document.getElementById(inputId);
+            const eyeIcon = document.getElementById('eyeIcon' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
+
+            // Kiểm tra nếu mật khẩu đang được ẩn, sẽ chuyển sang hiển thị và ngược lại
+            if (inputField.type === 'password') {
+                inputField.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                inputField.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        
 
     
     

@@ -226,7 +226,7 @@ namespace HTTL_May_Xay_Dung.Controllers
         }
 
         [HttpPut("ChangePassword")]
-        public async Task<IActionResult> UpdatePassword([FromBody] ChangePassworđTO dto)
+        public async Task<IActionResult> UpdatePassword([FromBody] ChangePasswordDTO dto)
         {
             if (dto == null || string.IsNullOrEmpty(dto.NewPassword) || string.IsNullOrEmpty(dto.OldPassword))
             {
@@ -239,7 +239,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
 
             var user = await _context.Users
-                .Where(a => a.Email == dto.Email)
+                .Where(a => a.Id == dto.UserId)
                 .FirstOrDefaultAsync();
 
             if (user == null)

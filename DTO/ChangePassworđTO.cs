@@ -1,8 +1,8 @@
 ﻿namespace HTTL_May_Xay_Dung.DTO
 {
-    public class ChangePassworđTO
+    public class ChangePasswordDTO
     {
-        public string Email { get; set; }
+        public int UserId { get; set; }
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
     }
