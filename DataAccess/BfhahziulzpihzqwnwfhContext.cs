@@ -335,6 +335,9 @@ public partial class BfhahziulzpihzqwnwfhContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
+            entity.Property(e => e.GoogleId)
+                .HasMaxLength(255)
+                .HasColumnName("google_id");
             entity.Property(e => e.LastLogin)
                 .HasColumnType("datetime")
                 .HasColumnName("last_login");

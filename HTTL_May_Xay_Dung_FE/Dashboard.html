@@ -119,25 +119,25 @@
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="Product-Management.html" target="_blank">
+						<a class="sidebar-link" href="Product-Management.html">
 							<i class="align-middle" data-feather="box"></i> <span class="align-middle">Quản lý sản phẩm</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="Article-Management.html" target="_blank">
+						<a class="sidebar-link" href="Article-Management.html">
 							<i class="align-middle" data-feather="edit"></i> <span class="align-middle">Quản lý bài viết</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="Contact-Management.html"target="_blank">
+						<a class="sidebar-link" href="Contact-Management.html">
 							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Quản lý liên hệ</span>
 						</a>
 					</li>
 
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="Order-Management.html" target="_blank">
+						<a class="sidebar-link" href="Order-Management.html">
 							<i class="align-middle" data-feather="shopping-cart"></i> <span class="align-middle">Quản lý đơn hàng</span>
 						</a>
 					</li>
@@ -217,27 +217,27 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Sales</h5>
+														<h5 class="card-title">Số lượng sản phẩm</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
+															<i class="align-middle" data-feather="box"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
-												<div class="mb-0">
+												<h1 class="mt-1 mb-3" id="product-count">Loading...</h1>
+												<!-- <div class="mb-0">
 													<span class="badge badge-primary-light"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
 													<span class="text-muted">Since last week</span>
-												</div>
+												</div> -->
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Visitors</h5>
+														<h5 class="card-title">Tổng số người dùng</h5>
 													</div>
 
 													<div class="col-auto">
@@ -246,11 +246,11 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
-												<div class="mb-0">
+												<h1 class="mt-1 mb-3" id="user-count">Loading...</h1>
+												<!-- <div class="mb-0">
 													<span class="badge badge-success-light"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
 													<span class="text-muted">Since last week</span>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div>
@@ -259,27 +259,27 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Earnings</h5>
+														<h5 class="card-title">Số lượng bài viết</h5>
 													</div>
 
 													<div class="col-auto">
 														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
+															<i class="align-middle" data-feather="book"></i>
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">$21.300</h1>
-												<div class="mb-0">
+												<h1 class="mt-1 mb-3" id="article-count">Loading...</h1>
+												<!-- <div class="mb-0">
 													<span class="badge badge-success-light"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
 													<span class="text-muted">Since last week</span>
-												</div>
+												</div> -->
 											</div>
 										</div>
 										<div class="card">
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
+														<h5 class="card-title">Tổng số đơn hàng</h5>
 													</div>
 
 													<div class="col-auto">
@@ -288,11 +288,12 @@
 														</div>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
+												<h1 class="mt-1 mb-3" id="order-count">Loading...</h1>
+
+												<!-- <div class="mb-0">
 													<span class="badge badge-danger-light"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
 													<span class="text-muted">Since last week</span>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div>
@@ -550,6 +551,54 @@
 			`<div class="alert alert-danger">${error.message}</div>`;
 		});
 	  });
+
+	  fetch('https://localhost:7205/api/Product/CountProducts')
+    .then(response => response.json())
+    .then(data => {
+      // Cập nhật nội dung của phần tử <h1> với số lượng sản phẩm
+      document.getElementById('product-count').textContent = data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('product-count').textContent = 'Error loading data';
+    });
+
+	fetch('https://localhost:7205/api/Article/CountArticles')
+    .then(response => response.json())
+    .then(data => {
+      // Cập nhật nội dung của phần tử <h1> với số lượng sản phẩm
+      document.getElementById('article-count').textContent = data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('article-count').textContent = 'Error loading data';
+    });
+
+	fetch('https://localhost:7205/api/Order/CountOrders')
+    .then(response => response.json())
+    .then(data => {
+      // Cập nhật nội dung của phần tử <h1> với số lượng sản phẩm
+      document.getElementById('order-count').textContent = data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('order-count').textContent = 'Error loading data';
+    });
+
+	fetch('https://localhost:7205/api/User/CountUsers')
+    .then(response => response.json())
+    .then(data => {
+      // Cập nhật nội dung của phần tử <h1> với số lượng sản phẩm
+      document.getElementById('user-count').textContent = data;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      document.getElementById('user-count').textContent = 'Error loading data';
+    });
+
+
+
+	  //end dom content loaded
 	});
   </script>
   

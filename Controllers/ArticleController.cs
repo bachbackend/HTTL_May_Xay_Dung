@@ -356,5 +356,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             // Trả về 3 bài viết mới nhất
             return Ok(latestArticles);
         }
+
+        [HttpGet("CountArticles")]
+        public async Task<IActionResult> CountArticles()
+        {
+            var quantity = await _context.Articles.CountAsync();
+
+            return Ok(quantity);
+        }
+
     }
 }

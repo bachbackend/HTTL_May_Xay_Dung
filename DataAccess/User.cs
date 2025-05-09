@@ -27,6 +27,8 @@ public partial class User
 
     public DateTime? ResetTokenExpired { get; set; }
 
+    public string? GoogleId { get; set; }
+
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

@@ -348,5 +348,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
         }
 
+        [HttpGet("CountOrders")]
+        public async Task<IActionResult> CountOrders()
+        {
+            var quantity = await _context.Orders.CountAsync();
+
+            return Ok(quantity);
+        }
+
+
     }
 }

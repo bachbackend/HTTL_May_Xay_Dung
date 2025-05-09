@@ -15,6 +15,8 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <style>
         img:is([sizes="auto" i], [sizes^="auto," i]) {
             contain-intrinsic-size: 3000px 1500px
@@ -1883,6 +1885,7 @@
                                 padding: 10px;
                                 background-color: #fff;
                                 text-align: center;
+                                height: 320px;
                             }
 
                             .product-card img {
@@ -1896,12 +1899,18 @@
                                 font-weight: bold;
                                 margin-top: 10px;
                                 font-size: 16px;
+                                height: 48px;
                             }
 
                             .product-category {
                                 color: #666;
                                 font-size: 14px;
                             }
+                            .product-price {
+                                                    margin-top: auto;
+                                                    text-align: center;
+                                                    color: orange;
+                                                }
 
                             .scrolling-wrapper::-webkit-scrollbar {
                                 height: 8px;
@@ -2495,7 +2504,55 @@
             </div>
         </div>
     </div>
-    <script
+
+    <style>
+        .image-modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    padding-top: 120px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8);
+}
+
+.image-modal .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    animation: zoomIn 0.3s ease-in-out;
+}
+
+.image-modal .close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.image-modal .close-btn:hover {
+    color: #ccc;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(1.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+    </style>
+    <!-- Modal ảnh phóng to -->
+<div id="image-modal" class="image-modal">
+    <span class="close-btn">&times;</span>
+    <img class="modal-content" id="modal-image">
+</div>
+    <!-- <script
         type="application/ld+json">{"@context":"https:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"name":"Shop All","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/\/shop-all\/"}},{"@type":"ListItem","position":2,"item":{"name":"Heavy Equipment","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/product-category\/heavy-equipment\/"}},{"@type":"ListItem","position":3,"item":{"name":"Forklift 5 Ton","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/product\/forklift-5-ton\/"}}]}</script>
     <script>
         const lazyloadRunObserver = () => {
@@ -2522,14 +2579,14 @@
         events.forEach((event) => {
             document.addEventListener(event, lazyloadRunObserver);
         });
-    </script>
-    <script type="text/javascript">
+    </script> -->
+    <!-- <script type="text/javascript">
         (function () {
             var c = document.body.className;
             c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
             document.body.className = c;
         })();
-    </script>
+    </script> -->
     <link rel="stylesheet" id="wc-blocks-style-css" href="./Product-Detail_files/wc-blocks.css" type="text/css"
         media="all">
     <link rel="stylesheet" id="twbb-theme-customize-style-css" href="./Product-Detail_files/theme-customize.css"
@@ -2565,29 +2622,29 @@
     <script type="text/javascript" id=""
         charset="">(function () { var a = document.createElement("script"); a.type = "text/javascript"; a.async = !0; a.src = "https://cdn.firstpromoter.com/fprom.js"; a.onload = a.onreadystatechange = function () { var b = this.readyState; if (!b || "complete" == b || "loaded" == b) try { $FPROM.init("xs0difqj", ".10web.io") } catch (d) { } }; var c = document.getElementsByTagName("script")[0]; c.parentNode.insertBefore(a, c) })();</script>
 
-    <script type="text/javascript" id="" charset="">!function (d, g, e) {
+    <!-- <script type="text/javascript" id="" charset="">!function (d, g, e) {
             d.TiktokAnalyticsObject = e; var a = d[e] = d[e] || []; a.methods = "page track identify instances debug on off once ready alias group enableCookie disableCookie".split(" "); a.setAndDefer = function (b, c) { b[c] = function () { b.push([c].concat(Array.prototype.slice.call(arguments, 0))) } }; for (d = 0; d < a.methods.length; d++)a.setAndDefer(a, a.methods[d]); a.instance = function (b) { b = a._i[b] || []; for (var c = 0; c < a.methods.length; c++)a.setAndDefer(b, a.methods[c]); return b }; a.load = function (b, c) {
                 var f = "https://analytics.tiktok.com/i18n/pixel/events.js";
                 a._i = a._i || {}; a._i[b] = []; a._i[b]._u = f; a._t = a._t || {}; a._t[b] = +new Date; a._o = a._o || {}; a._o[b] = c || {}; c = document.createElement("script"); c.type = "text/javascript"; c.async = !0; c.src = f + "?sdkid\x3d" + b + "\x26lib\x3d" + e; b = document.getElementsByTagName("script")[0]; b.parentNode.insertBefore(c, b)
             }; a.load("CML2UCRC77UBB48CJFDG"); a.page()
-        }(window, document, "ttq");</script>
+        }(window, document, "ttq");</script> -->
 
-    <script type="text/javascript" id=""
+    <!-- <script type="text/javascript" id=""
         charset="">!function (b, e, f, g, a, c, d) { b.fbq || (a = b.fbq = function () { a.callMethod ? a.callMethod.apply(a, arguments) : a.queue.push(arguments) }, b._fbq || (b._fbq = a), a.push = a, a.loaded = !0, a.version = "2.0", a.queue = [], c = e.createElement(f), c.async = !0, c.src = g, d = e.getElementsByTagName(f)[0], d.parentNode.insertBefore(c, d)) }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js"); fbq("init", "2165004553783123"); fbq("set", "agent", "tmgoogletagmanager", "2165004553783123"); fbq("track", "PageView", {}, { eventID: "a0346585-38bb-4ba8-bc94-22d24fa96114_1745545875316.3" });</script>
     <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=2165004553783123&amp;ev=PageView&amp;noscript=1"></noscript>
+            src="https://www.facebook.com/tr?id=2165004553783123&amp;ev=PageView&amp;noscript=1"></noscript> -->
 
     <link rel="stylesheet" id="google-fonts-2-css" href="./Product-Detail_files/css(3)" type="text/css" media="all">
     <link rel="stylesheet" id="elementor-icons-fa-brands-css" href="./Product-Detail_files/brands.min.css"
         type="text/css" media="all">
     <script type="text/javascript" src="./Product-Detail_files/sourcebuster.min.js.download"
         id="sourcebuster-js-js"></script>
-    <script type="text/javascript" id="wc-order-attribution-js-extra">
+    <!-- <script type="text/javascript" id="wc-order-attribution-js-extra">
         /* <![CDATA[ */
         var wc_order_attribution = { "params": { "lifetime": 1.0000000000000001e-5, "session": 30, "base64": false, "ajaxurl": "https:\/\/aisite.10web.io\/70\/wp-admin\/admin-ajax.php", "prefix": "wc_order_attribution_", "allowTracking": true }, "fields": { "source_type": "current.typ", "referrer": "current_add.rf", "utm_campaign": "current.cmp", "utm_source": "current.src", "utm_medium": "current.mdm", "utm_content": "current.cnt", "utm_id": "current.id", "utm_term": "current.trm", "utm_source_platform": "current.plt", "utm_creative_format": "current.fmt", "utm_marketing_tactic": "current.tct", "session_entry": "current_add.ep", "session_start_time": "current_add.fd", "session_pages": "session.pgs", "session_count": "udata.vst", "user_agent": "udata.uag" } };
         /* ]]> */
-    </script>
-    <script type="text/javascript" src="./Product-Detail_files/order-attribution.min.js.download"
+    </script> -->
+    <!-- <script type="text/javascript" src="./Product-Detail_files/order-attribution.min.js.download"
         id="wc-order-attribution-js"></script>
     <script type="text/javascript" id="tbdemo-main-js-extra">
         /* <![CDATA[ */
@@ -2600,7 +2657,7 @@
         /* <![CDATA[ */
         var twbb_theme_customize = { "from_demo": "1", "fonts": { "152": "ABeeZee", "56": "Abel", "288": "Abhaya Libre", "111": "Abril Fatface", "141": "Acme", "290": "Adamina", "263": "Advent Pro", "219": "Alata", "231": "Albert Sans", "154": "Alegreya", "150": "Alegreya Sans", "257": "Alegreya Sans SC", "264": "Aleo", "160": "Alfa Slab One", "201": "Alice", "259": "Allura", "135": "Almarai", "287": "Amaranth", "151": "Amatic SC", "174": "Amiri", "242": "Antic Slab", "64": "Anton", "272": "Antonio", "229": "Architects Daughter", "57": "Archivo", "113": "Archivo Black", "138": "Archivo Narrow", "0": "Arial", "50": "Arimo", "207": "Arsenal", "94": "Arvo", "108": "Asap", "188": "Asap Condensed", "84": "Assistant", "261": "Bangers", "32": "Barlow", "54": "Barlow Condensed", "109": "Barlow Semi Condensed", "156": "Be Vietnam Pro", "49": "Bebas Neue", "53": "Bitter", "227": "Black Ops One", "215": "Bodoni Moda", "149": "Bree Serif", "251": "Bungee", "52": "Cabin", "67": "Cairo", "191": "Cantarell", "185": "Cardo", "278": "Carter One", "129": "Catamaran", "98": "Caveat", "92": "Chakra Petch", "168": "Changa", "166": "Chivo", "144": "Cinzel", "80": "Comfortaa", "273": "Comic Neue", "245": "Commissioner", "172": "Concert One", "244": "Cookie", "167": "Cormorant", "103": "Cormorant Garamond", "178": "Courgette", "280": "Courier Prime", "262": "Creepster", "206": "Crete Round", "130": "Crimson Pro", "77": "Crimson Text", "247": "Cuprum", "269": "DM Mono", "35": "DM Sans", "116": "DM Serif Display", "223": "DM Serif Text", "62": "Dancing Script", "140": "Didact Gothic", "122": "Domine", "51": "Dosis", "66": "EB Garamond", "234": "Eczar", "224": "El Messiri", "165": "Encode Sans", "240": "Encode Sans Condensed", "147": "Exo", "82": "Exo 2", "89": "Figtree", "33": "Fira Sans", "104": "Fira Sans Condensed", "249": "Fira Sans Extra Condensed", "86": "Fjalla One", "197": "Francois One", "145": "Frank Ruhl Libre", "243": "Fraunces", "279": "Fugaz One", "254": "Gelasio", "6": "Georgia", "212": "Gloria Hallelujah", "213": "Gothic A1", "164": "Great Vibes", "226": "Gruppo", "282": "Handlee", "40": "Heebo", "3": "Helvetica", "71": "Hind", "61": "Hind Madurai", "46": "Hind Siliguri", "99": "IBM Plex Mono", "39": "IBM Plex Sans", "131": "IBM Plex Sans Arabic", "190": "IBM Plex Sans Condensed", "119": "IBM Plex Serif", "43": "Inconsolata", "118": "Indie Flower", "13": "Inter", "235": "Inter Tight", "277": "JetBrains Mono", "60": "Josefin Sans", "193": "Josefin Slab", "59": "Jost", "155": "Kalam", "30": "Kanit", "47": "Karla", "210": "Kaushan Script", "171": "Khand", "281": "Kosugi Maru", "275": "Kumbh Sans", "11": "Lato", "192": "League Spartan", "107": "Lexend", "169": "Lexend Deca", "238": "Libre Barcode 39", "63": "Libre Baskerville", "170": "Libre Caslon Text", "44": "Libre Franklin", "114": "Lilita One", "255": "Literata", "81": "Lobster", "184": "Lobster Two", "34": "Lora", "203": "Luckiest Guy", "124": "M PLUS 1p", "90": "M PLUS Rounded 1c", "246": "Macondo", "41": "Manrope", "153": "Marcellus", "177": "Martel", "162": "Mate", "209": "Mate SC", "65": "Material Symbols Rounded", "96": "Maven Pro", "183": "Merienda", "22": "Merriweather", "121": "Merriweather Sans", "268": "Mitr", "9": "Montserrat", "146": "Montserrat Alternates", "45": "Mukta", "286": "Mukta Malar", "29": "Mulish", "38": "Nanum Gothic", "78": "Nanum Gothic Coding", "120": "Nanum Myeongjo", "196": "Neuton", "265": "News Cycle", "137": "Noticia Text", "55": "Noto Color Emoji", "139": "Noto Kufi Arabic", "236": "Noto Naskh Arabic", "17": "Noto Sans", "105": "Noto Sans Arabic", "211": "Noto Sans Bengali", "186": "Noto Sans Display", "75": "Noto Sans HK", "12": "Noto Sans JP", "25": "Noto Sans KR", "228": "Noto Sans Mono", "69": "Noto Sans SC", "31": "Noto Sans TC", "176": "Noto Sans Thai", "48": "Noto Serif", "72": "Noto Serif JP", "173": "Noto Serif KR", "200": "Noto Serif TC", "26": "Nunito", "21": "Nunito Sans", "179": "Old Standard TT", "204": "Oleo Script", "8": "Open Sans", "142": "Orbitron", "15": "Oswald", "73": "Outfit", "91": "Overpass", "68": "Oxygen", "285": "PT Mono", "27": "PT Sans", "187": "PT Sans Caption", "70": "PT Sans Narrow", "42": "PT Serif", "76": "Pacifico", "289": "Parisienne", "180": "Passion One", "220": "Pathway Gothic One", "258": "Patrick Hand", "181": "Patua One", "208": "Paytone One", "115": "Permanent Marker", "163": "Philosopher", "100": "Play", "23": "Playfair Display", "271": "Playfair Display SC", "110": "Plus Jakarta Sans", "248": "Poiret One", "10": "Poppins", "175": "Prata", "85": "Prompt", "79": "Public Sans", "225": "Quattrocento", "205": "Quattrocento Sans", "123": "Questrial", "36": "Quicksand", "95": "Rajdhani", "18": "Raleway", "218": "Readex Pro", "93": "Red Hat Display", "276": "Red Hat Text", "182": "Righteous", "7": "Roboto", "14": "Roboto Condensed", "134": "Roboto Flex", "16": "Roboto Mono", "232": "Roboto Serif", "24": "Roboto Slab", "241": "Rokkitt", "125": "Rowdies", "20": "Rubik", "274": "Rubik Bubbles", "221": "Rubik Mono One", "148": "Russo One", "283": "STIX Two Text", "199": "Sacramento", "216": "Saira", "161": "Saira Condensed", "239": "Sanchez", "136": "Sarabun", "112": "Satisfy", "230": "Sawarabi Gothic", "194": "Sawarabi Mincho", "284": "Secular One", "252": "Sen", "106": "Shadows Into Light", "128": "Signika", "87": "Signika Negative", "256": "Silkscreen", "101": "Slabo 27px", "126": "Sora", "58": "Source Code Pro", "97": "Source Sans 3", "133": "Source Serif 4", "83": "Space Grotesk", "195": "Space Mono", "250": "Special Elite", "158": "Spectral", "267": "Staatliches", "1": "Tahoma", "117": "Tajawal", "260": "Tangerine", "266": "Taviraj", "74": "Teko", "270": "Tenor Sans", "4": "Times New Roman", "157": "Tinos", "198": "Titan One", "37": "Titillium Web", "5": "Trebuchet MS", "19": "Ubuntu", "189": "Ubuntu Condensed", "214": "Ubuntu Mono", "217": "Unbounded", "253": "Unna", "132": "Urbanist", "88": "Varela Round", "2": "Verdana", "292": "Vidaloka", "143": "Vollkorn", "28": "Work Sans", "127": "Yanone Kaffeesatz", "202": "Yantramanav", "291": "Yatra One", "222": "Yellowtail", "237": "Yeseva One", "233": "Zen Kaku Gothic New", "159": "Zeyada", "102": "Zilla Slab" }, "colors": [{ "id": "indigo", "title": "Indigo", "order": 1, "kit": { "system_colors": [{ "_id": "accent", "color": "#283566" }, { "_id": "secondary", "color": "#986424" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#28356626" }, { "_id": "twbb_bg_2", "color": "#98642426" }, { "_id": "twbb_link", "color": "#283566" }, { "_id": "twbb_accent_hover", "color": "#283566CC" }, { "_id": "twbb_link_hover", "color": "#28356680" }] }, "default": true, "accent_color": "#283566", "secondary_color": "#986424" }, { "id": "han_blue", "title": "Han blue", "order": 2, "kit": { "system_colors": [{ "_id": "accent", "color": "#3A5BCC" }, { "_id": "secondary", "color": "#898989" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#3A5BCC26" }, { "_id": "twbb_bg_2", "color": "#89898926" }, { "_id": "twbb_link", "color": "#3A5BCC" }, { "_id": "twbb_accent_hover", "color": "#3A5BCCCC" }, { "_id": "twbb_link_hover", "color": "#3A5BCC80" }] }, "default": true, "accent_color": "#3A5BCC", "secondary_color": "#898989" }, { "id": "orchid_pink", "title": "Orchid pink", "order": 3, "kit": { "system_colors": [{ "_id": "accent", "color": "#E33665" }, { "_id": "secondary", "color": "#898989" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#E3366526" }, { "_id": "twbb_bg_2", "color": "#89898926" }, { "_id": "twbb_link", "color": "#E33665" }, { "_id": "twbb_accent_hover", "color": "#E33665CC" }, { "_id": "twbb_link_hover", "color": "#E3366580" }] }, "default": true, "accent_color": "#E33665", "secondary_color": "#898989" }, { "id": "basque_green", "title": "Basque green", "order": 4, "kit": { "system_colors": [{ "_id": "accent", "color": "#5A5E32" }, { "_id": "secondary", "color": "#DBC75B" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#5A5E3226" }, { "_id": "twbb_bg_2", "color": "#DBC75B26" }, { "_id": "twbb_link", "color": "#5A5E32" }, { "_id": "twbb_accent_hover", "color": "#5A5E32CC" }, { "_id": "twbb_link_hover", "color": "#5A5E3280" }] }, "default": true, "accent_color": "#5A5E32", "secondary_color": "#DBC75B" }, { "id": "red_berry", "title": "Red berry", "order": 5, "kit": { "system_colors": [{ "_id": "accent", "color": "#5F1928" }, { "_id": "secondary", "color": "#DE87C2" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#5F192826" }, { "_id": "twbb_bg_2", "color": "#DE87C226" }, { "_id": "twbb_link", "color": "#5F1928" }, { "_id": "twbb_accent_hover", "color": "#5F1928CC" }, { "_id": "twbb_link_hover", "color": "#5F192880" }] }, "default": true, "accent_color": "#5F1928", "secondary_color": "#DE87C2" }, { "id": "purplish_blue", "title": "Purplish blue", "order": 6, "kit": { "system_colors": [{ "_id": "accent", "color": "#5833F1" }, { "_id": "secondary", "color": "#898989" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#5833F126" }, { "_id": "twbb_bg_2", "color": "#89898926" }, { "_id": "twbb_link", "color": "#5833F1" }, { "_id": "twbb_accent_hover", "color": "#5833F1CC" }, { "_id": "twbb_link_hover", "color": "#5833F180" }] }, "default": true, "accent_color": "#5833F1", "secondary_color": "#898989" }, { "id": "obsidian_shell", "title": "Obsidian shell", "order": 7, "kit": { "system_colors": [{ "_id": "accent", "color": "#821FA0" }, { "_id": "secondary", "color": "#F4C730" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#821FA026" }, { "_id": "twbb_bg_2", "color": "#F4C73026" }, { "_id": "twbb_link", "color": "#821FA0" }, { "_id": "twbb_accent_hover", "color": "#821FA0CC" }, { "_id": "twbb_link_hover", "color": "#821FA080" }] }, "default": true, "accent_color": "#821FA0", "secondary_color": "#F4C730" }, { "id": "beagle_brown", "title": "Beagle brown", "order": 8, "kit": { "system_colors": [{ "_id": "accent", "color": "#8D6D36" }, { "_id": "secondary", "color": "#9EBD59" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#8D6D3626" }, { "_id": "twbb_bg_2", "color": "#9EBD5926" }, { "_id": "twbb_link", "color": "#8D6D36" }, { "_id": "twbb_accent_hover", "color": "#8D6D36CC" }, { "_id": "twbb_link_hover", "color": "#8D6D3680" }] }, "default": true, "accent_color": "#8D6D36", "secondary_color": "#9EBD59" }, { "id": "chinese_plant", "title": "Chinese plant", "order": 9, "kit": { "system_colors": [{ "_id": "accent", "color": "#9EBD59" }, { "_id": "secondary", "color": "#DEBF15" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#9EBD5926" }, { "_id": "twbb_bg_2", "color": "#DEBF1526" }, { "_id": "twbb_link", "color": "#9EBD59" }, { "_id": "twbb_accent_hover", "color": "#9EBD59CC" }, { "_id": "twbb_link_hover", "color": "#9EBD5980" }] }, "default": true, "accent_color": "#9EBD59", "secondary_color": "#DEBF15" }, { "id": "aurora_orange", "title": "Aurora orange", "order": 10, "kit": { "system_colors": [{ "_id": "accent", "color": "#ED6744" }, { "_id": "secondary", "color": "#A7A2A0" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#ED674426" }, { "_id": "twbb_bg_2", "color": "#A7A2A026" }, { "_id": "twbb_link", "color": "#ED6744" }, { "_id": "twbb_accent_hover", "color": "#ED6744CC" }, { "_id": "twbb_link_hover", "color": "#ED674480" }] }, "default": true, "accent_color": "#ED6744", "secondary_color": "#A7A2A0" }], "active_font": "PT Sans", "active_color": "indigo", "typography_ids": ["primary", "secondary", "text", "accent", "twbb_h3", "twbb_h4", "twbb_h5", "twbb_h6", "twbb_p1", "twbb_p3", "twbb_p4", "twbb_p5", "twbb_p6", "twbb_label", "twbb_bold", "twbb_input", "twbb_link"], "ajaxnonce": "cf65469c74", "rest_route": "https:\/\/aisite.10web.io\/70\/wp-json\/tenweb-builder\/v1" };
         /* ]]> */
-    </script>
+    </script> -->
     <script type="text/javascript" src="./Product-Detail_files/theme-customize.js.download"
         id="twbb-theme-customize-script-js"></script>
     <script type="text/javascript" src="./Product-Detail_files/v4-shims.min.js.download"
@@ -2610,37 +2667,37 @@
     <script type="text/javascript" src="./Product-Detail_files/frontend-modules.min.js.download"
         id="elementor-frontend-modules-js"></script>
     <script type="text/javascript" src="./Product-Detail_files/core.min.js.download" id="jquery-ui-core-js"></script>
-    <script type="text/javascript" id="elementor-frontend-js-before">
+    <!-- <script type="text/javascript" id="elementor-frontend-js-before">
         /* <![CDATA[ */
         var elementorFrontendConfig = { "environmentMode": { "edit": false, "wpPreview": false, "isScriptDebug": false }, "i18n": { "shareOnFacebook": "Share on Facebook", "shareOnTwitter": "Share on Twitter", "pinIt": "Pin it", "download": "Download", "downloadImage": "Download image", "fullscreen": "Fullscreen", "zoom": "Zoom", "share": "Share", "playVideo": "Play Video", "previous": "Previous", "next": "Next", "close": "Close", "a11yCarouselPrevSlideMessage": "Previous slide", "a11yCarouselNextSlideMessage": "Next slide", "a11yCarouselFirstSlideMessage": "This is the first slide", "a11yCarouselLastSlideMessage": "This is the last slide", "a11yCarouselPaginationBulletMessage": "Go to slide" }, "is_rtl": false, "breakpoints": { "xs": 0, "sm": 480, "md": 768, "lg": 1025, "xl": 1440, "xxl": 1600 }, "responsive": { "breakpoints": { "mobile": { "label": "Mobile Portrait", "value": 767, "default_value": 767, "direction": "max", "is_enabled": true }, "mobile_extra": { "label": "Mobile Landscape", "value": 880, "default_value": 880, "direction": "max", "is_enabled": false }, "tablet": { "label": "Tablet Portrait", "value": 1024, "default_value": 1024, "direction": "max", "is_enabled": true }, "tablet_extra": { "label": "Tablet Landscape", "value": 1200, "default_value": 1200, "direction": "max", "is_enabled": false }, "laptop": { "label": "Laptop", "value": 1366, "default_value": 1366, "direction": "max", "is_enabled": false }, "widescreen": { "label": "Widescreen", "value": 2400, "default_value": 2400, "direction": "min", "is_enabled": false } }, "hasCustomBreakpoints": false }, "version": "3.27.6", "is_static": false, "experimentalFeatures": { "container": true, "e_swiper_latest": true, "e_onboarding": true, "home_screen": true, "link-in-bio": true, "floating-buttons": true, "launchpad-checklist": true, "fast_editing_tools": true, "sections_generation": true, "co_pilot": true }, "urls": { "assets": "https:\/\/aisite.10web.io\/70\/wp-content\/plugins\/elementor\/assets\/", "ajaxurl": "https:\/\/aisite.10web.io\/70\/wp-admin\/admin-ajax.php", "uploadUrl": "https:\/\/aisite.10web.io\/70\/wp-content\/uploads\/sites\/172" }, "nonces": { "floatingButtonsClickTracking": "ff136c8d12" }, "swiperClass": "swiper", "settings": { "page": [], "editorPreferences": [] }, "kit": { "active_breakpoints": ["viewport_mobile", "viewport_tablet"], "global_image_lightbox": "yes", "lightbox_enable_counter": "yes", "lightbox_enable_fullscreen": "yes", "lightbox_enable_zoom": "yes", "lightbox_enable_share": "yes", "lightbox_title_src": "title", "lightbox_description_src": "description", "body_background_background": "classic", "woocommerce_notices_elements": ["wc_error", "wc_message", "wc_info"] }, "post": { "id": 82359, "title": "Forklift%205%20Ton", "excerpt": "5 Ton Forklift for material handling", "featuredImage": "https:\/\/aisite.10web.io\/70\/wp-content\/uploads\/sites\/172\/2025\/04\/tenweb_media_rwskjmfvg.webp" } };
         /* ]]> */
-    </script>
+    </script> -->
     <script type="text/javascript" src="./Product-Detail_files/frontend.min.js.download"
         id="elementor-frontend-js"></script><span id="elementor-device-mode" class="elementor-screen-only"></span>
-    <script type="text/javascript" id="twbb-pro-features-frontend-script-js-extra">
+    <!-- <script type="text/javascript" id="twbb-pro-features-frontend-script-js-extra">
         /* <![CDATA[ */
         var ElementorTenwebFrontendConfig = { "ajaxurl": "https:\/\/aisite.10web.io\/70\/wp-admin\/admin-ajax.php", "nonce": "06e21402b1", "urls": { "assets": "https:\/\/aisite.10web.io\/70\/wp-content\/plugins\/tenweb-builder\/pro-features\/assets\/" }, "woocommerce": { "menu_cart": { "cart_page_url": "https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/\/cart\/", "checkout_page_url": "https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/\/checkout\/", "fragments_nonce": "43bc13c6f4" } } };
         /* ]]> */
-    </script>
+    </script> -->
     <script type="text/javascript" src="./Product-Detail_files/concated_frontend.min.js.download"
         id="twbb-pro-features-frontend-script-js"></script>
     <script type="text/javascript" src="./Product-Detail_files/underscore.min.js.download" id="underscore-js"></script>
     <script type="text/javascript" src="./Product-Detail_files/imagesloaded.min.js.download"
         id="imagesloaded-js"></script>
     <script type="text/javascript" src="./Product-Detail_files/masonry.min.js.download" id="masonry-js"></script>
-    <script type="text/javascript" id="wc-cart-fragments-js-extra">
+    <!-- <script type="text/javascript" id="wc-cart-fragments-js-extra">
         /* <![CDATA[ */
         var wc_cart_fragments_params = { "ajax_url": "\/70\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/70\/?wc-ajax=%%endpoint%%", "cart_hash_key": "wc_cart_hash_432a82f1708a60b6ab04ecaa6182497c", "fragment_name": "wc_fragments_432a82f1708a60b6ab04ecaa6182497c", "request_timeout": "5000" };
         /* ]]> */
-    </script>
+    </script> -->
     <script type="text/javascript" src="./Product-Detail_files/cart-fragments.min.js.download" id="wc-cart-fragments-js"
         data-wp-strategy="defer"></script>
-    <script type="text/javascript" id="twbb-frontend-scripts-js-extra">
+    <!-- <script type="text/javascript" id="twbb-frontend-scripts-js-extra">
         /* <![CDATA[ */
         var twbb = { "ajaxurl": "https:\/\/aisite.10web.io\/70\/wp-admin\/admin-ajax.php", "home_url": "https:\/\/aisite.10web.io\/70", "nonce": "0e6646c799", "tenweb_dashboard": "https:\/\/my.10web.io", "swiper_latest": "active", "woocommerce": { "add_to_cart": "Add to cart", "added": "Added" } };
         var TWBBFrontendConfig = { "facebook_sdk": { "lang": "en_US", "app_id": "" } };
         /* ]]> */
-    </script>
+    </script> -->
     <script type="text/javascript" src="./Product-Detail_files/frontend.min(1).js.download"
         id="twbb-frontend-scripts-js"></script>
     <script type="text/javascript" src="./Product-Detail_files/jquery.sticky.min.js.download"
@@ -2762,12 +2819,14 @@
             products
                 .filter(p => p.id !== currentProductId) // Loại bỏ chính sản phẩm đang xem
                 .forEach(product => {
+                    const formattedPrice = new Intl.NumberFormat('vi-VN').format(product.productPrice) + "₫";
                     const productHTML = `
                     <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
                         <div class="product-card">
                         <img src="https://localhost:7205/images/product/${product.image}" alt="${product.name}">
                         <div class="product-name">${product.name}</div>
                         <div class="product-category">${product.categoryName}</div>
+                        <div class="product-price">Giá: ${formattedPrice}</div>
                         </div>
                     </a>
           `;
@@ -3009,6 +3068,33 @@
                 dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
             });
     });
+
+
+
+
+    // Modal phóng to ảnh
+const imageLink = document.getElementById('product-image-link');
+const modal = document.getElementById('image-modal');
+const modalImg = document.getElementById('modal-image');
+const closeBtn = document.querySelector('.close-btn');
+
+imageLink.addEventListener('click', function (event) {
+    event.preventDefault(); // Ngăn redirect
+    modal.style.display = "block";
+    modalImg.src = this.href;
+});
+
+// Đóng modal khi bấm nút đóng
+closeBtn.addEventListener('click', function () {
+    modal.style.display = "none";
+});
+
+// Đóng modal khi bấm ngoài ảnh
+modal.addEventListener('click', function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
 
 
 </script>

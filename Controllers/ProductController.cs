@@ -519,5 +519,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(products);
         }
 
+        [HttpGet("CountProducts")]
+        public async Task<IActionResult> CountProducts()
+        {
+            // Lấy 3 sản phẩm mới nhất dựa trên CreatedAt
+            var quantity = await _context.Products.CountAsync();
+
+            return Ok(quantity);
+        }
+
     }
 }

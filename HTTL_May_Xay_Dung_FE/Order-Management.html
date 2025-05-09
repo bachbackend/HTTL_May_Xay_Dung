@@ -529,7 +529,7 @@
             let startDate = document.getElementById('startDate').value;
             let endDate = document.getElementById('endDate').value;
             // const searchStatus = document.getElementById('searchStatus').value;
-            let url = `https://localhost:7205/api/Order/GetAllOrderSortByDate?pageNumber=${pageNumber}&pageSize=10`;
+            let url = `https://localhost:7205/api/Order/GetAllOrderSortByDate?pageNumber=${pageNumber}&pageSize=15`;
             currentPage = pageNumber;
 
             const params = new URLSearchParams();
@@ -592,7 +592,7 @@
                 <td>${order.specificAddress}</td>
                 <td style="width: 100px;">${order.cityName}</td>
                 <td style="width: 150px;">${order.phoneNumber}</td>
-                <td style="width: 150px;">${new Date(order.orderDate).toLocaleDateString()}</td>
+                <td style="width: 150px;">${new Date(order.orderDate).toLocaleString('vi-VN')}</td>
                 <td>
                 ${(() => {
                                 switch (order.statusName) {
