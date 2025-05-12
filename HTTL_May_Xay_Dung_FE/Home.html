@@ -1267,32 +1267,6 @@
                                         display: none !important;
                                     }
                                 </style>
-                                <!-- <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
-                                    <a href="Cart.html" class="twbb-item"
-                                        style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
-                                        <i class="fa fa-shopping-cart"
-                                            style="font-size: 20px; margin-left: 5px; position: relative;"></i>
-                                        <span id="cart-count" style="
-                                                    position: absolute;
-                                                    top: -5px;
-                                                    right: -8px;
-                                                    background-color: red;
-                                                    color: white;
-                                                    font-size: 10px;
-                                                    font-weight: bold;
-                                                    padding: 2px 5px;
-                                                    border-radius: 50%;
-                                                    min-width: 18px;
-                                                    text-align: center;
-                                                    line-height: 1;
-                                                    border: 2px solid white;">
-                                            0
-                                        </span>
-                                    </a>
-                                    <ul class="dropdown-menu1" id="cart-dropdown" style="right: 0; left: auto;"></ul>
-                                </li> -->
                                 <li class="menu-item dropdown" id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
@@ -1336,35 +1310,117 @@
                             style="width: 1521px; left: 0px; top: 38px;">
                             <ul id="menu-2-dbt0obf5" class="twbb-nav-menu twbb-menu_term_id-8743"
                                 data-smartmenus-id="17454618201219614">
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82380">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/construction-tools/"
-                                        class="twbb-item">Construction Tools</a>
+                                <style>
+                                    .dropdown-menu {
+                                        display: none;
+                                        list-style: none;
+                                        padding: 12px 16px;
+                                        /* tăng padding để dễ bấm */
+                                        background: #fff;
+                                        position: absolute;
+                                        top: 100%;
+                                        left: 0;
+                                        z-index: 99;
+                                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                                        min-width: 220px;
+                                        /* tăng độ rộng tối thiểu */
+                                        font-size: 16px;
+                                        /* phông to hơn chút */
+                                    }
+
+                                    .dropdown-menu li {
+                                        margin-bottom: 8px;
+                                        /* khoảng cách giữa các mục */
+                                    }
+
+                                    .dropdown-menu li:last-child {
+                                        margin-bottom: 0;
+                                    }
+
+                                    .menu-item:hover .dropdown-menu {
+                                        display: block;
+                                    }
+
+                                    @media (max-width: 768px) {
+                                        .dropdown-menu {
+                                            position: static;
+                                            display: none;
+                                            box-shadow: none;
+                                            min-width: 100%;
+                                            padding: 10px 14px;
+                                        }
+
+                                        .menu-item.open .dropdown-menu {
+                                            display: block;
+                                        }
+                                    }
+                                </style>
+                                <li class="menu-item1">
+                                    <a href="#" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>GIỚI
+                                            THIỆU</strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./AboutUs.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Giới thiệu về
+                                                    chúng tôi</strong></a></li>
+                                        <li><a href="./HistoryCompany.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Lịch sử phát
+                                                    triển</strong></a></li>
+                                        <li><a href="./DevelopmentOrientation.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Định hướng
+                                                    phát triển</strong></a></li>
+                                    </ul>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82381">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/heavy-equipment/"
-                                        class="twbb-item">Heavy Equipment</a>
+                                    <a href="./Product.html" class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>SẢN PHẨM</strong></a>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-82382">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product-category/safety-gear/"
-                                        class="twbb-item">Safety Gear</a>
+                                    <a href="./Article.html"
+                                        class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>BÀI VIẾT</strong></a>
                                 </li>
                                 <li
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82383">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/winter-essentials/"
-                                        class="twbb-item">Winter Essentials</a>
+                                    <a href="./Contact.html"
+                                    class="twbb-item" style="font-family: Arial, sans-serif !important;"><strong>LIÊN HỆ</strong></a>
                                 </li>
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/contractors-choice/"
-                                        class="twbb-item">Contractor’s Choice</a>
+                                <li class="menu-item1">
+                                    <a href="#" class="twbb-item"
+                                        style="font-family: Arial, sans-serif !important;"><strong>CHÍNH SÁCH</strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="./TermsAndConditions.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Điều khoản & điều kiện</strong></a></li>
+                                        <li><a href="./Privacy.html"
+                                                style="font-family: Arial, sans-serif !important;"><strong>Chính sách bảo mật</strong></a></li>
+                                    </ul>
                                 </li>
-                                <li
-                                    class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82385">
-                                    <a href="https://aisite.10web.io/70/entirely-humane-lacewing/power-tools/"
-                                        class="twbb-item">Power Tools</a>
+                                <li id="cart-menu">
+                                    <a href="Cart.html" class="twbb-item"
+                                        style="position: relative; display: inline-block;">
+                                        <strong>GIỎ HÀNG</strong>
+                                        <i class="fa fa-shopping-cart"
+                                            style="font-size: 20px; margin-left: 5px; position: relative;"></i>
+                                        <span id="cart-count" style="
+                                                    position: absolute;
+                                                    top: -5px;
+                                                    right: -8px;
+                                                    background-color: red;
+                                                    color: white;
+                                                    font-size: 10px;
+                                                    font-weight: bold;
+                                                    padding: 2px 5px;
+                                                    border-radius: 50%;
+                                                    min-width: 18px;
+                                                    text-align: center;
+                                                    line-height: 1;
+                                                    border: 2px solid white;">
+                                            0
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="menu-item d-inline-block" id="auth-links1">
+                                    <!-- Nội dung sẽ được JavaScript thay đổi -->
                                 </li>
                             </ul>
                         </nav>
@@ -1378,7 +1434,7 @@
                 
             </div>
         </div>
-        <div class="elementor-element elementor-element-2hox7bwj twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky__spacer"
+        <!-- <div class="elementor-element elementor-element-2hox7bwj twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded elementor-sticky elementor-sticky__spacer"
             data-id="2hox7bwj" data-element_type="container" id="header"
             data-settings="{&quot;tenweb_sticky_effects_offset&quot;:100,&quot;position&quot;:&quot;absolute&quot;,&quot;background_background&quot;:&quot;classic&quot;,&quot;tenweb_sticky&quot;:&quot;top&quot;,&quot;tenweb_sticky_on&quot;:[&quot;desktop&quot;,&quot;tablet&quot;,&quot;mobile&quot;],&quot;tenweb_sticky_offset&quot;:0}"
             style="visibility: hidden; transition: none; animation: auto ease 0s 1 normal none running none;">
@@ -1479,58 +1535,9 @@
                         </style>
                     </div>
                 </div>
-                <div class="elementor-element elementor-element-pncer879 e-con-full e-flex e-con e-parent e-lazyloaded"
-                    data-id="pncer879" data-element_type="container">
-                    <div class="elementor-element elementor-element-ltok8oyl elementor-view-default elementor-widget elementor-widget-icon"
-                        data-id="ltok8oyl" data-element_type="widget" data-widget_type="icon.default">
-                        <div class="elementor-widget-container">
-                            <div class="elementor-icon-wrapper">
-                                <a class="elementor-icon"
-                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/my-account//">
-                                    <i aria-hidden="true" class="fas fa-user-alt"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-te3i7due toggle-icon--custom remove-item-position--top twbb_menu-cart--empty-indicator-hide twbb_menu-cart--items-indicator-bubble twbb_menu-cart--cart-type-side-cart twbb_menu-cart--show-remove-button-yes elementor-widget elementor-widget-twbb_woocommerce-menu-cart"
-                        data-id="te3i7due" data-element_type="widget"
-                        data-settings="{&quot;automatically_open_cart&quot;:&quot;yes&quot;,&quot;cart_type&quot;:&quot;side-cart&quot;,&quot;open_cart&quot;:&quot;click&quot;}"
-                        data-widget_type="twbb_woocommerce-menu-cart.default">
-                        <div class="elementor-widget-container">
-                            <div class="twbb_menu-cart__wrapper">
-                                <div class="twbb_menu-cart__toggle_wrapper">
-                                    <div class="twbb_menu-cart__container elementor-lightbox" aria-hidden="true">
-                                        <div class="twbb_menu-cart__main" aria-hidden="true">
-                                            <div class="twbb_menu-cart__close-button">
-                                            </div>
-                                            <div class="widget_shopping_cart_content">
-                                                <div class="woocommerce-mini-cart__empty-message">No products in the
-                                                    cart.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="twbb_menu-cart__toggle elementor-button-wrapper">
-                                        <a id="twbb_menu-cart__toggle_button"
-                                            href="https://aisite.10web.io/70/entirely-humane-lacewing/#"
-                                            class="twbb_menu-cart__toggle_button elementor-button elementor-size-sm"
-                                            aria-expanded="false">
-                                            <span class="elementor-button-text"><span
-                                                    class="woocommerce-Price-amount amount"><bdi><span
-                                                            class="woocommerce-Price-currencySymbol">$</span>0.00</bdi></span></span>
-                                            <span class="elementor-button-icon">
-                                                <span class="elementor-button-icon-qty" data-counter="0">0</span>
-                                                <i class="e-toggle-cart-custom-icon fas fa-shopping-bag"
-                                                    aria-hidden="true"></i> <span
-                                                    class="elementor-screen-only">Cart</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div> <!-- close twbb_menu-cart__wrapper -->
-                        </div>
-                    </div>
-                </div>
+                
             </div>
-        </div>
+        </div> -->
     </div>
     <div data-elementor-type="wp-page" data-elementor-id="82369" class="elementor elementor-82369">
         <section
@@ -4855,202 +4862,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="elementor-element elementor-element-5jylkpr6 e-con-full twbb_section e-flex e-con e-parent e-lazyloaded"
-                                        data-id="5jylkpr6" data-element_type="container"
-                                        id="explore-our-construction-tools">
-                                        <div class="elementor-element elementor-element-ehss3zwc elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-grid-10 elementor-product-loop-item--align-left tenweb-widget-slider-yes tenweb-widget-slider--full-width-layout-full-width elementor-grid-tablet-2 elementor-grid-mobile-1 twbb-product-images-default twbb-product-title-default twbb-product-description-default tenweb-widget-slider--full-width-yes tenweb-widget-slider--full-width-tablet-yes tenweb-widget-slider--full-width-mobile-no tenweb-widget-slider--full-width-layout-tablet-full-width tenweb-arrows-yes tenweb-arrows-tablet-yes tenweb-arrows-mobile-no tenweb-widget-slider--edge-arrows-disable tenweb-widget-slider--navigation-position-outside tenweb-widget-slider--navigation-position-tablet-outside tenweb-widget-slider--navigation-position-mobile-outside tenweb-widget-slider--arrows-position-right tenweb-widget-slider--arrows-position-tablet-right tenweb-widget-slider--arrows-position-mobile-right tenweb-pagination-yes tenweb-pagination-tablet-yes tenweb-pagination-mobile-yes tenweb-widget-slider--pagination-position-outside tenweb-widget-slider--pagination-position-tablet-outside tenweb-widget-slider--pagination-position-mobile-outside tenweb-pagination-type-bullets tenweb-widget-slider--pagination-position-left tenweb-widget-slider--pagination-position-tablet-left tenweb-widget-slider--pagination-position-mobile-center twbb-badge-type-sale elementor-products-grid elementor-wc-products elementor-widget elementor-widget-twbb_woocommerce-products e-widget-swiper"
-                                            data-id="ehss3zwc" data-element_type="widget"
-                                            data-settings="{&quot;slides_per_view&quot;:&quot;4&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;loop&quot;:&quot;yes&quot;,&quot;speed&quot;:500,&quot;show_pagination&quot;:&quot;yes&quot;,&quot;show_pagination_tablet&quot;:&quot;yes&quot;,&quot;show_pagination_mobile&quot;:&quot;yes&quot;,&quot;pagination&quot;:&quot;bullets&quot;,&quot;autoplay_speed&quot;:5000,&quot;pause_on_interaction&quot;:&quot;yes&quot;,&quot;classic_skin_image_aspect_ratio&quot;:&quot;1:1&quot;}"
-                                            data-widget_type="twbb_woocommerce-products.classic">
-                                            <div class="elementor-widget-container">
-                                                <div class="woocommerce columns-10 ">
-                                                    <ul class="products elementor-grid tenweb-widget-slider swiper swiper-horizontal swiper-initialized swiper-pointer-events swiper-backface-hidden"
-                                                        data-settings="{&quot;slider_view&quot;:null,&quot;slides_per_view&quot;:null,&quot;slides_to_scroll&quot;:null,&quot;slides_count&quot;:10,&quot;pagination&quot;:null,&quot;show_arrows&quot;:null,&quot;speed&quot;:null,&quot;autoplay&quot;:null,&quot;autoplay_speed&quot;:null,&quot;loop&quot;:null,&quot;pause_on_interaction&quot;:null,&quot;breakpoints&quot;:{&quot;space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:14,&quot;sizes&quot;:[]},&quot;space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:14,&quot;sizes&quot;:[]},&quot;space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:14,&quot;sizes&quot;:[]}}}"
-                                                        id="tenweb-widget-slider-ehss3zwc">
-                                                        <div class="swiper-wrapper"
-                                                            id="swiper-wrapper-2b1853f26d241057b" aria-live="polite"
-                                                            style="cursor: grab; transform: translate3d(0px, 0px, 0px);">
-                                                            <li class="swiper-slide product type-product post-82355 status-publish first instock product_cat-construction-tools-entirely-humane-lacewing product_tag-heavy-duty-collection-entirely-humane-lacewing product_tag-power-tools-entirely-humane-lacewing has-post-thumbnail shipping-taxable purchasable product-type-simple swiper-slide-active"
-                                                                role="group" aria-label="1 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/laser-level-tool/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;"><img width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_r94xnpsr7.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async"></div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">Laser
-                                                                        Level Tool</h2>
-                                                                    <span class="price"><span
-                                                                            class="woocommerce-Price-amount amount"><bdi><span
-                                                                                    class="woocommerce-Price-currencySymbol">$</span>49.99</bdi></span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82355"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82355"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82355" data-product_sku=""
-                                                                    aria-label="Add to cart: “Laser Level Tool”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Laser Level Tool” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82355"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                            <li class="swiper-slide product type-product post-82354 status-publish instock product_cat-construction-tools-entirely-humane-lacewing product_tag-contractors-choice-entirely-humane-lacewing has-post-thumbnail shipping-taxable purchasable product-type-simple swiper-slide-next"
-                                                                role="group" aria-label="2 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/adjustable-wrench-set/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;"><img width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rgh7dcmpr.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async"></div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">
-                                                                        Adjustable Wrench Set</h2>
-                                                                    <span class="price"><span
-                                                                            class="woocommerce-Price-amount amount"><bdi><span
-                                                                                    class="woocommerce-Price-currencySymbol">$</span>39.99</bdi></span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82354"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82354"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82354" data-product_sku=""
-                                                                    aria-label="Add to cart: “Adjustable Wrench Set”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Adjustable Wrench Set” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82354"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                            <li class="swiper-slide product type-product post-82353 status-publish instock product_cat-construction-tools-entirely-humane-lacewing product_tag-heavy-duty-collection-entirely-humane-lacewing product_tag-winter-essentials-entirely-humane-lacewing has-post-thumbnail sale shipping-taxable purchasable product-type-simple"
-                                                                role="group" aria-label="3 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/heavy-duty-hammer/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;">
-                                                                            <span class="onsale">Sale</span>
-                                                                            <img loading="lazy" width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rkfklnpwq.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async">
-                                                                        </div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">
-                                                                        Heavy-Duty Hammer</h2>
-                                                                    <span class="price"><del aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>24.99</bdi></span></del>
-                                                                        <span class="screen-reader-text">Original price
-                                                                            was: $24.99.</span><ins
-                                                                            aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>18.99</bdi></span></ins><span
-                                                                            class="screen-reader-text">Current price is:
-                                                                            $18.99.</span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82353"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82353"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82353" data-product_sku=""
-                                                                    aria-label="Add to cart: “Heavy-Duty Hammer”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Heavy-Duty Hammer” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82353"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                            <li class="swiper-slide product type-product post-82352 status-publish instock product_cat-construction-tools-entirely-humane-lacewing product_tag-contractors-choice-entirely-humane-lacewing product_tag-power-tools-entirely-humane-lacewing has-post-thumbnail sale shipping-taxable purchasable product-type-simple"
-                                                                role="group" aria-label="4 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/cordless-drill-20v/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;">
-                                                                            <span class="onsale">Sale</span>
-                                                                            <img loading="lazy" width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rantdpcih.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async">
-                                                                        </div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">Cordless
-                                                                        Drill 20V</h2>
-                                                                    <span class="price"><del aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>89.99</bdi></span></del>
-                                                                        <span class="screen-reader-text">Original price
-                                                                            was: $89.99.</span><ins
-                                                                            aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>67.99</bdi></span></ins><span
-                                                                            class="screen-reader-text">Current price is:
-                                                                            $67.99.</span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82352"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82352"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82352" data-product_sku=""
-                                                                    aria-label="Add to cart: “Cordless Drill 20V”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Cordless Drill 20V” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82352"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                        </div>
-                                                        <div class="swiper-pagination-container">
-                                                            <div
-                                                                class="swiper-pagination swiper-pagination-null swiper-pagination-horizontal">
-                                                            </div>
-                                                            <div class="swiper-pagination-arrows-container">
-                                                                <div
-                                                                    class="swiper-pagination-arrows-wrapper twbb-slider-arrows-icon arrow2">
-                                                                    <div class="swiper-button swiper-button-prev swiper-button-disabled"
-                                                                        tabindex="-1" role="button"
-                                                                        aria-label="Previous slide"
-                                                                        aria-controls="swiper-wrapper-2b1853f26d241057b"
-                                                                        aria-disabled="true"></div>
-                                                                    <div class="swiper-button swiper-button-next"
-                                                                        tabindex="0" role="button"
-                                                                        aria-label="Next slide"
-                                                                        aria-controls="swiper-wrapper-2b1853f26d241057b"
-                                                                        aria-disabled="false"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <span class="swiper-notification" aria-live="assertive"
-                                                            aria-atomic="true"></span><span class="swiper-notification"
-                                                            aria-live="assertive" aria-atomic="true"></span>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                     <div class="container mt-5">
                                         <h4 class="mb-3">Sản phẩm mới nhất</h4>
                                         <div class="scrolling-wrapper" id="newestProductList">
@@ -5230,203 +5041,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="elementor-element elementor-element-y4ofr6he e-con-full twbb_section e-flex e-con e-parent e-lazyloaded"
-                                        data-id="y4ofr6he" data-element_type="container" id="safety-first-gear-up">
-                                        <div class="elementor-element elementor-element-w46rxahr elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-grid-10 elementor-product-loop-item--align-left tenweb-widget-slider-yes tenweb-widget-slider--full-width-layout-cut-from-right elementor-grid-tablet-2 elementor-grid-mobile-1 twbb-product-images-default twbb-product-title-default twbb-product-description-default tenweb-widget-slider--full-width-yes tenweb-widget-slider--full-width-tablet-yes tenweb-widget-slider--full-width-mobile-no tenweb-widget-slider--full-width-layout-tablet-full-width tenweb-arrows-yes tenweb-arrows-tablet-yes tenweb-arrows-mobile-no tenweb-widget-slider--edge-arrows-disable tenweb-widget-slider--navigation-position-outside tenweb-widget-slider--navigation-position-tablet-outside tenweb-widget-slider--navigation-position-mobile-outside tenweb-widget-slider--arrows-position-right tenweb-widget-slider--arrows-position-tablet-right tenweb-widget-slider--arrows-position-mobile-right tenweb-pagination-yes tenweb-pagination-tablet-yes tenweb-pagination-mobile-yes tenweb-widget-slider--pagination-position-outside tenweb-widget-slider--pagination-position-tablet-outside tenweb-widget-slider--pagination-position-mobile-outside tenweb-pagination-type-bullets tenweb-widget-slider--pagination-position-left tenweb-widget-slider--pagination-position-tablet-left tenweb-widget-slider--pagination-position-mobile-center twbb-badge-type-sale elementor-products-grid elementor-wc-products elementor-widget elementor-widget-twbb_woocommerce-products e-widget-swiper"
-                                            data-id="w46rxahr" data-element_type="widget"
-                                            data-settings="{&quot;slides_per_view&quot;:&quot;4&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;loop&quot;:&quot;yes&quot;,&quot;speed&quot;:500,&quot;show_pagination&quot;:&quot;yes&quot;,&quot;show_pagination_tablet&quot;:&quot;yes&quot;,&quot;show_pagination_mobile&quot;:&quot;yes&quot;,&quot;pagination&quot;:&quot;bullets&quot;,&quot;autoplay_speed&quot;:5000,&quot;pause_on_interaction&quot;:&quot;yes&quot;,&quot;classic_skin_image_aspect_ratio&quot;:&quot;1:1&quot;}"
-                                            data-widget_type="twbb_woocommerce-products.classic">
-                                            <div class="elementor-widget-container">
-                                                <div class="woocommerce columns-10 ">
-                                                    <ul class="products elementor-grid tenweb-widget-slider swiper swiper-horizontal swiper-initialized swiper-pointer-events swiper-backface-hidden"
-                                                        data-settings="{&quot;slider_view&quot;:null,&quot;slides_per_view&quot;:null,&quot;slides_to_scroll&quot;:null,&quot;slides_count&quot;:10,&quot;pagination&quot;:null,&quot;show_arrows&quot;:null,&quot;speed&quot;:null,&quot;autoplay&quot;:null,&quot;autoplay_speed&quot;:null,&quot;loop&quot;:null,&quot;pause_on_interaction&quot;:null,&quot;breakpoints&quot;:{&quot;space_between&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:14,&quot;sizes&quot;:[]},&quot;space_between_tablet&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:14,&quot;sizes&quot;:[]},&quot;space_between_mobile&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;size&quot;:14,&quot;sizes&quot;:[]}}}"
-                                                        id="tenweb-widget-slider-w46rxahr">
-                                                        <div class="swiper-wrapper" id="swiper-wrapper-759a8acdd74c2b61"
-                                                            aria-live="polite"
-                                                            style="cursor: grab; transform: translate3d(0px, 0px, 0px);">
-                                                            <li class="swiper-slide product type-product post-82363 status-publish first instock product_cat-safety-gear-entirely-humane-lacewing product_tag-heavy-duty-collection-entirely-humane-lacewing has-post-thumbnail shipping-taxable purchasable product-type-simple swiper-slide-active"
-                                                                role="group" aria-label="1 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/hard-hat-with-face-shield/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;"><img
-                                                                                loading="lazy" width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rz6ct0h4f.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async"></div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">Hard Hat
-                                                                        with Face Shield</h2>
-                                                                    <span class="price"><span
-                                                                            class="woocommerce-Price-amount amount"><bdi><span
-                                                                                    class="woocommerce-Price-currencySymbol">$</span>34.99</bdi></span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82363"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82363"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82363" data-product_sku=""
-                                                                    aria-label="Add to cart: “Hard Hat with Face Shield”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Hard Hat with Face Shield” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82363"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                            <li class="swiper-slide product type-product post-82362 status-publish instock product_cat-safety-gear-entirely-humane-lacewing product_tag-power-tools-entirely-humane-lacewing has-post-thumbnail shipping-taxable purchasable product-type-simple swiper-slide-next"
-                                                                role="group" aria-label="2 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/protective-safety-goggles/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;"><img
-                                                                                loading="lazy" width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rofzbw9oc.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async"></div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">
-                                                                        Protective Safety Goggles</h2>
-                                                                    <span class="price"><span
-                                                                            class="woocommerce-Price-amount amount"><bdi><span
-                                                                                    class="woocommerce-Price-currencySymbol">$</span>14.99</bdi></span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82362"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82362"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82362" data-product_sku=""
-                                                                    aria-label="Add to cart: “Protective Safety Goggles”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Protective Safety Goggles” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82362"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                            <li class="swiper-slide product type-product post-82361 status-publish instock product_cat-safety-gear-entirely-humane-lacewing product_tag-contractors-choice-entirely-humane-lacewing has-post-thumbnail sale shipping-taxable purchasable product-type-simple"
-                                                                role="group" aria-label="3 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/steel-toe-work-boots/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;">
-                                                                            <span class="onsale">Sale</span>
-                                                                            <img loading="lazy" width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rmxepkzxy.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async">
-                                                                        </div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">
-                                                                        Steel-Toe Work Boots</h2>
-                                                                    <span class="price"><del aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>89.99</bdi></span></del>
-                                                                        <span class="screen-reader-text">Original price
-                                                                            was: $89.99.</span><ins
-                                                                            aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>67.99</bdi></span></ins><span
-                                                                            class="screen-reader-text">Current price is:
-                                                                            $67.99.</span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82361"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82361"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82361" data-product_sku=""
-                                                                    aria-label="Add to cart: “Steel-Toe Work Boots”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“Steel-Toe Work Boots” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82361"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                            <li class="swiper-slide product type-product post-82360 status-publish instock product_cat-safety-gear-entirely-humane-lacewing product_tag-winter-essentials-entirely-humane-lacewing has-post-thumbnail sale shipping-taxable purchasable product-type-simple"
-                                                                role="group" aria-label="4 / 4"
-                                                                style="width: 464.333px; margin-right: 14px;">
-                                                                <a href="https://aisite.10web.io/70/entirely-humane-lacewing/product/high-visibility-safety-vest/"
-                                                                    class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                                    <div class="twbb-image-wrap">
-                                                                        <div class="twbb-image-container"
-                                                                            style="aspect-ratio: 1/1;">
-                                                                            <span class="onsale">Sale</span>
-                                                                            <img loading="lazy" width="1024"
-                                                                                height="1024"
-                                                                                src="./Home_files/tenweb_media_rgqryfdnq.webp"
-                                                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                                                                                alt="" data-image="main"
-                                                                                decoding="async">
-                                                                        </div>
-                                                                    </div>
-                                                                    <h2 class="woocommerce-loop-product__title">
-                                                                        High-Visibility Safety Vest</h2>
-                                                                    <span class="price"><del aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>19.99</bdi></span></del>
-                                                                        <span class="screen-reader-text">Original price
-                                                                            was: $19.99.</span><ins
-                                                                            aria-hidden="true"><span
-                                                                                class="woocommerce-Price-amount amount"><bdi><span
-                                                                                        class="woocommerce-Price-currencySymbol">$</span>14.99</bdi></span></ins><span
-                                                                            class="screen-reader-text">Current price is:
-                                                                            $14.99.</span></span>
-                                                                </a><a
-                                                                    href="https://aisite.10web.io/70/entirely-humane-lacewing/?add-to-cart=82360"
-                                                                    aria-describedby="woocommerce_loop_add_to_cart_link_describedby_82360"
-                                                                    data-quantity="1"
-                                                                    class="button product_type_simple add_to_cart_button ajax_add_to_cart"
-                                                                    data-product_id="82360" data-product_sku=""
-                                                                    aria-label="Add to cart: “High-Visibility Safety Vest”"
-                                                                    rel="nofollow"
-                                                                    data-success_message="“High-Visibility Safety Vest” has been added to your cart">Add
-                                                                    to cart</a> <span
-                                                                    id="woocommerce_loop_add_to_cart_link_describedby_82360"
-                                                                    class="screen-reader-text">
-                                                                </span>
-                                                            </li>
-                                                        </div>
-                                                        <div class="swiper-pagination-container">
-                                                            <div
-                                                                class="swiper-pagination swiper-pagination-null swiper-pagination-horizontal">
-                                                            </div>
-                                                            <div class="swiper-pagination-arrows-container">
-                                                                <div
-                                                                    class="swiper-pagination-arrows-wrapper twbb-slider-arrows-icon arrow2">
-                                                                    <div class="swiper-button swiper-button-prev swiper-button-disabled"
-                                                                        tabindex="-1" role="button"
-                                                                        aria-label="Previous slide"
-                                                                        aria-controls="swiper-wrapper-759a8acdd74c2b61"
-                                                                        aria-disabled="true"></div>
-                                                                    <div class="swiper-button swiper-button-next"
-                                                                        tabindex="0" role="button"
-                                                                        aria-label="Next slide"
-                                                                        aria-controls="swiper-wrapper-759a8acdd74c2b61"
-                                                                        aria-disabled="false"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <span class="swiper-notification" aria-live="assertive"
-                                                            aria-atomic="true"></span><span class="swiper-notification"
-                                                            aria-live="assertive" aria-atomic="true"></span>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                    
 
 
                                     <div class="container mt-5">
@@ -5450,121 +5065,7 @@
 
 
 
-
-    <!-- <style>
-        #footer {
-            background-color: white;
-            padding: 40px 20px;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-        }
-
-        #footer .e-con-inner {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        #footer .e-parent {
-            flex: 1 1 250px;
-            box-sizing: border-box;
-        }
-
-        /* Section titles */
-        #footer h5 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: black;
-            font-weight: bold;
-        }
-
-        /* Navigation links */
-        .twbb-item {
-            display: block;
-            margin-bottom: 10px;
-            color: black;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .twbb-item:hover {
-            color: #ffa500;
-        }
-
-        /* Remove default list style */
-        .twbb-nav-menu--main {
-            padding-left: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        /* Remove hardcoded margin-left */
-        .elementor-element-5tckqlfg {
-            margin-left: 0 !important;
-        }
-
-        /* Responsive styles for mobile */
-        @media screen and (max-width: 768px) {
-            #footer .e-con-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            #footer .e-parent {
-                width: 100% !important;
-                margin-bottom: 25px;
-            }
-
-            #footer h5 {
-                font-size: 18px;
-            }
-
-            .twbb-item {
-                font-size: 15px;
-            }
-        }
-    </style> -->
-
-    <style>
-       #footer {
-    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 40px 20px;
-    position: relative;
-}
-
-
-
-/* Overlay mờ để chữ dễ nhìn hơn */
-/* #footer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 0;
-} */
-
-/* #footer * {
-    position: relative;
-    z-index: 1;
-}
-.footer p, .footer a {
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-} */
-/* .footer {
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-              url('https://www.transparenttextures.com/patterns/stardust.png') center/cover no-repeat;
-  color: white;
-  padding: 40px;
-} */
-    </style>
+   
 
     <div data-elementor-type="twbb_footer" data-elementor-id="82396" class="elementor elementor-82396">
         <div class="elementor-element elementor-element-wyvesdu6 twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
@@ -6050,6 +5551,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         const token = localStorage.getItem('accesstoken');  // Lấy token từ localStorage
         const authLinks = document.getElementById('auth-links');
+        const authLinks1 = document.getElementById('auth-links1');
 
         if (token) {
             const payload = parseJwt(token);  // Giải mã token
@@ -6057,6 +5559,32 @@
             if (payload && payload.unique_name) {
                 // Nếu giải mã thành công và có unique_name, hiển thị lời chào
                 authLinks.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
+                                <strong>Hello, ${payload.unique_name}!</strong>
+                            </a>
+                            <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+                                style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+
+                    `;
+            } else {
+                // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
+                showLoginButtons();
+            }
+        } else {
+            // Nếu không có token, hiển thị nút đăng nhập/đăng ký
+            showLoginButtons();
+        }
+
+        if (token) {
+            const payload = parseJwt(token);  // Giải mã token
+
+            if (payload && payload.unique_name) {
+                // Nếu giải mã thành công và có unique_name, hiển thị lời chào
+                authLinks1.innerHTML = `
                         <div style="display: flex; align-items: center; gap: 15px;">
                             <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
                                 <strong>Hello, ${payload.unique_name}!</strong>
@@ -6095,6 +5623,14 @@
         // Hiển thị nút Đăng nhập/Đăng ký
         function showLoginButtons() {
             const authLinks = document.getElementById('auth-links');
+            authLinks.innerHTML = `
+                    <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
+                
+            `;
+        }
+
+        function showLoginButtons() {
+            const authLinks = document.getElementById('auth-links1');
             authLinks.innerHTML = `
                     <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
                 
