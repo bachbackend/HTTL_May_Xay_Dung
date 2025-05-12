@@ -1,4 +1,5 @@
-﻿using HTTL_May_Xay_Dung.DataAccess;
+﻿using Google.Apis.Auth;
+using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Extension;
 using HTTL_May_Xay_Dung.Service;
@@ -314,6 +315,77 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             return Ok(new { message = "Create manager account successfully." });
         }
+
+
+        [HttpPost("LoginWithGoogle")]
+        public async Task<IActionResult> LoginWithGoogle([FromBody] GoogleLoginDTO googleLogin)
+        {
+            try
+            {
+                var payload = await GoogleJsonWebSignature.ValidateAsync(googleLogin.IdToken, new GoogleJsonWebSignature.ValidationSettings
+                {
+                    Audience = new[] { _configuration["GoogleAuth:ClientId"] }
+                });
+
+                var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == payload.Email);
+
+                if (user == null)
+                {
+                    // Nếu người dùng chưa tồn tại, tạo mới với role mặc định là khách hàng (ví dụ Role = 1)
+                    user = new User
+                    {
+                        Username = payload.Email,
+                        Email = payload.Email,
+                        Phonenumber = "",
+                        Password = "", // Google login không có mật khẩu
+                        Role = 1,
+                        Status = 1,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    _context.Users.Add(user);
+                    await _context.SaveChangesAsync();
+                }
+
+                // Cập nhật LastLogin
+                user.LastLogin = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+
+                // Tạo JWT token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration["Jwt:SecretKey"]);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim(ClaimTypes.Role, user.Role.ToString())
+                }),
+                    Expires = DateTime.UtcNow.AddHours(1),
+                    Issuer = _configuration["Jwt:Issuer"],
+                    Audience = _configuration["Jwt:Audience"],
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
+
+                return Ok(new
+                {
+                    token = tokenString,
+                    userId = user.Id,
+                    username = user.Username,
+                    role = user.Role
+                });
+            }
+            catch (InvalidJwtException)
+            {
+                return BadRequest(new { message = "Invalid Google token." });
+            }
+        }
+
 
     }
 }

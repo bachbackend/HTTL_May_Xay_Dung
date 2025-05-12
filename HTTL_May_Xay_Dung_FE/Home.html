@@ -5405,23 +5405,45 @@
         </div>
     </div>
     <!-- popup đăng nhập -->
-    <div class="popup-overlay" id="popup">
-        <div class="popup-box">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <h2>Đăng Nhập</h2>
-            <form id="loginForm">
-                <label for="username">Tên đăng nhập</label>
-                <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
-                
-                <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
-                <a style="color: orange; font-size: 15px; font-family:Arial, Helvetica, sans-serif;" href="./Register.html">Chưa có tài khoản? Đăng ký ngay</a>
-                <a style="color: orange; font-size: 15px; font-family:Arial, Helvetica, sans-serif;" href="./resetPassword.html">Quên mật khẩu ?</a>
- 
-                <button type="submit">Đăng nhập</button>
-            </form>
+<div class="popup-overlay" id="popup">
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Đăng Nhập</h2>
+        <form id="loginForm">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+
+            <a style="color: orange; font-size: 15px; font-family:Arial, Helvetica, sans-serif;" href="./Register.html">Chưa có tài khoản? Đăng ký ngay</a>
+            <a style="color: orange; font-size: 15px; font-family:Arial, Helvetica, sans-serif;" href="./resetPassword.html">Quên mật khẩu ?</a>
+
+            <button type="submit">Đăng nhập</button>
+        </form>
+
+        <!-- Nút đăng nhập với Google -->
+        <div style="text-align: center; margin-top: 20px;">
+            <p>Hoặc đăng nhập bằng</p>
+
+            <!-- Google Identity Button -->
+            <div id="g_id_onload"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="rectangular"
+                 data-logo_alignment="left">
+            </div>
         </div>
     </div>
+</div>
+
     <style>
     /* Ban đầu popup bị ẩn */
     .popup-overlay {
@@ -5599,6 +5621,7 @@
         var twbb_theme_customize = { "from_demo": "1", "fonts": { "152": "ABeeZee", "56": "Abel", "288": "Abhaya Libre", "111": "Abril Fatface", "141": "Acme", "290": "Adamina", "263": "Advent Pro", "219": "Alata", "231": "Albert Sans", "154": "Alegreya", "150": "Alegreya Sans", "257": "Alegreya Sans SC", "264": "Aleo", "160": "Alfa Slab One", "201": "Alice", "259": "Allura", "135": "Almarai", "287": "Amaranth", "151": "Amatic SC", "174": "Amiri", "242": "Antic Slab", "64": "Anton", "272": "Antonio", "229": "Architects Daughter", "57": "Archivo", "113": "Archivo Black", "138": "Archivo Narrow", "0": "Arial", "50": "Arimo", "207": "Arsenal", "94": "Arvo", "108": "Asap", "188": "Asap Condensed", "84": "Assistant", "261": "Bangers", "32": "Barlow", "54": "Barlow Condensed", "109": "Barlow Semi Condensed", "156": "Be Vietnam Pro", "49": "Bebas Neue", "53": "Bitter", "227": "Black Ops One", "215": "Bodoni Moda", "149": "Bree Serif", "251": "Bungee", "52": "Cabin", "67": "Cairo", "191": "Cantarell", "185": "Cardo", "278": "Carter One", "129": "Catamaran", "98": "Caveat", "92": "Chakra Petch", "168": "Changa", "166": "Chivo", "144": "Cinzel", "80": "Comfortaa", "273": "Comic Neue", "245": "Commissioner", "172": "Concert One", "244": "Cookie", "167": "Cormorant", "103": "Cormorant Garamond", "178": "Courgette", "280": "Courier Prime", "262": "Creepster", "206": "Crete Round", "130": "Crimson Pro", "77": "Crimson Text", "247": "Cuprum", "269": "DM Mono", "35": "DM Sans", "116": "DM Serif Display", "223": "DM Serif Text", "62": "Dancing Script", "140": "Didact Gothic", "122": "Domine", "51": "Dosis", "66": "EB Garamond", "234": "Eczar", "224": "El Messiri", "165": "Encode Sans", "240": "Encode Sans Condensed", "147": "Exo", "82": "Exo 2", "89": "Figtree", "33": "Fira Sans", "104": "Fira Sans Condensed", "249": "Fira Sans Extra Condensed", "86": "Fjalla One", "197": "Francois One", "145": "Frank Ruhl Libre", "243": "Fraunces", "279": "Fugaz One", "254": "Gelasio", "6": "Georgia", "212": "Gloria Hallelujah", "213": "Gothic A1", "164": "Great Vibes", "226": "Gruppo", "282": "Handlee", "40": "Heebo", "3": "Helvetica", "71": "Hind", "61": "Hind Madurai", "46": "Hind Siliguri", "99": "IBM Plex Mono", "39": "IBM Plex Sans", "131": "IBM Plex Sans Arabic", "190": "IBM Plex Sans Condensed", "119": "IBM Plex Serif", "43": "Inconsolata", "118": "Indie Flower", "13": "Inter", "235": "Inter Tight", "277": "JetBrains Mono", "60": "Josefin Sans", "193": "Josefin Slab", "59": "Jost", "155": "Kalam", "30": "Kanit", "47": "Karla", "210": "Kaushan Script", "171": "Khand", "281": "Kosugi Maru", "275": "Kumbh Sans", "11": "Lato", "192": "League Spartan", "107": "Lexend", "169": "Lexend Deca", "238": "Libre Barcode 39", "63": "Libre Baskerville", "170": "Libre Caslon Text", "44": "Libre Franklin", "114": "Lilita One", "255": "Literata", "81": "Lobster", "184": "Lobster Two", "34": "Lora", "203": "Luckiest Guy", "124": "M PLUS 1p", "90": "M PLUS Rounded 1c", "246": "Macondo", "41": "Manrope", "153": "Marcellus", "177": "Martel", "162": "Mate", "209": "Mate SC", "65": "Material Symbols Rounded", "96": "Maven Pro", "183": "Merienda", "22": "Merriweather", "121": "Merriweather Sans", "268": "Mitr", "9": "Montserrat", "146": "Montserrat Alternates", "45": "Mukta", "286": "Mukta Malar", "29": "Mulish", "38": "Nanum Gothic", "78": "Nanum Gothic Coding", "120": "Nanum Myeongjo", "196": "Neuton", "265": "News Cycle", "137": "Noticia Text", "55": "Noto Color Emoji", "139": "Noto Kufi Arabic", "236": "Noto Naskh Arabic", "17": "Noto Sans", "105": "Noto Sans Arabic", "211": "Noto Sans Bengali", "186": "Noto Sans Display", "75": "Noto Sans HK", "12": "Noto Sans JP", "25": "Noto Sans KR", "228": "Noto Sans Mono", "69": "Noto Sans SC", "31": "Noto Sans TC", "176": "Noto Sans Thai", "48": "Noto Serif", "72": "Noto Serif JP", "173": "Noto Serif KR", "200": "Noto Serif TC", "26": "Nunito", "21": "Nunito Sans", "179": "Old Standard TT", "204": "Oleo Script", "8": "Open Sans", "142": "Orbitron", "15": "Oswald", "73": "Outfit", "91": "Overpass", "68": "Oxygen", "285": "PT Mono", "27": "PT Sans", "187": "PT Sans Caption", "70": "PT Sans Narrow", "42": "PT Serif", "76": "Pacifico", "289": "Parisienne", "180": "Passion One", "220": "Pathway Gothic One", "258": "Patrick Hand", "181": "Patua One", "208": "Paytone One", "115": "Permanent Marker", "163": "Philosopher", "100": "Play", "23": "Playfair Display", "271": "Playfair Display SC", "110": "Plus Jakarta Sans", "248": "Poiret One", "10": "Poppins", "175": "Prata", "85": "Prompt", "79": "Public Sans", "225": "Quattrocento", "205": "Quattrocento Sans", "123": "Questrial", "36": "Quicksand", "95": "Rajdhani", "18": "Raleway", "218": "Readex Pro", "93": "Red Hat Display", "276": "Red Hat Text", "182": "Righteous", "7": "Roboto", "14": "Roboto Condensed", "134": "Roboto Flex", "16": "Roboto Mono", "232": "Roboto Serif", "24": "Roboto Slab", "241": "Rokkitt", "125": "Rowdies", "20": "Rubik", "274": "Rubik Bubbles", "221": "Rubik Mono One", "148": "Russo One", "283": "STIX Two Text", "199": "Sacramento", "216": "Saira", "161": "Saira Condensed", "239": "Sanchez", "136": "Sarabun", "112": "Satisfy", "230": "Sawarabi Gothic", "194": "Sawarabi Mincho", "284": "Secular One", "252": "Sen", "106": "Shadows Into Light", "128": "Signika", "87": "Signika Negative", "256": "Silkscreen", "101": "Slabo 27px", "126": "Sora", "58": "Source Code Pro", "97": "Source Sans 3", "133": "Source Serif 4", "83": "Space Grotesk", "195": "Space Mono", "250": "Special Elite", "158": "Spectral", "267": "Staatliches", "1": "Tahoma", "117": "Tajawal", "260": "Tangerine", "266": "Taviraj", "74": "Teko", "270": "Tenor Sans", "4": "Times New Roman", "157": "Tinos", "198": "Titan One", "37": "Titillium Web", "5": "Trebuchet MS", "19": "Ubuntu", "189": "Ubuntu Condensed", "214": "Ubuntu Mono", "217": "Unbounded", "253": "Unna", "132": "Urbanist", "88": "Varela Round", "2": "Verdana", "292": "Vidaloka", "143": "Vollkorn", "28": "Work Sans", "127": "Yanone Kaffeesatz", "202": "Yantramanav", "291": "Yatra One", "222": "Yellowtail", "237": "Yeseva One", "233": "Zen Kaku Gothic New", "159": "Zeyada", "102": "Zilla Slab" }, "colors": [{ "id": "indigo", "title": "Indigo", "order": 1, "kit": { "system_colors": [{ "_id": "accent", "color": "#283566" }, { "_id": "secondary", "color": "#986424" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#28356626" }, { "_id": "twbb_bg_2", "color": "#98642426" }, { "_id": "twbb_link", "color": "#283566" }, { "_id": "twbb_accent_hover", "color": "#283566CC" }, { "_id": "twbb_link_hover", "color": "#28356680" }] }, "default": true, "accent_color": "#283566", "secondary_color": "#986424" }, { "id": "han_blue", "title": "Han blue", "order": 2, "kit": { "system_colors": [{ "_id": "accent", "color": "#3A5BCC" }, { "_id": "secondary", "color": "#898989" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#3A5BCC26" }, { "_id": "twbb_bg_2", "color": "#89898926" }, { "_id": "twbb_link", "color": "#3A5BCC" }, { "_id": "twbb_accent_hover", "color": "#3A5BCCCC" }, { "_id": "twbb_link_hover", "color": "#3A5BCC80" }] }, "default": true, "accent_color": "#3A5BCC", "secondary_color": "#898989" }, { "id": "orchid_pink", "title": "Orchid pink", "order": 3, "kit": { "system_colors": [{ "_id": "accent", "color": "#E33665" }, { "_id": "secondary", "color": "#898989" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#E3366526" }, { "_id": "twbb_bg_2", "color": "#89898926" }, { "_id": "twbb_link", "color": "#E33665" }, { "_id": "twbb_accent_hover", "color": "#E33665CC" }, { "_id": "twbb_link_hover", "color": "#E3366580" }] }, "default": true, "accent_color": "#E33665", "secondary_color": "#898989" }, { "id": "basque_green", "title": "Basque green", "order": 4, "kit": { "system_colors": [{ "_id": "accent", "color": "#5A5E32" }, { "_id": "secondary", "color": "#DBC75B" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#5A5E3226" }, { "_id": "twbb_bg_2", "color": "#DBC75B26" }, { "_id": "twbb_link", "color": "#5A5E32" }, { "_id": "twbb_accent_hover", "color": "#5A5E32CC" }, { "_id": "twbb_link_hover", "color": "#5A5E3280" }] }, "default": true, "accent_color": "#5A5E32", "secondary_color": "#DBC75B" }, { "id": "red_berry", "title": "Red berry", "order": 5, "kit": { "system_colors": [{ "_id": "accent", "color": "#5F1928" }, { "_id": "secondary", "color": "#DE87C2" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#5F192826" }, { "_id": "twbb_bg_2", "color": "#DE87C226" }, { "_id": "twbb_link", "color": "#5F1928" }, { "_id": "twbb_accent_hover", "color": "#5F1928CC" }, { "_id": "twbb_link_hover", "color": "#5F192880" }] }, "default": true, "accent_color": "#5F1928", "secondary_color": "#DE87C2" }, { "id": "purplish_blue", "title": "Purplish blue", "order": 6, "kit": { "system_colors": [{ "_id": "accent", "color": "#5833F1" }, { "_id": "secondary", "color": "#898989" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#5833F126" }, { "_id": "twbb_bg_2", "color": "#89898926" }, { "_id": "twbb_link", "color": "#5833F1" }, { "_id": "twbb_accent_hover", "color": "#5833F1CC" }, { "_id": "twbb_link_hover", "color": "#5833F180" }] }, "default": true, "accent_color": "#5833F1", "secondary_color": "#898989" }, { "id": "obsidian_shell", "title": "Obsidian shell", "order": 7, "kit": { "system_colors": [{ "_id": "accent", "color": "#821FA0" }, { "_id": "secondary", "color": "#F4C730" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#821FA026" }, { "_id": "twbb_bg_2", "color": "#F4C73026" }, { "_id": "twbb_link", "color": "#821FA0" }, { "_id": "twbb_accent_hover", "color": "#821FA0CC" }, { "_id": "twbb_link_hover", "color": "#821FA080" }] }, "default": true, "accent_color": "#821FA0", "secondary_color": "#F4C730" }, { "id": "beagle_brown", "title": "Beagle brown", "order": 8, "kit": { "system_colors": [{ "_id": "accent", "color": "#8D6D36" }, { "_id": "secondary", "color": "#9EBD59" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#8D6D3626" }, { "_id": "twbb_bg_2", "color": "#9EBD5926" }, { "_id": "twbb_link", "color": "#8D6D36" }, { "_id": "twbb_accent_hover", "color": "#8D6D36CC" }, { "_id": "twbb_link_hover", "color": "#8D6D3680" }] }, "default": true, "accent_color": "#8D6D36", "secondary_color": "#9EBD59" }, { "id": "chinese_plant", "title": "Chinese plant", "order": 9, "kit": { "system_colors": [{ "_id": "accent", "color": "#9EBD59" }, { "_id": "secondary", "color": "#DEBF15" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#9EBD5926" }, { "_id": "twbb_bg_2", "color": "#DEBF1526" }, { "_id": "twbb_link", "color": "#9EBD59" }, { "_id": "twbb_accent_hover", "color": "#9EBD59CC" }, { "_id": "twbb_link_hover", "color": "#9EBD5980" }] }, "default": true, "accent_color": "#9EBD59", "secondary_color": "#DEBF15" }, { "id": "aurora_orange", "title": "Aurora orange", "order": 10, "kit": { "system_colors": [{ "_id": "accent", "color": "#ED6744" }, { "_id": "secondary", "color": "#A7A2A0" }], "custom_colors": [{ "_id": "twbb_bg_1", "color": "#ED674426" }, { "_id": "twbb_bg_2", "color": "#A7A2A026" }, { "_id": "twbb_link", "color": "#ED6744" }, { "_id": "twbb_accent_hover", "color": "#ED6744CC" }, { "_id": "twbb_link_hover", "color": "#ED674480" }] }, "default": true, "accent_color": "#ED6744", "secondary_color": "#A7A2A0" }], "active_font": "PT Sans", "active_color": "indigo", "typography_ids": ["primary", "secondary", "text", "accent", "twbb_h3", "twbb_h4", "twbb_h5", "twbb_h6", "twbb_p1", "twbb_p3", "twbb_p4", "twbb_p5", "twbb_p6", "twbb_label", "twbb_bold", "twbb_input", "twbb_link"], "ajaxnonce": "6c23971bc6", "rest_route": "https:\/\/aisite.10web.io\/70\/wp-json\/tenweb-builder\/v1" };
         /* ]]> */
     </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="text/javascript" src="./Home_files/theme-customize.js.download"
         id="twbb-theme-customize-script-js"></script>
     <script type="text/javascript" src="./Home_files/v4-shims.min.js.download" id="font-awesome-4-shim-js"></script>
@@ -5653,6 +5676,35 @@
     <script src="./Home_files/swiper.min.js.download"></script>
 </body>
 
+
+<!-- Script xử lý callback Google -->
+<script>
+    async function handleCredentialResponse(response) {
+        const credential = response.credential;
+
+        try {
+            const res = await fetch("https://localhost:7205/api/Auth/LoginWithGoogle", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ IdToken: credential })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                alert("Đăng nhập thành công!");
+                localStorage.setItem("accesstoken", data.token);
+                window.location.reload(); // hoặc redirect tùy bạn
+            } else {
+                alert(data.message || "Đăng nhập thất bại!");
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Lỗi khi gửi token đến server.");
+        }
+    }
+</script>
 <script>
     function openPopup() {
     document.getElementById("popup").style.display = "flex";
@@ -5698,27 +5750,53 @@ function parseJwt(token) {
         const authLinks = document.getElementById('auth-links');
         const authLinks1 = document.getElementById('auth-links1');
 
-        if (token) {
-        const payload = parseJwt(token);
-        if (payload && payload.unique_name) {
-            const html = `
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
-                        <strong>Hello, ${payload.unique_name}!</strong>
-                    </a>
-                    <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
-                        style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </div>`;
-            if (authLinks) authLinks.innerHTML = html;
-            if (authLinks1) authLinks1.innerHTML = html;
-        } else {
-            showLoginButtons();
-        }
+    //     if (token) {
+    //     const payload = parseJwt(token);
+    //     if (payload && payload.unique_name) {
+    //         const html = `
+    //             <div style="display: flex; align-items: center; gap: 15px;">
+    //                 <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
+    //                     <strong>Hello, ${payload.unique_name}!</strong>
+    //                 </a>
+    //                 <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+    //                     style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+    //                     <i class="fas fa-sign-out-alt"></i>
+    //                 </button>
+    //             </div>`;
+    //         if (authLinks) authLinks.innerHTML = html;
+    //         if (authLinks1) authLinks1.innerHTML = html;
+    //     } else {
+    //         showLoginButtons();
+    //     }
+    // } else {
+    //     showLoginButtons();
+    // }
+
+if (token) {
+    const payload = parseJwt(token);
+    if (payload && payload.unique_name) {
+        const fullName = payload.unique_name.split('@')[0];
+        const displayName = fullName.length > 15 ? fullName.slice(0, 15) + '...' : fullName;
+
+        const html = `
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
+                    <strong title="${fullName}">Hello, ${displayName}!</strong>
+                </a>
+                <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+                    style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>`;
+
+        if (authLinks) authLinks.innerHTML = html;
+        if (authLinks1) authLinks1.innerHTML = html;
     } else {
         showLoginButtons();
     }
+} else {
+    showLoginButtons();
+}
 
         function parseJwt(token) {
             try {
