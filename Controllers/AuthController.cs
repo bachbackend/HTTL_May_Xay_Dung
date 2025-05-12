@@ -47,6 +47,42 @@ namespace HTTL_May_Xay_Dung.Controllers
             return new string(result);
         }
 
+        //[HttpPost("ResetPassword/{email}")]
+        //public async Task<IActionResult> ResetPassword(string email)
+        //{
+        //    var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+        //    if (user == null)
+        //    {
+        //        return NotFound(new { message = "User not found." });
+        //    }
+
+        //    // Generate a reset token
+        //    string resetToken = GenerateRandomString();
+        //    DateTime expiry = DateTime.Now.AddHours(1); // Token hết hạn sau 1 giờ
+
+        //    // Save token and expiry to database
+        //    user.ResetToken = resetToken;
+        //    user.ResetTokenExpired = expiry;
+        //    await _context.SaveChangesAsync();
+
+        //    // Generate reset link with token and phone number
+        //    string resetLink = $"http://127.0.0.1:5500/confirmResetPassword.html";
+
+        //    var subject = "Reset Password";
+        //    var message = $"Click the link below to reset your password:\n{resetLink}\n\nLink will expire in 10 minutes.";
+
+        //    // Send email
+        //    _mailService.SendEmailAsync(user.Email, subject, message);
+
+        //    // Return result including phoneNumber and token
+        //    return Ok(new
+        //    {
+        //        message = "Password reset link has been sent to your email.",
+        //        phoneNumber = user.Email,
+        //        token = resetToken
+        //    });
+        //}
+
         [HttpPost("ResetPassword/{email}")]
         public async Task<IActionResult> ResetPassword(string email)
         {
@@ -58,18 +94,16 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             // Generate a reset token
             string resetToken = GenerateRandomString();
-            DateTime expiry = DateTime.Now.AddHours(1); // Token hết hạn sau 1 giờ
+            DateTime expiry = DateTime.Now.AddMinutes(15); // Token hết hạn sau 15 phút
 
             // Save token and expiry to database
             user.ResetToken = resetToken;
             user.ResetTokenExpired = expiry;
             await _context.SaveChangesAsync();
 
-            // Generate reset link with token and phone number
-            string resetLink = $"http://127.0.0.1:5500/confirmResetPassword.html";
-
-            var subject = "Reset Password";
-            var message = $"Click the link below to reset your password:\n{resetLink}\n\nLink will expire in 10 minutes.";
+            // Compose email with the token directly
+            var subject = "Mã đặt lại mật khẩu";
+            var message = $"Xin chào,\n\nMã đặt lại mật khẩu của bạn là: **{resetToken}**\nMã sẽ hết hạn sau 15 phút.\n\nNếu bạn không yêu cầu thay đổi mật khẩu, vui lòng bỏ qua email này.";
 
             // Send email
             _mailService.SendEmailAsync(user.Email, subject, message);
@@ -77,9 +111,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             // Return result including phoneNumber and token
             return Ok(new
             {
-                message = "Password reset link has been sent to your email.",
-                phoneNumber = user.Email,
-                token = resetToken
+                message = "Mã đặt lại mật khẩu đã được gửi tới email của bạn."
             });
         }
 
