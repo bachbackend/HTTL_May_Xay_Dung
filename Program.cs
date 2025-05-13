@@ -49,6 +49,9 @@ namespace HTTL_May_Xay_Dung
                            .SetIsOriginAllowed((host) => true));
             });
             builder.Services.AddScoped<MailService>();
+            
+            builder.Configuration
+    .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
 
             // Đăng ký DbContext với MySQL sử dụng Pomelo.EntityFrameworkCore.MySql
             builder.Services.AddDbContext<BfhahziulzpihzqwnwfhContext>(options =>
