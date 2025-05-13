@@ -29,7 +29,9 @@ namespace HTTL_May_Xay_Dung.Controllers
             int? pageSize = null,
             int? status = null,
             string? title = null,
-            int? categoryId = null
+            int? categoryId = null,
+            string? sortBy = "id",
+            string? sortOrder = "asc"
             )
         {
             int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
@@ -50,6 +52,25 @@ namespace HTTL_May_Xay_Dung.Controllers
             if (status.HasValue)
             {
                 articles = articles.Where(p => p.Status == status.Value);
+            }
+
+            if (sortBy?.ToLower() == "title")
+            {
+                articles = sortOrder.ToLower() == "desc"
+                    ? articles.OrderByDescending(p => p.Title)
+                    : articles.OrderBy(p => p.Title);
+            }
+            else if (sortBy?.ToLower() == "createDate")
+            {
+                articles = sortOrder.ToLower() == "desc"
+                    ? articles.OrderByDescending(p => p.CreatedAt)
+                    : articles.OrderBy(p => p.CreatedAt);
+            }
+            else // Sắp xếp mặc định theo Id
+            {
+                articles = sortOrder.ToLower() == "desc"
+                    ? articles.OrderByDescending(p => p.Id)
+                    : articles.OrderBy(p => p.Id);
             }
 
             int totalArticleCount = await articles.CountAsync();
@@ -158,14 +179,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             // Kiểm tra nếu ảnh được upload
             if (file == null || file.Length == 0)
             {
-                return BadRequest("No image uploaded.");
+                return BadRequest(new { message = "Chưa chọn ảnh" });
             }
 
             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
             var extension = Path.GetExtension(file.FileName).ToLower();
             if (!allowedExtensions.Contains(extension))
             {
-                return BadRequest("Invalid file type.");
+                return BadRequest(new { message = "Sai định dạng file. Chỉ .jpg, .jpeg, .png mới được cho phép." });
             }
 
             // Lưu ảnh vào thư mục
@@ -201,7 +222,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             var article = await _context.Articles.FirstOrDefaultAsync(p => p.Id == id);
             if (article == null)
             {
-                return NotFound("Article not found.");
+                return NotFound(new { message = "Không tìm thấy baì viết với id này" });
             }
 
             article.ArticleCateId = model.ArticleCateId;
@@ -215,7 +236,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 var extension = Path.GetExtension(file.FileName).ToLower();
                 if (!allowedExtensions.Contains(extension))
                 {
-                    return BadRequest(new { message = "Invalid file type." });
+                    return BadRequest(new { message = "Sai định dạng file. Chỉ .jpg, .jpeg, .png mới được cho phép." });
                 }
 
                 var fileName = Guid.NewGuid() + extension;
@@ -237,11 +258,11 @@ namespace HTTL_May_Xay_Dung.Controllers
 
         [HttpGet("GetAllArticleStatusZero")]
         public async Task<IActionResult> GetAllArticleStatusZero(
-    int pageNumber = 1,
-    int? pageSize = null,
-    string? title = null,
-    int? categoryId = null
-)
+                int pageNumber = 1,
+                int? pageSize = null,
+                string? title = null,
+                int? categoryId = null
+            )
         {
             int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
             var articles = _context.Articles

@@ -2468,11 +2468,11 @@
                     `;
         } else {
             // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
-            showLoginButtons();
+            showLoginButtons1();
         }
     } else {
         // Nếu không có token, hiển thị nút đăng nhập/đăng ký
-        showLoginButtons();
+        showLoginButtons1();
     }
 
     function parseJwt(token) {
@@ -2499,7 +2499,7 @@
             `;
     }
 
-    function showLoginButtons() {
+    function showLoginButtons1() {
         const authLinks = document.getElementById('auth-links1');
         authLinks.innerHTML = `
                     <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>

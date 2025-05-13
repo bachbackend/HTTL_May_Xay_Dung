@@ -211,7 +211,7 @@
                 sản phẩm
             </button> -->
 
-            <a href="Add-Article.html" class="btn btn-success" target="_blank">
+            <a href="Add-Article.html" class="btn btn-success">
                 Thêm bài viết
             </a>
 
@@ -289,6 +289,8 @@
                                 <option value="1">Ngừng kinh doanh</option>
                             </select>
                         </div>
+
+                        
 
                         <div class="mb-3">
                             <label for="status" class="form-label">Upload Image <span
@@ -399,6 +401,17 @@
                     <option value="0">Đang hiển thị</option>
                     <option value="1">Ngừng hiển thị</option>
                 </select>
+
+                <select class="form-control" id="sortBy">
+                            <option value="id">Sắp xếp theo</option>
+                            <option value="title">Tiêu đề</option>
+                            <option value="createDate">Ngày đăng</option>
+                        </select>
+
+                        <select class="form-control" id="sortOrder">
+                            <option value="asc">Tăng dần</option>
+                            <option value="desc">Giảm dần</option>
+                        </select>
                 
 
 
@@ -475,6 +488,8 @@
             const searchName = document.getElementById('searchName').value;
             const serviceId = document.getElementById('filterServices3').value;
             const searchStatus = document.getElementById('searchStatus').value;
+            const sortBy = document.getElementById('sortBy').value;
+            const sortOrder = document.getElementById('sortOrder').value;
             let url = `https://localhost:7205/api/Article/GetAllArticle?pageNumber=${pageNumber}&pageSize=10`;
             currentPage = pageNumber;
 
@@ -490,6 +505,12 @@
             }
             if (searchStatus) {
                 params.append('status', searchStatus);
+            }
+            if (sortBy) {
+                params.append('sortBy', sortBy);
+            }
+            if (sortOrder) {
+                params.append('sortOrder', sortOrder);
             }
 
             if (params.toString()) {
@@ -554,8 +575,8 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="javascript:void(0);" onclick="showArticleModal(${article.id})">Xem</a></li>
-                                <li><a class="dropdown-item" href="Update-Article.html?id=${article.id}" target="_blank">Sửa</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="deleteProduct(${article.id})">Xóa</a></li>
+                                <li><a class="dropdown-item" href="Update-Article.html?id=${article.id}">Sửa</a></li>
+                                
                             </ul>
                         </div>
                     </div>

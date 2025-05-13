@@ -1807,7 +1807,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="margin-top: -120px;" class="elementor-element elementor-element-ryu61g9j twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
+                                    <div style="margin-top: -100px;" class="elementor-element elementor-element-ryu61g9j twbb_section e-con-boxed e-flex e-con e-parent e-lazyloaded"
                                         data-id="ryu61g9j" data-element_type="container">
                                         <div class="e-con-inner">
                                             <div class="elementor-element elementor-element-1qxntmyq elementor-widget__width-initial elementor-widget-mobile__width-inherit elementor-widget-tablet__width-initial elementor-widget elementor-widget-text-editor animated fadeInUp"
@@ -2549,11 +2549,11 @@
                     `;
         } else {
             // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
-            showLoginButtons();
+            showLoginButtons1();
         }
     } else {
         // Nếu không có token, hiển thị nút đăng nhập/đăng ký
-        showLoginButtons();
+        showLoginButtons1();
     }
 
     function parseJwt(token) {
@@ -2575,6 +2575,14 @@
     function showLoginButtons() {
         const authLinks = document.getElementById('auth-links');
         authLinks.innerHTML = `
+                    <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
+                
+            `;
+    }
+
+    function showLoginButtons1() {
+        const authLinks = document.getElementById('auth-links1');
+        authLinks1.innerHTML = `
                     <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
                 
             `;

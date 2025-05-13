@@ -5534,6 +5534,21 @@
     }
     </style>
     <script>
+    // Khi click vào overlay (nền), đóng popup nếu click không nằm trong popup-box
+    document.getElementById('popup').addEventListener('click', function (event) {
+        const popupBox = document.querySelector('.popup-box');
+        if (!popupBox.contains(event.target)) {
+            closePopup(); // gọi hàm bạn đã có sẵn để đóng
+        }
+    });
+
+    // Hàm đóng popup
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
+
+    <script>
         const lazyloadRunObserver = () => {
             const lazyloadBackgrounds = document.querySelectorAll(`.e-con.e-parent:not(.e-lazyloaded)`);
             const lazyloadBackgroundObserver = new IntersectionObserver((entries) => {

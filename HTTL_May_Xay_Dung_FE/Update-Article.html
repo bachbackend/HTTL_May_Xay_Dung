@@ -64,7 +64,7 @@
 
             <div class="mb-3">
                 <label for="editArticleImage" class="form-label">Upload Image <span class="text-danger">*</span></label>
-                <input type="file" id="editArticleImage" name="file" accept="image/*" class="form-control" required>
+                <input type="file" id="editArticleImage" name="file" accept="image/*" class="form-control" >
             </div>
 
             <!-- <button type="submit" class="btn btn-primary">Cập nhật</button> -->
@@ -96,39 +96,97 @@
         window.location.href = 'Article-Management.html';
     }
 
-    // Load thông tin sản phẩm từ API
-    fetch(`https://localhost:7205/api/Article/GetArticleById/${articleId}`, {
-        method: 'GET',
-        headers: {
-            'accept': '*/*',
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            // Điền dữ liệu vào form
-            document.getElementById('editArticleId').value = data.id;
-            document.getElementById('editArticleTitle').value = data.title;
-            tinymce.get('editArticleContent').setContent(data.content || '');
-            document.getElementById('editArticleStatus').value = data.status;
-
-            // Cập nhật thông tin category
-            const categorySelect = document.getElementById('editArticleCategory');
-            const option = document.createElement('option');
-            option.value = data.articleCateId;
-            option.textContent = data.articleCateName;
-            categorySelect.appendChild(option);
-            categorySelect.value = data.articleCateId;  // Chọn category hiện tại
-
-            // Cập nhật hình ảnh sản phẩm
-            const imageUrl = `https://localhost:7205/images/article/${data.thumbnail}`;
-            document.getElementById('editArticleImage').setAttribute('data-current-image', imageUrl);  // Lưu lại đường dẫn cũ của ảnh
-
-
-            // Sau khi TinyMCE được khởi tạo, cập nhật nội dung
-            tinymce.get('editArticleContent').setContent(data.content);
-
+    // 1. Load danh sách thể loại trước
+    function loadArticleCategoryAndThenArticle(callback) {
+        fetch('https://localhost:7205/api/ArticleCate/GetAll', {
+            method: 'GET',
+            headers: {
+                'Accept': '*/*'
+            }
         })
-        .catch(error => console.error('Error fetching article data:', error));
+            .then(response => response.json())
+            .then(data => {
+                const categorySelect = document.getElementById('editArticleCategory');
+                categorySelect.innerHTML = '<option value="">Chọn thể loại bài viết</option>';
+
+                data.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    categorySelect.appendChild(option);
+                });
+
+                // Sau khi load xong dropdown, gọi callback để load bài viết
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải thể loại:', error);
+            });
+    }
+
+    // 2. Gọi API lấy bài viết và điền vào form
+    function loadArticleData() {
+        fetch(`https://localhost:7205/api/Article/GetArticleById/${articleId}`, {
+            method: 'GET',
+            headers: {
+                'accept': '*/*',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('editArticleId').value = data.id;
+                document.getElementById('editArticleTitle').value = data.title;
+                tinymce.get('editArticleContent').setContent(data.content || '');
+                document.getElementById('editArticleStatus').value = data.status;
+
+                // Gán category hiện tại sau khi dropdown đã được fill
+                document.getElementById('editArticleCategory').value = data.articleCateId;
+
+                // Gán ảnh
+                const imageUrl = `https://localhost:7205/images/article/${data.thumbnail}`;
+                document.getElementById('editArticleImage').setAttribute('data-current-image', imageUrl);
+            })
+            .catch(error => console.error('Lỗi khi tải bài viết:', error));
+    }
+
+    // Gọi load category trước, sau đó mới load article
+    loadArticleCategoryAndThenArticle(loadArticleData);
+
+    // Load thông tin sản phẩm từ API
+    // fetch(`https://localhost:7205/api/Article/GetArticleById/${articleId}`, {
+    //     method: 'GET',
+    //     headers: {
+    //         'accept': '*/*',
+    //     }
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Điền dữ liệu vào form
+    //         document.getElementById('editArticleId').value = data.id;
+    //         document.getElementById('editArticleTitle').value = data.title;
+    //         tinymce.get('editArticleContent').setContent(data.content || '');
+    //         document.getElementById('editArticleStatus').value = data.status;
+
+    //         // Cập nhật thông tin category
+    //         const categorySelect = document.getElementById('editArticleCategory');
+    //         const option = document.createElement('option');
+    //         option.value = data.articleCateId;
+    //         option.textContent = data.articleCateName;
+    //         categorySelect.appendChild(option);
+    //         categorySelect.value = data.articleCateId;  // Chọn category hiện tại
+
+    //         // Cập nhật hình ảnh sản phẩm
+    //         const imageUrl = `https://localhost:7205/images/article/${data.thumbnail}`;
+    //         document.getElementById('editArticleImage').setAttribute('data-current-image', imageUrl);  // Lưu lại đường dẫn cũ của ảnh
+
+
+    //         // Sau khi TinyMCE được khởi tạo, cập nhật nội dung
+    //         tinymce.get('editArticleContent').setContent(data.content);
+
+    //     })
+    //     .catch(error => console.error('Error fetching article data:', error));
 
     // Xử lý cập nhật bài viết
     document.getElementById('editArticleForm').addEventListener('submit', function (event) {
@@ -141,12 +199,6 @@
             tinymce.get('editArticleContent').focus();  // Focus vào editor
             return;
         }
-
-        // const formData = new FormData();
-        // formData.append('ArticleCateId', document.getElementById('editArticleCategory').value);
-        // formData.append('Title', document.getElementById('editArticleTitle').value);
-        // formData.append('Content', tinymce.get('editArticleContent').getContent());
-        // formData.append('Status', document.getElementById('editArticleStatus').value);
 
         const formData = new FormData();
         const articleCateId = document.getElementById('editArticleCategory').value;
@@ -181,54 +233,55 @@
 
         // Gọi API update
         fetch(`https://localhost:7205/api/Article/updateArticle/${articleId}`, {
-            method: 'PUT',
-            headers: {
-                'accept': '*/*',
-            },
-            body: formData
-        })
-            .then(response => response.json())
-            .then(result => {
-                if (result) {
-                    alert('Cập nhật bài viết thành công!');
-                    // window.location.href = 'Article-Management.html'; 
-                } else {
-                    alert('Cập nhật sản phẩm thất bại!');
-                }
-            })
-            .catch(error => {
-                console.error('Error updating article:', error);
-                alert('Có lỗi xảy ra khi cập nhật bài viết!');
-            });
+    method: 'PUT',
+    headers: {
+        'accept': '*/*',
+    },
+    body: formData
+})
+    .then(async response => {
+        const result = await response.json(); // Lấy JSON trả về
+
+        if (response.ok) {
+            alert(result.message || 'Cập nhật bài viết thành công!');
+            window.location.href = 'Article-Management.html'; 
+        } else {
+            alert(result.message || 'Cập nhật bài viết thất bại!');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating article:', error);
+        alert('Có lỗi xảy ra khi cập nhật bài viết!');
+    });
     });
 
-    function loadArticleCategory1() {
-        fetch('https://localhost:7205/api/ArticleCate/GetAll', {
-            method: 'GET',
-            headers: {
-                'Accept': '*/*'
-            }
-        })
-            .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
-            .then(data => {
-                const serviceDropdown = document.getElementById('editArticleCategory');
+    // function loadArticleCategory1() {
+    //     fetch('https://localhost:7205/api/ArticleCate/GetAll', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Accept': '*/*'
+    //         }
+    //     })
+    //         .then(response => response.json()) // Chuyển đổi phản hồi từ API thành JSON
+    //         .then(data => {
+    //             const serviceDropdown = document.getElementById('editArticleCategory');
 
-                // Xóa tất cả các option cũ trong dropdown
-                serviceDropdown.innerHTML = '<option value="">Chọn thể loại bài viết</option>';
+    //             // Xóa tất cả các option cũ trong dropdown
+    //             serviceDropdown.innerHTML = '<option value="">Chọn thể loại bài viết</option>';
 
-                // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
-                data.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category.id; // Gán giá trị là ID của dịch vụ
-                    option.textContent = category.name; // Hiển thị tên dịch vụ
-                    serviceDropdown.appendChild(option); // Thêm option vào dropdown
-                });
-            })
-            .catch(error => {
-                console.error('Có lỗi xảy ra khi gọi API:', error);
-            });
-    }
-    loadArticleCategory1();
+    //             // Duyệt qua dữ liệu và thêm các dịch vụ vào dropdown
+    //             data.forEach(category => {
+    //                 const option = document.createElement('option');
+    //                 option.value = category.id; // Gán giá trị là ID của dịch vụ
+    //                 option.textContent = category.name; // Hiển thị tên dịch vụ
+    //                 serviceDropdown.appendChild(option); // Thêm option vào dropdown
+    //             });
+    //         })
+    //         .catch(error => {
+    //             console.error('Có lỗi xảy ra khi gọi API:', error);
+    //         });
+    // }
+    // loadArticleCategory1();
 
 
 </script>

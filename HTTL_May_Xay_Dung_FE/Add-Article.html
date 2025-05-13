@@ -112,6 +112,46 @@
 
         document.querySelector('.btn-primary').addEventListener('click', submitForm);
 
+// function submitForm() {
+//     const title = document.getElementById('articleTitle').value.trim();
+//     const content = tinymce.get('articleContent').getContent(); // lấy nội dung tinyMCE
+//     const status = document.getElementById('status').value;
+//     const categoryId = document.getElementById('filterCategory1').value;
+//     const fileInput = document.getElementById('file');
+//     const file = fileInput.files[0];
+
+//     if (!title || !content  || !categoryId || !file) {
+//         alert('Vui lòng nhập đầy đủ thông tin!');
+//         return;
+//     }
+
+//     const formData = new FormData();
+//     formData.append('Title', title);
+//     formData.append('Content', content);
+//     formData.append('Status', status);
+//     formData.append('ArticleCateId', categoryId);
+//     formData.append('file', file);
+
+//     fetch('https://localhost:7205/api/Article/addArticle', {
+//         method: 'POST',
+//         body: formData
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Có lỗi xảy ra khi thêm bài viết.');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         alert('Thêm bài viết thành công!');
+//         window.location.href = './Article-Management.html'; // Redirect về trang quản lý sản phẩm
+//     })
+//     .catch(error => {
+//         console.error(error);
+//         alert('Thêm bài viết thất bại.');
+//     });
+// }
+
 function submitForm() {
     const title = document.getElementById('articleTitle').value.trim();
     const content = tinymce.get('articleContent').getContent(); // lấy nội dung tinyMCE
@@ -120,7 +160,7 @@ function submitForm() {
     const fileInput = document.getElementById('file');
     const file = fileInput.files[0];
 
-    if (!title || !content  || !categoryId || !file) {
+    if (!title || !content || !categoryId || !file) {
         alert('Vui lòng nhập đầy đủ thông tin!');
         return;
     }
@@ -136,19 +176,22 @@ function submitForm() {
         method: 'POST',
         body: formData
     })
-    .then(response => {
+    .then(async response => {
+        const result = await response.json();
+
         if (!response.ok) {
-            throw new Error('Có lỗi xảy ra khi thêm bài viết.');
+            // Nếu response có status khác 200, hiển thị message từ server
+            alert(result.message || 'Có lỗi xảy ra khi thêm bài viết.');
+            throw new Error(result.message);
         }
-        return response.json();
-    })
-    .then(data => {
+
         alert('Thêm bài viết thành công!');
-        window.location.href = './Article-Management.html'; // Redirect về trang quản lý sản phẩm
+        window.location.href = './Article-Management.html'; // Redirect về trang quản lý
     })
     .catch(error => {
-        console.error(error);
-        alert('Thêm bài viết thất bại.');
+        console.error('Lỗi:', error);
+        // Có thể không cần alert ở đây vì đã alert ở trên
+        // alert('Thêm bài viết thất bại.');
     });
 }
 
