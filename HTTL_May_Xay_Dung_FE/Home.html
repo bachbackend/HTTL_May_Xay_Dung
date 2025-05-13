@@ -5426,20 +5426,10 @@
         <div style="text-align: center; margin-top: 20px;">
             <p>Hoặc đăng nhập bằng</p>
 
-            <!-- Google Identity Button -->
-            <div id="g_id_onload"
-                 data-callback="handleCredentialResponse"
-                 data-auto_prompt="false">
-            </div>
+            <!-- Container để inject Google Sign-In -->
+<div id="googleLoginContainer"></div>
 
-            <div class="g_id_signin"
-                 data-type="standard"
-                 data-size="large"
-                 data-theme="outline"
-                 data-text="sign_in_with"
-                 data-shape="rectangular"
-                 data-logo_alignment="left">
-            </div>
+            
         </div>
     </div>
 </div>
@@ -5678,7 +5668,7 @@
 
 
 <!-- Script xử lý callback Google -->
-<script>
+<!-- <script>
     async function handleCredentialResponse(response) {
         const credential = response.credential;
 
@@ -5704,7 +5694,7 @@
             alert("Lỗi khi gửi token đến server.");
         }
     }
-</script>
+</script> -->
 <script>
     function openPopup() {
     document.getElementById("popup").style.display = "flex";
@@ -6309,6 +6299,65 @@ async function loginUser(event) {
 
 
 
+</script>
+<!-- Container để inject Google Sign-In -->
+<div id="googleLoginContainer"></div>
+
+<script>
+    fetch('https://localhost:7205/api/Auth/client-id')
+        .then(res => res.json())
+        .then(data => {
+            const clientId = data.clientId;
+
+            const gsiDiv = document.createElement('div');
+            gsiDiv.id = 'g_id_onload';
+            gsiDiv.setAttribute('data-client_id', clientId);
+            gsiDiv.setAttribute('data-callback', 'handleCredentialResponse');
+            gsiDiv.setAttribute('data-auto_prompt', 'false');
+
+            document.getElementById('googleLoginContainer').appendChild(gsiDiv);
+
+            const signInButton = document.createElement('div');
+            signInButton.className = 'g_id_signin';
+            signInButton.setAttribute('data-type', 'standard');
+            signInButton.setAttribute('data-size', 'large');
+            signInButton.setAttribute('data-theme', 'outline');
+
+            document.getElementById('googleLoginContainer').appendChild(signInButton);
+
+            // Inject Google SDK
+            const script = document.createElement('script');
+            script.src = 'https://accounts.google.com/gsi/client';
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        });
+
+    async function handleCredentialResponse(response) {
+        const credential = response.credential;
+
+        try {
+            const res = await fetch("https://localhost:7205/api/Auth/LoginWithGoogle", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ IdToken: credential })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                alert("Đăng nhập thành công!");
+                localStorage.setItem("accesstoken", data.token);
+                window.location.reload(); // hoặc redirect tùy bạn
+            } else {
+                alert(data.message || "Đăng nhập thất bại!");
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Lỗi khi gửi token đến server.");
+        }
+    }
 </script>
 
 

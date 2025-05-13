@@ -418,6 +418,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
         }
 
+        [HttpGet("client-id")]
+        public IActionResult GetClientId()
+        {
+            var clientId = _configuration["GoogleAuth:ClientId"];
+            return Ok(new { clientId });
+        }
+
+
 
     }
 }
