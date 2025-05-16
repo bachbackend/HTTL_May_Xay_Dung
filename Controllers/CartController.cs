@@ -45,7 +45,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     ProductName = c.Product.Name,
                     Image = c.Product.Image,
                     Quantity = c.Quantity,
-                    ProductPrice = c.Product.ProductPrice,
+                    //ProductPrice = c.Product.ProductPrice,
                 })
                 .ToListAsync();
 
@@ -274,7 +274,7 @@ namespace HTTL_May_Xay_Dung.Controllers
 
             if (!cartItems.Any())
                 return BadRequest(new { message = "Giỏ hàng trống hoặc không tìm thấy thông tin giỏ hàng." });
-            decimal totalPrice = cartItems.Sum(item => item.Product.ProductPrice * item.Quantity);
+            //decimal totalPrice = cartItems.Sum(item => item.Product.ProductPrice * item.Quantity);
 
             // Xử lý địa chỉ giao hàng
             ShippingAddress shippingAddress;
@@ -312,7 +312,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                 ShippingAddressId = shippingAddress.Id,  // Gán địa chỉ vào đơn hàng
                 OrderDate = DateTime.Now,
                 OrderStatusId = 1, // Đang xử lý
-                TotalPrice = totalPrice,
+                //TotalPrice = totalPrice,
             };
 
             await _context.Orders.AddAsync(order);

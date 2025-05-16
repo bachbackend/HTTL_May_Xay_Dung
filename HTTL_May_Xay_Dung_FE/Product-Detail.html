@@ -1209,7 +1209,7 @@
                                 <li class="menu-item dropdown" id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
+                                        <!-- <strong>GIỎ HÀNG</strong> -->
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
@@ -1346,7 +1346,7 @@
                                 <li id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
+                                        <!-- <strong>GIỎ HÀNG</strong> -->
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
@@ -1806,7 +1806,7 @@
                         <div class="elementor-widget-container">
                             <p class="price" id="product-price"
                                 style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;">
-                                <a href="https://zalo.me/0773026042" class="price-link" target="_blank">
+                                <a href="https://zalo.me/0852488845" class="price-link" target="_blank">
                                     Giá sản phẩm: Liên hệ
                                     <span class="phone-icon">📞</span>
                                 </a>
@@ -2943,8 +2943,8 @@ function parseJwt(token) {
 
         const html = `
             <div style="display: flex; align-items: center; gap: 15px;">
-                <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
-                    <strong title="${fullName}">Hello, ${displayName}!</strong>
+                <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
+                    Hello, ${displayName}!
                 </a>
                 <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
                     style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
@@ -3075,7 +3075,7 @@ function parseJwt(token) {
             document.getElementById('product-specification').innerHTML = product.specifications;
             const price = Number(product.productPrice);
             const priceElement = document.getElementById('product-price');
-            priceElement.textContent = `Giá: ${price.toLocaleString('vi-VN')}₫`;
+            // priceElement.textContent = `Giá: ${price.toLocaleString('vi-VN')}₫`;
             priceElement.style.color = '#283566';
 
             loadSameCategoryProducts(product.categoryId, productId);

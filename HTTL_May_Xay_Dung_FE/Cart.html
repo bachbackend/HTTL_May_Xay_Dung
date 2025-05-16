@@ -1170,7 +1170,7 @@
                                     class="a:1:{i:0;s:0:&quot;&quot;;} menu-item menu-item-type-post_type menu-item-object-page menu-item-82384">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
+                                        <!-- <strong>GIỎ HÀNG</strong> -->
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
@@ -1295,7 +1295,7 @@
                                 <li id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
+                                        <!-- <strong>GIỎ HÀNG</strong> -->
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
@@ -1907,7 +1907,7 @@
 
                                                 <!-- Tổng cộng & thanh toán -->
                                                 <div class="total-section">
-                                                    <h5>Tổng cộng: <span class="text-danger fw-bold">0₫</span></h5>
+                                                    <!-- <h5>Tổng cộng: <span class="text-danger fw-bold">0₫</span></h5> -->
                                                     <button type="submit" class="checkout-btn mt-3">🧾 Thanh
                                                         toán</button>
                                                 </div>
@@ -2674,8 +2674,8 @@ function parseJwt(token) {
 
         const html = `
             <div style="display: flex; align-items: center; gap: 15px;">
-                <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
-                    <strong title="${fullName}">Hello, ${displayName}!</strong>
+                <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
+                   Hello, ${displayName}!
                 </a>
                 <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
                     style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
@@ -3054,20 +3054,20 @@ function parseJwt(token) {
 
                 let html = "";
                 data.cartItems.forEach(item => {
-                    const productPrice = item.productPrice;
+                    // const productPrice = item.productPrice;
                     const quantity = item.quantity;
-                    const totalPrice = productPrice * quantity;
-                    totalAmount += totalPrice;
+                    // const totalPrice = productPrice * quantity;
+                    // totalAmount += totalPrice;
 
-                    const formattedPrice = new Intl.NumberFormat('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                    }).format(productPrice);
+                    // const formattedPrice = new Intl.NumberFormat('vi-VN', {
+                    //     style: 'currency',
+                    //     currency: 'VND'
+                    // }).format(productPrice);
 
-                    const formattedTotal = new Intl.NumberFormat('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                    }).format(totalPrice);
+                    // const formattedTotal = new Intl.NumberFormat('vi-VN', {
+                    //     style: 'currency',
+                    //     currency: 'VND'
+                    // }).format(totalPrice);
 
                     const imagePath = `https://localhost:7205/images/product/${item.image}`;
                     html += `
@@ -3076,13 +3076,13 @@ function parseJwt(token) {
                     <img src="${imagePath}" alt="${item.productName}" />
                 </div>
                 <div class="col-md-4">${item.productName}</div>
-                <div class="col-md-2 text-success fw-bold">${formattedPrice}</div>
+                
                 <div class="col-md-2">
                     <input type="number" class="form-control quantity-input" 
                            value="${item.quantity}" min="1" 
                            data-product-id="${item.productId}" />
                 </div>
-                <div class="col-md-1 text-end" style="margin-left: -40px">${formattedTotal}</div> 
+                
                 <div class="col-md-1 text-end" style="margin-left: 40px">
                     <span class="text-danger remove-btn" 
                         style="cursor: pointer;" 
@@ -3093,13 +3093,13 @@ function parseJwt(token) {
                 });
 
                 // Định dạng tổng tiền
-                const formattedGrandTotal = new Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).format(totalAmount);
+                // const formattedGrandTotal = new Intl.NumberFormat('vi-VN', {
+                //     style: 'currency',
+                //     currency: 'VND'
+                // }).format(totalAmount);
 
                 // Gán vào phần tử HTML Tổng cộng
-                document.querySelector(".total-section span").textContent = formattedGrandTotal;
+                // document.querySelector(".total-section span").textContent = formattedGrandTotal;
 
                 document.getElementById("cart-items").innerHTML = html;
 
@@ -3161,74 +3161,150 @@ function parseJwt(token) {
         //end dom content loaded
     });
 
+    // async function submitShippingForm(event) {
+    //     event.preventDefault();
+    //     const userId = getUserIdFromToken();
+    //     if (!userId) {
+    //         Swal.fire({
+    //             icon: 'warning',
+    //             title: 'Chưa đăng nhập',
+    //             text: 'Vui lòng đăng nhập để tiếp tục.',
+    //         });
+    //         return;
+    //     }
+
+    //     const savedAddressId = document.getElementById('savedAddressSelect').value;
+    //     const cityId = document.getElementById('province').value;
+    //     const addressDetail = document.getElementById('address').value;
+    //     const phone = document.getElementById('phone').value;
+
+    //     const payload = savedAddressId
+    //         ? {
+    //             userId: parseInt(userId),
+    //             shippingAddressId: parseInt(savedAddressId)
+    //             // newShippingAddress: {
+    //             //     cityId: cityId ? parseInt(cityId) : 0,
+    //             //     specificAddress: addressDetail || '',
+    //             //     phoneNumber: phone || ''
+    //             // }
+    //         }
+    //         : {
+    //             userId: parseInt(userId),
+    //             newShippingAddress: {
+    //                 cityId: parseInt(cityId),
+    //                 specificAddress: addressDetail,
+    //                 phoneNumber: phone
+    //             }
+    //         };
+
+    //     try {
+    //         const response = await fetch('https://localhost:7205/api/Cart/PaymentCOD', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'accept': '*/*',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(payload)
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error(`Lỗi thanh toán: ${response.status}`);
+    //         }
+
+    //         const result = await response.json();
+
+    //         Swal.fire({
+    //             icon: 'success',
+    //             title: 'Thành công',
+    //             text: result.message || 'Đặt hàng thành công!',
+    //         }).then(() => {
+    //             window.location.reload();
+    //         });
+    //     } catch (error) {
+    //         console.error('Lỗi khi thanh toán:', error);
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Thất bại',
+    //             text: 'Thanh toán thất bại, vui lòng thử lại.',
+    //         });
+    //     }
+    // }
+
+
+
     async function submitShippingForm(event) {
-        event.preventDefault();
-        const userId = getUserIdFromToken();
-        if (!userId) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Chưa đăng nhập',
-                text: 'Vui lòng đăng nhập để tiếp tục.',
-            });
-            return;
-        }
+    event.preventDefault();
 
-        const savedAddressId = document.getElementById('savedAddressSelect').value;
-        const cityId = document.getElementById('province').value;
-        const addressDetail = document.getElementById('address').value;
-        const phone = document.getElementById('phone').value;
+    const submitButton = document.querySelector('#shipping-form button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.innerText = 'Đang xử lý...';
 
-        const payload = savedAddressId
-            ? {
-                userId: parseInt(userId),
-                shippingAddressId: parseInt(savedAddressId)
-                // newShippingAddress: {
-                //     cityId: cityId ? parseInt(cityId) : 0,
-                //     specificAddress: addressDetail || '',
-                //     phoneNumber: phone || ''
-                // }
-            }
-            : {
-                userId: parseInt(userId),
-                newShippingAddress: {
-                    cityId: parseInt(cityId),
-                    specificAddress: addressDetail,
-                    phoneNumber: phone
-                }
-            };
-
-        try {
-            const response = await fetch('https://localhost:7205/api/Cart/PaymentCOD', {
-                method: 'POST',
-                headers: {
-                    'accept': '*/*',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`Lỗi thanh toán: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Thành công',
-                text: result.message || 'Đặt hàng thành công!',
-            }).then(() => {
-                window.location.reload();
-            });
-        } catch (error) {
-            console.error('Lỗi khi thanh toán:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Thất bại',
-                text: 'Thanh toán thất bại, vui lòng thử lại.',
-            });
-        }
+    const userId = getUserIdFromToken();
+    if (!userId) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Chưa đăng nhập',
+            text: 'Vui lòng đăng nhập để tiếp tục.',
+        });
+        submitButton.disabled = false;
+        submitButton.innerText = 'Thanh toán';
+        return;
     }
+
+    const savedAddressId = document.getElementById('savedAddressSelect').value;
+    const cityId = document.getElementById('province').value;
+    const addressDetail = document.getElementById('address').value;
+    const phone = document.getElementById('phone').value;
+
+    const payload = savedAddressId
+        ? {
+            userId: parseInt(userId),
+            shippingAddressId: parseInt(savedAddressId)
+        }
+        : {
+            userId: parseInt(userId),
+            newShippingAddress: {
+                cityId: parseInt(cityId),
+                specificAddress: addressDetail,
+                phoneNumber: phone
+            }
+        };
+
+    try {
+        const response = await fetch('https://localhost:7205/api/Cart/PaymentCOD', {
+            method: 'POST',
+            headers: {
+                'accept': '*/*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Lỗi thanh toán: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công',
+            text: result.message || 'Đặt hàng thành công!',
+        }).then(() => {
+            window.location.reload();
+        });
+    } catch (error) {
+        console.error('Lỗi khi thanh toán:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Thất bại',
+            text: 'Thanh toán thất bại, vui lòng thử lại.',
+        });
+        submitButton.disabled = false;
+        submitButton.innerText = 'Thanh toán';
+    }
+}
+
 
     document.getElementById('shipping-form').addEventListener('submit', submitShippingForm);
 
@@ -3334,20 +3410,20 @@ async function loginUser(event) {
 
        document.getElementById('loginForm').addEventListener('submit', loginUser);
 
-       document.getElementById('togglePassword').addEventListener('click', function () {
-           const passwordField = document.getElementById('password');
-           const eyeIcon = document.getElementById('eyeIcon');
+    //    document.getElementById('togglePassword').addEventListener('click', function () {
+    //        const passwordField = document.getElementById('password');
+    //        const eyeIcon = document.getElementById('eyeIcon');
 
-           if (passwordField.type === 'password') {
-               passwordField.type = 'text'; // Hiển thị mật khẩu
-               eyeIcon.classList.remove('bi-eye-slash');
-               eyeIcon.classList.add('bi-eye');
-           } else {
-               passwordField.type = 'password'; // Ẩn mật khẩu
-               eyeIcon.classList.remove('bi-eye');
-               eyeIcon.classList.add('bi-eye-slash');
-           }
-       });
+    //        if (passwordField.type === 'password') {
+    //            passwordField.type = 'text'; // Hiển thị mật khẩu
+    //            eyeIcon.classList.remove('bi-eye-slash');
+    //            eyeIcon.classList.add('bi-eye');
+    //        } else {
+    //            passwordField.type = 'password'; // Ẩn mật khẩu
+    //            eyeIcon.classList.remove('bi-eye');
+    //            eyeIcon.classList.add('bi-eye-slash');
+    //        }
+    //    });
 
 
 

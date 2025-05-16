@@ -13,7 +13,7 @@ namespace HTTL_May_Xay_Dung.DTO
         public int StatusId { get; set; }
         public string StatusName { get; set; } = null!;
         public DateTime OrderDate { get; set; }
-        public decimal? TotalPrice { get; set; }
+        //public decimal? TotalPrice { get; set; }
         public int CityId { get; set; }
         public string CityName { get; set; } = null!;
         public List<OrderDetailDTO> OrderDetails { get; set; } = new List<OrderDetailDTO>();
