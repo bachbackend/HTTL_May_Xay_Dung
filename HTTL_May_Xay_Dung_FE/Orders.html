@@ -1177,7 +1177,7 @@
                                 <li class="menu-item dropdown" id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
+                                        <!-- <strong>GIỎ HÀNG</strong> -->
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
@@ -1307,7 +1307,7 @@
                                 <li id="cart-menu">
                                     <a href="Cart.html" class="twbb-item"
                                         style="position: relative; display: inline-block;">
-                                        <strong>GIỎ HÀNG</strong>
+                                        <!-- <strong>GIỎ HÀNG</strong> -->
                                         <i class="fa fa-shopping-cart"
                                             style="font-size: 20px; margin-left: 5px; position: relative;"></i>
                                         <span id="cart-count" style="
@@ -2486,28 +2486,28 @@
         const payload = parseJwt(token);  // Giải mã token
 
         if (payload && payload.unique_name) {
-            // Nếu giải mã thành công và có unique_name, hiển thị lời chào
-            authLinks1.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
-                                <strong>Hello, ${payload.unique_name}!</strong>
-                            </a>
-                            <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
-                                style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </button>
-                        </div>
+        const fullName = payload.unique_name.split('@')[0];
+        const displayName = fullName.length > 15 ? fullName.slice(0, 15) + '...' : fullName;
 
-                    `;
-        } else {
-            // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
-            showLoginButtons();
-        }
+        const html = `
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
+                    Hello, ${displayName}!
+                </a>
+                <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+                    style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>`;
+
+        if (authLinks) authLinks.innerHTML = html;
+        if (authLinks1) authLinks1.innerHTML = html;
     } else {
-        // Nếu không có token, hiển thị nút đăng nhập/đăng ký
         showLoginButtons();
     }
-
+} else {
+    showLoginButtons();
+}
 
 
     function parseJwt(token) {
@@ -2536,7 +2536,7 @@
 
     function logout() {
         localStorage.removeItem('accesstoken');
-        location.reload();
+        window.location.href = 'Home.html';
     }
 
     function getUserIdFromToken() {

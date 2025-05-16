@@ -57,14 +57,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             {
                 products = products.Where(p => p.Status == status.Value);
             }
-            if (minPrice > 0)
+            /*if (minPrice > 0)
             {
                 products = products.Where(p => p.ProductPrice >= minPrice);
             }
             if (maxPrice > 0)
             {
                 products = products.Where(p => p.ProductPrice <= maxPrice);
-            }
+            }*/
 
             if (sortBy?.ToLower() == "name")
             {
@@ -121,8 +121,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
-                    BasePrice = p.BasePrice,
+                    //ProductPrice = p.ProductPrice,
+                    //BasePrice = p.BasePrice,
                 })
             .ToListAsync();
 
@@ -171,8 +171,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                 Specifications = model.Specifications,
                 Status = model.Status,
                 CreatedAt = DateTime.UtcNow,
-                ProductPrice = model.ProductPrice,
-                BasePrice = model.BasePrice,
+                //ProductPrice = model.ProductPrice,
+                //BasePrice = model.BasePrice,
             };
 
             // Lưu sản phẩm vào database
@@ -197,8 +197,8 @@ namespace HTTL_May_Xay_Dung.Controllers
             product.Status = model.Status;
             product.Description = model.Description;
             product.Specifications = model.Specifications;
-            product.ProductPrice = model.ProductPrice;
-            product.BasePrice = model.BasePrice;
+            //product.ProductPrice = model.ProductPrice;
+            //product.BasePrice = model.BasePrice;
 
             if (file != null && file.Length > 0)
             {
@@ -231,8 +231,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                 description = product.Description,
                 status = product.Status,
                 image = product.Image,
-                price = product.Price,
-                baseprice = product.BasePrice,
+                //price = product.Price,
+                //baseprice = product.BasePrice,
             });
         }
 
@@ -285,7 +285,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
+                    //ProductPrice = p.ProductPrice,
                 })
                 .FirstOrDefaultAsync();
 
@@ -319,7 +319,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
+                    //ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 
@@ -347,7 +347,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
+                    //ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
             return Ok(bestseller);
@@ -375,14 +375,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             {
                 products = products.Where(p => p.Name.Contains(name));
             }
-            if (minPrice > 0)
-            {
-                products = products.Where(p => p.ProductPrice >= minPrice);
-            }
-            if (maxPrice > 0)
-            {
-                products = products.Where(p => p.ProductPrice <= maxPrice);
-            }
+            //if (minPrice > 0)
+            //{
+            //    products = products.Where(p => p.ProductPrice >= minPrice);
+            //}
+            //if (maxPrice > 0)
+            //{
+            //    products = products.Where(p => p.ProductPrice <= maxPrice);
+            //}
 
             // ✅ Lọc theo category cha và các category con
             if (categoryId.HasValue)
@@ -423,8 +423,8 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
-                    BasePrice = p.BasePrice,
+                    //ProductPrice = p.ProductPrice,
+                    //BasePrice = p.BasePrice,
                 })
                 .ToListAsync();
 
@@ -458,7 +458,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
+                    //ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 
@@ -492,7 +492,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
+                    //ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 
@@ -525,7 +525,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Specifications = p.Specifications,
-                    ProductPrice = p.ProductPrice,
+                    //ProductPrice = p.ProductPrice,
                 })
                 .ToListAsync();
 

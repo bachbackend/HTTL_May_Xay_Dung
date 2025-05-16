@@ -21,8 +21,8 @@
             public DateTime? CreatedAt { get; set; }
 
             public string CategoryName { get; set; } = null!;
-            public decimal ProductPrice { get; set; }
-            public decimal BasePrice { get; set; }
+            //public decimal ProductPrice { get; set; }
+            //public decimal BasePrice { get; set; }
         }
 
         public class ProductRequestDTO
@@ -32,8 +32,8 @@
             public string Description { get; set; }
             public sbyte Status { get; set; }
             public string Specifications { get; set; }
-            public decimal ProductPrice { get; set; }
-            public decimal BasePrice { get; set; }
+            //public decimal ProductPrice { get; set; }
+            //public decimal BasePrice { get; set; }
         }
     }
 }
