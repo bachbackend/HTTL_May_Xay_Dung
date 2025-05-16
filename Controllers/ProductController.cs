@@ -32,6 +32,8 @@ namespace HTTL_May_Xay_Dung.Controllers
             int? status = null,
             string? name = null,
             int? categoryId = null,
+            decimal minPrice = 0,
+            decimal maxPrice = 0,
             string? sortBy = "id",
             string? sortOrder = "asc"
             )
@@ -54,6 +56,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             if (status.HasValue)
             {
                 products = products.Where(p => p.Status == status.Value);
+            }
+            if (minPrice > 0)
+            {
+                products = products.Where(p => p.ProductPrice >= minPrice);
+            }
+            if (maxPrice > 0)
+            {
+                products = products.Where(p => p.ProductPrice <= maxPrice);
             }
 
             if (sortBy?.ToLower() == "name")
@@ -346,11 +356,13 @@ namespace HTTL_May_Xay_Dung.Controllers
 
         [HttpGet("GetProductByStatus")]
         public async Task<IActionResult> GetProductByStatus(
-    int pageNumber = 1,
-    int? pageSize = null,
-    string? name = null,
-    int? categoryId = null
-)
+                int pageNumber = 1,
+                int? pageSize = null,
+                string? name = null,
+                decimal minPrice = 0,
+                decimal maxPrice = 0,
+                int? categoryId = null
+            )
         {
             int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
 
@@ -362,6 +374,14 @@ namespace HTTL_May_Xay_Dung.Controllers
             if (!string.IsNullOrEmpty(name))
             {
                 products = products.Where(p => p.Name.Contains(name));
+            }
+            if (minPrice > 0)
+            {
+                products = products.Where(p => p.ProductPrice >= minPrice);
+            }
+            if (maxPrice > 0)
+            {
+                products = products.Where(p => p.ProductPrice <= maxPrice);
             }
 
             // ✅ Lọc theo category cha và các category con

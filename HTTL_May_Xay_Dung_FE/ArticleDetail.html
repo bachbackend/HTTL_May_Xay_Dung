@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bài viết</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="robots" content="noindex, nofollow">
     <style>
         img:is([sizes="auto" i], [sizes^="auto," i]) {
@@ -2099,8 +2100,143 @@
                 </div>
             </div>
         </div>
-        <script
-            type="application/ld+json">{"@context":"https:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"name":"Shop All","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/\/shop-all\/"}},{"@type":"ListItem","position":2,"item":{"name":"Safety Gear","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/product-category\/safety-gear\/"}}]}</script>
+
+        <!-- popup đăng nhập -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Đăng Nhập</h2>
+        <form id="loginForm">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+
+            <a style="color: orange; font-size: 15px; font-family:Arial, Helvetica, sans-serif;" href="./Register.html">Chưa có tài khoản? Đăng ký ngay</a>
+            <a style="color: orange; font-size: 15px; font-family:Arial, Helvetica, sans-serif;" href="./resetPassword.html">Quên mật khẩu ?</a>
+
+            <button type="submit">Đăng nhập</button>
+        </form>
+
+        <!-- Nút đăng nhập với Google -->
+        <div style="text-align: center; margin-top: 20px;">
+            <p>Hoặc đăng nhập bằng</p>
+
+            <!-- Container để inject Google Sign-In -->
+<div id="googleLoginContainer"></div>
+
+            
+        </div>
+    </div>
+</div>
+
+    <style>
+    /* Ban đầu popup bị ẩn */
+    .popup-overlay {
+        display: none; /* Ẩn khi mới vào trang */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        z-index: 9999; /* Đặt popup trên tất cả các phần tử khác */
+    }
+    
+    /* Hộp đăng nhập */
+    .popup-box {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        width: 360px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+        border-top: 5px solid #D2691E;
+        z-index: 10000; /* Đảm bảo hộp popup nằm trên overlay */
+    }
+    
+    /* Tiêu đề */
+    .popup-box h2 {
+        color: #D2691E;
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+    
+    /* Nút đóng */
+    .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #D2691E;
+        font-weight: bold;
+    }
+    
+    .close-btn:hover {
+        color: #A0522D;
+    }
+    
+    /* Form đăng nhập */
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        text-align: left;
+    }
+    
+    /* Ô nhập liệu */
+    input {
+        padding: 12px;
+        border: 1px solid #D2691E;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none;
+    }
+    
+    input:focus {
+        border-color: #A0522D;
+        box-shadow: 0 0 5px rgba(210, 105, 30, 0.5);
+    }
+    
+    /* Nút đăng nhập */
+    button {
+        padding: 12px;
+        background-color: #D2691E;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #A0522D;
+    }
+    </style>
+    <script>
+    // Khi click vào overlay (nền), đóng popup nếu click không nằm trong popup-box
+    document.getElementById('popup').addEventListener('click', function (event) {
+        const popupBox = document.querySelector('.popup-box');
+        if (!popupBox.contains(event.target)) {
+            closePopup(); // gọi hàm bạn đã có sẵn để đóng
+        }
+    });
+
+    // Hàm đóng popup
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
+
+        <!-- <script
+            type="application/ld+json">{"@context":"https:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"name":"Shop All","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/\/shop-all\/"}},{"@type":"ListItem","position":2,"item":{"name":"Safety Gear","@id":"https:\/\/aisite.10web.io\/70\/entirely-humane-lacewing\/product-category\/safety-gear\/"}}]}</script> -->
         <script>
             const lazyloadRunObserver = () => {
                 const lazyloadBackgrounds = document.querySelectorAll(`.e-con.e-parent:not(.e-lazyloaded)`);
@@ -2328,62 +2464,130 @@
 
 
 <script>
+
+    function openPopup() {
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function logout() {
+    localStorage.removeItem('accesstoken');
+    window.location.reload();
+}
+
+function showLoginButtons() {
+    const authLinks = document.getElementById('auth-links');
+    const authLinks1 = document.getElementById('auth-links1');
+
+    if (authLinks) {
+        authLinks.innerHTML = `<a href="#" class="twbb-item" onclick="openPopup()"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>`;
+    }
+    if (authLinks1) {
+        authLinks1.innerHTML = `<a href="#" class="twbb-item" onclick="openPopup()"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>`;
+    }
+}
+
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+            '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        ).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        console.error("Invalid JWT", e);
+        return null;
+    }
+}
+
+
     document.addEventListener("DOMContentLoaded", async () => {
         const token = localStorage.getItem('accesstoken');
         const authLinks = document.getElementById('auth-links');
         const authLinks1 = document.getElementById('auth-links1');
 
         if (token) {
-            const payload = parseJwt(token);  // Giải mã token
+    const payload = parseJwt(token);
+    if (payload && payload.unique_name) {
+        const fullName = payload.unique_name.split('@')[0];
+        const displayName = fullName.length > 15 ? fullName.slice(0, 15) + '...' : fullName;
 
-            if (payload && payload.unique_name) {
-                // Nếu giải mã thành công và có unique_name, hiển thị lời chào
-                authLinks.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
-                                <strong>Hello, ${payload.unique_name}!</strong>
-                            </a>
-                            <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
-                                style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </button>
-                        </div>
+        const html = `
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
+                    <strong title="${fullName}">Hello, ${displayName}!</strong>
+                </a>
+                <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+                    style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>`;
 
-                    `;
-            } else {
-                // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
-                showLoginButtons();
-            }
-        } else {
-            // Nếu không có token, hiển thị nút đăng nhập/đăng ký
-            showLoginButtons();
-        }
+        if (authLinks) authLinks.innerHTML = html;
+        if (authLinks1) authLinks1.innerHTML = html;
+    } else {
+        showLoginButtons();
+    }
+} else {
+    showLoginButtons();
+}
 
-        if (token) {
-            const payload = parseJwt(token);  // Giải mã token
 
-            if (payload && payload.unique_name) {
-                // Nếu giải mã thành công và có unique_name, hiển thị lời chào
-                authLinks1.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
-                                <strong>Hello, ${payload.unique_name}!</strong>
-                            </a>
-                            <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
-                                style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </button>
-                        </div>
+        // if (token) {
+        //     const payload = parseJwt(token);  // Giải mã token
 
-                    `;
-            } else {
-                // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
-                showLoginButtons1();
-            }
-        } else {
-            // Nếu không có token, hiển thị nút đăng nhập/đăng ký
-            showLoginButtons1();
-        }
+        //     if (payload && payload.unique_name) {
+        //         // Nếu giải mã thành công và có unique_name, hiển thị lời chào
+        //         authLinks.innerHTML = `
+        //                 <div style="display: flex; align-items: center; gap: 15px;">
+        //                     <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
+        //                         <strong>Hello, ${payload.unique_name}!</strong>
+        //                     </a>
+        //                     <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+        //                         style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+        //                         <i class="fas fa-sign-out-alt"></i>
+        //                     </button>
+        //                 </div>
+
+        //             `;
+        //     } else {
+        //         // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
+        //         showLoginButtons();
+        //     }
+        // } else {
+        //     // Nếu không có token, hiển thị nút đăng nhập/đăng ký
+        //     showLoginButtons();
+        // }
+
+        // if (token) {
+        //     const payload = parseJwt(token);  // Giải mã token
+
+        //     if (payload && payload.unique_name) {
+        //         // Nếu giải mã thành công và có unique_name, hiển thị lời chào
+        //         authLinks1.innerHTML = `
+        //                 <div style="display: flex; align-items: center; gap: 15px;">
+        //                     <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
+        //                         <strong>Hello, ${payload.unique_name}!</strong>
+        //                     </a>
+        //                     <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
+        //                         style="border-radius: 8px; padding: 10px 20px; background-color: #ff4d4d; color: white; border: none; cursor: pointer;">
+        //                         <i class="fas fa-sign-out-alt"></i>
+        //                     </button>
+        //                 </div>
+
+        //             `;
+        //     } else {
+        //         // Nếu token không hợp lệ, hiển thị lại nút đăng nhập/đăng ký
+        //         showLoginButtons1();
+        //     }
+        // } else {
+        //     // Nếu không có token, hiển thị nút đăng nhập/đăng ký
+        //     showLoginButtons1();
+        // }
 
         function parseJwt(token) {
             try {
@@ -2401,21 +2605,21 @@
         }
 
         // Hiển thị nút Đăng nhập/Đăng ký
-        function showLoginButtons() {
-            const authLinks = document.getElementById('auth-links');
-            authLinks.innerHTML = `
-                    <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
+        // function showLoginButtons() {
+        //     const authLinks = document.getElementById('auth-links');
+        //     authLinks.innerHTML = `
+        //             <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
                 
-            `;
-        }
+        //     `;
+        // }
 
-        function showLoginButtons1() {
-            const authLinks = document.getElementById('auth-links1');
-            authLinks1.innerHTML = `
-                    <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
+        // function showLoginButtons1() {
+        //     const authLinks = document.getElementById('auth-links1');
+        //     authLinks1.innerHTML = `
+        //             <a href="login.html" class="twbb-item"><strong>ĐĂNG KÝ/ĐĂNG NHẬP</strong></a>
                 
-            `;
-        }
+        //     `;
+        // }
 
         function logout() {
             localStorage.removeItem('accesstoken');
@@ -2675,7 +2879,136 @@
                 dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
             });
     });
+
+    async function loginUser(event) {
+           event.preventDefault();
+
+           let form = event.target;
+           let formData = new FormData(form);
+           let data = {};
+
+           formData.forEach((value, key) => {
+               data[key] = value;
+           });
+
+           let requestOptions = {
+               method: 'POST',
+               headers: {
+                   'Accept': '*/*',
+                   'Content-Type': 'application/json;odata.metadata=minimal;odata.streaming=true'
+               },
+               body: JSON.stringify(data) // Send the data as a JSON object
+           };
+
+           try {
+               let response = await fetch('https://localhost:7205/api/Auth/Login', requestOptions); // Updated URL
+               if (response.ok) {
+                   let responseData = await response.json();
+
+                   // Lưu token vào localStorage và sessionStorage
+                   localStorage.setItem('accesstoken', responseData.token);
+                   sessionStorage.setItem('accesstoken', responseData.token);
+
+                   // Giải mã JWT để lấy vai trò (role)
+                   const token = responseData.token;
+                   const payload = JSON.parse(atob(token.split('.')[1])); // Decode phần payload
+                   const userRole = payload.role;
+
+                   console.log("Thông tin từ JWT:", payload);
+
+                   // Chuyển hướng dựa trên role
+                   if (userRole === "1") {
+                       window.location.href = './Home.html';
+                   } else {
+                       window.location.href = './Dashboard.html';
+                   }
+               } else {
+                   let errorData = await response.json();
+                   alert(`Login failed: ${errorData.message}`);
+               }
+           } catch (error) {
+               console.error('Error logging in:', error);
+               alert('Login failed due to network error');
+           }
+       }
+
+       document.getElementById('loginForm').addEventListener('submit', loginUser);
+
+       document.getElementById('togglePassword').addEventListener('click', function () {
+           const passwordField = document.getElementById('password');
+           const eyeIcon = document.getElementById('eyeIcon');
+
+           if (passwordField.type === 'password') {
+               passwordField.type = 'text'; // Hiển thị mật khẩu
+               eyeIcon.classList.remove('bi-eye-slash');
+               eyeIcon.classList.add('bi-eye');
+           } else {
+               passwordField.type = 'password'; // Ẩn mật khẩu
+               eyeIcon.classList.remove('bi-eye');
+               eyeIcon.classList.add('bi-eye-slash');
+           }
+       });
+
 </script>
+
+
+<script>
+    fetch('https://localhost:7205/api/Auth/client-id')
+        .then(res => res.json())
+        .then(data => {
+            const clientId = data.clientId;
+
+            const gsiDiv = document.createElement('div');
+            gsiDiv.id = 'g_id_onload';
+            gsiDiv.setAttribute('data-client_id', clientId);
+            gsiDiv.setAttribute('data-callback', 'handleCredentialResponse');
+            gsiDiv.setAttribute('data-auto_prompt', 'false');
+
+            document.getElementById('googleLoginContainer').appendChild(gsiDiv);
+
+            const signInButton = document.createElement('div');
+            signInButton.className = 'g_id_signin';
+            signInButton.setAttribute('data-type', 'standard');
+            signInButton.setAttribute('data-size', 'large');
+            signInButton.setAttribute('data-theme', 'outline');
+
+            document.getElementById('googleLoginContainer').appendChild(signInButton);
+
+            // Inject Google SDK
+            const script = document.createElement('script');
+            script.src = 'https://accounts.google.com/gsi/client';
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        });
+
+    async function handleCredentialResponse(response) {
+        const credential = response.credential;
+
+        try {
+            const res = await fetch("https://localhost:7205/api/Auth/LoginWithGoogle", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ IdToken: credential })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+                alert("Đăng nhập thành công!");
+                localStorage.setItem("accesstoken", data.token);
+                window.location.reload(); // hoặc redirect tùy bạn
+            } else {
+                alert(data.message || "Đăng nhập thất bại!");
+            }
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert("Lỗi khi gửi token đến server.");
+        }
+    }
+</script>
+
 
 
 </html>
