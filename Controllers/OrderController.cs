@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace HTTL_May_Xay_Dung.Controllers
 {
@@ -388,6 +389,61 @@ namespace HTTL_May_Xay_Dung.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Đã xảy ra lỗi khi cập nhật tổng giá trị đơn hàng: {ex.Message}");
+            }
+        }
+
+        [HttpGet("GetCSVFile")]
+        public async Task<ActionResult> GetOrderCSVFile(DateTime? startDate, DateTime? endDate)
+        {
+            var query = _context.Orders
+                .Include(od => od.User)
+                .Include(od => od.OrderStatus)
+                .Include(od => od.ShippingAddress)
+                    .ThenInclude(od => od.City)
+                .AsQueryable();
+
+            // Lọc theo ngày đặt hàng nếu có
+            if (startDate.HasValue)
+            {
+                query = query.Where(o => o.OrderDate >= startDate.Value);
+            }
+            if (endDate.HasValue)
+            {
+                endDate = endDate.Value.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                query = query.Where(o => o.OrderDate <= endDate.Value);
+            }
+
+            var orders = await query.ToListAsync();
+
+            StringBuilder strCSV = new StringBuilder();
+            strCSV.AppendLine("STT,Khách hàng,Email,Số điện thoại,Địa chỉ,Thành phố,Thành tiền,Ngày đặt hàng,Trạng thái đơn hàng");
+
+            int index = 1;
+            foreach (var order in orders)
+            {
+                strCSV.AppendLine($"\"{index}\"," +
+                                  $"\"{order.User.Username}\"," +
+                                  $"\"{order.User.Email}\"," +
+                                  $"\"{order.ShippingAddress.PhoneNumber}\"," +
+                                  $"\"{order.ShippingAddress.SpecificAddress}\"," +
+                                  $"\"{order.ShippingAddress.City.Name}\"," +
+                                  $"\"{order.TotalPrice?.ToString() ?? "0"}\"," +
+                                  $"\"{order.OrderDate}\"," +
+                                  $"\"{order.OrderStatus.Name}\"");
+                index++;
+            }
+
+            byte[] bom = Encoding.UTF8.GetPreamble();
+            using (MemoryStream memory = new MemoryStream())
+            {
+                memory.Write(bom, 0, bom.Length);
+                using (StreamWriter writer = new StreamWriter(memory, Encoding.UTF8, 1024, leaveOpen: true))
+                {
+                    await writer.WriteAsync(strCSV.ToString());
+                    await writer.FlushAsync();
+                }
+                memory.Position = 0;
+                return File(memory.ToArray(), "text/csv", "Order.csv");
             }
         }
 
