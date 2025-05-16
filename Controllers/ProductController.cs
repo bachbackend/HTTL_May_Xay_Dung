@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Text;
 using static HTTL_May_Xay_Dung.DTO.ProductDTO;
 
 namespace HTTL_May_Xay_Dung.Controllers
@@ -546,6 +547,52 @@ namespace HTTL_May_Xay_Dung.Controllers
             var quantity = await _context.Products.CountAsync();
 
             return Ok(quantity);
+        }
+
+
+        [HttpGet("GetCSVFile")]
+        public async Task<ActionResult> GetProductCSVFile()
+        {
+            string baseImageUrl = "https://localhost:7205/images/product/";
+
+            var query = _context.Products
+                .Include(od => od.Category)
+                .AsQueryable();
+
+            var products = await query.ToListAsync();
+
+            StringBuilder strCSV = new StringBuilder();
+            strCSV.AppendLine("STT,Tên sản phẩm,Ảnh sản phẩm,Loại sản phẩm,Trạng thái,Số lượng bán,Ngày tạo sản phẩm");
+
+            int index = 1;
+            foreach (var product in products)
+            {
+                string imageUrl = $"{baseImageUrl}{product.Image}";
+
+                string statusText = product.Status == 0 ? "Đang kinh doanh" : "Ngừng bán";
+
+                strCSV.AppendLine($"\"{index}\"," +
+                                  $"\"{product.Name}\"," +
+                                  $"\"{imageUrl}\"," +
+                                  $"\"{product.Category.Name}\"," +
+                                  $"\"{statusText}\"," +
+                                  $"\"{product.SaleQuantity}\"," +
+                                  $"\"{product.CreatedAt}\"");
+                index++;
+            }
+
+            byte[] bom = Encoding.UTF8.GetPreamble();
+            using (MemoryStream memory = new MemoryStream())
+            {
+                memory.Write(bom, 0, bom.Length);
+                using (StreamWriter writer = new StreamWriter(memory, Encoding.UTF8, 1024, leaveOpen: true))
+                {
+                    await writer.WriteAsync(strCSV.ToString());
+                    await writer.FlushAsync();
+                }
+                memory.Position = 0;
+                return File(memory.ToArray(), "text/csv", "Product.csv");
+            }
         }
 
     }
