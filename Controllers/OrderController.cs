@@ -94,7 +94,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     StatusId = p.OrderStatusId,
                     StatusName = p.OrderStatus.Name,
                     OrderDate = p.OrderDate,
-                    //TotalPrice = p.TotalPrice,
+                    TotalPrice = p.TotalPrice,
                     CityId = p.ShippingAddress.CityId,
                     CityName = p.ShippingAddress.City.Name,
                     SpecificAddress = p.ShippingAddress.SpecificAddress
@@ -132,7 +132,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     StatusId = p.OrderStatus.Id,
                     StatusName = p.OrderStatus.Name,
                     OrderDate = p.OrderDate,
-                    //TotalPrice = p.TotalPrice
+                    TotalPrice = p.TotalPrice
 
                 })
                 .FirstOrDefaultAsync();
@@ -169,7 +169,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     StatusId = o.OrderStatus.Id,
                     StatusName = o.OrderStatus.Name,
                     OrderDate = o.OrderDate,
-                    //TotalPrice = o.TotalPrice,
+                    TotalPrice = o.TotalPrice,
 
                     // Thông tin chi tiết của OrderDetail
                     OrderDetails = o.OrderDetails.Select(od => new OrderDetailDTO
@@ -238,7 +238,7 @@ namespace HTTL_May_Xay_Dung.Controllers
                     StatusId = p.OrderStatusId,
                     StatusName = p.OrderStatus.Name,
                     OrderDate = p.OrderDate,
-                    //TotalPrice = p.TotalPrice,
+                    TotalPrice = p.TotalPrice,
                 })
                 .ToListAsync();
 
