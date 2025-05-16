@@ -356,6 +356,41 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(quantity);
         }
 
+        [HttpPut("UpdateTotalPrice/{orderId}")]
+        public async Task<IActionResult> UpdateTotalPrice(int orderId, [FromForm] decimal totalPrice)
+        {
+            // Kiểm tra giá trị totalPrice hợp lệ (không âm)
+            if (totalPrice < 0)
+            {
+                return BadRequest("Tổng giá trị đơn hàng không thể là số âm.");
+            }
+
+            // Tìm đơn hàng theo orderId
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
+            if (order == null)
+            {
+                return NotFound("Không tìm thấy đơn hàng.");
+            }
+
+            // Cập nhật tổng giá trị đơn hàng
+            order.TotalPrice = totalPrice;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = "Cập nhật tổng giá trị đơn hàng thành công!",
+                    orderId = order.Id,
+                    totalPrice = order.TotalPrice
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Đã xảy ra lỗi khi cập nhật tổng giá trị đơn hàng: {ex.Message}");
+            }
+        }
+
 
     }
 }
