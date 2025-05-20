@@ -1,5 +1,6 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _paginationSettings = paginationSettings.Value;
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllShippingAddress()
         {
@@ -31,6 +33,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(sa);
         }
 
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpGet("GetByUser/{userId}")]
         public async Task<IActionResult> GetShippingAddressByUser(int userId)
         {

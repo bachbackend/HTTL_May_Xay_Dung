@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _environment = environment;
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetAllArticle")]
         public async Task<IActionResult> GetAllArticle(
             int pageNumber = 1,
@@ -173,6 +175,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(articles);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPost("addArticle")]
         public async Task<IActionResult> AddArticle(IFormFile file, [FromForm] ArticleRequest model)
         {
@@ -216,6 +219,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { articleId = article.Id, fileName = article.Thumbnail });
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("updateArticle/{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromForm] ArticleRequestUpdate model, IFormFile? file)
         {

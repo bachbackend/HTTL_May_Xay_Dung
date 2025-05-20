@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(ac);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPost("Add")]
         public async Task<IActionResult> AddAC([FromBody] AcRequest dto)
         {
@@ -70,6 +72,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(ac);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("Edit/{id}")]
         public async Task<IActionResult> EditAC(int id, [FromBody] AcRequest dto)
         {

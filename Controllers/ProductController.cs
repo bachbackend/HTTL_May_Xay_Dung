@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _environment = environment;
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetAllProduct")]
         public async Task<IActionResult> GetAllProduct(
             int pageNumber = 1,
@@ -136,7 +137,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(result);
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPost("addProduct")]
         public async Task<IActionResult> AddProduct(IFormFile file, [FromForm] ProductRequestDTO model)
         {
@@ -183,7 +184,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { productId = product.Id, fileName = product.Image });
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("updateProduct/{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductRequestDTO model, IFormFile? file)
         {
@@ -237,7 +238,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             });
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpDelete("deleteProduct/{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -549,7 +550,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(quantity);
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetCSVFile")]
         public async Task<ActionResult> GetProductCSVFile()
         {

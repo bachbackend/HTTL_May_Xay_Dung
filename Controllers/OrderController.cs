@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _paginationSettings = paginationSettings.Value;
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetAllOrderSortByDate")]
         public async Task<IActionResult> GetAllOrder(
             int pageNumber = 1,
@@ -251,7 +252,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(result);
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("UpdateOrderStatus/{orderId}")]
         public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromForm] int statusId)
         {
@@ -294,6 +295,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("CancelOrder/{orderId}")]
         public async Task<IActionResult> CancelOrder(int orderId)
         {
@@ -349,6 +351,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("CountOrders")]
         public async Task<IActionResult> CountOrders()
         {
@@ -357,6 +360,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(quantity);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("UpdateTotalPrice/{orderId}")]
         public async Task<IActionResult> UpdateTotalPrice(int orderId, [FromForm] decimal totalPrice)
         {
@@ -392,6 +396,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             }
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetCSVFile")]
         public async Task<ActionResult> GetOrderCSVFile(DateTime? startDate, DateTime? endDate)
         {

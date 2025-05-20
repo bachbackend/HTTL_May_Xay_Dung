@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(_context.Categories.AsQueryable());
 
         }
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPost("Add")]
         public async Task<IActionResult> AddBlogCategory([FromBody] CategoryDTO dto)
         {
@@ -67,6 +68,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(category);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("Edit/{id}")]
         public async Task<IActionResult> EditCategory(int id, [FromBody] CategoryDTO dto)
         {

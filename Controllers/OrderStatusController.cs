@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _context = context;
             _paginationSettings = paginationSettings.Value;
         }
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllOrderStatus()
         {
@@ -31,6 +33,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(os);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPost("Add")]
         public async Task<IActionResult> AddOrderStatus([FromBody] OrderStatusRequestDTO dto)
         {
@@ -69,6 +72,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(os);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPut("Edit/{id}")]
         public async Task<IActionResult> EditOs(int id, [FromBody] OrderStatusRequestDTO dto)
         {
@@ -98,6 +102,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(existingOs);
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOs(int id)
         {

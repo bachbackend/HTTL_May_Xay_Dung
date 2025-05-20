@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,28 +25,17 @@ namespace HTTL_May_Xay_Dung.Controllers
             _environment = environment;
         }
 
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpGet("GetAllContact")]
         public async Task<IActionResult> GetAllContact(
             int pageNumber = 1,
             int? pageSize = null,
             int? status = null
-            //string? title = null,
-            //int? categoryId = null
             )
         {
             int actualPageSize = pageSize ?? _paginationSettings.DefaultPageSize;
             var contacts = _context.Contacts
                 .AsQueryable();
-
-            //if (!string.IsNullOrEmpty(title))
-            //{
-            //    articles = articles.Where(p => p.Title.Contains(title));
-            //}
-
-            //if (categoryId.HasValue)
-            //{
-            //    articles = articles.Where(p => p.ArticleCategoryId == categoryId.Value);
-            //}
 
             if (status.HasValue)
             {
@@ -113,7 +103,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { contactId = contact.Id });
         }
 
-
+        [Authorize(Policy = "AdminAndManagerOnly")]
         [HttpPatch("updateContactStatus/{id}")]
         public async Task<IActionResult> UpdateContactStatus(int id, [FromBody] UpdateStatusRequest request)
         {

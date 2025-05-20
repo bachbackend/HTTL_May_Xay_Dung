@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa sản phẩm</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background: #f8f9fa;
@@ -106,156 +107,157 @@
             window.location.href = 'Product-Management.html';
         }
 
-        // Load thông tin sản phẩm từ API
-        fetch(`https://localhost:7205/api/Product/GetProductById/${productId}`, {
-            method: 'GET',
-            headers: {
-                'accept': '*/*',
+        fetch('https://localhost:7205/api/Category/GetAll')
+    .then(response => response.json())
+    .then(categories => {
+        const categorySelect = document.getElementById('editProductCategory');
+        categorySelect.innerHTML = '<option value="">Chọn loại sản phẩm</option>';
+
+        // Chỉ lấy category có parent
+        const childCategories = categories.filter(category => category.parentId !== null);
+        const groupedCategories = {};
+
+        childCategories.forEach(category => {
+            const parentName = category.parent.name;
+            if (!groupedCategories[parentName]) {
+                groupedCategories[parentName] = [];
             }
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Điền dữ liệu vào form
-                document.getElementById('editProductId').value = data.id;
-                document.getElementById('editProductName').value = data.name;
-                // document.getElementById('editProductDescription').value = data.description;
-                // document.getElementById('editProductSpecification').value = data.specifications;
-                tinymce.get('editProductDescription').setContent(data.description || '');
-                tinymce.get('editProductSpecification').setContent(data.specifications || '');
-                document.getElementById('editStatus').value = data.status;
+            groupedCategories[parentName].push(category);
+        });
 
-                // Cập nhật thông tin category
-                const categorySelect = document.getElementById('editProductCategory');
+        // Tạo optgroup
+        for (const parentName in groupedCategories) {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = parentName;
+
+            groupedCategories[parentName].forEach(category => {
                 const option = document.createElement('option');
-                option.value = data.categoryId;
-                option.textContent = data.categoryName;
-                categorySelect.appendChild(option);
-                categorySelect.value = data.categoryId;  // Chọn category hiện tại
+                option.value = category.id;
+                option.textContent = category.name;
+                optgroup.appendChild(option);
+            });
 
-                // Cập nhật hình ảnh sản phẩm
-                const imageUrl = `https://localhost:7205/images/${data.image}`;
-                document.getElementById('editImage').setAttribute('data-current-image', imageUrl);  // Lưu lại đường dẫn cũ của ảnh
+            categorySelect.appendChild(optgroup);
+        }
 
-                // tinymce.init({
-                //     selector: '#editProductDescription, #editProductSpecification',  // Cài đặt TinyMCE cho textarea này
-                //     menubar: false,
-                //     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright',
-                //     height: 300,
-                //     setup: function (editor) {
-                //         editor.on('init', function (e) {
-                //             if (editor.id === 'editProductDescription') {
-                //                 editor.setContent(data.description || '');
-                //             }
-                //             if (editor.id === 'editProductSpecification') {
-                //                 editor.setContent(data.specifications || '');
-                //             }
-                //         });
-                //     }
-                // });
+        // ✅ Sau khi danh sách category đã được load xong, tiếp tục fetch product
+        return fetch(`https://localhost:7205/api/Product/GetProductById/${productId}`);
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('editProductId').value = data.id;
+        document.getElementById('editProductName').value = data.name;
+        tinymce.get('editProductDescription').setContent(data.description || '');
+        tinymce.get('editProductSpecification').setContent(data.specifications || '');
+        document.getElementById('editStatus').value = data.status;
 
-                // Sau khi TinyMCE được khởi tạo, cập nhật mô tả
-                tinymce.get('editProductDescription').setContent(data.description);
-                tinymce.get('editProductSpecification').setContent(data.specifications);
+        // ✅ Set selected value
+        document.getElementById('editProductCategory').value = data.categoryId;
 
-            })
-            .catch(error => console.error('Error fetching product data:', error));
+        const imageUrl = `https://localhost:7205/images/${data.image}`;
+        document.getElementById('editImage').setAttribute('data-current-image', imageUrl);
+    })
+    .catch(error => console.error('Có lỗi xảy ra:', error));
+
+        // Load thông tin sản phẩm từ API
+        // fetch(`https://localhost:7205/api/Product/GetProductById/${productId}`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'accept': '*/*',
+        //     }
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         // Điền dữ liệu vào form
+        //         document.getElementById('editProductId').value = data.id;
+        //         document.getElementById('editProductName').value = data.name;
+        //         tinymce.get('editProductDescription').setContent(data.description || '');
+        //         tinymce.get('editProductSpecification').setContent(data.specifications || '');
+        //         document.getElementById('editStatus').value = data.status;
+
+        //         // Cập nhật thông tin category
+        //         const categorySelect = document.getElementById('editProductCategory');
+        //         const option = document.createElement('option');
+        //         option.value = data.categoryId;
+        //         option.textContent = data.categoryName;
+        //         categorySelect.appendChild(option);
+        //         categorySelect.value = data.categoryId;  // Chọn category hiện tại
+
+        //         // Cập nhật hình ảnh sản phẩm
+        //         const imageUrl = `https://localhost:7205/images/${data.image}`;
+        //         document.getElementById('editImage').setAttribute('data-current-image', imageUrl);  // Lưu lại đường dẫn cũ của ảnh
+
+        //         // Sau khi TinyMCE được khởi tạo, cập nhật mô tả
+        //         tinymce.get('editProductDescription').setContent(data.description);
+        //         tinymce.get('editProductSpecification').setContent(data.specifications);
+
+        //     })
+        //     .catch(error => console.error('Error fetching product data:', error));
 
         // Xử lý cập nhật sản phẩm
         document.getElementById('editProductForm').addEventListener('submit', function (event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            const formData = new FormData();
-            formData.append('CategoryId', document.getElementById('editProductCategory').value);
-            formData.append('Name', document.getElementById('editProductName').value);
-            formData.append('Description', tinymce.get('editProductDescription').getContent());
-            formData.append('Status', document.getElementById('editStatus').value);
-            formData.append('Specifications', tinymce.get('editProductSpecification').getContent());
+    const formData = new FormData();
+    formData.append('CategoryId', document.getElementById('editProductCategory').value);
+    formData.append('Name', document.getElementById('editProductName').value);
+    formData.append('Description', tinymce.get('editProductDescription').getContent());
+    formData.append('Status', document.getElementById('editStatus').value);
+    formData.append('Specifications', tinymce.get('editProductSpecification').getContent());
 
+    const imageInput = document.getElementById('editImage');
+    const imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;
+    if (imageFile) {
+        formData.append('file', imageFile);
+    }
 
-            const imageInput = document.getElementById('editImage');
-            const imageFile = imageInput.files.length > 0 ? imageInput.files[0] : null;
-            if (imageFile) {
-                formData.append('file', imageFile);
-            }
+    // LOG dữ liệu formData
+    console.log('--- Data chuẩn bị gửi đi ---');
+    for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+    }
+    console.log('--- End formData ---');
 
-            // LOG dữ liệu formData
-            console.log('--- Data chuẩn bị gửi đi ---');
-            for (let pair of formData.entries()) {
-                console.log(`${pair[0]}:`, pair[1]);
-            }
-            console.log('--- End formData ---');
-
-            // Gọi API update
-            fetch(`https://localhost:7205/api/Product/updateProduct/${productId}`, {
-                method: 'PUT',
-                headers: {
-                    'accept': '*/*',
-                },
-                body: formData
-            })
-                .then(response => response.json())
-                .then(result => {
-                    if (result) {
-                        alert('Cập nhật sản phẩm thành công!');
-                        window.location.href = 'Product-Management.html'; 
-                    } else {
-                        alert('Cập nhật sản phẩm thất bại!');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error updating product:', error);
-                    alert('Có lỗi xảy ra khi cập nhật sản phẩm!');
+    // Gọi API update
+    fetch(`https://localhost:7205/api/Product/updateProduct/${productId}`, {
+        method: 'PUT',
+        headers: {
+            'accept': '*/*',
+        },
+        body: formData
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công!',
+                    text: 'Cập nhật sản phẩm thành công!',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = 'Product-Management.html';
                 });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Thất bại!',
+                    text: 'Cập nhật sản phẩm thất bại!',
+                    confirmButtonColor: '#d33'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error updating product:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: 'Có lỗi xảy ra khi cập nhật sản phẩm!',
+                confirmButtonColor: '#d33'
+            });
         });
+});
 
-        function loadFilterCategory1() {
-            fetch('https://localhost:7205/api/Category/GetAll', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const serviceDropdown = document.getElementById('editProductCategory');
-
-                    // Xóa tất cả các option cũ trong dropdown
-                    serviceDropdown.innerHTML = '<option value="">Chọn loại sản phẩm</option>';
-
-                    // Lọc ra những category có parentId
-                    const childCategories = data.filter(category => category.parentId !== null);
-
-                    // Gom nhóm theo parent.name
-                    const groupedCategories = {};
-
-                    childCategories.forEach(category => {
-                        const parentName = category.parent.name;
-                        if (!groupedCategories[parentName]) {
-                            groupedCategories[parentName] = [];
-                        }
-                        groupedCategories[parentName].push(category);
-                    });
-
-                    // Tạo các optgroup
-                    for (const parentName in groupedCategories) {
-                        const optgroup = document.createElement('optgroup');
-                        optgroup.label = parentName;
-
-                        groupedCategories[parentName].forEach(category => {
-                            const option = document.createElement('option');
-                            option.value = category.id;
-                            option.textContent = category.name;
-                            optgroup.appendChild(option);
-                        });
-
-                        serviceDropdown.appendChild(optgroup);
-                    }
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API:', error);
-                });
-        }
-        loadFilterCategory1();
 
 
     </script>

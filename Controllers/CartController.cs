@@ -1,6 +1,7 @@
 ﻿using HTTL_May_Xay_Dung.DataAccess;
 using HTTL_May_Xay_Dung.DTO;
 using HTTL_May_Xay_Dung.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _paginationSettings = paginationSettings.Value;
         }
 
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpGet("GetCartByUserId/{userId}")]
         public async Task<IActionResult> GetCartByUserId(int userId)
         {
@@ -62,6 +64,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             });
         }
 
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpGet("CountUniqueProducts/{userId}")]
         public async Task<IActionResult> CountUniqueProducts(int userId)
         {
@@ -87,7 +90,7 @@ namespace HTTL_May_Xay_Dung.Controllers
         }
 
 
-
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpPost("AddToCart")]
         public async Task<IActionResult> AddToCart(int userId, int productId, int quantity)
         {
@@ -146,7 +149,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { message = "Thêm sản phẩm vào giỏ hàng thành công." });
         }
 
-
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpPost("UpdateQuantityFromCart")]
         public async Task<IActionResult> UpdateQuantityFromCart(int userId, int productId, int quantity)
         {
@@ -203,6 +206,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { message = "Cập nhật số lượng sản phẩm thành công.", cartItems = cartItems });
         }
 
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpDelete("Delete")]
         public async Task<IActionResult> Delete(int userId, int productId)
         {
@@ -228,6 +232,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { message = "Sản phẩm đã được xóa khỏi giỏ hàng." });
         }
 
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpDelete("DeleteAll")]
         public async Task<IActionResult> DeleteAll(int userId)
         {
@@ -254,7 +259,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             return Ok(new { message = "Tất cả sản phẩm đã được xóa khỏi giỏ hàng." });
         }
 
-
+        [Authorize(Policy = "NormalUserOnly")]
         [HttpPost("PaymentCOD")]
         public async Task<IActionResult> PaymentCOD([FromBody] PaymentRequestDTO request)
         {

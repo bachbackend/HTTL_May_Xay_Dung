@@ -211,16 +211,16 @@
                 sản phẩm
             </button> -->
 
-            <a href="Add-Product.html" class="btn btn-success" target="_blank">
+            <a href="Add-Product.html" class="btn btn-success">
                 Thêm sản phẩm
             </a>
 
             <!-- <button type="button" class="btn btn-primary" id="downloadCSVButton">
                 Tải File CSV
             </button> -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportCSVModal">Tải
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportCSVModal">Tải
                 File CSV
-            </button>
+            </button> -->
         </div>
     </div>
 
@@ -571,8 +571,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="javascript:void(0);" onclick="showProductModal(${product.id})">Xem</a></li>
-                                <li><a class="dropdown-item" href="Update-Product.html?id=${product.id}" target="_blank">Sửa</a></li>
-                                <li><a class="dropdown-item" href="javascript:void(0);" onclick="deleteProduct(${product.id})">Xóa</a></li>
+                                <li><a class="dropdown-item" href="Update-Product.html?id=${product.id}">Sửa</a></li>
                             </ul>
                         </div>
                     </div>
@@ -818,32 +817,32 @@
 
 
         // Hàm để load các tỉnh/thành phố vào popupcsv
-        function loadProvincesCSV() {
-            fetch('https://localhost:7214/api/Location/GetProvinces', {
-                method: 'GET',
-                headers: {
-                    'Accept': '*/*'
-                }
-            })
-                .then(response => response.json()) // Chuyển đổi phản hồi thành JSON
-                .then(data => {
-                    const provinceDropdown = document.getElementById('provinceCSV');
+        // function loadProvincesCSV() {
+        //     fetch('https://localhost:7214/api/Location/GetProvinces', {
+        //         method: 'GET',
+        //         headers: {
+        //             'Accept': '*/*'
+        //         }
+        //     })
+        //         .then(response => response.json()) // Chuyển đổi phản hồi thành JSON
+        //         .then(data => {
+        //             const provinceDropdown = document.getElementById('provinceCSV');
 
-                    // Xóa tất cả các option cũ trong dropdown
-                    provinceDropdown.innerHTML = '<option value="">Chọn Tỉnh/Thành Phố</option>';
+        //             // Xóa tất cả các option cũ trong dropdown
+        //             provinceDropdown.innerHTML = '<option value="">Chọn Tỉnh/Thành Phố</option>';
 
-                    // Duyệt qua dữ liệu và thêm các tỉnh vào dropdown
-                    data.forEach(province => {
-                        const option = document.createElement('option');
-                        option.value = province.id; // Gán giá trị là ID của tỉnh/thành phố
-                        option.textContent = province.name; // Hiển thị tên tỉnh/thành phố
-                        provinceDropdown.appendChild(option); // Thêm option vào dropdown
-                    });
-                })
-                .catch(error => {
-                    console.error('Có lỗi xảy ra khi gọi API tỉnh/thành phố:', error);
-                });
-        }
+        //             // Duyệt qua dữ liệu và thêm các tỉnh vào dropdown
+        //             data.forEach(province => {
+        //                 const option = document.createElement('option');
+        //                 option.value = province.id; // Gán giá trị là ID của tỉnh/thành phố
+        //                 option.textContent = province.name; // Hiển thị tên tỉnh/thành phố
+        //                 provinceDropdown.appendChild(option); // Thêm option vào dropdown
+        //             });
+        //         })
+        //         .catch(error => {
+        //             console.error('Có lỗi xảy ra khi gọi API tỉnh/thành phố:', error);
+        //         });
+        // }
 
 
 
@@ -979,50 +978,50 @@
             });
     }
 
-    function editProduct(productId) {
-        const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
+    // function editProduct(productId) {
+    //     const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
 
-        // Fetch thông tin sản phẩm
-        fetch(`https://localhost:7171/api/Product/GetProductById/${productId}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Load thông tin vào form
+    //     // Fetch thông tin sản phẩm
+    //     fetch(`https://localhost:7171/api/Product/GetProductById/${productId}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // Load thông tin vào form
 
-                document.getElementById('editProductId').value = data.id;
-                document.getElementById('editProductName').value = data.name;
-                document.getElementById('editProductCategory').value = data.categoryId; // Cập nhật ID của loại sản phẩm
-                // tinymce.get('description').setContent(data.description); 
-                document.getElementById('editStatus').value = data.status;
+    //             document.getElementById('editProductId').value = data.id;
+    //             document.getElementById('editProductName').value = data.name;
+    //             document.getElementById('editProductCategory').value = data.categoryId; // Cập nhật ID của loại sản phẩm
+    //             // tinymce.get('description').setContent(data.description); 
+    //             document.getElementById('editStatus').value = data.status;
 
-                const productDescription = document.getElementById('editProductDescription');
-                productDescription.value = data.description; // Gán nội dung mô tả vào textarea
+    //             const productDescription = document.getElementById('editProductDescription');
+    //             productDescription.value = data.description; // Gán nội dung mô tả vào textarea
 
-                // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
-                tinymce.init({
-                    selector: '#editProductDescription',
-                    menubar: false,
-                    toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
-                    plugins: 'lists link image',
-                    readonly: false // Đảm bảo rằng người dùng không thể chỉnh sửa
-                });
-                tinymce.get('editProductDescription').setContent(data.description);
+    //             // Tái khởi tạo TinyMCE với nội dung mô tả và readonly
+    //             tinymce.init({
+    //                 selector: '#editProductDescription',
+    //                 menubar: false,
+    //                 toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright',
+    //                 plugins: 'lists link image',
+    //                 readonly: false // Đảm bảo rằng người dùng không thể chỉnh sửa
+    //             });
+    //             tinymce.get('editProductDescription').setContent(data.description);
 
 
-                // Hiển thị modal
-                var modal = new bootstrap.Modal(document.getElementById('editCompanyModal'));
-                modal.show();
-            })
-            .catch(error => {
-                console.error('Có lỗi khi tải thông tin sản phẩm:', error);
-                alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
-            });
-    }
+    //             // Hiển thị modal
+    //             var modal = new bootstrap.Modal(document.getElementById('editCompanyModal'));
+    //             modal.show();
+    //         })
+    //         .catch(error => {
+    //             console.error('Có lỗi khi tải thông tin sản phẩm:', error);
+    //             alert('Không thể tải thông tin sản phẩm. Vui lòng thử lại.');
+    //         });
+    // }
 
     // document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
     //     event.preventDefault(); // Ngăn chặn form gửi mặc định
@@ -1074,53 +1073,53 @@
     //         });
     // });
 
-    function updateProduct() {
-        const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
-        const productId = document.getElementById('editProductId').value; // Lấy ID sản phẩm
-        const formData = new FormData();
+    // function updateProduct() {
+    //     const token = localStorage.getItem('accessToken'); // Lấy token từ localStorage
+    //     const productId = document.getElementById('editProductId').value; // Lấy ID sản phẩm
+    //     const formData = new FormData();
 
-        // Thêm thông tin sản phẩm vào formData
-        formData.append('CategoryId', document.getElementById('editProductCategory').value);
-        formData.append('Name', document.getElementById('editProductName').value);
-        formData.append('Description', tinymce.get('editProductDescription').getContent()); // Lấy nội dung mô tả từ TinyMCE
-        formData.append('Status', document.getElementById('editStatus').value);
+    //     // Thêm thông tin sản phẩm vào formData
+    //     formData.append('CategoryId', document.getElementById('editProductCategory').value);
+    //     formData.append('Name', document.getElementById('editProductName').value);
+    //     formData.append('Description', tinymce.get('editProductDescription').getContent()); // Lấy nội dung mô tả từ TinyMCE
+    //     formData.append('Status', document.getElementById('editStatus').value);
 
-        const fileInput = document.getElementById('editImage');
+    //     const fileInput = document.getElementById('editImage');
 
-        // Nếu có file, thêm vào formData
-        if (fileInput.files.length > 0) {
-            formData.append('file', fileInput.files[0]);
-        }
+    //     // Nếu có file, thêm vào formData
+    //     if (fileInput.files.length > 0) {
+    //         formData.append('file', fileInput.files[0]);
+    //     }
 
-        // Gửi yêu cầu PUT đến API
-        fetch(`https://localhost:7171/api/Product/updateProduct/${productId}`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Dữ liệu trả về từ API:', data); // In ra dữ liệu trả về để kiểm tra
+    //     // Gửi yêu cầu PUT đến API
+    //     fetch(`https://localhost:7171/api/Product/updateProduct/${productId}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`,
+    //         },
+    //         body: formData,
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log('Dữ liệu trả về từ API:', data); // In ra dữ liệu trả về để kiểm tra
 
-                if (data.message) {
-                    alert(data.message); // Hiển thị thông báo thành công hoặc lỗi từ API
-                } else {
-                    alert('Cập nhật sản phẩm thành công!');
+    //             if (data.message) {
+    //                 alert(data.message); // Hiển thị thông báo thành công hoặc lỗi từ API
+    //             } else {
+    //                 alert('Cập nhật sản phẩm thành công!');
 
-                }
+    //             }
 
-                // Đóng modal sau khi cập nhật thành công
-                var modal = bootstrap.Modal.getInstance(document.getElementById('editCompanyModal'));
-                modal.hide();
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Có lỗi xảy ra:', error);
-                alert('Đã xảy ra lỗi khi cập nhật sản phẩm!');
-            });
-    }
+    //             // Đóng modal sau khi cập nhật thành công
+    //             var modal = bootstrap.Modal.getInstance(document.getElementById('editCompanyModal'));
+    //             modal.hide();
+    //             location.reload();
+    //         })
+    //         .catch(error => {
+    //             console.error('Có lỗi xảy ra:', error);
+    //             alert('Đã xảy ra lỗi khi cập nhật sản phẩm!');
+    //         });
+    // }
 
 
 
@@ -1128,35 +1127,35 @@
 
 
     // Gắn sự kiện submit cho form
-    document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Ngừng gửi form mặc định
-        updateProduct(); // Gọi hàm updateProduct để gửi yêu cầu PUT
-    });
+    // document.getElementById('editCompanyForm').addEventListener('submit', function (event) {
+    //     event.preventDefault(); // Ngừng gửi form mặc định
+    //     updateProduct(); // Gọi hàm updateProduct để gửi yêu cầu PUT
+    // });
 
-    function deleteProduct(companyId) {
-        // Lấy token từ localStorage
-        const token = localStorage.getItem('accessToken');
-        if (confirm("Bạn có chắc chắn muốn xóa công ty này?")) {
-            fetch(`https://localhost:7171/api/Product/deleteProduct/${companyId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': '*/*',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Sản phẩm đã được xóa thành công!');
-                        // Cập nhật lại danh sách công ty hoặc reload trang
-                        // window.location.href = 'http://127.0.0.1:5500/transportCompany.html';
-                        location.reload();
-                    } else {
-                        alert('Xóa sản phẩm thất bại!');
-                    }
-                })
-        }
-    }
+    // function deleteProduct(companyId) {
+    //     // Lấy token từ localStorage
+    //     const token = localStorage.getItem('accessToken');
+    //     if (confirm("Bạn có chắc chắn muốn xóa công ty này?")) {
+    //         fetch(`https://localhost:7171/api/Product/deleteProduct/${companyId}`, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 'Accept': '*/*',
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${token}`
+    //             }
+    //         })
+    //             .then(response => {
+    //                 if (response.ok) {
+    //                     alert('Sản phẩm đã được xóa thành công!');
+    //                     // Cập nhật lại danh sách công ty hoặc reload trang
+    //                     // window.location.href = 'http://127.0.0.1:5500/transportCompany.html';
+    //                     location.reload();
+    //                 } else {
+    //                     alert('Xóa sản phẩm thất bại!');
+    //                 }
+    //             })
+    //     }
+    // }
 
 
 
