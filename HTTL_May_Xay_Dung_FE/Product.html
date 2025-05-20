@@ -2909,7 +2909,13 @@ function parseJwt(token) {
             return;
         }
 
-        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
+        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
             .then(response => response.json())
             .then(data => {
                 dropdown.innerHTML = '';

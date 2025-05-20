@@ -2825,6 +2825,7 @@ function parseJwt(token) {
                 headers: {
                     'accept': '*/*',
                     "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
+
                 }
             });
 
@@ -2852,8 +2853,7 @@ function parseJwt(token) {
         fetch(`https://localhost:7205/api/Cart/Delete?userId=${userId}&productId=${productId}`, {
             method: 'DELETE',
             headers: {
-                'accept': '*/*',
-                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
+                'accept': '*/*'
             }
         })
             .then(response => {
@@ -2889,8 +2889,7 @@ function parseJwt(token) {
         fetch(`https://localhost:7205/api/Cart/DeleteAll?userId=${userId}`, {
             method: 'DELETE',
             headers: {
-                'accept': '*/*',
-                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
+                'accept': '*/*'
             }
         })
             .then(response => {
@@ -2941,13 +2940,7 @@ function parseJwt(token) {
 
     const userId = getUserIdFromToken(); // Lấy ID người dùng từ token
 
-    fetch(`https://localhost:7205/api/ShippingAddress/GetByUser/${userId}`, {
-    method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'accept': 'application/json'
-    }
-})
+    fetch(`https://localhost:7205/api/ShippingAddress/GetByUser/${userId}`)
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById("savedAddressSelect");
@@ -3121,7 +3114,9 @@ function parseJwt(token) {
                         fetch(`https://localhost:7205/api/Cart/UpdateQuantityFromCart?userId=${userId}&productId=${productId}&quantity=${newQuantity}`, {
                             method: 'POST',
                             headers: {
-                                'accept': '*/*'
+                                'accept': '*/*',
+                                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
+
                             },
                             body: ''
                         })

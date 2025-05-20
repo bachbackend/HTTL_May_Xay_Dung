@@ -521,6 +521,7 @@
         const itemsPerPage = 10;
         let currentPage = 1;
 
+
         function renderPaginationButtons(totalPages) {
             const paginationElement = document.getElementById('pagination');
             paginationElement.innerHTML = '';
@@ -572,8 +573,9 @@
             }
 
             const headers = {
-                'Content-Type': 'application/json',
-                'Accept': '*/*'
+                        "Content-Type": "application/json",
+                        "Accept": "*/*",
+                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
             };
 
             fetch(url, {
@@ -1414,7 +1416,11 @@
 
     fetch(`https://localhost:7205/api/Order/UpdateOrderStatus/${orderId}`, {
         method: "PUT",
-        headers: { "accept": "*/*" },
+        headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "*/*",
+                        'Authorization': `Bearer ${token}`
+                    },
         body: formData
     })
         .then(response => response.json().then(data => ({ status: response.status, body: data })))
@@ -1591,7 +1597,8 @@ async function confirmUpdatePrice() {
         const response = await fetch(`https://localhost:7205/api/Order/UpdateTotalPrice/${currentOrderId1}`, {
             method: 'PUT',
             headers: {
-                'accept': '*/*'
+                'accept': '*/*',
+                'Authorization': `Bearer ${token}`
                 // Không đặt Content-Type, FormData tự xử lý
             },
             body: formData

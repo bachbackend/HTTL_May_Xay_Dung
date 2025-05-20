@@ -343,7 +343,8 @@
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': '*/*'
+                    'Accept': '*/*',
+                    'Authorization': `Bearer ${localStorage.getItem('accesstoken')}`
                 }
             })
             .then(response => response.json())
@@ -437,7 +438,8 @@
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
-                        "Accept": "*/*"
+                        "Accept": "*/*",
+                        'Authorization': `Bearer ${localStorage.getItem('accesstoken')}`
                     },
                     body: JSON.stringify({ status: parseInt(newStatus) })
                 })

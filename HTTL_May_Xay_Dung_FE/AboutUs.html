@@ -2742,7 +2742,9 @@
             const response = await fetch(`https://localhost:7205/api/Cart/CountUniqueProducts/${userId}`, {
                 method: 'GET',
                 headers: {
-                    'accept': '*/*'
+                    'accept': '*/*',
+                    "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
+
                 }
             });
 

@@ -2799,7 +2799,7 @@ function parseJwt(token) {
 
         const html = `
             <div style="display: flex; align-items: center; gap: 15px;">
-                <a href="Orders.html" style="font-weight: bold; color: white; text-decoration: none;">
+                <a href="Orders.html" style="font-weight: bold; color: black; text-decoration: none;">
                     <strong title="${fullName}">Hello, ${displayName}!</strong>
                 </a>
                 <button onclick="logout()" title="Đăng xuất" class="logout-btn"  
@@ -3035,7 +3035,13 @@ function parseJwt(token) {
             return;
         }
 
-        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
+        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
             .then(response => response.json())
             .then(data => {
                 dropdown.innerHTML = '';
