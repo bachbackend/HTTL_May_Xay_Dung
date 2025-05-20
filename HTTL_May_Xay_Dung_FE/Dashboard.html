@@ -304,11 +304,88 @@
 									<div class="float-end">
 										<!-- abc -->
 									</div>
-									<h5 class="card-title mb-0">Tổng quan đơn hàng</h5>
+									<h5 class="card-title mb-0">Tải dữ liệu sản phẩm</h5>
 								</div>
 								<div class="card-body pt-2 pb-3">
 									<div class="chart chart-sm">
-										<canvas id="chartjs-dashboard-line"></canvas>
+
+
+										<div class="train-slider-container">
+  <div class="track">
+    <div class="rail"></div>
+    <div class="train-icon" id="trainIcon">🚆</div>
+  </div>
+  <input type="range" min="0" max="100" value="0" class="train-slider" id="downloadSlider">
+  <div class="progress-label" id="progressLabel">0%</div>
+  <div class="train-status" id="sliderStatus">Kéo tàu 🚆 đến cuối đường ray để tải CSV</div>
+</div>
+<style>
+	.train-slider-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  position: relative;
+  text-align: center;
+}
+
+.track {
+  position: relative;
+  height: 60px;
+  background: transparent;
+  margin-bottom: 20px;
+}
+
+.rail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: #444;
+  transform: translateY(-50%);
+  border-radius: 4px;
+  z-index: 1;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.train-icon {
+  position: absolute;
+  top: -25px;
+  font-size: 30px;
+  z-index: 5;
+  transition: left 0.1s ease;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
+  pointer-events: auto;
+}
+
+.train-slider {
+	left: 0px;
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+  position: absolute;
+  top: 20px;
+  height: 20px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.train-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+
+.train-status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+</style>
+
+
 									</div>
 								</div>
 							</div>
@@ -332,8 +409,83 @@
 											</div>
 										</div>
 									</div>
-									<h5 class="card-title mb-0">Tình trạng sản phẩm </h5>
+									<h5 class="card-title mb-0">Lưu đơn hàng </h5>
 								</div>
+
+
+								 <div class="input-section">
+    <label for="startDate">Từ ngày:</label>
+    <input type="date" id="startDate">
+    <label for="endDate">Đến ngày:</label>
+    <input type="date" id="endDate">
+  </div>
+
+
+								<div class="slider-container">
+  <div class="rail"></div>
+  <div class="train-icon" id="orderTrainIcon">🚆</div>
+  <input type="range" min="0" max="100" value="0" class="train-slider" id="orderTrainSlider">
+  <div class="progress-label" id="orderProgressLabel">0%</div>
+</div>
+<style>
+	.slider-container {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  margin: 30px auto;
+}
+
+.rail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 10px;
+  width: 100%;
+  background: repeating-linear-gradient(90deg, #ccc, #ccc 10px, #999 10px, #999 20px);
+  border-radius: 5px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.train-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  background: transparent;
+  position: absolute;
+  top: 30px;
+  height: 30px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.train-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+}
+
+.train-icon {
+  position: absolute;
+  top: -5px;
+  font-size: 30px;
+  z-index: 5;
+  transition: left 0.1s ease;
+  pointer-events: none;
+}
+
+.progress-label {
+  position: absolute;
+  top: -30px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  z-index: 6;
+}
+
+</style>
 							</div>
 						</div>
 						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-1">
@@ -369,6 +521,70 @@
 
 		</div>
 	</div>
+
+	<script>
+
+		const orderSlider = document.getElementById('orderTrainSlider');
+    const orderTrainIcon = document.getElementById('orderTrainIcon');
+    const orderProgressLabel = document.getElementById('orderProgressLabel');
+
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+
+    orderSlider.addEventListener('input', () => {
+      const value = parseInt(orderSlider.value);
+      const max = parseInt(orderSlider.max);
+      const percentage = (value / max) * 100;
+
+      orderTrainIcon.style.left = `calc(${percentage}% - 15px)`;
+      orderProgressLabel.textContent = `${value}%`;
+      orderProgressLabel.style.left = `calc(${percentage}% - 10px)`;
+
+      if (value >= 36) {
+        orderTrainIcon.style.filter = 'drop-shadow(0 0 10px green)';
+      } else {
+        orderTrainIcon.style.filter = 'drop-shadow(0 2px 3px rgba(0,0,0,0.4))';
+      }
+
+      if (value >= 100) {
+        const startDate = startDateInput.value;
+        const endDate = endDateInput.value;
+
+        if (!startDate || !endDate) {
+          alert('Vui lòng chọn cả ngày bắt đầu và kết thúc!');
+          resetSlider();
+          return;
+        }
+
+        fetch(`https://localhost:7205/api/Order/GetCSVFile?startDate=${startDate}&endDate=${endDate}`)
+          .then(response => response.blob())
+          .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'orders.csv';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+            resetSlider();
+          })
+          .catch(err => {
+            alert('Lỗi khi tải CSV đơn hàng: ' + err);
+            resetSlider();
+          });
+      }
+    });
+
+    function resetSlider() {
+      setTimeout(() => {
+        orderSlider.value = 0;
+        orderTrainIcon.style.left = `-15px`;
+        orderProgressLabel.textContent = `0%`;
+        orderProgressLabel.style.left = `-10px`;
+      }, 500);
+    }
+	</script>
     <script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var date = new Date(Date.now());
@@ -382,7 +598,73 @@
 		});
 	</script>
 
+
+
 <script>
+
+
+const slider = document.getElementById('downloadSlider');
+const train = document.getElementById('trainIcon');
+const status = document.getElementById('sliderStatus');
+
+let isDownloading = false;
+
+slider.addEventListener('input', async function () {
+  const value = parseInt(slider.value);
+
+  // Di chuyển tàu
+  const trackWidth = slider.offsetWidth;
+  const trainPosition = (value / 100) * (trackWidth - 30); // 30 is icon width buffer
+  train.style.left = `${trainPosition}px`;
+
+  // Hiệu ứng sáng khi >= 36%
+  if (value >= 36) {
+    train.style.filter = 'drop-shadow(0 0 8px #00f)';
+  } else {
+    train.style.filter = 'drop-shadow(0 2px 3px rgba(0,0,0,0.4))';
+  }
+
+  // Khi đạt 100%, tải file
+  if (value === 100 && !isDownloading) {
+    isDownloading = true;
+    status.textContent = '🚆 Đang tải file CSV...';
+
+    try {
+      const response = await fetch('https://localhost:7205/api/Product/GetCSVFile', {
+        method: 'GET',
+        headers: { 'accept': '*/*' }
+      });
+
+      if (!response.ok) throw new Error('Lỗi tải file');
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'products.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      status.textContent = '✅ Tải thành công!';
+    } catch (error) {
+      status.textContent = '❌ Lỗi khi tải: ' + error.message;
+    } finally {
+      setTimeout(() => {
+        slider.value = 0;
+        train.style.left = '0px';
+        train.style.filter = 'drop-shadow(0 2px 3px rgba(0,0,0,0.4))';
+        status.textContent = '🚆 Kéo tàu đến cuối đường ray để tải CSV';
+        isDownloading = false;
+      }, 2000);
+    }
+  }
+});
+
+
+
+
 	let currentUser = null;
 
 	document.addEventListener("DOMContentLoaded", async function () {
