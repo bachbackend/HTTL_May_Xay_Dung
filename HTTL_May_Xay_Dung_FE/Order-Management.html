@@ -575,7 +575,7 @@
             const headers = {
                         "Content-Type": "application/json",
                         "Accept": "*/*",
-                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        'Authorization': `Bearer ${localStorage.getItem('accesstoken')}`
             };
 
             fetch(url, {
@@ -990,6 +990,7 @@
 
     function showProductModal(orderId) {
         fetch(`https://localhost:7205/api/Order/GetOrderDetailsByOrderId/${orderId}`)
+        
             .then(response => response.json())
             .then(order => {
                 renderOrderDetails(order);

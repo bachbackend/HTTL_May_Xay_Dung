@@ -24,7 +24,7 @@ namespace HTTL_May_Xay_Dung.Controllers
             _paginationSettings = paginationSettings.Value;
         }
 
-        [Authorize(Policy = "NormalUserOnly")]
+        /*[Authorize(Policy = "NormalUserOnly")]*/
         [HttpGet("GetCartByUserId/{userId}")]
         public async Task<IActionResult> GetCartByUserId(int userId)
         {

@@ -517,7 +517,8 @@
 
             const headers = {
                 'Content-Type': 'application/json',
-                'Accept': '*/*'
+                'Accept': '*/*',
+                'Authorization': `Bearer ${localStorage.getItem('accesstoken')}`
             };
 
             fetch(url, {
