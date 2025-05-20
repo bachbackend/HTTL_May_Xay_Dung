@@ -65,38 +65,46 @@
 
     // Submit form
     document.getElementById('addCategoryForm').addEventListener('submit', function (e) {
-      e.preventDefault();
+    e.preventDefault();
 
-      const name = document.getElementById('name').value;
-      const parentIdValue = document.getElementById('parentId').value;
+    const name = document.getElementById('name').value;
+    const parentIdValue = document.getElementById('parentId').value;
+    const token = localStorage.getItem("accesstoken");
 
-      const payload = {
+    if (!token) {
+        document.getElementById('message').innerHTML =
+            `<div class="alert alert-danger">Không tìm thấy token đăng nhập!</div>`;
+        return;
+    }
+
+    const payload = {
         name: name,
         parentId: parentIdValue ? parseInt(parentIdValue) : null
-      };
+    };
 
-      fetch('https://localhost:7205/api/Category/Add', {
+    fetch('https://localhost:7205/api/Category/Add', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': '*/*'
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload)
-      })
-      .then(response => {
+    })
+    .then(response => {
         if (response.ok) {
-          document.getElementById('message').innerHTML =
-            `<div class="alert alert-success">Thêm danh mục thành công!</div>`;
-          document.getElementById('addCategoryForm').reset();
+            document.getElementById('message').innerHTML =
+                `<div class="alert alert-success">Thêm danh mục thành công!</div>`;
+            document.getElementById('addCategoryForm').reset();
         } else {
-          throw new Error('Thêm thất bại!');
+            throw new Error('Thêm thất bại!');
         }
-      })
-      .catch(error => {
+    })
+    .catch(error => {
         document.getElementById('message').innerHTML =
-          `<div class="alert alert-danger">${error.message}</div>`;
-      });
+            `<div class="alert alert-danger">${error.message}</div>`;
     });
+});
   </script>
 </body>
 </html>

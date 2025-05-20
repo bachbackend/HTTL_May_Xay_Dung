@@ -155,12 +155,22 @@
     const fileInput = document.getElementById('file');
     const price = document.getElementById('price').value.trim();
     const file = fileInput.files[0];
+    const token = localStorage.getItem("accesstoken");
 
     if (!name || !price || !description || !specification || !categoryId || !file) {
         Swal.fire({
             icon: 'warning',
             title: 'Thiếu thông tin',
             text: 'Vui lòng nhập đầy đủ thông tin!'
+        });
+        return;
+    }
+
+    if (!token) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi xác thực',
+            text: 'Không tìm thấy token đăng nhập!'
         });
         return;
     }
@@ -176,6 +186,9 @@
 
     fetch('https://localhost:7205/api/Product/addProduct', {
         method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
         body: formData
     })
     .then(response => {

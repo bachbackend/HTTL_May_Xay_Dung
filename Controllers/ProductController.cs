@@ -361,8 +361,6 @@ namespace HTTL_May_Xay_Dung.Controllers
                 int pageNumber = 1,
                 int? pageSize = null,
                 string? name = null,
-                decimal minPrice = 0,
-                decimal maxPrice = 0,
                 int? categoryId = null
             )
         {
@@ -377,14 +375,6 @@ namespace HTTL_May_Xay_Dung.Controllers
             {
                 products = products.Where(p => p.Name.Contains(name));
             }
-            //if (minPrice > 0)
-            //{
-            //    products = products.Where(p => p.ProductPrice >= minPrice);
-            //}
-            //if (maxPrice > 0)
-            //{
-            //    products = products.Where(p => p.ProductPrice <= maxPrice);
-            //}
 
             // ✅ Lọc theo category cha và các category con
             if (categoryId.HasValue)

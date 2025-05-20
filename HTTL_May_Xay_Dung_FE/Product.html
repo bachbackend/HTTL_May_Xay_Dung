@@ -2664,12 +2664,12 @@ function parseJwt(token) {
             const params = new URLSearchParams();
 
             // Lấy khoảng giá từ các checkbox được tích
-            const checkedPrices = Array.from(document.querySelectorAll('input[name="priceRange"]:checked')).map(cb => cb.value);
-            if (checkedPrices.length > 0) {
-                const [min, max] = checkedPrices[0].split('-');
-                params.append('minPrice', min);
-                params.append('maxPrice', max);
-            }
+            // const checkedPrices = Array.from(document.querySelectorAll('input[name="priceRange"]:checked')).map(cb => cb.value);
+            // if (checkedPrices.length > 0) {
+            //     const [min, max] = checkedPrices[0].split('-');
+            //     params.append('minPrice', min);
+            //     params.append('maxPrice', max);
+            // }
 
             if (keyword) params.append('name', keyword);
             if (categoryId) params.append('categoryId', categoryId);

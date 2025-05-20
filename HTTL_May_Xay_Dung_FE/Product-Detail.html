@@ -3139,7 +3139,6 @@ function parseJwt(token) {
     function addToCart(quantity = 1) {
         const userId = getUserIdFromToken(); // Lấy userId từ token
         const productId = getProductIdFromURL(); // Lấy productId từ URL
-
         if (!userId) {
             Swal.fire({
                 icon: 'warning',
@@ -3162,7 +3161,7 @@ function parseJwt(token) {
             method: "POST",
             headers: {
                 "Accept": "*/*",
-                "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
+                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
             }
         })
             .then(response => {

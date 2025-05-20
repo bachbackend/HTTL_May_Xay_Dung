@@ -160,39 +160,45 @@ function submitForm() {
     const categoryId = document.getElementById('filterCategory1').value;
     const fileInput = document.getElementById('file');
     const file = fileInput.files[0];
+    const token = localStorage.getItem("accesstoken");
 
     if (!title || !content || !categoryId || !file) {
         alert('Vui lòng nhập đầy đủ thông tin!');
         return;
     }
 
-            const formData = new FormData();
-            formData.append('Title', title);
-            formData.append('Content', content);
-            formData.append('Status', status);
-            formData.append('ArticleCateId', categoryId);
-            formData.append('file', file);
+    if (!token) {
+        alert('Không tìm thấy token đăng nhập.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('Title', title);
+    formData.append('Content', content);
+    formData.append('Status', status);
+    formData.append('ArticleCateId', categoryId);
+    formData.append('file', file);
 
     fetch('https://localhost:7205/api/Article/addArticle', {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
     })
     .then(async response => {
         const result = await response.json();
 
         if (!response.ok) {
-            // Nếu response có status khác 200, hiển thị message từ server
             alert(result.message || 'Có lỗi xảy ra khi thêm bài viết.');
             throw new Error(result.message);
         }
 
         alert('Thêm bài viết thành công!');
-        window.location.href = './Article-Management.html'; // Redirect về trang quản lý
+        window.location.href = './Article-Management.html'; 
     })
     .catch(error => {
         console.error('Lỗi:', error);
-        // Có thể không cần alert ở đây vì đã alert ở trên
-        // alert('Thêm bài viết thất bại.');
     });
 }
 

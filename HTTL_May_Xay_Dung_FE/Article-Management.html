@@ -483,71 +483,84 @@
         }
 
         function loadProducts(pageNumber) {
-            const spinner = document.getElementById("loading-spinner");
+    const spinner = document.getElementById("loading-spinner");
 
-            const searchName = document.getElementById('searchName').value;
-            const serviceId = document.getElementById('filterServices3').value;
-            const searchStatus = document.getElementById('searchStatus').value;
-            const sortBy = document.getElementById('sortBy').value;
-            const sortOrder = document.getElementById('sortOrder').value;
-            let url = `https://localhost:7205/api/Article/GetAllArticle?pageNumber=${pageNumber}&pageSize=10`;
-            currentPage = pageNumber;
+    const searchName = document.getElementById('searchName').value;
+    const serviceId = document.getElementById('filterServices3').value;
+    const searchStatus = document.getElementById('searchStatus').value;
+    const sortBy = document.getElementById('sortBy').value;
+    const sortOrder = document.getElementById('sortOrder').value;
+    let url = `https://localhost:7205/api/Article/GetAllArticle?pageNumber=${pageNumber}&pageSize=10`;
+    currentPage = pageNumber;
 
-            spinner.style.display = "block"; // Hiện loading
+    spinner.style.display = "block"; // Hiện loading
 
-            const params = new URLSearchParams();
+    const params = new URLSearchParams();
 
-            if (searchName) {
-                params.append('title', searchName);
-            }
-            if (serviceId) {
-                params.append('categoryId', serviceId);
-            }
-            if (searchStatus) {
-                params.append('status', searchStatus);
-            }
-            if (sortBy) {
-                params.append('sortBy', sortBy);
-            }
-            if (sortOrder) {
-                params.append('sortOrder', sortOrder);
-            }
+    if (searchName) {
+        params.append('title', searchName);
+    }
+    if (serviceId) {
+        params.append('categoryId', serviceId);
+    }
+    if (searchStatus) {
+        params.append('status', searchStatus);
+    }
+    if (sortBy) {
+        params.append('sortBy', sortBy);
+    }
+    if (sortOrder) {
+        params.append('sortOrder', sortOrder);
+    }
 
-            if (params.toString()) {
-                url += `&${params.toString()}`;
-            }
+    if (params.toString()) {
+        url += `&${params.toString()}`;
+    }
 
-            const headers = {
-                'Content-Type': 'application/json',
-                'Accept': '*/*'
-            };
+    const token = localStorage.getItem("accesstoken");
 
-            fetch(url, {
-                method: 'GET',
-                headers: headers
-            })
-                .then(response => response.json())
-                .then(data => {
-                    spinner.style.display = "none"; // Ẩn loading
-                    const articles = data.articles;
-                    const paging = data.paging;
-                    const tableBody = document.getElementById('transportTableBody');
+    if (!token) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi xác thực',
+            text: 'Không tìm thấy token!'
+        });
+        spinner.style.display = "none";
+        return;
+    }
 
-                    tableBody.innerHTML = ''; // Clear existing rows
+    const headers = {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': `Bearer ${token}`
+    };
 
-                    if (articles.length === 0) {
-                        tableBody.innerHTML = `<tr><td colspan="6" class="text-center">Không tìm thấy bài viết nào.</td></tr>`;
-                        renderPaginationButtons(0); // No pagination if no products
-                        return;
-                    }
+    fetch(url, {
+        method: 'GET',
+        headers: headers
+    })
+    .then(response => response.json())
+    .then(data => {
+        spinner.style.display = "none"; // Ẩn loading
+        const articles = data.articles;
+        const paging = data.paging;
+        const tableBody = document.getElementById('transportTableBody');
 
-                    articles.forEach((article, index) => {
-                        const pageSize = 12;
-                        const serialNumber = (currentPage - 1) * pageSize + (index + 1);
-                        console.log(`Sản phẩm #${serialNumber}:`, article);
+        tableBody.innerHTML = ''; // Clear existing rows
 
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
+        if (articles.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="6" class="text-center">Không tìm thấy bài viết nào.</td></tr>`;
+            renderPaginationButtons(0); // No pagination if no products
+            return;
+        }
+
+        articles.forEach((article, index) => {
+            const pageSize = 12;
+            const serialNumber = (currentPage - 1) * pageSize + (index + 1);
+            console.log(`Sản phẩm #${serialNumber}:`, article);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
                 <td>${article.id}</td> 
                 <td style="width: 200px;">${article.title}</td>
                 <td>
@@ -559,14 +572,13 @@
                 <td style="width: 100px;">${article.articleCateName}</td>
                 <td>
                     ${article.status === 0
-                                ? '<span style="color: green; font-weight: bold;">Đang hiển thị</span>'
-                                : '<span style="color: red; font-weight: bold;">Ngừng hiển thị</span>'
-                            }
+                        ? '<span style="color: green; font-weight: bold;">Đang hiển thị</span>'
+                        : '<span style="color: red; font-weight: bold;">Ngừng hiển thị</span>'
+                    }
                 </td>
                 <td>
-                ${article.createdAt != null ? formatDate(article.createdAt) : 'Không có ngày đăng'}
+                    ${article.createdAt != null ? formatDate(article.createdAt) : 'Không có ngày đăng'}
                 </td>
-                
                 <td>
                     <div class="action-btns">
                         <div class="dropdown">
@@ -576,20 +588,25 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="javascript:void(0);" onclick="showArticleModal(${article.id})">Xem</a></li>
                                 <li><a class="dropdown-item" href="Update-Article.html?id=${article.id}">Sửa</a></li>
-                                
                             </ul>
                         </div>
                     </div>
                 </td>
             `;
-                        tableBody.appendChild(row);
-                    });
+            tableBody.appendChild(row);
+        });
 
-                    // Render pagination buttons
-                    renderPaginationButtons(paging.totalPageCount);
-                })
-                .catch(() => alert("Không tìm thấy bài viết nào."));
-        }
+        renderPaginationButtons(paging.totalPageCount);
+    })
+    .catch(() => {
+        spinner.style.display = "none";
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            text: 'Không tìm thấy bài viết nào.'
+        });
+    });
+}
 
 
         loadProducts(1);

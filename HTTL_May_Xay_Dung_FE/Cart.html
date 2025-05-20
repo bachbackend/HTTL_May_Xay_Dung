@@ -2823,7 +2823,8 @@ function parseJwt(token) {
             const response = await fetch(`https://localhost:7205/api/Cart/CountUniqueProducts/${userId}`, {
                 method: 'GET',
                 headers: {
-                    'accept': '*/*'
+                    'accept': '*/*',
+                    "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
                 }
             });
 
@@ -2851,7 +2852,8 @@ function parseJwt(token) {
         fetch(`https://localhost:7205/api/Cart/Delete?userId=${userId}&productId=${productId}`, {
             method: 'DELETE',
             headers: {
-                'accept': '*/*'
+                'accept': '*/*',
+                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
             }
         })
             .then(response => {
@@ -2887,7 +2889,8 @@ function parseJwt(token) {
         fetch(`https://localhost:7205/api/Cart/DeleteAll?userId=${userId}`, {
             method: 'DELETE',
             headers: {
-                'accept': '*/*'
+                'accept': '*/*',
+                "Authorization": `Bearer ${localStorage.getItem("accesstoken")}`
             }
         })
             .then(response => {
@@ -2938,7 +2941,13 @@ function parseJwt(token) {
 
     const userId = getUserIdFromToken(); // Lấy ID người dùng từ token
 
-    fetch(`https://localhost:7205/api/ShippingAddress/GetByUser/${userId}`)
+    fetch(`https://localhost:7205/api/ShippingAddress/GetByUser/${userId}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'accept': 'application/json'
+    }
+})
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById("savedAddressSelect");

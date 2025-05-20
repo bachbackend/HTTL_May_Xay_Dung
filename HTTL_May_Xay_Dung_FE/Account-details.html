@@ -2780,48 +2780,56 @@
     }
 
     document.getElementById('cart-menu').addEventListener('mouseenter', function () {
-        const dropdown = document.getElementById('cart-dropdown');
-        dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
+    const dropdown = document.getElementById('cart-dropdown');
+    dropdown.innerHTML = '<li>Đang tải...</li>'; // Loading placeholder
 
-        const userId = getUserIdFromToken();
-        if (!userId) {
-            dropdown.innerHTML = '<li>Không xác định người dùng</li>';
-            return;
+    const userId = getUserIdFromToken();
+    const token = localStorage.getItem("accesstoken");
+
+    if (!userId || !token) {
+        dropdown.innerHTML = '<li>Không xác định người dùng</li>';
+        return;
+    }
+
+    fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
         }
+    })
+        .then(response => response.json())
+        .then(data => {
+            dropdown.innerHTML = '';
 
-        fetch(`https://localhost:7205/api/Cart/GetCartByUserId/${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                dropdown.innerHTML = '';
+            const items = data.cartItems;
+            if (!Array.isArray(items) || items.length === 0) {
+                dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
+                return;
+            }
 
-                const items = data.cartItems;
-                if (!Array.isArray(items) || items.length === 0) {
-                    dropdown.innerHTML = '<li>Giỏ hàng trống</li>';
-                    return;
-                }
-
-                items.forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 5px 0;">
-                        <img src="https://localhost:7205/images/product/${item.image}" alt="${item.productName}" width="40" height="40" style="border-radius: 5px;">
-                        <div style="font-family: Arial, sans-serif;">
-                            <strong>${item.productName}</strong><br>
-                            SL: ${item.quantity} - 
-                            <span style="color: #007bff;">${item.productPrice.toLocaleString()} đ</span>
-                        </div>
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px; padding: 5px 0;">
+                    <img src="https://localhost:7205/images/product/${item.image}" alt="${item.productName}" width="40" height="40" style="border-radius: 5px;">
+                    <div style="font-family: Arial, sans-serif;">
+                        <strong>${item.productName}</strong><br>
+                        SL: ${item.quantity} - 
+                        <span style="color: #007bff;">${item.productPrice.toLocaleString()} đ</span>
                     </div>
-                `;
-                    dropdown.appendChild(li);
-                });
-
-                document.getElementById('cart-count').innerText = items.length;
-            })
-            .catch(error => {
-                console.error('Lỗi khi gọi API giỏ hàng:', error);
-                dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
+                </div>
+            `;
+                dropdown.appendChild(li);
             });
-    });
+
+            document.getElementById('cart-count').innerText = items.length;
+        })
+        .catch(error => {
+            console.error('Lỗi khi gọi API giỏ hàng:', error);
+            dropdown.innerHTML = '<li>Lỗi khi tải dữ liệu</li>';
+        });
+});
 
     
 
